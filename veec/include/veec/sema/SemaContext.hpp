@@ -12,6 +12,7 @@
 #include "veec/CoreDefines.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstNode.hpp"
+#include "veec/sema/BuiltinRegistrar.hpp"
 #include "veec/sema/ScopeManager.hpp"
 #include "veec/symbols/SymbolTable.hpp"
 #include "veec/symbols/OperatorTable.hpp"
@@ -39,7 +40,8 @@ public:
     SemaContext()
         : typeSystem(types) {
 
-        typeSystem.addBuiltinConversionRules();
+        BuiltinRegistrar registrar(*this);
+        registrar.registerAll();
     }
 
     ~SemaContext() = default;

@@ -70,7 +70,6 @@ public:
     explicit TypeSystem(TypeTable& typeTable)
         : _typeTable(typeTable) {}
 
-    void addBuiltinConversionRules();
     void addConversionRule(Type* from, Type* to, ConversionRank rank);
 
     bool canConvert(Type* from, Type* to) const;

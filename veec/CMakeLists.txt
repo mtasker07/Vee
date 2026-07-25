@@ -29,12 +29,14 @@ set(VEEC_SOURCES
     src/ast_passes/TypeInferencePass.cpp
     src/ast_passes/TypeCheckerPass.cpp
     
+    src/sema/BuiltinRegistrar.cpp
     src/sema/ScopeManager.cpp
 
     src/symbols/Symbol.cpp
     src/symbols/SymbolTable.cpp
 
     src/types/TypeTable.cpp
+    src/types/TypeSystem.cpp
 )
 
 add_library(veec_lib
