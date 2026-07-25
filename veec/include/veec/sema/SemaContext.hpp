@@ -12,10 +12,11 @@
 #include "veec/CoreDefines.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstNode.hpp"
+#include "veec/sema/ScopeManager.hpp"
 #include "veec/symbols/SymbolTable.hpp"
 #include "veec/symbols/OperatorTable.hpp"
 #include "veec/types/TypeTable.hpp"
-#include "veec/sema/ScopeManager.hpp"
+#include "veec/types/TypeSystem.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace sema {
@@ -30,11 +31,14 @@ public:
     symbols::SymbolTable symbols;
     symbols::OperatorTable operators;
     types::TypeTable types;
+    types::TypeSystem typeSystem;
 
     /**
      * @brief Creates a new SemaContext instance.
      */
-    SemaContext() = default;
+    SemaContext()
+        : typeSystem(types) {}
+
     ~SemaContext() = default;
 };
 
