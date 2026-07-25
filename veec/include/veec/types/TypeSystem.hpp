@@ -67,7 +67,7 @@ struct ConversionRule {
  */
 class TypeSystem {
 public:
-    TypeSystem(const TypeTable& typeTable)
+    explicit TypeSystem(const TypeTable& typeTable)
         : _typeTable(typeTable) {}
 
     std::span<const ConversionRule> getBuiltinConversionRules() const;
