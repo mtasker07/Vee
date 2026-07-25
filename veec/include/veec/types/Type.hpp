@@ -4,6 +4,12 @@
  * 
  * The type class is the base class for all Vee data types.
  * Types represent data types in the program, such as i32.
+ * 
+ * Every Type object should represent a single unique type in the program.
+ * For example, i32 should only have one Type object representing it.
+ * This makes it easy to compare types by comparing their pointers.
+ * This logic is enforced in the TypeTable class, which is responsible for
+ * creating and managing ALL Type objects.
  */
 
 #pragma once
