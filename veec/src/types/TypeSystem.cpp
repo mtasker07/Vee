@@ -18,129 +18,149 @@
 VEEC_NAMESPACE_BEGIN
 namespace types {
 
-std::span<const ConversionRule> TypeSystem::getBuiltinConversionRules() const {
-    Type* boolTy = _typeTable.getBuiltin(BuiltinTypeKind::BOOL);
-    Type* i8Ty = _typeTable.getBuiltin(BuiltinTypeKind::I8);
-    Type* i16Ty = _typeTable.getBuiltin(BuiltinTypeKind::I16);
-    Type* i32Ty = _typeTable.getBuiltin(BuiltinTypeKind::I32);
-    Type* i64Ty = _typeTable.getBuiltin(BuiltinTypeKind::I64);
-    Type* u8Ty = _typeTable.getBuiltin(BuiltinTypeKind::U8);
-    Type* u16Ty = _typeTable.getBuiltin(BuiltinTypeKind::U16);
-    Type* u32Ty = _typeTable.getBuiltin(BuiltinTypeKind::U32);
-    Type* u64Ty = _typeTable.getBuiltin(BuiltinTypeKind::U64);
-    Type* f32Ty = _typeTable.getBuiltin(BuiltinTypeKind::F32);
-    Type* f64Ty = _typeTable.getBuiltin(BuiltinTypeKind::F64);
-    
-    static std::vector<ConversionRule> rules = {
-        // ------------------------------------------------------------
-        // Promotions
-        // ------------------------------------------------------------
+void TypeSystem::addBuiltinConversionRules() {
+    Type* boolTy = _typeTable.getBuiltin(BuiltinTypeKind::Bool);
+    Type* i8Ty   = _typeTable.getBuiltin(BuiltinTypeKind::I8);
+    Type* i16Ty  = _typeTable.getBuiltin(BuiltinTypeKind::I16);
+    Type* i32Ty  = _typeTable.getBuiltin(BuiltinTypeKind::I32);
+    Type* i64Ty  = _typeTable.getBuiltin(BuiltinTypeKind::I64);
+    Type* u8Ty   = _typeTable.getBuiltin(BuiltinTypeKind::U8);
+    Type* u16Ty  = _typeTable.getBuiltin(BuiltinTypeKind::U16);
+    Type* u32Ty  = _typeTable.getBuiltin(BuiltinTypeKind::U32);
+    Type* u64Ty  = _typeTable.getBuiltin(BuiltinTypeKind::U64);
+    Type* f32Ty  = _typeTable.getBuiltin(BuiltinTypeKind::F32);
+    Type* f64Ty  = _typeTable.getBuiltin(BuiltinTypeKind::F64);
 
-        // Signed integer widening
-        { i8Ty,  i16Ty, ConversionRank::Promotion },
-        { i8Ty,  i32Ty, ConversionRank::Promotion },
-        { i8Ty,  i64Ty, ConversionRank::Promotion },
-
-        { i16Ty, i32Ty, ConversionRank::Promotion },
-        { i16Ty, i64Ty, ConversionRank::Promotion },
-
-        { i32Ty, i64Ty, ConversionRank::Promotion },
-
-        // Unsigned integer widening
-        { u8Ty,  u16Ty, ConversionRank::Promotion },
-        { u8Ty,  u32Ty, ConversionRank::Promotion },
-        { u8Ty,  u64Ty, ConversionRank::Promotion },
-
-        { u16Ty, u32Ty, ConversionRank::Promotion },
-        { u16Ty, u64Ty, ConversionRank::Promotion },
-
-        { u32Ty, u64Ty, ConversionRank::Promotion },
-
-        // Float widening
-        { f32Ty, f64Ty, ConversionRank::Promotion },
-
-        // ------------------------------------------------------------
-        // Conversions
-        // ------------------------------------------------------------
-
-        // Integer -> floating point
-        { i8Ty,  f32Ty, ConversionRank::Conversion },
-        { i16Ty, f32Ty, ConversionRank::Conversion },
-        { i32Ty, f32Ty, ConversionRank::Conversion },
-        { i64Ty, f64Ty, ConversionRank::Conversion },
-
-        { u8Ty,  f32Ty, ConversionRank::Conversion },
-        { u16Ty, f32Ty, ConversionRank::Conversion },
-        { u32Ty, f32Ty, ConversionRank::Conversion },
-        { u64Ty, f64Ty, ConversionRank::Conversion },
-
-        // Signed <-> unsigned (same width)
-        { i8Ty,  u8Ty,  ConversionRank::Conversion },
-        { i16Ty, u16Ty, ConversionRank::Conversion },
-        { i32Ty, u32Ty, ConversionRank::Conversion },
-        { i64Ty, u64Ty, ConversionRank::Conversion },
-
-        { u8Ty,  i8Ty,  ConversionRank::Conversion },
-        { u16Ty, i16Ty, ConversionRank::Conversion },
-        { u32Ty, i32Ty, ConversionRank::Conversion },
-        { u64Ty, i64Ty, ConversionRank::Conversion },
-
-        // ------------------------------------------------------------
-        // Narrowing conversions
-        // ------------------------------------------------------------
-
-        // Signed narrowing
-        { i16Ty, i8Ty,  ConversionRank::NarrowingConversion },
-        { i32Ty, i8Ty,  ConversionRank::NarrowingConversion },
-        { i32Ty, i16Ty, ConversionRank::NarrowingConversion },
-        { i64Ty, i8Ty,  ConversionRank::NarrowingConversion },
-        { i64Ty, i16Ty, ConversionRank::NarrowingConversion },
-        { i64Ty, i32Ty, ConversionRank::NarrowingConversion },
-
-        // Unsigned narrowing
-        { u16Ty, u8Ty,  ConversionRank::NarrowingConversion },
-        { u32Ty, u8Ty,  ConversionRank::NarrowingConversion },
-        { u32Ty, u16Ty, ConversionRank::NarrowingConversion },
-        { u64Ty, u8Ty,  ConversionRank::NarrowingConversion },
-        { u64Ty, u16Ty, ConversionRank::NarrowingConversion },
-        { u64Ty, u32Ty, ConversionRank::NarrowingConversion },
-
-        // Float narrowing
-        { f64Ty, f32Ty, ConversionRank::NarrowingConversion },
-
-        // Float -> integer
-        { f32Ty, i8Ty,  ConversionRank::NarrowingConversion },
-        { f32Ty, i16Ty, ConversionRank::NarrowingConversion },
-        { f32Ty, i32Ty, ConversionRank::NarrowingConversion },
-        { f32Ty, i64Ty, ConversionRank::NarrowingConversion },
-
-        { f64Ty, i8Ty,  ConversionRank::NarrowingConversion },
-        { f64Ty, i16Ty, ConversionRank::NarrowingConversion },
-        { f64Ty, i32Ty, ConversionRank::NarrowingConversion },
-        { f64Ty, i64Ty, ConversionRank::NarrowingConversion },
-
-        { f32Ty, u8Ty,  ConversionRank::NarrowingConversion },
-        { f32Ty, u16Ty, ConversionRank::NarrowingConversion },
-        { f32Ty, u32Ty, ConversionRank::NarrowingConversion },
-        { f32Ty, u64Ty, ConversionRank::NarrowingConversion },
-
-        { f64Ty, u8Ty,  ConversionRank::NarrowingConversion },
-        { f64Ty, u16Ty, ConversionRank::NarrowingConversion },
-        { f64Ty, u32Ty, ConversionRank::NarrowingConversion },
-        { f64Ty, u64Ty, ConversionRank::NarrowingConversion },
-
-        // ------------------------------------------------------------
-        // Bool conversions
-        // ------------------------------------------------------------
-
-        { boolTy, i32Ty, ConversionRank::Promotion },
-        { boolTy, u32Ty, ConversionRank::Promotion },
-
-        { i32Ty, boolTy, ConversionRank::Conversion },
-        { u32Ty, boolTy, ConversionRank::Conversion },
+    auto promote = [this](Type* from, Type* to) {
+        addConversionRule(from, to, ConversionRank::Promotion);
     };
 
-    return rules;
+    auto convert = [this](Type* from, Type* to) {
+        addConversionRule(from, to, ConversionRank::Conversion);
+    };
+
+    auto narrow = [this](Type* from, Type* to) {
+        addConversionRule(from, to, ConversionRank::NarrowingConversion);
+    };
+
+    // ------------------------------------------------------------
+    // Promotions
+    // ------------------------------------------------------------
+
+    // Signed integer widening
+    promote(i8Ty,  i16Ty);
+    promote(i8Ty,  i32Ty);
+    promote(i8Ty,  i64Ty);
+
+    promote(i16Ty, i32Ty);
+    promote(i16Ty, i64Ty);
+
+    promote(i32Ty, i64Ty);
+
+    // Unsigned integer widening
+    promote(u8Ty,  u16Ty);
+    promote(u8Ty,  u32Ty);
+    promote(u8Ty,  u64Ty);
+
+    promote(u16Ty, u32Ty);
+    promote(u16Ty, u64Ty);
+
+    promote(u32Ty, u64Ty);
+
+    // Float widening
+    promote(f32Ty, f64Ty);
+
+    // ------------------------------------------------------------
+    // Conversions
+    // ------------------------------------------------------------
+
+    // Integer -> floating point
+    convert(i8Ty,  f32Ty);
+    convert(i16Ty, f32Ty);
+    convert(i32Ty, f32Ty);
+    convert(i64Ty, f64Ty);
+
+    convert(u8Ty,  f32Ty);
+    convert(u16Ty, f32Ty);
+    convert(u32Ty, f32Ty);
+    convert(u64Ty, f64Ty);
+
+    // Signed <-> unsigned (same width)
+    convert(i8Ty,  u8Ty);
+    convert(i16Ty, u16Ty);
+    convert(i32Ty, u32Ty);
+    convert(i64Ty, u64Ty);
+
+    convert(u8Ty,  i8Ty);
+    convert(u16Ty, i16Ty);
+    convert(u32Ty, i32Ty);
+    convert(u64Ty, i64Ty);
+
+    // ------------------------------------------------------------
+    // Narrowing conversions
+    // ------------------------------------------------------------
+
+    // Signed narrowing
+    narrow(i16Ty, i8Ty);
+    narrow(i32Ty, i8Ty);
+    narrow(i32Ty, i16Ty);
+    narrow(i64Ty, i8Ty);
+    narrow(i64Ty, i16Ty);
+    narrow(i64Ty, i32Ty);
+
+    // Unsigned narrowing
+    narrow(u16Ty, u8Ty);
+    narrow(u32Ty, u8Ty);
+    narrow(u32Ty, u16Ty);
+    narrow(u64Ty, u8Ty);
+    narrow(u64Ty, u16Ty);
+    narrow(u64Ty, u32Ty);
+
+    // Float narrowing
+    narrow(f64Ty, f32Ty);
+
+    // Float -> integer
+    narrow(f32Ty, i8Ty);
+    narrow(f32Ty, i16Ty);
+    narrow(f32Ty, i32Ty);
+    narrow(f32Ty, i64Ty);
+
+    narrow(f64Ty, i8Ty);
+    narrow(f64Ty, i16Ty);
+    narrow(f64Ty, i32Ty);
+    narrow(f64Ty, i64Ty);
+
+    narrow(f32Ty, u8Ty);
+    narrow(f32Ty, u16Ty);
+    narrow(f32Ty, u32Ty);
+    narrow(f32Ty, u64Ty);
+
+    narrow(f64Ty, u8Ty);
+    narrow(f64Ty, u16Ty);
+    narrow(f64Ty, u32Ty);
+    narrow(f64Ty, u64Ty);
+
+    // ------------------------------------------------------------
+    // Bool conversions
+    // ------------------------------------------------------------
+
+    promote(boolTy, i32Ty);
+    promote(boolTy, u32Ty);
+
+    convert(i32Ty, boolTy);
+    convert(u32Ty, boolTy);
+}
+void TypeSystem::addConversionRule(Type* from, Type* to, ConversionRank rank) {
+    VEE_ASSERT(from != nullptr, "from type is null");
+    VEE_ASSERT(to != nullptr, "to type is null");
+
+    const ConversionRuleKey key{from, to};
+    if (_conversionRules.find(key) != _conversionRules.end()) {
+        VEE_FATAL("Conversion rule already exists for this type pair");
+        return;
+    }
+
+    _conversionRules[key] = ConversionRule{from, to, rank};
 }
 
 bool TypeSystem::canConvert(Type* from, Type* to) const {
@@ -155,14 +175,11 @@ ConversionRank TypeSystem::rankConversion(Type* from, Type* to) const {
         return ConversionRank::ExactMatch;
     }
 
-    // Check builtin conversion rules
-    for (const auto& rule : getBuiltinConversionRules()) {
-        if (rule.from == from && rule.to == to) {
-            return rule.rank;
-        }
+    // Lookup in conversion rules
+    const ConversionRuleKey key{from, to};
+    if (auto it = _conversionRules.find(key); it != _conversionRules.end()) {
+        return it->second.rank;
     }
-
-    // TODO: Add user-defined conversion rules
 
     return ConversionRank::NoConversion;
 }

@@ -37,7 +37,10 @@ public:
      * @brief Creates a new SemaContext instance.
      */
     SemaContext()
-        : typeSystem(types) {}
+        : typeSystem(types) {
+
+        typeSystem.addBuiltinConversionRules();
+    }
 
     ~SemaContext() = default;
 };

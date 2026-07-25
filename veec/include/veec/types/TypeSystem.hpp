@@ -67,16 +67,33 @@ struct ConversionRule {
  */
 class TypeSystem {
 public:
-    explicit TypeSystem(const TypeTable& typeTable)
+    explicit TypeSystem(TypeTable& typeTable)
         : _typeTable(typeTable) {}
 
-    std::span<const ConversionRule> getBuiltinConversionRules() const;
+    void addBuiltinConversionRules();
+    void addConversionRule(Type* from, Type* to, ConversionRank rank);
 
     bool canConvert(Type* from, Type* to) const;
     ConversionRank rankConversion(Type* from, Type* to) const;
 
 private:
-    const TypeTable& _typeTable;
+    struct ConversionRuleKey {
+        Type* from;
+        Type* to;
+
+        bool operator==(const ConversionRuleKey& other) const {
+            return from == other.from && to == other.to;
+        }
+    };
+
+    struct ConversionRuleKeyHash {
+        std::size_t operator()(const ConversionRuleKey& key) const {
+            return std::hash<Type*>()(key.from) ^ std::hash<Type*>()(key.to);
+        }
+    };
+
+    TypeTable& _typeTable;
+    std::unordered_map<ConversionRuleKey, ConversionRule, ConversionRuleKeyHash> _conversionRules;
 };
 
 } // namespace types
