@@ -1,0 +1,56 @@
+/**
+ * @file TypeInferencePass.hpp
+ * @brief This file contains the definition of the TypeInferencePass class,
+ * which is responsible for inferring all types in the program wherever
+ * they are not explicitly specified.
+ */
+
+#pragma once
+
+#include "vee/core/CoreDefines.hpp"
+#include "vee/core/CoreTypedefs.hpp"
+#include "veec/CoreDefines.hpp"
+#include "veec/CompilationContext.hpp"
+#include "veec/ast/AstNode.hpp"
+#include "veec/ast/AstFwd.hpp"
+#include "veec/ast/AstWalker.hpp"
+#include "veec/ast/CompilationUnitNode.hpp"
+#include "veec/sema/SemaContext.hpp"
+#include "veec/sema/Pass.hpp"
+#include "veec/symbols/SymbolFwd.hpp"
+
+VEEC_NAMESPACE_BEGIN
+namespace ast_passes {
+
+/**
+ * @class TypeInferencePass
+ * @brief A semantic analysis pass that infers all types in the program.
+ */
+class TypeInferencePass : public sema::Pass {
+public:
+    /**
+     * @brief Creates a new TypeInferencePass instance with the given context.
+     * @param ctx The CompilationContext to use for this pass.
+     * @param sema The SemaContext to use for this pass.
+     */
+    TypeInferencePass(CompilationContext& ctx, sema::SemaContext& sema)
+        : sema::Pass(ctx, sema) {}
+        
+    virtual ~TypeInferencePass() = default;
+
+    /**
+     * @brief Runs the type inference pass over a given module node.
+     * @param node The CompilationUnitNode AST node to run this pass on.
+     */
+    virtual void run(ast::CompilationUnitNode& node) override {
+        walk(node);
+    }
+
+protected:
+    virtual void visitType(ast::TypeNode& node) override;
+    virtual void visitBuiltinType(ast::BuiltinTypeNode& node) override;
+    virtual void visitNamedType(ast::NamedTypeNode& node) override;
+};
+
+} // namespace ast_passes
+VEEC_NAMESPACE_END

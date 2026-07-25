@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/maxmt/source/repos/Vee/veec/tests/veec_tests[1]_tests.cmake")
+  include("C:/Users/maxmt/source/repos/Vee/veec/tests/veec_tests[1]_tests.cmake")
+else()
+  add_test(veec_tests_NOT_BUILT veec_tests_NOT_BUILT)
+endif()

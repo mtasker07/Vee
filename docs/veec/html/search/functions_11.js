@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['scope_0',['Scope',['../classsema_1_1_scope.html#af8cffd2cf9b95402518baa5b0b451471',1,'sema::Scope']]],
+  ['scopeguard_1',['ScopeGuard',['../classsema_1_1_scope_guard.html#a83a49345ddbfc8d47a9ac116588342cf',1,'sema::ScopeGuard']]],
+  ['scopemanager_2',['ScopeManager',['../classsema_1_1_scope_manager.html#a255d134b5d34547cb55d9cce978d2f48',1,'sema::ScopeManager']]],
+  ['scopeownersymbol_3',['ScopeOwnerSymbol',['../classsymbols_1_1_scope_owner_symbol.html#ac0d7d0a381074ce1e1577e620dcc777b',1,'symbols::ScopeOwnerSymbol']]],
+  ['semacontext_4',['SemaContext',['../classsema_1_1_sema_context.html#a0953beca8bd2dfab21ab120fbf444470',1,'sema::SemaContext']]],
+  ['seterrorlevel_5',['setErrorLevel',['../classdiagnostics_1_1_diagnostic_engine.html#a31c889306aaa5b2315534192e24260bf',1,'diagnostics::DiagnosticEngine']]],
+  ['setnodescope_6',['setNodeScope',['../classsema_1_1_scope_manager.html#a3bda26661cbbf8663d12b2aac8315973',1,'sema::ScopeManager']]],
+  ['setnodetype_7',['setNodeType',['../classtypes_1_1_type_table.html#a3cc111d4c1257a182d9094df4fb91700',1,'types::TypeTable']]],
+  ['settype_8',['setType',['../classsymbols_1_1_class_symbol.html#aaf0c94102c4cbc74b675a0ac4c3e76af',1,'symbols::ClassSymbol::setType()'],['../classsymbols_1_1_field_symbol.html#a2fcce79b4781a81c59fc1278ea538c62',1,'symbols::FieldSymbol::setType()'],['../classsymbols_1_1_function_symbol.html#a7bfd5804854d21c2b66163b0c1243ea2',1,'symbols::FunctionSymbol::setType()'],['../classsymbols_1_1_variable_symbol.html#a862a71d78d957e38f7d27c1a5cfede75',1,'symbols::VariableSymbol::setType()']]],
+  ['setvisibility_9',['setVisibility',['../classsymbols_1_1_class_symbol.html#aea3775aaeeb6bd299588cfc19f6a787d',1,'symbols::ClassSymbol::setVisibility()'],['../classsymbols_1_1_field_symbol.html#a0baf3844f910bfac79767bb860f5c342',1,'symbols::FieldSymbol::setVisibility()'],['../classsymbols_1_1_module_symbol.html#a097e93e7db11ba82dcb030ace7112c6b',1,'symbols::ModuleSymbol::setVisibility()']]],
+  ['sourcefile_10',['SourceFile',['../classsource_1_1_source_file.html#aa5988becb376640b623e318b7ef50b58',1,'source::SourceFile::SourceFile(const SourceFile &amp;other)=delete'],['../classsource_1_1_source_file.html#a6746c5075442fca513f7cc07da57df52',1,'source::SourceFile::SourceFile(SourceFile &amp;&amp;other) noexcept']]],
+  ['sourcemanager_11',['SourceManager',['../classsource_1_1_source_manager.html#af4a746b5283029dbb5d299e943be90bd',1,'source::SourceManager']]],
+  ['sourceview_12',['SourceView',['../classsource_1_1_source_view.html#ac03d6a6b40f7976cafd57a5d798539e5',1,'source::SourceView::SourceView()=default'],['../classsource_1_1_source_view.html#afab28c35d03adc14cdf62cf9f69272d6',1,'source::SourceView::SourceView(const SourceFile &amp;file)'],['../classsource_1_1_source_view.html#a72d178a5838d9d8432f6c0a8c22de266',1,'source::SourceView::SourceView(std::string_view str, SourceFileId id)']]],
+  ['statementnode_13',['StatementNode',['../classast_1_1_statement_node.html#afeddff5d24f8cf704d4da59215619d24',1,'ast::StatementNode']]],
+  ['str_14',['str',['../classfs_1_1_path.html#ae9273cd4bdc29fb401255855d1a690e6',1,'fs::Path::str()'],['../classsource_1_1_source_view.html#ad8f30020da612e4217ea681e2ddf4b8b',1,'source::SourceView::str()']]],
+  ['stringliteralexprnode_15',['StringLiteralExprNode',['../classast_1_1_string_literal_expr_node.html#a5228c869803213465c883d28fe7c2785',1,'ast::StringLiteralExprNode']]],
+  ['stringpool_16',['StringPool',['../classbasic_1_1_string_pool.html#aa7669fa47b5f96f5a8f36fae808455d3',1,'basic::StringPool']]],
+  ['symbol_17',['Symbol',['../classsymbols_1_1_symbol.html#a32bb7a4a0ddcf070adf6cb5432adb335',1,'symbols::Symbol::Symbol(SymbolKind kind)'],['../classsymbols_1_1_symbol.html#a6082dc0f9f05f0b4aac77a6db5a83f7d',1,'symbols::Symbol::Symbol(SymbolKind kind, basic::StringId name)']]],
+  ['symbolcollectionpass_18',['SymbolCollectionPass',['../classast__passes_1_1_symbol_collection_pass.html#acd1e19a4bb75d180f1c574678fae9f69',1,'ast_passes::SymbolCollectionPass']]],
+  ['symbolhandle_19',['SymbolHandle',['../classsymbols_1_1_symbol_handle.html#a2729409124c76980acb3045ec702e7ba',1,'symbols::SymbolHandle::SymbolHandle()=default'],['../classsymbols_1_1_symbol_handle.html#a0c9aea47ce0b44624c7dc56e66c642f5',1,'symbols::SymbolHandle::SymbolHandle(const T &amp;symbol)']]],
+  ['symbolresolutionpass_20',['SymbolResolutionPass',['../classast__passes_1_1_symbol_resolution_pass.html#a9fad78990556892c7b6896b736731f24',1,'ast_passes::SymbolResolutionPass']]],
+  ['symboltable_21',['SymbolTable',['../classsymbols_1_1_symbol_table.html#a8143bdc745f7f6cecfc646e0a45dec00',1,'symbols::SymbolTable']]]
+];
