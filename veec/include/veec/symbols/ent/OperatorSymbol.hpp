@@ -62,17 +62,26 @@ enum class UnaryOperatorKind : u8 {
  * @brief Represents the kind of a binary operator, such as addition (+).
  */
 enum class BinaryOperatorKind : u8 {
+    // ARITHMETIC
     Add,
     Subtract,
     Multiply,
     Divide,
     Modulo,
+    // COMPARISON
     Equal,
     NotEqual,
     LessThan,
     LessThanOrEqual,
     GreaterThan,
     GreaterThanOrEqual,
+    // BITWISE
+    BitwiseAnd,
+    BitwiseOr,
+    BitwiseXor,
+    ShiftLeft,
+    ShiftRight,
+    // LOGICAL
     LogicalAnd,
     LogicalOr,
 };
