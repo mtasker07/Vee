@@ -71,9 +71,6 @@ struct ConversionRule {
     ConversionRank rank;
 };
 
-// ConversionCost -> u32
-using ConversionCost = u32;
-
 /**
  * @class TypeSystem
  * @brief Handles all type-related operations, such as conversion compatibility, etc.
@@ -116,10 +113,10 @@ public:
      * @param from The source type of the conversion.
      * @param to The target type of the conversion.
      * @param mode The mode of the conversion (implicit or explicit).
-     * @return The cost of the conversion, or `std::numeric_limits<ConversionCost>::max()` if no
+     * @return The cost of the conversion, or `std::numeric_limits<u32>::max()` if no
      * conversion is possible.
      */
-    ConversionCost conversionCost(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
+    u32 conversionCost(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
 
 private:
     struct ConversionRuleKey {
