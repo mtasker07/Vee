@@ -17,6 +17,7 @@
 #include "veec/CoreDefines.hpp"
 #include "veec/basic/StringId.hpp"
 #include "veec/symbols/SymbolFwd.hpp"
+#include "veec/symbols/ent/ClassSymbol.hpp"
 #include "veec/symbols/ent/FunctionSymbol.hpp"
 #include "veec/symbols/ent/FieldSymbol.hpp"
 #include "veec/types/TypeId.hpp"
