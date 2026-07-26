@@ -65,11 +65,15 @@ protected:
     virtual void visitMemberAccessExpr(ast::MemberAccessExprNode& node) override;
     virtual void visitConstructExpr(ast::ConstructExprNode& node) override;
 
+    // For variable type inference
+    virtual void visitVariableDecl(ast::VariableDeclNode& node) override;
+
 private:
     //
     // Overload resolution
     //
 
+    bool implicitConversionPossible(types::Type* from, types::Type* to);
     u32 implicitConversionCost(types::Type* from, types::Type* to);
 
     template<typename T, typename CostFn>

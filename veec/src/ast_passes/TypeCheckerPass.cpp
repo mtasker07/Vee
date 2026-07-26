@@ -29,6 +29,7 @@
 #include "veec/ast/expr/IndexExprNode.hpp"
 #include "veec/ast/expr/MemberAccessExprNode.hpp"
 #include "veec/ast/expr/ConstructExprNode.hpp"
+#include "veec/ast/decl/VariableDeclNode.hpp"
 #include "veec/ast/type/TypeNode.hpp"
 #include "veec/ast/type/BuiltinTypeNode.hpp"
 #include "veec/ast/type/NamedTypeNode.hpp"
@@ -514,6 +515,67 @@ void TypeCheckerPass::visitConstructExpr(ast::ConstructExprNode& node) {
     _sema.types.setNodeType(&node, type);
 }
 
+void TypeCheckerPass::visitVariableDecl(ast::VariableDeclNode& node) {
+    ast::AstWalker::visitVariableDecl(node);
+    // ^^ Walks type and initializer
+
+    types::ErrorType* errorType = _sema.types.getError();
+
+    // NOTE: We dont want to use setNodeType here, since its a declaration,
+    // instead, only set the type of the symbol vv
+    symbols::VariableSymbol* varSymbol = node.symbol;
+
+    // If we have no initializer we dont need to do any checks
+    // UNLESS the variable has no explicit type
+    if (node.getInitializer() == nullptr) {
+        if (varSymbol->getType() == nullptr) {
+            // Cannot infer type for variable without type or initializer
+            _ctx.diagnostics.report(
+                diagnostics::ERROR_VAR_DECL_NO_TYPE_OR_INIT,
+                node.getRange(),
+                _ctx.strings.get(node.getName().id)
+            );
+
+            varSymbol->setType(_sema.types.getError());
+        }
+        return;
+    }
+
+    types::Type* initType = _sema.types.getNodeType(node.getInitializer());
+    VEE_ASSERT(initType != nullptr, "Failed to infer type for initializer of variable declaration");
+    
+    // Attempt to infer type if not explicitly specified
+    if (varSymbol->getType() == nullptr) {
+        varSymbol->setType(initType);
+
+        // If we inferred an error type, return early to avoid further errors
+        if (initType == errorType) {
+            return;
+        }
+    }
+
+    // Validate initializer can be assigned to variable
+    if (!implicitConversionPossible(initType, varSymbol->getType())) {
+        // Cannot convert initializer type to variable type
+        _ctx.diagnostics.report(
+            diagnostics::ERROR_VAR_ASSIGNMENT_TYPE_MISMATCH,
+            node.getInitializer()->getRange(),
+            initType->toString(),
+            varSymbol->getType()->toString()
+        );
+    }
+
+    // Emit conversion diagnostics for initializer
+    emitImplicitConversionDiagnostics(
+        node.getInitializer()->getRange(),
+        initType,
+        varSymbol->getType()
+    );
+}
+
+bool TypeCheckerPass::implicitConversionPossible(types::Type* from, types::Type* to) {
+    return _sema.typeSystem.canConvert(from, to, types::ConversionMode::Implicit);
+}
 u32 TypeCheckerPass::implicitConversionCost(types::Type* from, types::Type* to) {
     return _sema.typeSystem.conversionCost(from, to, types::ConversionMode::Implicit);
 }

@@ -246,6 +246,12 @@ inline constexpr DiagnosticDescriptor<2> ERROR_NO_IMPLICIT_CONVERSION_AVAILABLE 
 inline constexpr DiagnosticDescriptor<2> ERROR_NO_CONVERSION_AVAILABLE {
     UserDiagnosticKind::Error, 514, "no conversion available from '{}' to '{}'"
 };
+inline constexpr DiagnosticDescriptor<1> ERROR_VAR_DECL_NO_TYPE_OR_INIT {
+    UserDiagnosticKind::Error, 515, "cannot deduce type for variable '{}' because it has no type or initializer"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_VAR_ASSIGNMENT_TYPE_MISMATCH {
+    UserDiagnosticKind::Error, 516, "value of type '{}' cannot be assigned to variable of type '{}'"
+};
 
 // ------------------------------------------------------
 //                       WARNINGS
