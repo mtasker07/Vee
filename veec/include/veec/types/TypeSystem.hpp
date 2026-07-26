@@ -80,13 +80,45 @@ using ConversionCost = u32;
  */
 class TypeSystem {
 public:
+    /**
+     * @brief Constructs a new TypeSystem instance with the specified TypeTable.
+     * @param typeTable The TypeTable instance to use for getting existing types.
+     */
     explicit TypeSystem(TypeTable& typeTable)
         : _typeTable(typeTable) {}
 
+    /**
+     * @brief Adds a conversion rule to the type system.
+     * @param from The source type of the conversion.
+     * @param to The target type of the conversion.
+     * @param rank The rank of the conversion.
+     */
     void addConversionRule(Type* from, Type* to, ConversionRank rank);
 
+    /**
+     * @brief Checks if a conversion from one type to another is possible.
+     * @param from The source type of the conversion.
+     * @param to The target type of the conversion.
+     * @param mode The mode of the conversion (implicit or explicit).
+     * @return True if the conversion is possible, false otherwise.
+     */
     bool canConvert(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
+    /**
+     * @brief Gets the rank of a conversion from one type to another.
+     * @param from The source type of the conversion.
+     * @param to The target type of the conversion.
+     * @param mode The mode of the conversion (implicit or explicit).
+     * @return The rank of the conversion, or ConversionRank::NoConversion if no conversion is possible.
+     */
     ConversionRank rankConversion(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
+    /**
+     * @brief Gets the cost of a conversion from one type to another.
+     * @param from The source type of the conversion.
+     * @param to The target type of the conversion.
+     * @param mode The mode of the conversion (implicit or explicit).
+     * @return The cost of the conversion, or `std::numeric_limits<ConversionCost>::max()` if no
+     * conversion is possible.
+     */
     ConversionCost conversionCost(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
 
 private:
