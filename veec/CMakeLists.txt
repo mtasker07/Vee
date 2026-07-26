@@ -26,7 +26,7 @@ set(VEEC_SOURCES
     src/ast_passes/TopLevelUseResolutionPass.cpp
     src/ast_passes/SymbolResolutionPass.cpp
     src/ast_passes/TypeConstructionPass.cpp
-    src/ast_passes/TypeInferencePass.cpp
+    src/ast_passes/TypeResolutionPass.cpp
     src/ast_passes/TypeCheckerPass.cpp
     
     src/sema/BuiltinRegistrar.cpp

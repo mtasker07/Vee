@@ -1,8 +1,9 @@
 /**
- * @file TypeInferencePass.hpp
- * @brief This file contains the definition of the TypeInferencePass class,
- * which is responsible for inferring all types in the program wherever
- * they are not explicitly specified.
+ * @file TypeResolutionPass.hpp
+ * @brief This file contains the definition of the TypeResolutionPass class,
+ * which is responsible for resolving all explicit types in the program and
+ * assigning that information to the declaration symbols where necessary
+ * so that it can be used in later passes.
  */
 
 #pragma once
@@ -23,23 +24,23 @@ VEEC_NAMESPACE_BEGIN
 namespace ast_passes {
 
 /**
- * @class TypeInferencePass
- * @brief A semantic analysis pass that infers all types in the program.
+ * @class TypeResolutionPass
+ * @brief A semantic analysis pass that resolves all explicit types in the program.
  */
-class TypeInferencePass : public sema::Pass {
+class TypeResolutionPass : public sema::Pass {
 public:
     /**
-     * @brief Creates a new TypeInferencePass instance with the given context.
+     * @brief Creates a new TypeResolutionPass instance with the given context.
      * @param ctx The CompilationContext to use for this pass.
      * @param sema The SemaContext to use for this pass.
      */
-    TypeInferencePass(CompilationContext& ctx, sema::SemaContext& sema)
+    TypeResolutionPass(CompilationContext& ctx, sema::SemaContext& sema)
         : sema::Pass(ctx, sema) {}
         
-    virtual ~TypeInferencePass() = default;
+    virtual ~TypeResolutionPass() = default;
 
     /**
-     * @brief Runs the type inference pass over a given module node.
+     * @brief Runs the type resolution pass over a given module node.
      * @param node The CompilationUnitNode AST node to run this pass on.
      */
     virtual void run(ast::CompilationUnitNode& node) override {

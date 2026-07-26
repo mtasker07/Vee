@@ -1,4 +1,4 @@
-#include "veec/ast_passes/TypeInferencePass.hpp"
+#include "veec/ast_passes/TypeResolutionPass.hpp"
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -8,21 +8,6 @@
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
-#include "veec/ast/expr/ExpressionNode.hpp"
-#include "veec/ast/expr/ParenthesizedExprNode.hpp"
-#include "veec/ast/expr/LiteralExprNode.hpp"
-#include "veec/ast/expr/IntLiteralExprNode.hpp"
-#include "veec/ast/expr/FloatLiteralExprNode.hpp"
-#include "veec/ast/expr/StringLiteralExprNode.hpp"
-#include "veec/ast/expr/BoolLiteralExprNode.hpp"
-#include "veec/ast/expr/UnaryExprNode.hpp"
-#include "veec/ast/expr/BinaryExprNode.hpp"
-#include "veec/ast/expr/AssignmentExprNode.hpp"
-#include "veec/ast/expr/NameExprNode.hpp"
-#include "veec/ast/expr/CallExprNode.hpp"
-#include "veec/ast/expr/IndexExprNode.hpp"
-#include "veec/ast/expr/MemberAccessExprNode.hpp"
-#include "veec/ast/expr/ConstructExprNode.hpp"
 #include "veec/ast/decl/FunctionDeclNode.hpp"
 #include "veec/ast/decl/ParameterDeclNode.hpp"
 #include "veec/ast/decl/ClassDeclNode.hpp"
@@ -53,7 +38,7 @@
 VEEC_NAMESPACE_BEGIN
 namespace ast_passes {
 
-void TypeInferencePass::visitFunctionDecl(ast::FunctionDeclNode& node) {
+void TypeResolutionPass::visitFunctionDecl(ast::FunctionDeclNode& node) {
     ast::AstWalker::visitFunctionDecl(node);
     // ^^ Assigns parameter types and return type
 
@@ -71,7 +56,7 @@ void TypeInferencePass::visitFunctionDecl(ast::FunctionDeclNode& node) {
     types::FunctionType* funcType = _sema.types.getFunction(returnType, parameterTypes);
     functionSymbol->setType(funcType);
 }
-void TypeInferencePass::visitParameterDecl(ast::ParameterDeclNode& node) {
+void TypeResolutionPass::visitParameterDecl(ast::ParameterDeclNode& node) {
     ast::AstWalker::visitParameterDecl(node);
 
     symbols::VariableSymbol* paramSymbol = node.symbol;
@@ -83,14 +68,14 @@ void TypeInferencePass::visitParameterDecl(ast::ParameterDeclNode& node) {
     // Assign to symbol
     paramSymbol->setType(paramType);
 }
-void TypeInferencePass::visitClassDecl(ast::ClassDeclNode& node) {
+void TypeResolutionPass::visitClassDecl(ast::ClassDeclNode& node) {
     ast::AstWalker::visitClassDecl(node);
     
     // Class symbol info set from TypeConstructionPass
     VEE_ASSERT(node.symbol != nullptr, "ClassDeclNode has no associated ClassSymbol");
     VEE_ASSERT(node.symbol->getType() != nullptr, "ClassSymbol has no associated ClassType");
 }
-void TypeInferencePass::visitMethodDecl(ast::MethodDeclNode& node) {
+void TypeResolutionPass::visitMethodDecl(ast::MethodDeclNode& node) {
     ast::AstWalker::visitMethodDecl(node);
     // ^^ Assigns parameter types and return type
 
@@ -108,7 +93,7 @@ void TypeInferencePass::visitMethodDecl(ast::MethodDeclNode& node) {
     types::FunctionType* funcType = _sema.types.getFunction(returnType, parameterTypes);
     methodSymbol->setType(funcType);
 }
-void TypeInferencePass::visitFieldDecl(ast::FieldDeclNode& node) {
+void TypeResolutionPass::visitFieldDecl(ast::FieldDeclNode& node) {
     ast::AstWalker::visitFieldDecl(node);
 
     symbols::FieldSymbol* fieldSymbol = node.symbol;
@@ -120,7 +105,7 @@ void TypeInferencePass::visitFieldDecl(ast::FieldDeclNode& node) {
     // Assign to symbol
     fieldSymbol->setType(fieldType);
 }
-void TypeInferencePass::visitVariableDecl(ast::VariableDeclNode& node) {
+void TypeResolutionPass::visitVariableDecl(ast::VariableDeclNode& node) {
     ast::AstWalker::visitVariableDecl(node);
 
     symbols::VariableSymbol* varSymbol = node.symbol;
@@ -133,10 +118,10 @@ void TypeInferencePass::visitVariableDecl(ast::VariableDeclNode& node) {
     varSymbol->setType(varType);
 }
 
-void TypeInferencePass::visitType(ast::TypeNode& node) {
+void TypeResolutionPass::visitType(ast::TypeNode& node) {
     ast::AstWalker::visitType(node);
 }
-void TypeInferencePass::visitBuiltinType(ast::BuiltinTypeNode& node) {
+void TypeResolutionPass::visitBuiltinType(ast::BuiltinTypeNode& node) {
     ast::AstWalker::visitBuiltinType(node);
 
     // Convert to builtin type (from ast builtin type)
@@ -162,7 +147,7 @@ void TypeInferencePass::visitBuiltinType(ast::BuiltinTypeNode& node) {
     types::Type* type = _sema.types.getBuiltin(kind);
     _sema.types.setNodeType(&node, type);
 }
-void TypeInferencePass::visitNamedType(ast::NamedTypeNode& node) {
+void TypeResolutionPass::visitNamedType(ast::NamedTypeNode& node) {
     ast::AstWalker::visitNamedType(node);
 
     types::ErrorType* errorType = _sema.types.getError();

@@ -20,7 +20,7 @@
 #include "veec/ast_passes/SymbolCollectionPass.hpp"
 #include "veec/ast_passes/SymbolResolutionPass.hpp"
 #include "veec/ast_passes/TypeConstructionPass.hpp"
-#include "veec/ast_passes/TypeInferencePass.hpp"
+#include "veec/ast_passes/TypeResolutionPass.hpp"
 #include "veec/ast_passes/TypeCheckerPass.hpp"
 #include "veec/symbols/ent/ClassSymbol.hpp"
 #include "veec/types/TypeTable.hpp"
@@ -55,6 +55,13 @@ class MyClass {
     func new(_x: i32, _y: i32) -> MyClass {
         return MyClass { _x, _y };
     }
+
+    func mult(a: i32, b: i32) -> i32 {
+        return a * b;
+    }
+    func mult(a: i64, b: i64) -> i64 {
+        return a * b;
+    }
     
     func addByX(a: i32) -> i32 {
         return x + a;
@@ -62,9 +69,11 @@ class MyClass {
 }
 
 func main() -> i32 {
-    let x: i32 = 5;
+    let x: i64 = 6;
 
-    let myObj = MyClass::new(10, 20);
+    let result1 = MyClass::mult(x, 4);
+
+    let myObj = MyClass::new(x, 20);
 
     return myObj.addByX(x);
 }
@@ -95,7 +104,7 @@ func main() -> i32 {
     spm.addPass<ast_passes::SymbolCollectionPass>();
     spm.addPass<ast_passes::SymbolResolutionPass>();
     spm.addPass<ast_passes::TypeConstructionPass>();
-    spm.addPass<ast_passes::TypeInferencePass>();
+    spm.addPass<ast_passes::TypeResolutionPass>();
     spm.addPass<ast_passes::TypeCheckerPass>();
     spm.runAll(*ast);
 
@@ -123,11 +132,15 @@ func main() -> i32 {
     std::cout << "SYMBOLS:\n";
     symbols::SymbolTable& symTable = semaCtx.symbols;
     for (const auto& symbol : symTable.getAllSymbols()) {
-        std::cout << "Symbol: '" << ctx.strings.get(symbol->getNameValue()) << "'  ";
+        std::string_view symbolName = symbol->getName().hasValue() ? ctx.strings.get(symbol->getNameValue()) : "<unnamed>";
+        std::cout << "Symbol: '" << symbolName << "'  ";
 
         switch (symbol->getKind()) {
             case symbols::SymbolKind::Module:
                 std::cout << "  Kind: Module\n";
+                break;
+            case symbols::SymbolKind::FunctionSet:
+                std::cout << "  Kind: FunctionSet\n";
                 break;
             case symbols::SymbolKind::Function:
                 std::cout << "  Kind: Function\n";
@@ -140,6 +153,9 @@ func main() -> i32 {
                 break;
             case symbols::SymbolKind::Variable:
                 std::cout << "  Kind: Variable\n";
+                break;
+            case symbols::SymbolKind::Operator:
+                std::cout << "  Kind: Operator\n";
                 break;
             default:
                 std::cout << "  Kind: Unknown\n";
