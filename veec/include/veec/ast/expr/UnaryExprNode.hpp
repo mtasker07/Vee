@@ -7,8 +7,11 @@
 
 #pragma once
 
+#include <string_view>
+
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
+#include "vee/core/InternalErrorHandling.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/expr/ExpressionNode.hpp"
@@ -30,6 +33,27 @@ enum class UnaryOp : u8 {
     Dereference,
     AddressOf
 };
+
+/**
+ * @brief Converts a UnaryOp to its string representation.
+ * @param op The UnaryOp to convert.
+ * @return A string representation of the UnaryOp.
+ */
+inline std::string_view toString(UnaryOp op) {
+    // TODO: Use constants
+    switch (op) {
+        case UnaryOp::Plus: return "+";
+        case UnaryOp::Minus: return "-";
+        case UnaryOp::Increment: return "++";
+        case UnaryOp::Decrement: return "--";
+        case UnaryOp::LogicalNot: return "!";
+        case UnaryOp::BitwiseNot: return "~";
+        case UnaryOp::Dereference: return "*";
+        case UnaryOp::AddressOf: return "&";
+        default:
+            VEE_UNREACHABLE("Unknown UnaryOp kind");
+    }
+}
 
 /**
  * @class UnaryExprNode

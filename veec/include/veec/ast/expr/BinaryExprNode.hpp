@@ -37,6 +37,32 @@ enum class BinaryOp : u8 {
 };
 
 /**
+ * @brief Converts a BinaryOp to its string representation.
+ * @param op The BinaryOp to convert.
+ * @return A string representation of the BinaryOp.
+ */
+inline std::string_view toString(BinaryOp op) {
+    // TODO: Use constants
+    switch (op) {
+        case BinaryOp::Add: return "+";
+        case BinaryOp::Subtract: return "-";
+        case BinaryOp::Multiply: return "*";
+        case BinaryOp::Divide: return "/";
+        case BinaryOp::Modulo: return "%";
+        case BinaryOp::Equal: return "==";
+        case BinaryOp::NotEqual: return "!=";
+        case BinaryOp::LessThan: return "<";
+        case BinaryOp::LessThanOrEqual: return "<=";
+        case BinaryOp::GreaterThan: return ">";
+        case BinaryOp::GreaterThanOrEqual: return ">=";
+        case BinaryOp::LogicalAnd: return "&&";
+        case BinaryOp::LogicalOr: return "||";
+        default:
+            VEE_UNREACHABLE("Unknown BinaryOp kind");
+    }
+}
+
+/**
  * @class BinaryExprNode
  * @brief Represents a binary expression in the AST.
  * A binary expression consists of a left operand, a right operand, and an operator.
