@@ -56,6 +56,12 @@ public:
     inline TypeKind getKind() const { return _kind; }
 
     /**
+     * @brief Converts this type to a string representation.
+     * @return A string representation of this type.
+     */
+    virtual std::string toString() const = 0;
+
+    /**
      * @brief Gets the static kind of this type.
      * @return The static kind of this type.
      */

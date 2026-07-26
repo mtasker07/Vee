@@ -7,7 +7,9 @@
 
 #pragma once
 
+#include <string>
 #include <string_view>
+#include <format>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -33,6 +35,14 @@ public:
         : Type(TypeKind::Array), _elementType(elementType), _size(size) {}
 
     virtual ~ArrayType() = default;
+
+    /**
+     * @brief Converts this array type to a string representation.
+     * @return A string representation of this array type.
+     */
+    std::string toString() const override {
+        return std::format("{}[{}]", _elementType->toString(), _size);
+    }
 
     /**
      * @brief Gets the element type of this array type.

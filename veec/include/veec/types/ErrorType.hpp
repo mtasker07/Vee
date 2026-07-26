@@ -33,6 +33,14 @@ public:
     virtual ~ErrorType() = default;
 
     /**
+     * @brief Converts this error type to a string representation.
+     * @return A string representation of this error type.
+     */
+    std::string toString() const override {
+        return "<Error>";
+    }
+
+    /**
      * @brief Gets the static kind of this type, which is Error.
      * @return The static kind of this type, which is Error.
      */

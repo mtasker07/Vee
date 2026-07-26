@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <string>
+#include <format>
 #include <unordered_map>
 
 #include "vee/core/CoreDefines.hpp"
@@ -37,6 +39,14 @@ public:
         : Type(TypeKind::Class), _classSymbol(classSymbol) {}
 
     virtual ~ClassType() = default;
+
+    /**
+     * @brief Converts this class type to a string representation.
+     * @return A string representation of this class type.
+     */
+    std::string toString() const override {
+        return std::format("class {}", _classSymbol->getNameValue());
+    }
 
     /**
      * @brief Gets the name ID of this class type.

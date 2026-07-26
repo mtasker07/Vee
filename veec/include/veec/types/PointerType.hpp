@@ -7,7 +7,9 @@
 
 #pragma once
 
+#include <string>
 #include <string_view>
+#include <format>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -32,6 +34,14 @@ public:
         : Type(TypeKind::Pointer), _pointeeType(pointeeType) {}
 
     virtual ~PointerType() = default;
+
+    /**
+     * @brief Converts this pointer type to a string representation.
+     * @return A string representation of this pointer type.
+     */
+    std::string toString() const override {
+        return std::format("{}*", _pointeeType->toString());
+    }
 
     /**
      * @brief Gets the type that this pointer points to.

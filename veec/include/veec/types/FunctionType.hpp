@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <string>
+#include <format>
 #include <unordered_map>
 
 #include "vee/core/CoreDefines.hpp"
@@ -36,6 +38,23 @@ public:
         : Type(TypeKind::Function), _returnType(returnType), _parameterTypes(parameterTypes) {}
 
     virtual ~FunctionType() = default;
+
+    /**
+     * @brief Converts this function type to a string representation.
+     * @return A string representation of this function type.
+     */
+    std::string toString() const override {
+        // Format params
+        std::string params;
+        for (size_t i = 0; i < _parameterTypes.size(); ++i) {
+            params += _parameterTypes[i]->toString();
+            if (i < _parameterTypes.size() - 1)
+                params += ", ";
+        }
+
+        // Full format
+        return std::format("func({}) -> {}", params, _returnType->toString());
+    }
 
     /**
      * @brief Gets the return type of this function type.

@@ -7,7 +7,9 @@
 
 #pragma once
 
+#include <string>
 #include <string_view>
+#include <format>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -42,6 +44,31 @@ enum class BuiltinTypeKind : u8 {
 };
 
 /**
+ * @brief Converts a BuiltinTypeKind to its string representation.
+ * @param kind The BuiltinTypeKind to convert.
+ * @return A string representation of the BuiltinTypeKind.
+ */
+inline std::string_view toString(BuiltinTypeKind kind) {
+    switch (kind) {
+        case BuiltinTypeKind::Void: return "void";
+        case BuiltinTypeKind::Bool: return "bool";
+        case BuiltinTypeKind::String: return "string";
+        case BuiltinTypeKind::I8: return "i8";
+        case BuiltinTypeKind::I16: return "i16";
+        case BuiltinTypeKind::I32: return "i32";
+        case BuiltinTypeKind::I64: return "i64";
+        case BuiltinTypeKind::U8: return "u8";
+        case BuiltinTypeKind::U16: return "u16";
+        case BuiltinTypeKind::U32: return "u32";
+        case BuiltinTypeKind::U64: return "u64";
+        case BuiltinTypeKind::F32: return "f32";
+        case BuiltinTypeKind::F64: return "f64";
+        default:
+            VEE_UNREACHABLE("Unknown builtin type kind");
+    }
+}
+
+/**
  * @brief Represents a builtin Vee type.
  */
 class BuiltinType : public Type {
@@ -54,6 +81,14 @@ public:
         : Type(TypeKind::Builtin), _builtinKind(builtinKind) {}
 
     virtual ~BuiltinType() = default;
+
+    /**
+     * @brief Converts this builtin type to a string representation.
+     * @return A string representation of this builtin type.
+     */
+    std::string toString() const override {
+        return std::format("{}", types::toString(_builtinKind));
+    }
 
     /**
      * @brief Gets the kind of this builtin type.
