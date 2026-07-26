@@ -469,6 +469,7 @@ void TypeCheckerPass::visitMemberAccessExpr(ast::MemberAccessExprNode& node) {
     ast::AstWalker::visitMemberAccessExpr(node);
 
     types::Type* objectType = _sema.types.getNodeType(node.getObject());
+    VEE_ASSERT(objectType != nullptr, "Failed to infer type for object of member access expression");
     
     types::ErrorType* errorType = _sema.types.getError();
 
