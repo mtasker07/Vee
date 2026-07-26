@@ -85,6 +85,7 @@ u32 TypeSystem::conversionCost(Type* from, Type* to, ConversionMode mode) const 
         default:
             VEE_UNREACHABLE("Unknown conversion rank");
     }
+}
 
 } // namespace types
 VEEC_NAMESPACE_END
