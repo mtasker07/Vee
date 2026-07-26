@@ -220,21 +220,42 @@ inline constexpr DiagnosticDescriptor<2> ERROR_UINT_LITERAL_OUT_OF_RANGE {
     UserDiagnosticKind::Error, 505, "integer literal '{}' is out of range for {}-bit unsigned integer"
 };
 inline constexpr DiagnosticDescriptor<2> ERROR_UNARY_OPERATOR_NOT_FOUND {
-    UserDiagnosticKind::Error, 506, "unary operator {} not found for type '{}'"
-};
-inline constexpr DiagnosticDescriptor<3> ERROR_BINARY_OPERATOR_NOT_FOUND {
-    UserDiagnosticKind::Error, 507, "binary operator {} not found for types '{}' and '{}'"
-};
-inline constexpr DiagnosticDescriptor<2> ERROR_UNARY_OPERATOR_AMBIGUOUS {
-    UserDiagnosticKind::Error, 508, "unary operator {} is ambiguous for type '{}'"
+    UserDiagnosticKind::Error, 506, "unary operator {} not found for '{}'"
 };
 inline constexpr DiagnosticDescriptor<3> ERROR_BINARY_OPERATOR_AMBIGUOUS {
-    UserDiagnosticKind::Error, 509, "binary operator {} is ambiguous for types '{}' and '{}'"
+    UserDiagnosticKind::Error, 507, "binary operator {} is ambiguous for '{}' and '{}'"
+};
+inline constexpr DiagnosticDescriptor<3> ERROR_BINARY_OPERATOR_NOT_FOUND {
+    UserDiagnosticKind::Error, 508, "binary operator {} not found for '{}' and '{}'"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_UNARY_OPERATOR_AMBIGUOUS {
+    UserDiagnosticKind::Error, 509, "unary operator {} is ambiguous for '{}'"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_CALL_NON_FUNCTION {
+    UserDiagnosticKind::Error, 510, "cannot call non-function '{}'"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_FUNCTION_OVERLOAD_NOT_FOUND {
+    UserDiagnosticKind::Error, 511, "function overload not found for '{}'"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_FUNCTION_OVERLOAD_AMBIGUOUS {
+    UserDiagnosticKind::Error, 512, "ambiguous function overload for '{}'"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_NO_IMPLICIT_CONVERSION_AVAILABLE {
+    UserDiagnosticKind::Error, 513, "no implicit conversion available from '{}' to '{}'"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_NO_CONVERSION_AVAILABLE {
+    UserDiagnosticKind::Error, 514, "no conversion available from '{}' to '{}'"
 };
 
 // ------------------------------------------------------
 //                       WARNINGS
 // ------------------------------------------------------
+
+// -------------------- SEMA WARNINGS -------------------
+
+inline constexpr DiagnosticDescriptor<2> WARNING_NARROWING_CONVERSION {
+    UserDiagnosticKind::Warning, 1000, "narrowing conversion from '{}' to '{}' may result in a loss of data"
+};
 
 // ------------------------------------------------------
 //                        INFOS

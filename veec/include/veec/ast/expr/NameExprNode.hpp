@@ -49,11 +49,19 @@ public:
     inline QualifiedNameNode& getQualifiedName() { return *_qualifiedName; }
 
     /**
-     * @brief Gets the resolved symbol for this name expression, if any.
+     * @brief Gets the resolved symbol for this name expression, if any (read-only).
      * This is basically just a shorthand for `getQualifiedName()->resolvedSymbol`.
      * @return The resolved symbol for this name expression, or nullptr if not resolved.
      */
     inline const symbols::Symbol* getResolvedSymbol() const {
+        return _qualifiedName ? _qualifiedName->resolvedSymbol : nullptr;
+    }
+    /**
+     * @brief Gets the resolved symbol for this name expression, if any (read-write).
+     * This is basically just a shorthand for `getQualifiedName()->resolvedSymbol`.
+     * @return The resolved symbol for this name expression, or nullptr if not resolved.
+     */
+    inline symbols::Symbol* getResolvedSymbol() {
         return _qualifiedName ? _qualifiedName->resolvedSymbol : nullptr;
     }
 

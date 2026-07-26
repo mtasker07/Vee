@@ -85,9 +85,20 @@ private:
     //
     // Lookup helpers
     //
+    
     std::vector<symbols::OperatorSymbol*> lookupUnaryOperator(symbols::UnaryOperatorKind kind, types::Type* operandType);
     std::vector<symbols::OperatorSymbol*> lookupBinaryOperator(symbols::BinaryOperatorKind kind, types::Type* lhsType, types::Type* rhsType);
     std::vector<symbols::FunctionSymbol*> lookupOverload(symbols::FunctionSetSymbol* set, const std::vector<types::Type*>& argTypes);
+
+    // 
+    // Diagnostic helpers
+    //
+    
+    void emitImplicitConversionDiagnostics(
+        const source::SourceRange& range,
+        types::Type* fromType,
+        types::Type* toType
+    );
 };
 
 } // namespace ast_passes

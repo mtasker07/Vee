@@ -190,6 +190,13 @@ void TypeCheckerPass::visitUnaryExpr(ast::UnaryExprNode& node) {
         // Found exactly one matching operator
         symbols::OperatorSymbol* opSymbol = result[0];
         resultType = opSymbol->getResultType();
+
+        // Emit conversion diagnostics
+        emitImplicitConversionDiagnostics(
+            node.getRange(),
+            operandType,
+            opSymbol->getOperandType(0)
+        );
     }
 
     _sema.types.setNodeType(&node, resultType);
@@ -240,6 +247,18 @@ void TypeCheckerPass::visitBinaryExpr(ast::BinaryExprNode& node) {
         // Found exactly one matching operator
         symbols::OperatorSymbol* opSymbol = result[0];
         resultType = opSymbol->getResultType();
+
+        // Emit conversion diagnostics
+        emitImplicitConversionDiagnostics(
+            node.getRange(),
+            lType,
+            opSymbol->getOperandType(0)
+        );
+        emitImplicitConversionDiagnostics(
+            node.getRange(),
+            rType,
+            opSymbol->getOperandType(1)
+        );
     }
 
     _sema.types.setNodeType(&node, resultType);
@@ -273,18 +292,11 @@ void TypeCheckerPass::visitNameExpr(ast::NameExprNode& node) {
     if (resolvedSymbol) {
         types::Type* symbolType = errorType;
 
-        // Function set -> resolve overload
+        // Function sets are a special case, since we dont actually know which overload
+        // is being called in the current context. This is the one case where we can dont
+        // set the type of the symbol (keep it null), and we will instead rely on CallExpr to set it
         if (auto* funcSet = resolvedSymbol->as<symbols::FunctionSetSymbol>()) {
-            std::vector<symbols::FunctionSymbol*> overloads = funcSet->getOverloads();
-            if (overloads.empty()) {
-                // No matching overload found
-            } else if (overloads.size() > 1) {
-                // Ambiguous overload
-            } else {
-                // Found exactly one matching overload
-                symbols::FunctionSymbol* funcSymbol = overloads[0];
-                symbolType = funcSymbol->getType();
-            }
+            return;
         }
         // Not a function set -> standard symbol resolution
         else switch (resolvedSymbol->getKind()) {
@@ -314,16 +326,103 @@ void TypeCheckerPass::visitNameExpr(ast::NameExprNode& node) {
 void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
     ast::AstWalker::visitCallExpr(node);
 
-    types::Type* calleeType = _sema.types.getNodeType(node.getCallee());
-
     types::ErrorType* errorType = _sema.types.getError();
 
     // Propogate errors
+    types::Type* calleeType = _sema.types.getNodeType(node.getCallee());
     if (calleeType == errorType) {
+        // ^^ Note that this wont break if the callee is a function set since it
+        // will actually be nullptr instead
         _sema.types.setNodeType(&node, errorType);
         return;
     }
 
+    // Handle function sets specially, since we can only decide which overload here when
+    // we have argument context
+    ast::NameExprNode* calleeNameExpr = ast::ast_cast<ast::NameExprNode>(node.getCallee());
+    if (calleeNameExpr) {
+        symbols::Symbol* resolvedSymbol = calleeNameExpr->getResolvedSymbol();
+        if (!resolvedSymbol) {
+            // Cannot infer unresolved symbol
+            _sema.types.setNodeType(&node, errorType);
+            return;
+        }
+
+        symbols::FunctionSetSymbol* funcSet = resolvedSymbol->as<symbols::FunctionSetSymbol>();
+        if (!funcSet) {
+            // Cannot call non-function set symbols
+            _ctx.diagnostics.report(
+                diagnostics::ERROR_CALL_NON_FUNCTION,
+                node.getRange(),
+                _ctx.strings.get(resolvedSymbol->getNameValue())
+            );
+
+            _sema.types.setNodeType(&node, errorType);
+            return;
+        }
+
+        // Grab argument types
+        std::vector<types::Type*> argTypes;
+        for (ast::ExpressionNode* arg : node.getArgs()) {
+            types::Type* argType = _sema.types.getNodeType(arg);
+            VEE_ASSERT(argType != nullptr, "Failed to infer type for argument of call expression");
+            argTypes.push_back(argType);
+        }
+
+        // Lookup overloads
+        std::vector<symbols::FunctionSymbol*> overloads = lookupOverload(funcSet, argTypes);
+
+        if (overloads.empty()) {
+            // No matching overload found
+            _ctx.diagnostics.report(
+                diagnostics::ERROR_FUNCTION_OVERLOAD_NOT_FOUND,
+                node.getRange(),
+                _ctx.strings.get(funcSet->getNameValue())
+            );
+
+            _sema.types.setNodeType(calleeNameExpr, errorType);
+            _sema.types.setNodeType(&node, errorType);
+            return;
+        } else if (overloads.size() > 1) {
+            // Ambiguous overload
+            _ctx.diagnostics.report(
+                diagnostics::ERROR_FUNCTION_OVERLOAD_AMBIGUOUS,
+                node.getRange(),
+                _ctx.strings.get(funcSet->getNameValue())
+            );
+
+            _sema.types.setNodeType(calleeNameExpr, errorType);
+            _sema.types.setNodeType(&node, errorType);
+            return;
+        } else {
+            // Found exactly one matching overload
+            // IMPORTANT: Use function type for name expression node,
+            // and return type for call expression node
+            symbols::FunctionSymbol* funcSymbol = overloads[0];
+            types::FunctionType* funcType = funcSymbol->getType()->as<types::FunctionType>();
+            VEE_ASSERT(funcType != nullptr, "Function symbol does not have a function type");
+            
+            _sema.types.setNodeType(calleeNameExpr, funcType);
+            _sema.types.setNodeType(&node, funcType->getReturnType());
+
+            // Output conversion diagnostics for args
+            const std::vector<types::Type*>& paramTypes = funcType->getParameterTypes();
+            for (size_t i = 0; i < argTypes.size(); ++i) {
+                types::Type* argType = argTypes[i];
+                types::Type* paramType = paramTypes[i];
+
+                emitImplicitConversionDiagnostics(
+                    node.getArgs()[i]->getRange(),
+                    argType,
+                    paramType
+                );
+            }
+
+            return;
+        }
+    }
+
+    // Any function-typed object
     types::FunctionType* calleeTypeAsFunction = calleeType->as<types::FunctionType>();
     if (calleeTypeAsFunction) {
         // Result type is the return type of the function
@@ -580,6 +679,54 @@ std::vector<symbols::FunctionSymbol*> TypeCheckerPass::lookupOverload(symbols::F
 
         return totalCost;
     });
+}
+
+void TypeCheckerPass::emitImplicitConversionDiagnostics(
+    const source::SourceRange& range,
+    types::Type* fromType,
+    types::Type* toType
+) {
+    using ConversionRank = types::ConversionRank;
+
+    VEE_ASSERT(fromType != nullptr, "From type must not be null");
+    VEE_ASSERT(toType != nullptr, "To type must not be null");
+
+    // Early out no conversion
+    if (fromType == toType) {
+        return;
+    }
+
+    ConversionRank rank = _sema.typeSystem.rankConversion(fromType, toType, types::ConversionMode::Implicit);
+    switch (rank) {
+        case ConversionRank::ExactMatch:
+        case ConversionRank::Promotion:
+        case ConversionRank::Conversion:
+        case ConversionRank::UserDefinedConversion:
+        case ConversionRank::ExplicitConversion:
+            // No diagnostics for these ranks
+            break;
+        
+        case ConversionRank::NarrowingConversion:
+            _ctx.diagnostics.report(
+                diagnostics::WARNING_NARROWING_CONVERSION,
+                range,
+                fromType->toString(),
+                toType->toString()
+            );
+            break;
+
+        case ConversionRank::NoConversion:
+            _ctx.diagnostics.report(
+                diagnostics::ERROR_NO_IMPLICIT_CONVERSION_AVAILABLE,
+                range,
+                fromType->toString(),
+                toType->toString()
+            );
+            break;
+
+        default:
+            VEE_UNREACHABLE("Unknown conversion rank");
+    }
 }
 
 } // namespace ast_passes
