@@ -6,7 +6,8 @@
 
 #pragma once
 
-#include <stack>
+#include <span>
+#include <vector>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -19,6 +20,7 @@
 #include "veec/sema/SemaContext.hpp"
 #include "veec/sema/Pass.hpp"
 #include "veec/symbols/SymbolFwd.hpp"
+#include "veec/types/TypeFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast_passes {
@@ -64,21 +66,28 @@ protected:
     virtual void visitConstructExpr(ast::ConstructExprNode& node) override;
 
 private:
-    /**
-     * @brief Checks if the given type is compatible with the expected type.
-     * @param expected The expected type.
-     * @param actual The actual type.
-     * @return True if the types are compatible, false otherwise.
-     */
-    bool checkTypeCompatibility(types::Type* expected, types::Type* actual);
+    //
+    // Overload resolution
+    //
 
+    u32 implicitConversionCost(types::Type* from, types::Type* to);
+
+    template<typename T, typename CostFn>
+    std::vector<T*> findBestCandidates(std::span<T* const> candidates, CostFn&& costFn);
+
+    //
     // Enum converters
+    //
+
     symbols::UnaryOperatorKind astToSemaUnaryOp(ast::UnaryOp op);
     symbols::BinaryOperatorKind astToSemaBinaryOp(ast::BinaryOp op);
 
-    // Lookup
-    symbols::OperatorSymbol* lookupUnaryOperator(symbols::UnaryOperatorKind kind, types::Type* operandType);
-    symbols::OperatorSymbol* lookupBinaryOperator(symbols::BinaryOperatorKind kind, types::Type* lhsType, types::Type* rhsType);
+    //
+    // Lookup helpers
+    //
+    std::vector<symbols::OperatorSymbol*> lookupUnaryOperator(symbols::UnaryOperatorKind kind, types::Type* operandType);
+    std::vector<symbols::OperatorSymbol*> lookupBinaryOperator(symbols::BinaryOperatorKind kind, types::Type* lhsType, types::Type* rhsType);
+    std::vector<symbols::FunctionSymbol*> lookupOverload(symbols::FunctionSetSymbol* set, const std::vector<types::Type*>& argTypes);
 };
 
 } // namespace ast_passes

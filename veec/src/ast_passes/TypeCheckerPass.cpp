@@ -1,6 +1,9 @@
 #include "veec/ast_passes/TypeCheckerPass.hpp"
 
 #include <span>
+#include <vector>
+#include <algorithm>
+#include <iostream>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -39,8 +42,10 @@
 #include "veec/symbols/ent/ClassSymbol.hpp"
 #include "veec/symbols/ent/FieldSymbol.hpp"
 #include "veec/symbols/ent/OperatorSymbol.hpp"
+#include "veec/types/Type.hpp"
 #include "veec/types/TypeFwd.hpp"
 #include "veec/types/TypeTable.hpp"
+#include "veec/types/TypeSystem.hpp"
 #include "veec/types/ErrorType.hpp"
 #include "veec/types/BuiltinType.hpp"
 #include "veec/types/PointerType.hpp"
@@ -150,14 +155,43 @@ void TypeCheckerPass::visitUnaryExpr(ast::UnaryExprNode& node) {
     // ^^ Sets operand type
 
     types::ErrorType* errorType = _sema.types.getError();
-    //types::Type* operandType = _sema.types.getNodeType(node.getOperand());
+    types::Type* operandType = _sema.types.getNodeType(node.getOperand());
+    VEE_ASSERT(operandType != nullptr, "Failed to infer type for operand of unary expression");
+
+    // Propogate errors early
+    if (operandType == errorType) {
+        _sema.types.setNodeType(&node, errorType);
+        return;
+    }
+    
     types::Type* resultType = errorType;
 
     // Lookup operator
     symbols::UnaryOperatorKind semaOp = astToSemaUnaryOp(node.getOperator());
-    std::span<symbols::OperatorSymbol* const> opSymbols = _sema.operators.getUnaryOperators(semaOp);
+    std::vector<symbols::OperatorSymbol*> result = lookupUnaryOperator(semaOp, operandType);
 
-    VEE_ASSERT(resultType != nullptr, "Failed to infer type for unary expression");
+    if (result.empty()) {
+        // No matching operator found
+        _ctx.diagnostics.report(
+            diagnostics::ERROR_UNARY_OPERATOR_NOT_FOUND,
+            node.getRange(),
+            ast::toString(node.getOperator()),
+            operandType->toString()
+        );
+    } else if (result.size() > 1) {
+        // Ambiguous operator
+        _ctx.diagnostics.report(
+            diagnostics::ERROR_UNARY_OPERATOR_AMBIGUOUS,
+            node.getRange(),
+            ast::toString(node.getOperator()),
+            operandType->toString()
+        );
+    } else {
+        // Found exactly one matching operator
+        symbols::OperatorSymbol* opSymbol = result[0];
+        resultType = opSymbol->getResultType();
+    }
+
     _sema.types.setNodeType(&node, resultType);
 }
 void TypeCheckerPass::visitBinaryExpr(ast::BinaryExprNode& node) {
@@ -166,18 +200,49 @@ void TypeCheckerPass::visitBinaryExpr(ast::BinaryExprNode& node) {
     ast::AstWalker::visitBinaryExpr(node);
     // ^^ Infer types of lhs and rhs
 
+    types::ErrorType* errorType = _sema.types.getError();
     types::Type* lType = _sema.types.getNodeType(node.getLeft());
     types::Type* rType = _sema.types.getNodeType(node.getRight());
     VEE_ASSERT(lType != nullptr, "Failed to infer type for left-hand side of binary expression");
     VEE_ASSERT(rType != nullptr, "Failed to infer type for right-hand side of binary expression");
 
-    types::ErrorType* errorType = _sema.types.getError();
-
-    // Propogate errors
+    // Propogate errors early
     if (lType == errorType || rType == errorType) {
         _sema.types.setNodeType(&node, errorType);
         return;
     }
+    
+    types::Type* resultType = errorType;
+
+    // Lookup operator
+    symbols::BinaryOperatorKind semaOp = astToSemaBinaryOp(node.getOperator());
+    std::vector<symbols::OperatorSymbol*> result = lookupBinaryOperator(semaOp, lType, rType);
+
+    if (result.empty()) {
+        // No matching operator found
+        _ctx.diagnostics.report(
+            diagnostics::ERROR_BINARY_OPERATOR_NOT_FOUND,
+            node.getRange(),
+            ast::toString(node.getOperator()),
+            lType->toString(),
+            rType->toString()
+        );
+    } else if (result.size() > 1) {
+        // Ambiguous operator
+        _ctx.diagnostics.report(
+            diagnostics::ERROR_BINARY_OPERATOR_AMBIGUOUS,
+            node.getRange(),
+            ast::toString(node.getOperator()),
+            lType->toString(),
+            rType->toString()
+        );
+    } else {
+        // Found exactly one matching operator
+        symbols::OperatorSymbol* opSymbol = result[0];
+        resultType = opSymbol->getResultType();
+    }
+
+    _sema.types.setNodeType(&node, resultType);
 }
 void TypeCheckerPass::visitAssignmentExpr(ast::AssignmentExprNode& node) {
     ast::AstWalker::visitAssignmentExpr(node);
@@ -208,11 +273,21 @@ void TypeCheckerPass::visitNameExpr(ast::NameExprNode& node) {
     if (resolvedSymbol) {
         types::Type* symbolType = errorType;
 
-        if (resolvedSymbol->is<symbols::FunctionSetSymbol>()) {
-
+        // Function set -> resolve overload
+        if (auto* funcSet = resolvedSymbol->as<symbols::FunctionSetSymbol>()) {
+            std::vector<symbols::FunctionSymbol*> overloads = funcSet->getOverloads();
+            if (overloads.empty()) {
+                // No matching overload found
+            } else if (overloads.size() > 1) {
+                // Ambiguous overload
+            } else {
+                // Found exactly one matching overload
+                symbols::FunctionSymbol* funcSymbol = overloads[0];
+                symbolType = funcSymbol->getType();
+            }
         }
-
-        switch (resolvedSymbol->getKind()) {
+        // Not a function set -> standard symbol resolution
+        else switch (resolvedSymbol->getKind()) {
             case symbols::SymbolKind::Variable:
                 symbolType = resolvedSymbol->as<symbols::VariableSymbol>()->getType();
                 break;
@@ -339,8 +414,29 @@ void TypeCheckerPass::visitConstructExpr(ast::ConstructExprNode& node) {
     _sema.types.setNodeType(&node, type);
 }
 
-bool TypeCheckerPass::checkTypeCompatibility(types::Type*, types::Type*) {
-    return false;
+u32 TypeCheckerPass::implicitConversionCost(types::Type* from, types::Type* to) {
+    return _sema.typeSystem.conversionCost(from, to, types::ConversionMode::Implicit);
+}
+
+template<typename T, typename CostFn>
+std::vector<T*> TypeCheckerPass::findBestCandidates(std::span<T* const> candidates, CostFn&& costFn) {
+    std::vector<T*> results;
+
+    u32 lowestCost = types::kNoConversionCost;
+    for (const auto& candidate : candidates) {
+        u32 cost = costFn(candidate);
+
+        if (cost < lowestCost) {
+            lowestCost = cost;
+            results.clear();
+            results.push_back(candidate);
+        }
+        else if (cost == lowestCost) {
+            results.push_back(candidate);
+        }
+    }
+
+    return results;
 }
 
 symbols::UnaryOperatorKind TypeCheckerPass::astToSemaUnaryOp(ast::UnaryOp op) {
@@ -406,16 +502,84 @@ symbols::BinaryOperatorKind TypeCheckerPass::astToSemaBinaryOp(ast::BinaryOp op)
     }
 }
 
-symbols::OperatorSymbol* TypeCheckerPass::lookupUnaryOperator(symbols::UnaryOperatorKind kind, types::Type*) {
-    std::span<symbols::OperatorSymbol* const> opSymbols = _sema.operators.getUnaryOperators(kind);
-    std::vector<symbols::OperatorSymbol*> candidates;
-    
-    return nullptr; // TODO
-}
-symbols::OperatorSymbol* TypeCheckerPass::lookupBinaryOperator(symbols::BinaryOperatorKind kind, types::Type*, types::Type*) {
-    std::span<symbols::OperatorSymbol* const> opSymbols = _sema.operators.getBinaryOperators(kind);
+std::vector<symbols::OperatorSymbol*> TypeCheckerPass::lookupUnaryOperator(symbols::UnaryOperatorKind kind, types::Type* operandType) {    
+    VEE_ASSERT(operandType != nullptr, "Operand type must not be null");
 
-    return nullptr; // TODO
+    // Early out if error type is passed
+    if (operandType == _sema.types.getError()) {
+        return {};
+    }
+    
+    std::span<symbols::OperatorSymbol* const> candidates = _sema.operators.getUnaryOperators(kind);
+
+    return findBestCandidates(candidates, [&](symbols::OperatorSymbol* opSymbol) {
+        types::Type* opType = opSymbol->getOperandType(0);
+        return implicitConversionCost(operandType, opType);
+    });
+}
+std::vector<symbols::OperatorSymbol*> TypeCheckerPass::lookupBinaryOperator(symbols::BinaryOperatorKind kind, types::Type* leftType, types::Type* rightType) {
+    VEE_ASSERT(leftType != nullptr, "Left operand type must not be null");
+    VEE_ASSERT(rightType != nullptr, "Right operand type must not be null");
+    
+    // Early out if error type is passed
+    types::Type* errorType = _sema.types.getError();
+    if (leftType == errorType || rightType == errorType) {
+        return {};
+    }
+    
+    std::span<symbols::OperatorSymbol* const> candidates = _sema.operators.getBinaryOperators(kind);
+
+    return findBestCandidates(candidates, [&](symbols::OperatorSymbol* opSymbol) {
+        // Left cost
+        types::Type* leftOpType = opSymbol->getOperandType(0);
+        u32 leftCost = implicitConversionCost(leftType, leftOpType);
+        if (leftCost == types::kNoConversionCost)
+            return types::kNoConversionCost;
+
+        // Right cost
+        types::Type* rightOpType = opSymbol->getOperandType(1);
+        u32 rightCost = implicitConversionCost(rightType, rightOpType);
+        if (rightCost == types::kNoConversionCost)
+            return types::kNoConversionCost;
+
+        // Combined cost is sum of left and right costs
+        return leftCost + rightCost;
+    });
+}
+std::vector<symbols::FunctionSymbol*> TypeCheckerPass::lookupOverload(symbols::FunctionSetSymbol* set, const std::vector<types::Type*>& argTypes) {
+    VEE_ASSERT(set != nullptr, "Function set symbol must not be null");
+    for (const auto* argType : argTypes) {
+        VEE_ASSERT(argType != nullptr, "Argument type must not be null");
+    }
+
+    // Early out if error type is passed
+    types::Type* errorType = _sema.types.getError();
+    if (std::any_of(argTypes.begin(), argTypes.end(), [&](types::Type* t) { return t == errorType; })) {
+        return {};
+    }
+
+    std::span<symbols::FunctionSymbol* const> candidates = set->getOverloads();
+
+    return findBestCandidates(candidates, [&](symbols::FunctionSymbol* funcSymbol) {
+        types::FunctionType* funcType = funcSymbol->getType()->as<types::FunctionType>();
+        VEE_ASSERT(funcType != nullptr, "Function symbol must have a function type");
+
+        const auto& paramTypes = funcType->getParameterTypes();
+        if (paramTypes.size() != argTypes.size()) {
+            return types::kNoConversionCost;
+        }
+
+        u32 totalCost = 0;
+        for (size_t i = 0; i < paramTypes.size(); ++i) {
+            u32 cost = implicitConversionCost(argTypes[i], paramTypes[i]);
+            if (cost == types::kNoConversionCost) {
+                return types::kNoConversionCost;
+            }
+            totalCost += cost;
+        }
+
+        return totalCost;
+    });
 }
 
 } // namespace ast_passes
