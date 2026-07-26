@@ -18,9 +18,24 @@ namespace types {
 
 enum class TypeKind : u8;
 enum class BuiltinTypeKind : u8;
+enum class ConversionRank : u8;
+enum class ConversionMode : u8;
 
 //
-// Types
+// Structs
+//
+
+struct ConversionRule;
+
+//
+// Classes
+//
+
+class TypeTable;
+class TypeSystem;
+
+//
+// Classes (types)
 //
 
 class Type;
