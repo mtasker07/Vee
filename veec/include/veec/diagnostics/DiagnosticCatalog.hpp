@@ -219,6 +219,18 @@ inline constexpr DiagnosticDescriptor<2> ERROR_INT_LITERAL_OUT_OF_RANGE {
 inline constexpr DiagnosticDescriptor<2> ERROR_UINT_LITERAL_OUT_OF_RANGE {
     UserDiagnosticKind::Error, 505, "integer literal '{}' is out of range for {}-bit unsigned integer"
 };
+inline constexpr DiagnosticDescriptor<2> ERROR_UNARY_OPERATOR_NOT_FOUND {
+    UserDiagnosticKind::Error, 506, "unary operator {} not found for type '{}'"
+};
+inline constexpr DiagnosticDescriptor<3> ERROR_BINARY_OPERATOR_NOT_FOUND {
+    UserDiagnosticKind::Error, 507, "binary operator {} not found for types '{}' and '{}'"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_UNARY_OPERATOR_AMBIGUOUS {
+    UserDiagnosticKind::Error, 508, "unary operator {} is ambiguous for type '{}'"
+};
+inline constexpr DiagnosticDescriptor<3> ERROR_BINARY_OPERATOR_AMBIGUOUS {
+    UserDiagnosticKind::Error, 509, "binary operator {} is ambiguous for types '{}' and '{}'"
+};
 
 // ------------------------------------------------------
 //                       WARNINGS
