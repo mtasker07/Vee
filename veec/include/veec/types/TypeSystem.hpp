@@ -21,6 +21,16 @@ VEEC_NAMESPACE_BEGIN
 namespace types {
 
 /**
+ * @brief Represents the mode of a type conversion.
+ */
+enum class ConversionMode : u8 {
+    /// @brief An automatic conversion that does not require a cast.
+    Implicit,
+    /// @brief A conversion that requires an explicit cast in the program.
+    Explicit
+};
+
+/**
  * @brief Represents the rank of a type conversion.
  * The rank indicates the "quality" of the conversion, with lower ranks representing better conversions.
  */
@@ -61,6 +71,9 @@ struct ConversionRule {
     ConversionRank rank;
 };
 
+// ConversionCost -> u32
+using ConversionCost = u32;
+
 /**
  * @class TypeSystem
  * @brief Handles all type-related operations, such as conversion compatibility, etc.
@@ -72,8 +85,9 @@ public:
 
     void addConversionRule(Type* from, Type* to, ConversionRank rank);
 
-    bool canConvert(Type* from, Type* to) const;
-    ConversionRank rankConversion(Type* from, Type* to) const;
+    bool canConvert(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
+    ConversionRank rankConversion(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
+    ConversionCost conversionCost(Type* from, Type* to, ConversionMode mode = ConversionMode::Implicit) const;
 
 private:
     struct ConversionRuleKey {

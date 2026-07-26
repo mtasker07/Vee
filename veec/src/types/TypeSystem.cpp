@@ -1,6 +1,7 @@
 #include "veec/types/TypeSystem.hpp"
 
 #include <span>
+#include <limits>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -31,10 +32,10 @@ void TypeSystem::addConversionRule(Type* from, Type* to, ConversionRank rank) {
     _conversionRules[key] = ConversionRule{from, to, rank};
 }
 
-bool TypeSystem::canConvert(Type* from, Type* to) const {
-    return rankConversion(from, to) != ConversionRank::NoConversion;
+bool TypeSystem::canConvert(Type* from, Type* to, ConversionMode mode) const {
+    return rankConversion(from, to, mode) != ConversionRank::NoConversion;
 }
-ConversionRank TypeSystem::rankConversion(Type* from, Type* to) const {
+ConversionRank TypeSystem::rankConversion(Type* from, Type* to, ConversionMode mode) const {
     VEE_ASSERT(from != nullptr, "from type is null");
     VEE_ASSERT(to != nullptr, "to type is null");
 
@@ -44,13 +45,46 @@ ConversionRank TypeSystem::rankConversion(Type* from, Type* to) const {
     }
 
     // Lookup in conversion rules
-    const ConversionRuleKey key{from, to};
-    if (auto it = _conversionRules.find(key); it != _conversionRules.end()) {
-        return it->second.rank;
+    auto it = _conversionRules.find({from, to}); 
+    if (it == _conversionRules.end()) {
+        return ConversionRank::NoConversion;
     }
 
-    return ConversionRank::NoConversion;
+    ConversionRank rank = it->second.rank;
+
+    // Ignore explicits if implicit mode
+    if (mode == ConversionMode::Implicit && rank == ConversionRank::ExplicitConversion) {
+        return ConversionRank::NoConversion;
+    }
+
+    return rank;
 }
+ConversionCost TypeSystem::conversionCost(Type* from, Type* to, ConversionMode mode) const {
+    ConversionRank rank = rankConversion(from, to, mode);
+
+    switch (rank) {
+        case ConversionRank::ExactMatch:
+            return 0;
+        case ConversionRank::Promotion:
+            return 1;
+        case ConversionRank::Conversion:
+            return 2;
+        case ConversionRank::NarrowingConversion:
+            return 3;
+        case ConversionRank::UserDefinedConversion:
+            return 4;
+        case ConversionRank::ExplicitConversion:
+            if (mode == ConversionMode::Explicit) {
+                return 5;
+            } else {
+                return std::numeric_limits<ConversionCost>::max();
+            }
+        case ConversionRank::NoConversion:
+            return std::numeric_limits<ConversionCost>::max();
+
+        default:
+            VEE_UNREACHABLE("Unknown conversion rank");
+    }
 
 } // namespace types
 VEEC_NAMESPACE_END
