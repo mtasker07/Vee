@@ -77,10 +77,10 @@ u32 TypeSystem::conversionCost(Type* from, Type* to, ConversionMode mode) const 
             if (mode == ConversionMode::Explicit) {
                 return 5;
             } else {
-                return std::numeric_limits<u32>::max();
+                return kNoConversionCost;
             }
         case ConversionRank::NoConversion:
-            return std::numeric_limits<u32>::max();
+            return kNoConversionCost;
 
         default:
             VEE_UNREACHABLE("Unknown conversion rank");

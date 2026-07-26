@@ -21,6 +21,12 @@ VEEC_NAMESPACE_BEGIN
 namespace types {
 
 /**
+ * @brief Sentinel value representing the cost of an invalid type conversion.
+ * @note This is just a shorthand for `std::numeric_limits<u32>::max()`.
+ */
+constexpr u32 kNoConversionCost = std::numeric_limits<u32>::max();
+
+/**
  * @brief Represents the mode of a type conversion.
  */
 enum class ConversionMode : u8 {
