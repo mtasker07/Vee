@@ -47,6 +47,15 @@ public:
     }
 
 protected:
+    // Declaration type resolution
+    virtual void visitFunctionDecl(ast::FunctionDeclNode& node) override;
+    virtual void visitParameterDecl(ast::ParameterDeclNode& node) override;
+    virtual void visitClassDecl(ast::ClassDeclNode& node) override;
+    virtual void visitMethodDecl(ast::MethodDeclNode& node) override;
+    virtual void visitFieldDecl(ast::FieldDeclNode& node) override;
+    virtual void visitVariableDecl(ast::VariableDeclNode& node) override;
+
+    // Concrete type resolution
     virtual void visitType(ast::TypeNode& node) override;
     virtual void visitBuiltinType(ast::BuiltinTypeNode& node) override;
     virtual void visitNamedType(ast::NamedTypeNode& node) override;

@@ -23,6 +23,12 @@
 #include "veec/ast/expr/IndexExprNode.hpp"
 #include "veec/ast/expr/MemberAccessExprNode.hpp"
 #include "veec/ast/expr/ConstructExprNode.hpp"
+#include "veec/ast/decl/FunctionDeclNode.hpp"
+#include "veec/ast/decl/ParameterDeclNode.hpp"
+#include "veec/ast/decl/ClassDeclNode.hpp"
+#include "veec/ast/decl/MethodDeclNode.hpp"
+#include "veec/ast/decl/FieldDeclNode.hpp"
+#include "veec/ast/decl/VariableDeclNode.hpp"
 #include "veec/ast/type/TypeNode.hpp"
 #include "veec/ast/type/BuiltinTypeNode.hpp"
 #include "veec/ast/type/NamedTypeNode.hpp"
@@ -46,6 +52,86 @@
 
 VEEC_NAMESPACE_BEGIN
 namespace ast_passes {
+
+void TypeInferencePass::visitFunctionDecl(ast::FunctionDeclNode& node) {
+    ast::AstWalker::visitFunctionDecl(node);
+    // ^^ Assigns parameter types and return type
+
+    symbols::FunctionSymbol* functionSymbol = node.symbol;
+    VEE_ASSERT(functionSymbol != nullptr, "FunctionDeclNode has no associated FunctionSymbol");
+
+    // Grab the return type and parameter types
+    types::Type* returnType = _sema.types.getNodeType(node.getReturnType());
+    std::vector<types::Type*> parameterTypes;
+    for (ast::ParameterDeclNode* paramNode : node.getParameters()) {
+        parameterTypes.push_back(_sema.types.getNodeType(paramNode->getType()));
+    }
+
+    // Assign to symbol
+    types::FunctionType* funcType = _sema.types.getFunction(returnType, parameterTypes);
+    functionSymbol->setType(funcType);
+}
+void TypeInferencePass::visitParameterDecl(ast::ParameterDeclNode& node) {
+    ast::AstWalker::visitParameterDecl(node);
+
+    symbols::VariableSymbol* paramSymbol = node.symbol;
+    VEE_ASSERT(paramSymbol != nullptr, "ParameterDeclNode has no associated VariableSymbol");
+
+    // Grab parameter type
+    types::Type* paramType = _sema.types.getNodeType(node.getType());
+
+    // Assign to symbol
+    paramSymbol->setType(paramType);
+}
+void TypeInferencePass::visitClassDecl(ast::ClassDeclNode& node) {
+    ast::AstWalker::visitClassDecl(node);
+    
+    // Class symbol info set from TypeConstructionPass
+    VEE_ASSERT(node.symbol != nullptr, "ClassDeclNode has no associated ClassSymbol");
+    VEE_ASSERT(node.symbol->getType() != nullptr, "ClassSymbol has no associated ClassType");
+}
+void TypeInferencePass::visitMethodDecl(ast::MethodDeclNode& node) {
+    ast::AstWalker::visitMethodDecl(node);
+    // ^^ Assigns parameter types and return type
+
+    symbols::FunctionSymbol* methodSymbol = node.symbol;
+    VEE_ASSERT(methodSymbol != nullptr, "MethodDeclNode has no associated FunctionSymbol");
+
+    // Grab the return type and parameter types
+    types::Type* returnType = _sema.types.getNodeType(node.getReturnType());
+    std::vector<types::Type*> parameterTypes;
+    for (ast::ParameterDeclNode* paramNode : node.getParameters()) {
+        parameterTypes.push_back(_sema.types.getNodeType(paramNode->getType()));
+    }
+
+    // Assign to symbol
+    types::FunctionType* funcType = _sema.types.getFunction(returnType, parameterTypes);
+    methodSymbol->setType(funcType);
+}
+void TypeInferencePass::visitFieldDecl(ast::FieldDeclNode& node) {
+    ast::AstWalker::visitFieldDecl(node);
+
+    symbols::FieldSymbol* fieldSymbol = node.symbol;
+    VEE_ASSERT(fieldSymbol != nullptr, "FieldDeclNode has no associated FieldSymbol");
+
+    // Grab field type
+    types::Type* fieldType = _sema.types.getNodeType(node.getType());
+
+    // Assign to symbol
+    fieldSymbol->setType(fieldType);
+}
+void TypeInferencePass::visitVariableDecl(ast::VariableDeclNode& node) {
+    ast::AstWalker::visitVariableDecl(node);
+
+    symbols::VariableSymbol* varSymbol = node.symbol;
+    VEE_ASSERT(varSymbol != nullptr, "VariableDeclNode has no associated VariableSymbol");
+
+    // Grab variable type
+    types::Type* varType = _sema.types.getNodeType(node.getType());
+
+    // Assign to symbol
+    varSymbol->setType(varType);
+}
 
 void TypeInferencePass::visitType(ast::TypeNode& node) {
     ast::AstWalker::visitType(node);
@@ -72,7 +158,7 @@ void TypeInferencePass::visitBuiltinType(ast::BuiltinTypeNode& node) {
         default:
             VEE_UNREACHABLE("Unknown builtin type kind");
     }
-
+    
     types::Type* type = _sema.types.getBuiltin(kind);
     _sema.types.setNodeType(&node, type);
 }
