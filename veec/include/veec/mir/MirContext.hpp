@@ -30,6 +30,7 @@ public:
 private:
     // Allow all MIR classes to alloc
     friend class MirBuilder;
+    friend class Module;
     friend class Function;
     friend class Block;
     friend class Instruction;

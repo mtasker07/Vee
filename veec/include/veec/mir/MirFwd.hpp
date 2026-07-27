@@ -28,6 +28,11 @@ namespace mir {
 class MirContext;
 class MirBuilder;
 
+//
+// CLASSES (MIR NODES)
+//
+
+class Module;
 class Function;
 class Block;
 class Instruction;
