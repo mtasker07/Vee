@@ -5,5 +5,6 @@ include(UnitTesting)
 vee_add_unit_tests(veec
     basic/APIntTests.cpp
     basic/BigIntTests.cpp
+    basic/SmallVectorTests.cpp
     lexing/LexerTests.cpp
 )
