@@ -118,12 +118,61 @@ public:
                _builtinKind == BuiltinTypeKind::U64;
     }
     /**
+     * @brief Checks if this builtin type is any signed integer type.
+     * @return True if this builtin type is any signed integer type, false otherwise.
+     */
+    inline bool isSignedInteger() const {
+        return _builtinKind == BuiltinTypeKind::I8 ||
+               _builtinKind == BuiltinTypeKind::I16 ||
+               _builtinKind == BuiltinTypeKind::I32 ||
+               _builtinKind == BuiltinTypeKind::I64;
+    }
+    /**
+     * @brief Checks if this builtin type is any unsigned integer type.
+     * @return True if this builtin type is any unsigned integer type, false otherwise.
+     */
+    inline bool isUnsignedInteger() const {
+        return _builtinKind == BuiltinTypeKind::U8 ||
+               _builtinKind == BuiltinTypeKind::U16 ||
+               _builtinKind == BuiltinTypeKind::U32 ||
+               _builtinKind == BuiltinTypeKind::U64;
+    }
+    /**
      * @brief Checks if this builtin type is any floating-point type.
      * @return True if this builtin type is any floating-point type, false otherwise.
      */
     inline bool isFloatingPoint() const {
         return _builtinKind == BuiltinTypeKind::F32 ||
                _builtinKind == BuiltinTypeKind::F64;
+    }
+
+    /**
+     * @brief Gets the bit width of this builtin type.
+     * @return The bit width of this builtin type.
+     * @note This function is only valid for integer and floating-point types.
+     */
+    inline u32 getBitWidth() const {
+        VEE_ASSERT(isInteger() || isFloatingPoint(),
+            "getBitWidth is only valid for integer and floating-point types");
+
+        switch (_builtinKind) {
+            case BuiltinTypeKind::I8:
+            case BuiltinTypeKind::U8:
+                return 8;
+            case BuiltinTypeKind::I16:
+            case BuiltinTypeKind::U16:
+                return 16;
+            case BuiltinTypeKind::I32:
+            case BuiltinTypeKind::U32:
+            case BuiltinTypeKind::F32:
+                return 32;
+            case BuiltinTypeKind::I64:
+            case BuiltinTypeKind::U64:
+            case BuiltinTypeKind::F64:
+                return 64;
+            default:
+                VEE_UNREACHABLE("Builtin type does not have a bit width");
+        }
     }
 
     /**
