@@ -105,6 +105,13 @@ public:
         return _parameters;
     }
     /**
+     * @brief Gets the number of parameters of this function symbol.
+     * @return The number of parameters of this function symbol.
+     */
+    inline size_t getParameterCount() const {
+        return _parameters.size();
+    }
+    /**
      * @brief Adds a parameter to this function symbol.
      * @param param The parameter symbol to add.
      */
