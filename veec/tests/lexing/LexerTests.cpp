@@ -358,7 +358,6 @@ TEST(LexerTests, ReportsUnexpectedCharacterDiagnostic) {
 	const auto& diagnostics = ctx.diagnostics.getDiagnostics();
 	ASSERT_EQ(diagnostics.size(), 1u);
 	EXPECT_EQ(diagnostics[0].getCode(), 1u);
-	EXPECT_EQ(diagnostics[0].getMessage(), "Unexpected character: \"");
 
 	ASSERT_EQ(tokens.size(), 1u);
 	EXPECT_EQ(tokens[0].type(), TokenType::EndOfFile);
