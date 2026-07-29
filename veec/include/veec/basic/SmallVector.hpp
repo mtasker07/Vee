@@ -34,6 +34,8 @@ template<typename T, size_t N = 4, class Allocator = std::allocator<T>>
 class SmallVector {
     static_assert(!std::is_void_v<T>,
         "SmallVector<T> cannot be used with void type");
+    static_assert(!std::is_reference_v<T>,
+        "SmallVector<T> cannot be used with reference types");
     static_assert(std::is_move_constructible_v<T>,
         "SmallVector<T> requires move-constructible types");
     static_assert(N > 0,
