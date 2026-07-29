@@ -9,14 +9,12 @@
 
 #include <unordered_map>
 
-#include "vee/core/CoreDefines.hpp"
-#include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
+#include "vee/core/CoreTypedefs.hpp"
 
 VEEC_NAMESPACE_BEGIN
-namespace sema {
 
-class SemaContext;
+class CompilationContext;
 
 /**
  * @class BuiltinRegistrar
@@ -25,11 +23,11 @@ class SemaContext;
 class BuiltinRegistrar {
 public:
     /**
-     * @brief Creates a new BuiltinRegistrar instance with the given SemaContext.
-     * @param sema The SemaContext to use for registering all built-ins.
+     * @brief Creates a new BuiltinRegistrar instance with the given CompilationContext.
+     * @param ctx The CompilationContext to register built-in functionality into.
      */
-    BuiltinRegistrar(SemaContext& sema)
-        : _sema(sema) {}
+    BuiltinRegistrar(CompilationContext& ctx)
+        : _ctx(ctx) {}
 
     ~BuiltinRegistrar() = default;
 
@@ -42,11 +40,10 @@ public:
     void registerAll();
 
 private:
-    SemaContext& _sema;
+    CompilationContext& _ctx;
 
     void registerBuiltinOperators();
     void registerBuiltinConversions();
 };
 
-} // namespace sema
 VEEC_NAMESPACE_END

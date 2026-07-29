@@ -43,6 +43,7 @@
 #include "veec/symbols/ent/ClassSymbol.hpp"
 #include "veec/symbols/ent/FieldSymbol.hpp"
 #include "veec/symbols/ent/OperatorSymbol.hpp"
+#include "veec/types/TypeContext.hpp"
 #include "veec/types/Type.hpp"
 #include "veec/types/TypeFwd.hpp"
 #include "veec/types/TypeTable.hpp"
@@ -65,8 +66,8 @@ void TypeCheckerPass::visitParenthesizedExpr(ast::ParenthesizedExprNode& node) {
     ast::AstWalker::visitParenthesizedExpr(node);
 
     // Type is just type of inner expression
-    types::Type* innerType = _sema.types.getNodeType(node.getInnerExpr());
-    _sema.types.setNodeType(&node, innerType);
+    types::Type* innerType = _ctx.types.table.getNodeType(node.getInnerExpr());
+    _ctx.types.table.setNodeType(&node, innerType);
 }
 void TypeCheckerPass::visitIntLiteralExpr(ast::IntLiteralExprNode& node) {
     using BTK = types::BuiltinTypeKind;
@@ -75,8 +76,8 @@ void TypeCheckerPass::visitIntLiteralExpr(ast::IntLiteralExprNode& node) {
 
     // Integer literals are always i32
     // TODO: Support suffixes for different literal types
-    types::BuiltinType* intType = _sema.types.getBuiltin(types::BuiltinTypeKind::I32);
-    _sema.types.setNodeType(&node, intType);
+    types::BuiltinType* intType = _ctx.types.table.getBuiltin(types::BuiltinTypeKind::I32);
+    _ctx.types.table.setNodeType(&node, intType);
 
     // Validate size of integer literal
     const basic::BigInt& value = node.getValue();
@@ -132,8 +133,8 @@ void TypeCheckerPass::visitFloatLiteralExpr(ast::FloatLiteralExprNode& node) {
 
     // Float literals are always f64
     // TODO: Support suffixes for different literal types
-    types::Type* floatType = _sema.types.getBuiltin(types::BuiltinTypeKind::F64);
-    _sema.types.setNodeType(&node, floatType);
+    types::Type* floatType = _ctx.types.table.getBuiltin(types::BuiltinTypeKind::F64);
+    _ctx.types.table.setNodeType(&node, floatType);
 
     // TODO: Maybe check it fits in F64
 }
@@ -141,27 +142,27 @@ void TypeCheckerPass::visitStringLiteralExpr(ast::StringLiteralExprNode& node) {
     ast::AstWalker::visitStringLiteralExpr(node);
 
     // String literals are always string
-    types::Type* stringType = _sema.types.getBuiltin(types::BuiltinTypeKind::String);
-    _sema.types.setNodeType(&node, stringType);
+    types::Type* stringType = _ctx.types.table.getBuiltin(types::BuiltinTypeKind::String);
+    _ctx.types.table.setNodeType(&node, stringType);
 }
 void TypeCheckerPass::visitBoolLiteralExpr(ast::BoolLiteralExprNode& node) {
     ast::AstWalker::visitBoolLiteralExpr(node);
 
     // Bool literals are always bool
-    types::Type* boolType = _sema.types.getBuiltin(types::BuiltinTypeKind::Bool);
-    _sema.types.setNodeType(&node, boolType);
+    types::Type* boolType = _ctx.types.table.getBuiltin(types::BuiltinTypeKind::Bool);
+    _ctx.types.table.setNodeType(&node, boolType);
 }
 void TypeCheckerPass::visitUnaryExpr(ast::UnaryExprNode& node) {
     ast::AstWalker::visitUnaryExpr(node);
     // ^^ Sets operand type
 
-    types::ErrorType* errorType = _sema.types.getError();
-    types::Type* operandType = _sema.types.getNodeType(node.getOperand());
+    types::ErrorType* errorType = _ctx.types.table.getError();
+    types::Type* operandType = _ctx.types.table.getNodeType(node.getOperand());
     VEE_ASSERT(operandType != nullptr, "Failed to infer type for operand of unary expression");
 
     // Propogate errors early
     if (operandType == errorType) {
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
     
@@ -200,7 +201,7 @@ void TypeCheckerPass::visitUnaryExpr(ast::UnaryExprNode& node) {
         );
     }
 
-    _sema.types.setNodeType(&node, resultType);
+    _ctx.types.table.setNodeType(&node, resultType);
 }
 void TypeCheckerPass::visitBinaryExpr(ast::BinaryExprNode& node) {
     using BinOp = ast::BinaryOp;
@@ -208,15 +209,15 @@ void TypeCheckerPass::visitBinaryExpr(ast::BinaryExprNode& node) {
     ast::AstWalker::visitBinaryExpr(node);
     // ^^ Infer types of lhs and rhs
 
-    types::ErrorType* errorType = _sema.types.getError();
-    types::Type* lType = _sema.types.getNodeType(node.getLeft());
-    types::Type* rType = _sema.types.getNodeType(node.getRight());
+    types::ErrorType* errorType = _ctx.types.table.getError();
+    types::Type* lType = _ctx.types.table.getNodeType(node.getLeft());
+    types::Type* rType = _ctx.types.table.getNodeType(node.getRight());
     VEE_ASSERT(lType != nullptr, "Failed to infer type for left-hand side of binary expression");
     VEE_ASSERT(rType != nullptr, "Failed to infer type for right-hand side of binary expression");
 
     // Propogate errors early
     if (lType == errorType || rType == errorType) {
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
     
@@ -262,31 +263,31 @@ void TypeCheckerPass::visitBinaryExpr(ast::BinaryExprNode& node) {
         );
     }
 
-    _sema.types.setNodeType(&node, resultType);
+    _ctx.types.table.setNodeType(&node, resultType);
 }
 void TypeCheckerPass::visitAssignmentExpr(ast::AssignmentExprNode& node) {
     ast::AstWalker::visitAssignmentExpr(node);
 
-    types::Type* lType = _sema.types.getNodeType(node.getLeft());
-    types::Type* rType = _sema.types.getNodeType(node.getRight());
+    types::Type* lType = _ctx.types.table.getNodeType(node.getLeft());
+    types::Type* rType = _ctx.types.table.getNodeType(node.getRight());
     VEE_ASSERT(lType != nullptr, "Failed to infer type for left-hand side of assignment expression");
     VEE_ASSERT(rType != nullptr, "Failed to infer type for right-hand side of assignment expression");
 
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     // Propogate errors
     if (lType == errorType || rType == errorType) {
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
 
     // Assignment always has left-side type
-    _sema.types.setNodeType(&node, lType);
+    _ctx.types.table.setNodeType(&node, lType);
 }
 void TypeCheckerPass::visitNameExpr(ast::NameExprNode& node) {
     ast::AstWalker::visitNameExpr(node);
 
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     // Type is just type of resolved symbol
     const symbols::Symbol* resolvedSymbol = node.getResolvedSymbol();
@@ -318,23 +319,23 @@ void TypeCheckerPass::visitNameExpr(ast::NameExprNode& node) {
                 // Not a type-bearing symbol
                 break;
         }
-        _sema.types.setNodeType(&node, symbolType);
+        _ctx.types.table.setNodeType(&node, symbolType);
     } else {
         // Cannot infer unresolved symbol
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
     }
 }
 void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
     ast::AstWalker::visitCallExpr(node);
 
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     // Propogate errors
-    types::Type* calleeType = _sema.types.getNodeType(node.getCallee());
+    types::Type* calleeType = _ctx.types.table.getNodeType(node.getCallee());
     if (calleeType == errorType) {
         // ^^ Note that this wont break if the callee is a function set since it
         // will actually be nullptr instead
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
 
@@ -345,7 +346,7 @@ void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
         symbols::Symbol* resolvedSymbol = calleeNameExpr->getResolvedSymbol();
         if (!resolvedSymbol) {
             // Cannot infer unresolved symbol
-            _sema.types.setNodeType(&node, errorType);
+            _ctx.types.table.setNodeType(&node, errorType);
             return;
         }
 
@@ -358,14 +359,14 @@ void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
                 _ctx.strings.get(resolvedSymbol->getNameValue())
             );
 
-            _sema.types.setNodeType(&node, errorType);
+            _ctx.types.table.setNodeType(&node, errorType);
             return;
         }
 
         // Grab argument types
         std::vector<types::Type*> argTypes;
         for (ast::ExpressionNode* arg : node.getArgs()) {
-            types::Type* argType = _sema.types.getNodeType(arg);
+            types::Type* argType = _ctx.types.table.getNodeType(arg);
             VEE_ASSERT(argType != nullptr, "Failed to infer type for argument of call expression");
             argTypes.push_back(argType);
         }
@@ -381,8 +382,8 @@ void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
                 _ctx.strings.get(funcSet->getNameValue())
             );
 
-            _sema.types.setNodeType(calleeNameExpr, errorType);
-            _sema.types.setNodeType(&node, errorType);
+            _ctx.types.table.setNodeType(calleeNameExpr, errorType);
+            _ctx.types.table.setNodeType(&node, errorType);
             return;
         } else if (overloads.size() > 1) {
             // Ambiguous overload
@@ -392,8 +393,8 @@ void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
                 _ctx.strings.get(funcSet->getNameValue())
             );
 
-            _sema.types.setNodeType(calleeNameExpr, errorType);
-            _sema.types.setNodeType(&node, errorType);
+            _ctx.types.table.setNodeType(calleeNameExpr, errorType);
+            _ctx.types.table.setNodeType(&node, errorType);
             return;
         } else {
             // Found exactly one matching overload
@@ -403,8 +404,8 @@ void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
             types::FunctionType* funcType = funcSymbol->getType()->as<types::FunctionType>();
             VEE_ASSERT(funcType != nullptr, "Function symbol does not have a function type");
             
-            _sema.types.setNodeType(calleeNameExpr, funcType);
-            _sema.types.setNodeType(&node, funcType->getReturnType());
+            _ctx.types.table.setNodeType(calleeNameExpr, funcType);
+            _ctx.types.table.setNodeType(&node, funcType->getReturnType());
 
             // Output conversion diagnostics for args
             const std::vector<types::Type*>& paramTypes = funcType->getParameterTypes();
@@ -428,24 +429,24 @@ void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
     if (calleeTypeAsFunction) {
         // Result type is the return type of the function
         types::Type* resultType = calleeTypeAsFunction->getReturnType();
-        _sema.types.setNodeType(&node, resultType);
+        _ctx.types.table.setNodeType(&node, resultType);
         return;
     }
 
     // Not a function (or object with function type)
-    _sema.types.setNodeType(&node, errorType);
+    _ctx.types.table.setNodeType(&node, errorType);
 }
 void TypeCheckerPass::visitIndexExpr(ast::IndexExprNode& node) {
     ast::AstWalker::visitIndexExpr(node);
 
-    types::Type* objectType = _sema.types.getNodeType(node.getObject());
-    types::Type* indexType = _sema.types.getNodeType(node.getIndex());
+    types::Type* objectType = _ctx.types.table.getNodeType(node.getObject());
+    types::Type* indexType = _ctx.types.table.getNodeType(node.getIndex());
 
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     // Propogate errors
     if (objectType == errorType || indexType == errorType) {
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
 
@@ -458,25 +459,25 @@ void TypeCheckerPass::visitIndexExpr(ast::IndexExprNode& node) {
         if (indexTypeAsBuiltin && indexTypeAsBuiltin->isInteger()) {
             // Result type is the element type of the array
             types::Type* resultType = objectTypeAsArray->getElementType();
-            _sema.types.setNodeType(&node, resultType);
+            _ctx.types.table.setNodeType(&node, resultType);
             return;
         }
     }
 
     // TODO: Support index operator overloads (perhaps based on index type too?)
-    _sema.types.setNodeType(&node, errorType);
+    _ctx.types.table.setNodeType(&node, errorType);
 }
 void TypeCheckerPass::visitMemberAccessExpr(ast::MemberAccessExprNode& node) {
     ast::AstWalker::visitMemberAccessExpr(node);
 
-    types::Type* objectType = _sema.types.getNodeType(node.getObject());
+    types::Type* objectType = _ctx.types.table.getNodeType(node.getObject());
     VEE_ASSERT(objectType != nullptr, "Failed to infer type for object of member access expression");
     
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     // Propogate errors
     if (objectType == errorType) {
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
 
@@ -493,7 +494,7 @@ void TypeCheckerPass::visitMemberAccessExpr(ast::MemberAccessExprNode& node) {
             memberType = methodSymbols->front()->getType();
         }
 
-        _sema.types.setNodeType(&node, memberType);
+        _ctx.types.table.setNodeType(&node, memberType);
         return;
     }
 }
@@ -501,25 +502,25 @@ void TypeCheckerPass::visitConstructExpr(ast::ConstructExprNode& node) {
     ast::AstWalker::visitConstructExpr(node);
     // ^^ Walks type and args
 
-    types::Type* type = _sema.types.getNodeType(node.getType());
+    types::Type* type = _ctx.types.table.getNodeType(node.getType());
     
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     // Propogate errors
     if (type == errorType) {
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
 
     // Result type is the type being constructed
-    _sema.types.setNodeType(&node, type);
+    _ctx.types.table.setNodeType(&node, type);
 }
 
 void TypeCheckerPass::visitVariableDecl(ast::VariableDeclNode& node) {
     ast::AstWalker::visitVariableDecl(node);
     // ^^ Walks type and initializer
 
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     // NOTE: We dont want to use setNodeType here, since its a declaration,
     // instead, only set the type of the symbol vv
@@ -536,12 +537,12 @@ void TypeCheckerPass::visitVariableDecl(ast::VariableDeclNode& node) {
                 _ctx.strings.get(node.getName().id)
             );
 
-            varSymbol->setType(_sema.types.getError());
+            varSymbol->setType(_ctx.types.table.getError());
         }
         return;
     }
 
-    types::Type* initType = _sema.types.getNodeType(node.getInitializer());
+    types::Type* initType = _ctx.types.table.getNodeType(node.getInitializer());
     VEE_ASSERT(initType != nullptr, "Failed to infer type for initializer of variable declaration");
     
     // Attempt to infer type if not explicitly specified
@@ -574,10 +575,10 @@ void TypeCheckerPass::visitVariableDecl(ast::VariableDeclNode& node) {
 }
 
 bool TypeCheckerPass::implicitConversionPossible(types::Type* from, types::Type* to) {
-    return _sema.typeSystem.canConvert(from, to, types::ConversionMode::Implicit);
+    return _ctx.types.system.canConvert(from, to, types::ConversionMode::Implicit);
 }
 u32 TypeCheckerPass::implicitConversionCost(types::Type* from, types::Type* to) {
-    return _sema.typeSystem.conversionCost(from, to, types::ConversionMode::Implicit);
+    return _ctx.types.system.conversionCost(from, to, types::ConversionMode::Implicit);
 }
 
 template<typename T, typename CostFn>
@@ -668,11 +669,11 @@ std::vector<symbols::OperatorSymbol*> TypeCheckerPass::lookupUnaryOperator(symbo
     VEE_ASSERT(operandType != nullptr, "Operand type must not be null");
 
     // Early out if error type is passed
-    if (operandType == _sema.types.getError()) {
+    if (operandType == _ctx.types.table.getError()) {
         return {};
     }
     
-    std::span<symbols::OperatorSymbol* const> candidates = _sema.operators.getUnaryOperators(kind);
+    std::span<symbols::OperatorSymbol* const> candidates = _ctx.sema.operators.getUnaryOperators(kind);
 
     return findBestCandidates(candidates, [&](symbols::OperatorSymbol* opSymbol) {
         types::Type* opType = opSymbol->getOperandType(0);
@@ -684,12 +685,12 @@ std::vector<symbols::OperatorSymbol*> TypeCheckerPass::lookupBinaryOperator(symb
     VEE_ASSERT(rightType != nullptr, "Right operand type must not be null");
     
     // Early out if error type is passed
-    types::Type* errorType = _sema.types.getError();
+    types::Type* errorType = _ctx.types.table.getError();
     if (leftType == errorType || rightType == errorType) {
         return {};
     }
     
-    std::span<symbols::OperatorSymbol* const> candidates = _sema.operators.getBinaryOperators(kind);
+    std::span<symbols::OperatorSymbol* const> candidates = _ctx.sema.operators.getBinaryOperators(kind);
 
     return findBestCandidates(candidates, [&](symbols::OperatorSymbol* opSymbol) {
         // Left cost
@@ -715,7 +716,7 @@ std::vector<symbols::FunctionSymbol*> TypeCheckerPass::lookupOverload(symbols::F
     }
 
     // Early out if error type is passed
-    types::Type* errorType = _sema.types.getError();
+    types::Type* errorType = _ctx.types.table.getError();
     if (std::any_of(argTypes.begin(), argTypes.end(), [&](types::Type* t) { return t == errorType; })) {
         return {};
     }
@@ -759,7 +760,7 @@ void TypeCheckerPass::emitImplicitConversionDiagnostics(
         return;
     }
 
-    ConversionRank rank = _sema.typeSystem.rankConversion(fromType, toType, types::ConversionMode::Implicit);
+    ConversionRank rank = _ctx.types.system.rankConversion(fromType, toType, types::ConversionMode::Implicit);
     switch (rank) {
         case ConversionRank::ExactMatch:
         case ConversionRank::Promotion:

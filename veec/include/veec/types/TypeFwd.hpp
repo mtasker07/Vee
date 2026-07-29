@@ -31,6 +31,7 @@ struct ConversionRule;
 // Classes
 //
 
+class TypeContext;
 class TypeTable;
 class TypeSystem;
 

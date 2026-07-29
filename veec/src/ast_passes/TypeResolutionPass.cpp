@@ -46,14 +46,14 @@ void TypeResolutionPass::visitFunctionDecl(ast::FunctionDeclNode& node) {
     VEE_ASSERT(functionSymbol != nullptr, "FunctionDeclNode has no associated FunctionSymbol");
 
     // Grab the return type and parameter types
-    types::Type* returnType = _sema.types.getNodeType(node.getReturnType());
+    types::Type* returnType = _ctx.types.table.getNodeType(node.getReturnType());
     std::vector<types::Type*> parameterTypes;
     for (ast::ParameterDeclNode* paramNode : node.getParameters()) {
-        parameterTypes.push_back(_sema.types.getNodeType(paramNode->getType()));
+        parameterTypes.push_back(_ctx.types.table.getNodeType(paramNode->getType()));
     }
 
     // Assign to symbol
-    types::FunctionType* funcType = _sema.types.getFunction(returnType, parameterTypes);
+    types::FunctionType* funcType = _ctx.types.table.getFunction(returnType, parameterTypes);
     functionSymbol->setType(funcType);
 }
 void TypeResolutionPass::visitParameterDecl(ast::ParameterDeclNode& node) {
@@ -63,7 +63,7 @@ void TypeResolutionPass::visitParameterDecl(ast::ParameterDeclNode& node) {
     VEE_ASSERT(paramSymbol != nullptr, "ParameterDeclNode has no associated VariableSymbol");
 
     // Grab parameter type
-    types::Type* paramType = _sema.types.getNodeType(node.getType());
+    types::Type* paramType = _ctx.types.table.getNodeType(node.getType());
 
     // Assign to symbol
     paramSymbol->setType(paramType);
@@ -83,14 +83,14 @@ void TypeResolutionPass::visitMethodDecl(ast::MethodDeclNode& node) {
     VEE_ASSERT(methodSymbol != nullptr, "MethodDeclNode has no associated FunctionSymbol");
 
     // Grab the return type and parameter types
-    types::Type* returnType = _sema.types.getNodeType(node.getReturnType());
+    types::Type* returnType = _ctx.types.table.getNodeType(node.getReturnType());
     std::vector<types::Type*> parameterTypes;
     for (ast::ParameterDeclNode* paramNode : node.getParameters()) {
-        parameterTypes.push_back(_sema.types.getNodeType(paramNode->getType()));
+        parameterTypes.push_back(_ctx.types.table.getNodeType(paramNode->getType()));
     }
 
     // Assign to symbol
-    types::FunctionType* funcType = _sema.types.getFunction(returnType, parameterTypes);
+    types::FunctionType* funcType = _ctx.types.table.getFunction(returnType, parameterTypes);
     methodSymbol->setType(funcType);
 }
 void TypeResolutionPass::visitFieldDecl(ast::FieldDeclNode& node) {
@@ -100,7 +100,7 @@ void TypeResolutionPass::visitFieldDecl(ast::FieldDeclNode& node) {
     VEE_ASSERT(fieldSymbol != nullptr, "FieldDeclNode has no associated FieldSymbol");
 
     // Grab field type
-    types::Type* fieldType = _sema.types.getNodeType(node.getType());
+    types::Type* fieldType = _ctx.types.table.getNodeType(node.getType());
 
     // Assign to symbol
     fieldSymbol->setType(fieldType);
@@ -112,7 +112,7 @@ void TypeResolutionPass::visitVariableDecl(ast::VariableDeclNode& node) {
     VEE_ASSERT(varSymbol != nullptr, "VariableDeclNode has no associated VariableSymbol");
 
     // Grab variable type
-    types::Type* varType = _sema.types.getNodeType(node.getType());
+    types::Type* varType = _ctx.types.table.getNodeType(node.getType());
 
     // Assign to symbol
     varSymbol->setType(varType);
@@ -144,24 +144,24 @@ void TypeResolutionPass::visitBuiltinType(ast::BuiltinTypeNode& node) {
             VEE_UNREACHABLE("Unknown builtin type kind");
     }
     
-    types::Type* type = _sema.types.getBuiltin(kind);
-    _sema.types.setNodeType(&node, type);
+    types::Type* type = _ctx.types.table.getBuiltin(kind);
+    _ctx.types.table.setNodeType(&node, type);
 }
 void TypeResolutionPass::visitNamedType(ast::NamedTypeNode& node) {
     ast::AstWalker::visitNamedType(node);
 
-    types::ErrorType* errorType = _sema.types.getError();
+    types::ErrorType* errorType = _ctx.types.table.getError();
 
     symbols::Symbol* resolvedSymbol = node.getResolvedSymbol();
     if (!resolvedSymbol || !resolvedSymbol->is<symbols::ClassSymbol>()) {
-        _sema.types.setNodeType(&node, errorType);
+        _ctx.types.table.setNodeType(&node, errorType);
         return;
     }
 
     symbols::ClassSymbol* classSymbol = resolvedSymbol->as<symbols::ClassSymbol>();
 
-    types::Type* classType = _sema.types.getClass(classSymbol);
-    _sema.types.setNodeType(&node, classType);
+    types::Type* classType = _ctx.types.table.getClass(classSymbol);
+    _ctx.types.table.setNodeType(&node, classType);
 }
 
 } // namespace ast_passes

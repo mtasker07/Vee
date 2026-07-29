@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.20)
 # VEEC shared library
 set(VEEC_SOURCES
     #src/Compilation.cpp
+    src/BuiltinRegistrar.cpp
 
     src/basic/APInt.cpp
     src/basic/BigInt.cpp
@@ -29,7 +30,6 @@ set(VEEC_SOURCES
     src/ast_passes/TypeResolutionPass.cpp
     src/ast_passes/TypeCheckerPass.cpp
     
-    src/sema/BuiltinRegistrar.cpp
     src/sema/ScopeManager.cpp
 
     src/symbols/Symbol.cpp

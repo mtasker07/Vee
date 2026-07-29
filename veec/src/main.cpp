@@ -6,6 +6,7 @@
 
 #include "veec/Compilation.hpp"
 #include "veec/CompilationContext.hpp"
+#include "veec/BuiltinRegistrar.hpp"
 #include "veec/basic/Token.hpp"
 #include "veec/source/SourceView.hpp"
 #include "veec/lexing/Lexer.hpp"
@@ -41,8 +42,8 @@ int main() {
     */
 
     CompilationContext ctx;
-    ast::AstContext astCtx;
-    sema::SemaContext semaCtx;
+    BuiltinRegistrar registrar(ctx);
+    registrar.registerAll();
 
     constexpr std::string_view sourceCode = R"(
 
@@ -91,7 +92,7 @@ func main() -> i32 {
     }
 
     parsing::TokenList tokenList{sourceId, std::move(tokens)};
-    parsing::Parser parser(ctx, astCtx, tokenList);
+    parsing::Parser parser(ctx, ctx.ast, tokenList);
     ast::CompilationUnitNode* ast = parser.parse();
     if (ast) {
         std::cout << "AST Generated:\n" + ast->toString(ctx) << std::endl;
@@ -100,7 +101,7 @@ func main() -> i32 {
     if (!ast) return 1;
 
     // SEMAAAA
-    sema::PassManager spm(ctx, semaCtx);
+    sema::PassManager spm(ctx, ctx.sema);
     spm.addPass<ast_passes::SymbolCollectionPass>();
     spm.addPass<ast_passes::SymbolResolutionPass>();
     spm.addPass<ast_passes::TypeConstructionPass>();
@@ -113,7 +114,7 @@ func main() -> i32 {
     }
 
     std::cout << "TYPES:\n";
-    types::TypeTable& typeTable = semaCtx.types;
+    types::TypeTable& typeTable = ctx.types.table;
     for (const auto& type : typeTable.getAllTypes()) {
         if (types::ClassType* classType = type->as<types::ClassType>()) {
             std::cout << "Class Type: " << ctx.strings.get(classType->getClassSymbol()->getNameValue()) << "\n";
@@ -130,7 +131,7 @@ func main() -> i32 {
     }
 
     std::cout << "SYMBOLS:\n";
-    symbols::SymbolTable& symTable = semaCtx.symbols;
+    symbols::SymbolTable& symTable = ctx.sema.symbols;
     for (const auto& symbol : symTable.getAllSymbols()) {
         std::string_view symbolName = symbol->getName().hasValue() ? ctx.strings.get(symbol->getNameValue()) : "<unnamed>";
         std::cout << "Symbol: '" << symbolName << "'  ";

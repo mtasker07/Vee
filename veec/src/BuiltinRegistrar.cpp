@@ -1,11 +1,13 @@
-#include "veec/sema/BuiltinRegistrar.hpp"
+#include "veec/BuiltinRegistrar.hpp"
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/CompilationContext.hpp"
 #include "veec/sema/SemaContext.hpp"
 #include "veec/symbols/OperatorTable.hpp"
+#include "veec/types/TypeContext.hpp"
 #include "veec/types/TypeFwd.hpp"
 #include "veec/types/Type.hpp"
 #include "veec/types/BuiltinType.hpp"
@@ -13,7 +15,6 @@
 #include "veec/types/TypeSystem.hpp"
 
 VEEC_NAMESPACE_BEGIN
-namespace sema {
 
 void BuiltinRegistrar::registerAll() {
     registerBuiltinOperators();
@@ -26,38 +27,38 @@ void BuiltinRegistrar::registerBuiltinOperators() {
     using UnaryOp = symbols::UnaryOperatorKind;
     using BinaryOp = symbols::BinaryOperatorKind;
 
-    Type* boolTy = _sema.types.getBuiltin(Builtin::Bool);
-    Type* i8Ty   = _sema.types.getBuiltin(Builtin::I8);
-    Type* i16Ty  = _sema.types.getBuiltin(Builtin::I16);
-    Type* i32Ty  = _sema.types.getBuiltin(Builtin::I32);
-    Type* i64Ty  = _sema.types.getBuiltin(Builtin::I64);
-    Type* u8Ty   = _sema.types.getBuiltin(Builtin::U8);
-    Type* u16Ty  = _sema.types.getBuiltin(Builtin::U16);
-    Type* u32Ty  = _sema.types.getBuiltin(Builtin::U32);
-    Type* u64Ty  = _sema.types.getBuiltin(Builtin::U64);
-    Type* f32Ty  = _sema.types.getBuiltin(Builtin::F32);
-    Type* f64Ty  = _sema.types.getBuiltin(Builtin::F64);
+    Type* boolTy = _ctx.types.table.getBuiltin(Builtin::Bool);
+    Type* i8Ty   = _ctx.types.table.getBuiltin(Builtin::I8);
+    Type* i16Ty  = _ctx.types.table.getBuiltin(Builtin::I16);
+    Type* i32Ty  = _ctx.types.table.getBuiltin(Builtin::I32);
+    Type* i64Ty  = _ctx.types.table.getBuiltin(Builtin::I64);
+    Type* u8Ty   = _ctx.types.table.getBuiltin(Builtin::U8);
+    Type* u16Ty  = _ctx.types.table.getBuiltin(Builtin::U16);
+    Type* u32Ty  = _ctx.types.table.getBuiltin(Builtin::U32);
+    Type* u64Ty  = _ctx.types.table.getBuiltin(Builtin::U64);
+    Type* f32Ty  = _ctx.types.table.getBuiltin(Builtin::F32);
+    Type* f64Ty  = _ctx.types.table.getBuiltin(Builtin::F64);
 
     auto unary = [&, this](UnaryOp op, Type* operand, Type* result) {
-        auto* opSymbol = _sema.symbols.declare<symbols::OperatorSymbol>(
+        auto* opSymbol = _ctx.sema.symbols.declare<symbols::OperatorSymbol>(
             symbols::OperatorImplementation::Builtin,
             op,
             result,
             std::vector<Type*>{ operand }
         );
 
-        _sema.operators.addOperator(opSymbol);
+        _ctx.sema.operators.addOperator(opSymbol);
     };
 
     auto binary = [&, this](BinaryOp op, Type* lhs, Type* rhs, Type* result) {
-        auto* opSymbol = _sema.symbols.declare<symbols::OperatorSymbol>(
+        auto* opSymbol = _ctx.sema.symbols.declare<symbols::OperatorSymbol>(
             symbols::OperatorImplementation::Builtin,
             op,
             result,
             std::vector<Type*>{ lhs, rhs }
         );
 
-        _sema.operators.addOperator(opSymbol);
+        _ctx.sema.operators.addOperator(opSymbol);
     };
 
     auto arithmetic = [&](Type* ty) {
@@ -130,28 +131,28 @@ void BuiltinRegistrar::registerBuiltinConversions() {
     using Builtin = types::BuiltinTypeKind;
     using Rank = types::ConversionRank;
 
-    Type* boolTy = _sema.types.getBuiltin(Builtin::Bool);
-    Type* i8Ty   = _sema.types.getBuiltin(Builtin::I8);
-    Type* i16Ty  = _sema.types.getBuiltin(Builtin::I16);
-    Type* i32Ty  = _sema.types.getBuiltin(Builtin::I32);
-    Type* i64Ty  = _sema.types.getBuiltin(Builtin::I64);
-    Type* u8Ty   = _sema.types.getBuiltin(Builtin::U8);
-    Type* u16Ty  = _sema.types.getBuiltin(Builtin::U16);
-    Type* u32Ty  = _sema.types.getBuiltin(Builtin::U32);
-    Type* u64Ty  = _sema.types.getBuiltin(Builtin::U64);
-    Type* f32Ty  = _sema.types.getBuiltin(Builtin::F32);
-    Type* f64Ty  = _sema.types.getBuiltin(Builtin::F64);
+    Type* boolTy = _ctx.types.table.getBuiltin(Builtin::Bool);
+    Type* i8Ty   = _ctx.types.table.getBuiltin(Builtin::I8);
+    Type* i16Ty  = _ctx.types.table.getBuiltin(Builtin::I16);
+    Type* i32Ty  = _ctx.types.table.getBuiltin(Builtin::I32);
+    Type* i64Ty  = _ctx.types.table.getBuiltin(Builtin::I64);
+    Type* u8Ty   = _ctx.types.table.getBuiltin(Builtin::U8);
+    Type* u16Ty  = _ctx.types.table.getBuiltin(Builtin::U16);
+    Type* u32Ty  = _ctx.types.table.getBuiltin(Builtin::U32);
+    Type* u64Ty  = _ctx.types.table.getBuiltin(Builtin::U64);
+    Type* f32Ty  = _ctx.types.table.getBuiltin(Builtin::F32);
+    Type* f64Ty  = _ctx.types.table.getBuiltin(Builtin::F64);
 
     auto promote = [this](Type* from, Type* to) {
-        _sema.typeSystem.addConversionRule(from, to, Rank::Promotion);
+        _ctx.types.system.addConversionRule(from, to, Rank::Promotion);
     };
 
     auto convert = [this](Type* from, Type* to) {
-        _sema.typeSystem.addConversionRule(from, to, Rank::Conversion);
+        _ctx.types.system.addConversionRule(from, to, Rank::Conversion);
     };
 
     auto narrow = [this](Type* from, Type* to) {
-        _sema.typeSystem.addConversionRule(from, to, Rank::NarrowingConversion);
+        _ctx.types.system.addConversionRule(from, to, Rank::NarrowingConversion);
     };
 
     // ------------------------------------------------------------
@@ -262,5 +263,4 @@ void BuiltinRegistrar::registerBuiltinConversions() {
     convert(u32Ty, boolTy);
 }
 
-} // namespace sema
 VEEC_NAMESPACE_END

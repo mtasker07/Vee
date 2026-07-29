@@ -12,12 +12,9 @@
 #include "veec/CoreDefines.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstNode.hpp"
-#include "veec/sema/BuiltinRegistrar.hpp"
 #include "veec/sema/ScopeManager.hpp"
 #include "veec/symbols/SymbolTable.hpp"
 #include "veec/symbols/OperatorTable.hpp"
-#include "veec/types/TypeTable.hpp"
-#include "veec/types/TypeSystem.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace sema {
@@ -31,19 +28,11 @@ public:
     ScopeManager scopes;
     symbols::SymbolTable symbols;
     symbols::OperatorTable operators;
-    types::TypeTable types;
-    types::TypeSystem typeSystem;
 
     /**
      * @brief Creates a new SemaContext instance.
      */
-    SemaContext()
-        : typeSystem(types) {
-
-        BuiltinRegistrar registrar(*this);
-        registrar.registerAll();
-    }
-
+    SemaContext() = default;
     ~SemaContext() = default;
 };
 

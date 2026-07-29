@@ -22,11 +22,13 @@
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
-#include "veec/CompilationContext.hpp"
 #include "veec/source/SourceRange.hpp"
 #include "veec/ast/AstKind.hpp"
 
 VEEC_NAMESPACE_BEGIN
+
+class CompilationContext;
+
 namespace ast {
 
 /**

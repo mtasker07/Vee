@@ -34,7 +34,7 @@ void TypeConstructionPass::visitClassDecl(ast::ClassDeclNode& node) {
     _currentClass = node.symbol;
 
     // Create semantic type
-    types::ClassType* classType = _sema.types.getClass(node.symbol);
+    types::ClassType* classType = _ctx.types.table.getClass(node.symbol);
     _currentClass->setType(classType);
 
     // Walk members
