@@ -13,8 +13,12 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/basic/StringId.hpp"
+#include "veec/basic/SmallVector.hpp"
+#include "veec/symbols/Symbol.hpp"
 #include "veec/symbols/ScopeOwnerSymbol.hpp"
 #include "veec/symbols/SymbolKind.hpp"
+#include "veec/symbols/ent/VariableSymbol.hpp"
+#include "veec/types/TypeContext.hpp"
 #include "veec/types/TypeFwd.hpp"
 #include "veec/types/FunctionType.hpp"
 
@@ -50,33 +54,63 @@ public:
      */
     inline FunctionSymbolKind getFunctionKind() const { return _kind; }
 
-    /**
-     * @brief Gets the return type of this function symbol.
-     * @return The return type of this function symbol.
-     */
-    inline types::FunctionType* getType() const { return _funcType; }
-    /**
-     * @brief Sets the function type of this function symbol.
-     * @param funcType The function type to set for this function symbol.
-     */
-    inline void setType(types::FunctionType* funcType) { _funcType = funcType; }
+    //
+    // Types
+    //
 
+    /**
+     * @brief Gets the type of this function symbol.
+     * @return The type of this function symbol.
+     */
+    inline types::FunctionType* getType() const {
+        return _type;
+    }
+    /**
+     * @brief Sets the type of this function symbol.
+     * It is up to the caller to ensure that the type being set matches the stored
+     * return type and parameters. Not doing so may lead to broken behaviour.
+     */
+    inline void setType(types::FunctionType* type) {
+        VEE_ASSERT(type != nullptr, "Cannot set function symbol type to null");
+        _type = type;
+    }
     /**
      * @brief Gets the return type of this function symbol.
      * @return The return type of this function symbol.
      */
     inline types::Type* getReturnType() const {
-        VEE_ASSERT(_funcType != nullptr, "Function type not set for function symbol");
-        return _funcType->getReturnType();
+        VEE_ASSERT(_type != nullptr, "Function symbol type is null, cannot get return type");
+        return _type->getReturnType();
     }
-
     /**
      * @brief Gets the parameter types of this function symbol.
      * @return A vector of parameter types for this function symbol.
+     * @note This grabs the parameter types from the function type, not the list
+     * of parameter symbols.
      */
-    inline const std::vector<types::Type*>& getParameterTypes() const {
-        VEE_ASSERT(_funcType != nullptr, "Function type not set for function symbol");
-        return _funcType->getParameterTypes();
+    inline std::vector<types::Type*> getParameterTypes() const {
+        VEE_ASSERT(_type != nullptr, "Function symbol type is null, cannot get parameter types");
+        return _type->getParameterTypes();
+    }
+
+    //
+    // Parameters
+    //
+
+    /**
+     * @brief Gets the parameters of this function symbol.
+     * @return A list of parameter symbols for this function symbol.
+     */
+    inline const basic::SmallVector<VariableSymbol*>& getParameters() const {
+        return _parameters;
+    }
+    /**
+     * @brief Adds a parameter to this function symbol.
+     * @param param The parameter symbol to add.
+     */
+    inline void addParameter(VariableSymbol* param) {
+        VEE_ASSERT(param != nullptr, "Cannot add a null parameter to a function symbol");
+        _parameters.push_back(param);
     }
 
     /**
@@ -90,7 +124,8 @@ public:
 
 private:
     FunctionSymbolKind _kind;
-    types::FunctionType* _funcType = nullptr;
+    types::FunctionType* _type = nullptr;
+    basic::SmallVector<VariableSymbol*> _parameters;
 };
 
 } // namespace symbols

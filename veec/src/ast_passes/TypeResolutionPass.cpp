@@ -45,10 +45,13 @@ void TypeResolutionPass::visitFunctionDecl(ast::FunctionDeclNode& node) {
     symbols::FunctionSymbol* functionSymbol = node.symbol;
     VEE_ASSERT(functionSymbol != nullptr, "FunctionDeclNode has no associated FunctionSymbol");
 
-    // Grab the return type and parameter types
+    // Set the return type and parameters
     types::Type* returnType = _ctx.types.table.getNodeType(node.getReturnType());
+
     std::vector<types::Type*> parameterTypes;
     for (ast::ParameterDeclNode* paramNode : node.getParameters()) {
+        // Add to symbol
+        functionSymbol->addParameter(paramNode->symbol);
         parameterTypes.push_back(_ctx.types.table.getNodeType(paramNode->getType()));
     }
 
