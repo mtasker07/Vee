@@ -191,6 +191,7 @@ void TypeCheckerPass::visitUnaryExpr(ast::UnaryExprNode& node) {
     } else {
         // Found exactly one matching operator
         symbols::OperatorSymbol* opSymbol = result[0];
+        node.symbol = opSymbol;
         resultType = opSymbol->getResultType();
 
         // Emit conversion diagnostics
@@ -248,6 +249,7 @@ void TypeCheckerPass::visitBinaryExpr(ast::BinaryExprNode& node) {
     } else {
         // Found exactly one matching operator
         symbols::OperatorSymbol* opSymbol = result[0];
+        node.symbol = opSymbol;
         resultType = opSymbol->getResultType();
 
         // Emit conversion diagnostics

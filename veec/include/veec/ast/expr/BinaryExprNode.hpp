@@ -12,6 +12,7 @@
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/expr/ExpressionNode.hpp"
+#include "veec/symbols/SymbolFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast {
@@ -69,6 +70,8 @@ inline std::string_view toString(BinaryOp op) {
  */
 class BinaryExprNode : public ExpressionNode {
 public:
+    symbols::OperatorSymbol* symbol = nullptr;
+
     /**
      * @brief Constructs a new binary expression node with the given operands and operator.
      * @param left The left operand of this binary expression.

@@ -15,6 +15,7 @@
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/expr/ExpressionNode.hpp"
+#include "veec/symbols/SymbolFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast {
@@ -61,6 +62,8 @@ inline std::string_view toString(UnaryOp op) {
  */
 class UnaryExprNode : public ExpressionNode {
 public:
+    symbols::OperatorSymbol* symbol = nullptr;
+
     /**
      * @brief Constructs a new unary expression node with the given operand and operator.
      * @param operand The operand of this unary expression.
