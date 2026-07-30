@@ -107,6 +107,13 @@ public:
      */
     std::string toString(u32 radix = 10) const;
 
+    friend bool operator==(const APInt& lhs, const APInt& rhs);
+    friend bool operator!=(const APInt& lhs, const APInt& rhs);
+    friend bool operator<(const APInt& lhs, const APInt& rhs);
+    friend bool operator<=(const APInt& lhs, const APInt& rhs);
+    friend bool operator>(const APInt& lhs, const APInt& rhs);
+    friend bool operator>=(const APInt& lhs, const APInt& rhs);
+
     friend APInt operator+(const APInt& lhs, const APInt& rhs);
     friend APInt operator-(const APInt& lhs, const APInt& rhs);
     friend APInt operator*(const APInt& lhs, const APInt& rhs);

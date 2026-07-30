@@ -146,6 +146,68 @@ std::string APInt::toString(u32 radix) const {
     return result;
 }
 
+bool operator==(const APInt& lhs, const APInt& rhs) {
+    if (lhs._bitWidth != rhs._bitWidth) {
+        return false;
+    }
+
+    size_t lhsSize = trimmedSize(lhs._words);
+    size_t rhsSize = trimmedSize(rhs._words);
+
+    if (lhsSize != rhsSize) {
+        return false;
+    }
+
+    for (size_t i = 0; i < lhsSize; ++i) {
+        if (lhs._words[i] != rhs._words[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+bool operator!=(const APInt& lhs, const APInt& rhs) {
+    return !(lhs == rhs);
+}
+bool operator<(const APInt& lhs, const APInt& rhs) {
+    VEE_ASSERT(lhs._bitWidth == rhs._bitWidth,
+        "Bit widths must match");
+
+    bool lhsNeg = lhs.isNegative();
+    bool rhsNeg = rhs.isNegative();
+
+    if (lhsNeg && !rhsNeg) {
+        return true;
+    }
+    if (!lhsNeg && rhsNeg) {
+        return false;
+    }
+
+    size_t lhsSize = trimmedSize(lhs._words);
+    size_t rhsSize = trimmedSize(rhs._words);
+
+    if (lhsSize != rhsSize) {
+        return lhsSize < rhsSize;
+    }
+
+    for (size_t i = lhsSize; i-- > 0;) {
+        if (lhs._words[i] != rhs._words[i]) {
+            return lhs._words[i] < rhs._words[i];
+        }
+    }
+
+    return false;
+}
+bool operator<=(const APInt& lhs, const APInt& rhs) {
+    return (lhs < rhs) || (lhs == rhs);
+}
+bool operator>(const APInt& lhs, const APInt& rhs) {
+    return !(lhs <= rhs);
+}
+bool operator>=(const APInt& lhs, const APInt& rhs) {
+    return !(lhs < rhs);
+}
+
 APInt operator+(const APInt& lhs, const APInt& rhs) {
     return APInt::addUnsigned(lhs, rhs);
 }
