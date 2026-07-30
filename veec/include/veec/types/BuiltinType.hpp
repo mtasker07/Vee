@@ -97,6 +97,13 @@ public:
     inline BuiltinTypeKind getBuiltinKind() const { return _builtinKind; }
 
     /**
+     * @brief Checks if this builtin type is a void type.
+     * @return True if this builtin type is a void type, false otherwise.
+     */
+    inline bool isVoid() const {
+        return _builtinKind == BuiltinTypeKind::Void;
+    }
+    /**
      * @brief Checks if this builtin type is a boolean type.
      * @return True if this builtin type is a boolean type, false otherwise.
      */
@@ -144,6 +151,13 @@ public:
     inline bool isFloatingPoint() const {
         return _builtinKind == BuiltinTypeKind::F32 ||
                _builtinKind == BuiltinTypeKind::F64;
+    }
+    /**
+     * @brief Checks if this builtin type is a string type.
+     * @return True if this builtin type is a string type, false otherwise.
+     */
+    inline bool isString() const {
+        return _builtinKind == BuiltinTypeKind::String;
     }
 
     /**
