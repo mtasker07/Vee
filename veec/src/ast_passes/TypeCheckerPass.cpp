@@ -285,6 +285,9 @@ void TypeCheckerPass::visitAssignmentExpr(ast::AssignmentExprNode& node) {
 
     // Assignment always has left-side type
     _ctx.types.table.setNodeType(&node, lType);
+
+    // TODO: Actually check if left-side is assignable
+    node.assigneeSymbol = ast_cast<ast::NameExprNode>(node.getLeft())->getResolvedSymbol()->as<symbols::VariableSymbol>();
 }
 void TypeCheckerPass::visitNameExpr(ast::NameExprNode& node) {
     ast::AstWalker::visitNameExpr(node);

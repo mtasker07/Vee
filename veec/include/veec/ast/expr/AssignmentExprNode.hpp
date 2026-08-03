@@ -12,6 +12,7 @@
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/expr/ExpressionNode.hpp"
+#include "veec/symbols/SymbolFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast {
@@ -36,6 +37,8 @@ enum class AssignmentOp : u8 {
  */
 class AssignmentExprNode : public ExpressionNode {
 public:
+    symbols::VariableSymbol* assigneeSymbol = nullptr;
+
     /**
      * @brief Constructs a new assignment expression node with the given operands and operator.
      * @param left The left operand of this assignment expression.
