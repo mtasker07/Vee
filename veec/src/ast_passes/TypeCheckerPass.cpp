@@ -408,6 +408,9 @@ void TypeCheckerPass::visitCallExpr(ast::CallExprNode& node) {
             symbols::FunctionSymbol* funcSymbol = overloads[0];
             types::FunctionType* funcType = funcSymbol->getType()->as<types::FunctionType>();
             VEE_ASSERT(funcType != nullptr, "Function symbol does not have a function type");
+
+            // Store in node
+            node.symbol = funcSymbol;
             
             _ctx.types.table.setNodeType(calleeNameExpr, funcType);
             _ctx.types.table.setNodeType(&node, funcType->getReturnType());

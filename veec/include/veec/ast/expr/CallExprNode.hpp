@@ -14,6 +14,7 @@
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/expr/ExpressionNode.hpp"
+#include "veec/symbols/SymbolFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast {
@@ -24,6 +25,8 @@ namespace ast {
  */
 class CallExprNode : public ExpressionNode {
 public:
+    symbols::FunctionSymbol* symbol = nullptr;
+
     /**
      * @brief Creates a new call expression node instance with the given callee and arguments.
      * @param callee The callee expression of this call expression.
