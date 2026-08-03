@@ -38,10 +38,10 @@ public:
 
     /**
      * @brief Creates a new AST node of type T with the given range.
-     * @tparam T The type of AST node to create, which must be derived from AstNode.
+     * @tparam T The type of AST node to create.
      * @param range The source range that corresponds to the AST node being created.
-     * @param args The arguments to forward to the constructor of T.
-     * @return A pointer to the created AST node of type T.
+     * @param args The arguments to forward to the constructor.
+     * @return A pointer to the created AST node.
      */
     template<typename T, typename... Args>
     inline T* makeNode(const source::SourceRange& range, Args&&... args) {
