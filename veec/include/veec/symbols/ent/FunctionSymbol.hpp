@@ -11,6 +11,7 @@
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
+#include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/basic/StringId.hpp"
 #include "veec/basic/SmallVector.hpp"
@@ -98,6 +99,13 @@ public:
     //
 
     /**
+     * @brief Gets the number of parameters of this function symbol.
+     * @return The number of parameters of this function symbol.
+     */
+    inline size_t getParameterCount() const {
+        return _parameters.size();
+    }
+    /**
      * @brief Gets the parameters of this function symbol.
      * @return A list of parameter symbols for this function symbol.
      */
@@ -105,11 +113,13 @@ public:
         return _parameters;
     }
     /**
-     * @brief Gets the number of parameters of this function symbol.
-     * @return The number of parameters of this function symbol.
+     * @brief Gets the parameter at the given index.
+     * @param index The index of the parameter to get.
+     * @return A pointer to the parameter symbol at the given index.
      */
-    inline size_t getParameterCount() const {
-        return _parameters.size();
+    inline VariableSymbol* getParameter(size_t index) const {
+        VEE_ASSERT(index < _parameters.size(), "Parameter index out of bounds");
+        return _parameters[index];
     }
     /**
      * @brief Adds a parameter to this function symbol.
