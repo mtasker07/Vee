@@ -77,13 +77,13 @@ public:
      * @param node The AST node to get the type for.
      * @return A pointer to the type of the AST node, or nullptr if not set.
      */
-    Type* getNodeType(ast::AstNode* node);
+    Type* getNodeType(const ast::AstNode* node);
     /**
      * @brief Sets the type for a given AST node.
      * @param node The AST node to set the type for.
      * @param type The type to set for the AST node.
      */
-    void setNodeType(ast::AstNode* node, Type* type);
+    void setNodeType(const ast::AstNode* node, Type* type);
 
     /**
      * @brief Gets a type by ID in this type table (read-only).
@@ -167,7 +167,7 @@ private:
     std::unordered_map<FunctionKey, FunctionType*, FunctionKeyHasher> _functionTypes; // by (returnType, parameterTypes)
     std::unordered_map<symbols::ClassSymbol*, ClassType*> _classTypes; // by symbol
     
-    std::unordered_map<ast::AstNode*, Type*> _astNodeTypes;
+    std::unordered_map<const ast::AstNode*, Type*> _astNodeTypes;
 
     // Index conversion helpers
     inline size_t typeIdToIndex(TypeId id) const {
