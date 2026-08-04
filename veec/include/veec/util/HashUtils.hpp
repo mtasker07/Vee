@@ -6,6 +6,8 @@
 #pragma once
 
 #include <functional>
+#include <tuple>
+#include <vector>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -20,32 +22,11 @@ namespace util {
  */
 namespace HashUtils {
 
-/**
- * @struct CompositeKey
- * @brief A composite key that can be used in hash maps. It combines multiple values into a single key that
- * can be used along with CompositeHasher to create a hash map with multiple values as the key.
- * @tparam Ts The types of the values to combine.
- */
-template<typename... Ts>
-struct CompositeKey {
-    std::tuple<Ts...> key;
-};
+template<typename T>
+inline void hashCombine(size_t& seed, const T& value);
 
-/**
- * @struct CompositeHasher
- * @brief A hasher for CompositeKey.
- */
-struct CompositeHasher {
-    template<typename... Ts>
-    std::size_t operator()(const CompositeKey<Ts...>& compositeKey) const {
-        const auto& key = compositeKey.key;
-        std::size_t seed = 0;
-        std::apply([&](const auto&... values) {
-            (hashCombine(seed, values), ...);
-        }, key);
-        return seed;
-    }
-};
+template<typename T, typename Alloc>
+inline void hashCombine(size_t& seed, const std::vector<T, Alloc>& values);
     
 /**
  * @brief Hashes any given pointer.
@@ -68,6 +49,19 @@ inline void hashCombine(size_t& seed, const T& value) {
     seed ^= h + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2);
 }
 /**
+ * @brief Combines the hash of a vector of values into an existing seed. This seed
+ * can then be used for further hashes.
+ * @param seed The existing hash seed.
+ * @param values The vector of values to hash and combine into the seed.
+ */
+template<typename T, typename Alloc>
+inline void hashCombine(size_t& seed, const std::vector<T, Alloc>& values) {
+    hashCombine(seed, values.size());
+    for (const auto& value : values) {
+        hashCombine(seed, value);
+    }
+}
+/**
  * @brief Hashes multiple values and combines them into a single hash value.
  * @param values The values to hash and combine.
  * @return The combined hash value of all the input values.
@@ -78,6 +72,30 @@ size_t hashValues(const Ts&... values) {
     (hashCombine(seed, values), ...);
     return seed;
 }
+
+/**
+ * @struct CompositeKey
+ * @brief A composite key that can be used in hash maps. It combines multiple values into a single key that
+ * can be used along with CompositeHasher to create a hash map with multiple values as the key.
+ * @tparam Ts The types of the values to combine.
+ */
+template<typename... Ts>
+using CompositeKey = std::tuple<Ts...>;
+
+/**
+ * @struct CompositeHasher
+ * @brief A hasher for CompositeKey.
+ */
+struct CompositeHasher {
+    template<typename... Ts>
+    std::size_t operator()(const CompositeKey<Ts...>& compositeKey) const {
+        std::size_t seed = 0;
+        std::apply([&](const auto&... values) {
+            (hashCombine(seed, values), ...);
+        }, compositeKey);
+        return seed;
+    }
+};
 
 } // namespace HashUtils
 
