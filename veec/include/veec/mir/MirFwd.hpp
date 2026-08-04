@@ -17,6 +17,11 @@ namespace mir {
 // ENUMS
 //
 
+enum class MirKind : u8;
+enum class InstructionOpcode : u8;
+enum class ConstantKind : u8;
+enum class LocalKind : u8;
+
 //
 // STRUCTS
 //
@@ -27,17 +32,25 @@ namespace mir {
 
 class MirContext;
 class MirBuilder;
+class MirFactory;
 
 //
 // CLASSES (MIR NODES)
 //
 
+class MirNode;
 class Module;
 class Function;
-class Block;
+class BasicBlock;
 class Instruction;
 class Value;
-class Type;
+class User;
+class Local;
+class Constant;
+class ConstantInt;
+class ConstantFloat;
+class ConstantString;
+class ConstantBool;
 
 } // namespace mir
 VEEC_NAMESPACE_END

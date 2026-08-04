@@ -7,10 +7,15 @@
 
 #pragma once
 
+#include <type_traits>
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/basic/Arena.hpp"
+#include "veec/mir/MirFactory.hpp"
+#include "veec/mir/support/InstructionTable.hpp"
+#include "veec/mir/support/ValueTypeMap.hpp"
+#include "veec/mir/pretty/ValueNameMap.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
@@ -21,23 +26,27 @@ namespace mir {
  */
 class MirContext {
 public:
+    support::InstructionTable instructionTable;
+    support::ValueTypeMap valueTypes;
+    pretty::ValueNameMap valueNames;
+    MirFactory factory;
+
     /**
      * @brief Creates a new MIRContext instance.
      */
-    MirContext() = default;
+    MirContext()
+        : factory(_nodeArena, valueTypes, valueNames) {}
+
     ~MirContext() = default;
 
-private:
-    // Allow all MIR classes to alloc
-    friend class MirBuilder;
-    friend class Module;
-    friend class Function;
-    friend class Block;
-    friend class Instruction;
-    friend class Value;
-    friend class Type;
+    // Disallow copying and moving
+    MirContext(const MirContext&) = delete;
+    MirContext& operator=(const MirContext&) = delete;
+    MirContext(MirContext&&) = delete;
+    MirContext& operator=(MirContext&&) = delete;
 
-    basic::Arena<> _arena;
+private:
+    basic::Arena<> _nodeArena;
 };
 
 } // namespace mir

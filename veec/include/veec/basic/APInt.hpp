@@ -70,6 +70,23 @@ public:
     static APInt fromBinary(u32 bitWidth, std::string_view binaryStr, bool negative = false);
 
     /**
+     * @brief Returns an APInt instance with the value 1 for a given bit width.
+     * @param bitWidth The bit width of the APInt.
+     * @return An APInt instance with the value 1.
+     */
+    inline static APInt one(u32 bitWidth) {
+        return fromU64(bitWidth, 1);
+    }
+    /**
+     * @brief Returns an APInt instance with the value 0 for a given bit width.
+     * @param bitWidth The bit width of the APInt.
+     * @return An APInt instance with the value 0.
+     */
+    inline static APInt zero(u32 bitWidth) {
+        return fromU64(bitWidth, 0);
+    }
+
+    /**
      * @brief Returns the maximum value for a given bit width.
      * @param bitWidth The bit width of the APInt.
      * @return APInt instance representing the maximum value.

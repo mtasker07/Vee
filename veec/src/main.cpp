@@ -23,6 +23,11 @@
 #include "veec/ast_passes/TypeConstructionPass.hpp"
 #include "veec/ast_passes/TypeResolutionPass.hpp"
 #include "veec/ast_passes/TypeCheckerPass.hpp"
+#include "veec/mir/MirFwd.hpp"
+#include "veec/mir/MirNode.hpp"
+#include "veec/mir/Module.hpp"
+#include "veec/mir/pretty/MirPrinter.hpp"
+#include "veec/mirgen/AstToMirLowerer.hpp"
 #include "veec/symbols/ent/ClassSymbol.hpp"
 #include "veec/types/TypeTable.hpp"
 #include "veec/types/ClassType.hpp"
@@ -47,36 +52,14 @@ int main() {
 
     constexpr std::string_view sourceCode = R"(
 
-use std::io::{Read, Write};
-
-class MyClass {
-    x: i32;
-    y: i32;
-
-    func new(_x: i32, _y: i32) -> MyClass {
-        return MyClass { _x, _y };
-    }
-
-    func mult(a: i32, b: i32) -> i32 {
-        return a * b;
-    }
-    func mult(a: i64, b: i64) -> i64 {
-        return a * b;
-    }
-    
-    func addByX(a: i32) -> i32 {
-        return x + a;
-    }
+func add(a: i32, b: i32) -> i32 {
+    return a + b;
 }
 
 func main() -> i32 {
     let x: i64 = 6;
-
-    let result1 = MyClass::mult(x, 4);
-
-    let myObj = MyClass::new(x, 20);
-
-    return myObj.addByX(x);
+    let y: i32 = add(x, 10);
+    return y;
 }
 
 )";
@@ -84,6 +67,9 @@ func main() -> i32 {
 	auto sourceId = ctx.sources.addVirtualFile("dummy.v", sourceCode);
     lexing::Lexer lexer(ctx, ctx.sources.getView(sourceId));
 
+	std::cout << "Source Code:\n" << sourceCode << std::endl;
+
+    std::cout << "\n\nTokens:\n";
     std::vector<lexing::Token> tokens = lexer.tokenize();
     for (const auto& token : tokens) {
         if (token.isTrivia()) continue;
@@ -95,7 +81,7 @@ func main() -> i32 {
     parsing::Parser parser(ctx, ctx.ast, tokenList);
     ast::CompilationUnitNode* ast = parser.parse();
     if (ast) {
-        std::cout << "AST Generated:\n" + ast->toString(ctx) << std::endl;
+        std::cout << "\n\nAST Generated:\n" + ast->toString(ctx) << std::endl;
     }
 
     if (!ast) return 1;
@@ -113,56 +99,10 @@ func main() -> i32 {
         std::cout << diag.toString() << std::endl;
     }
 
-    std::cout << "TYPES:\n";
-    types::TypeTable& typeTable = ctx.types.table;
-    for (const auto& type : typeTable.getAllTypes()) {
-        if (types::ClassType* classType = type->as<types::ClassType>()) {
-            std::cout << "Class Type: " << ctx.strings.get(classType->getClassSymbol()->getNameValue()) << "\n";
-            std::cout << "Fields:\n";
-            for (const auto& [fieldNameId, fieldSymbol] : classType->getFields()) {
-                std::cout << "  " << ctx.strings.get(fieldNameId) << "\n";
-            }
-            std::cout << "Methods:\n";
-            for (const auto& [methodNameId, methodSymbols] : classType->getMethods()) {
-                std::cout << "  " << ctx.strings.get(methodNameId) << "\n";
-            }
-            std::cout << std::endl;
-        }
-    }
-
-    std::cout << "SYMBOLS:\n";
-    symbols::SymbolTable& symTable = ctx.sema.symbols;
-    for (const auto& symbol : symTable.getAllSymbols()) {
-        std::string_view symbolName = symbol->getName().hasValue() ? ctx.strings.get(symbol->getNameValue()) : "<unnamed>";
-        std::cout << "Symbol: '" << symbolName << "'  ";
-
-        switch (symbol->getKind()) {
-            case symbols::SymbolKind::Module:
-                std::cout << "  Kind: Module\n";
-                break;
-            case symbols::SymbolKind::FunctionSet:
-                std::cout << "  Kind: FunctionSet\n";
-                break;
-            case symbols::SymbolKind::Function:
-                std::cout << "  Kind: Function\n";
-                break;
-            case symbols::SymbolKind::Class:
-                std::cout << "  Kind: Class\n";
-                break;
-            case symbols::SymbolKind::Field:
-                std::cout << "  Kind: Field\n";
-                break;
-            case symbols::SymbolKind::Variable:
-                std::cout << "  Kind: Variable\n";
-                break;
-            case symbols::SymbolKind::Operator:
-                std::cout << "  Kind: Operator\n";
-                break;
-            default:
-                std::cout << "  Kind: Unknown\n";
-                break;
-        }
-    }
+    // MIRRRR
+    mir::Module* mirModule = mirgen::AstToMirLowerer(ctx).lower(*ast);
+    mir::pretty::MirPrinter printer(ctx);
+    std::cout << "\n\nMIR:\n" << printer.printNode(*mirModule) << std::endl;
 
     return 0;
 }

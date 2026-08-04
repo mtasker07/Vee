@@ -29,6 +29,20 @@ set(VEEC_SOURCES
     src/ast_passes/TypeConstructionPass.cpp
     src/ast_passes/TypeResolutionPass.cpp
     src/ast_passes/TypeCheckerPass.cpp
+
+    src/mir/MirNode.cpp
+    src/mir/MirFactory.cpp
+    src/mir/MirBuilder.cpp
+    src/mir/Module.cpp
+    src/mir/Function.cpp
+    src/mir/BasicBlock.cpp
+    src/mir/Instruction.cpp
+    src/mir/Value.cpp
+    src/mir/Constant.cpp
+    src/mir/pretty/MirPrinter.cpp
+    src/mir/support/ConstantTable.cpp
+
+    src/mirgen/AstToMirLowerer.cpp
     
     src/sema/ScopeManager.cpp
 
