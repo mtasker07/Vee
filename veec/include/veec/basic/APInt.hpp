@@ -9,10 +9,12 @@
 #include <string>
 #include <string_view>
 #include <utility>
+#include <bit>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/util/HashUtils.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace basic {
@@ -124,6 +126,8 @@ public:
     friend APInt operator^(const APInt& lhs, const APInt& rhs);
 
 private:
+    friend struct std::hash<APInt>;
+
     u32 _bitWidth;
     std::vector<u32> _words;
 
@@ -155,3 +159,27 @@ private:
 
 } // namespace basic
 VEEC_NAMESPACE_END
+
+namespace std {
+
+// Note that this hash implementation generally should only be used for hashing APInts
+// that have a bit width of 64 or less, it may not be suitable for larger values.
+
+template<>
+struct hash<veec::basic::APInt> {
+    size_t operator()(const veec::basic::APInt& key) const {
+        u64 h = 0x9e3779b97f4a7c15ULL;
+
+        for (u32 limb : key._words) {
+            h ^= std::rotl(static_cast<u64>(limb) * 0xbf58476d1ce4e5b9ULL, 27);
+            h *= 0x94d049bb133111ebULL;
+        }
+
+        if (key.isNegative())
+            h ^= 0xdeadbeefcafebabeULL;
+
+        return static_cast<size_t>(h);
+    }
+};
+
+} // namespace std
