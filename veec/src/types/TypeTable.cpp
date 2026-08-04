@@ -79,14 +79,14 @@ ClassType* TypeTable::getClass(symbols::ClassSymbol* classSymbol) {
     return newClassType;
 }
 
-Type* TypeTable::getNodeType(ast::AstNode* node) {
+Type* TypeTable::getNodeType(const ast::AstNode* node) {
     auto it = _astNodeTypes.find(node);
     if (it != _astNodeTypes.end()) {
         return it->second;
     }
     return nullptr;
 }
-void TypeTable::setNodeType(ast::AstNode* node, Type* type) {
+void TypeTable::setNodeType(const ast::AstNode* node, Type* type) {
     _astNodeTypes[node] = type;
 }
 

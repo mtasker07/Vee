@@ -24,6 +24,7 @@
 #include "veec/types/TypeKind.hpp"
 #include "veec/types/Type.hpp"
 #include "veec/types/TypeFwd.hpp"
+#include "veec/util/HashUtils.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace types {
@@ -107,64 +108,18 @@ public:
     const std::vector<Type*>& getAllTypes() const { return _types; }
 
 private:
-    //
-    // KEYS
-    //
-
-    struct ArrayKey {
-        Type* elementType;
-        size_t size;
-
-        bool operator==(const ArrayKey& other) const {
-            return elementType == other.elementType && size == other.size;
-        }
-    };
-
-    struct FunctionKey {
-        Type* returnType;
-        std::vector<Type*> parameterTypes;
-
-        bool operator==(const FunctionKey& other) const {
-            if (returnType != other.returnType) return false;
-            if (parameterTypes.size() != other.parameterTypes.size()) return false;
-            for (size_t i = 0; i < parameterTypes.size(); ++i) {
-                if (parameterTypes[i] != other.parameterTypes[i]) return false;
-            }
-            return true;
-        }
-    };
-
-    //
-    // KEY HASHERS
-    //
-
-    struct ArrayKeyHasher {
-        std::size_t operator()(const ArrayKey& key) const {
-            std::size_t h1 = std::hash<Type*>{}(key.elementType);
-            std::size_t h2 = std::hash<size_t>{}(key.size);
-            return h1 ^ (h2 << 1); // Combine the two hashes
-        }
-    };
-
-    struct FunctionKeyHasher {
-        std::size_t operator()(const FunctionKey& key) const {
-            std::size_t h1 = std::hash<Type*>{}(key.returnType);
-            std::size_t h2 = 0;
-            for (const auto& paramType : key.parameterTypes) {
-                h2 ^= std::hash<Type*>{}(paramType) + 0x9e3779b9 + (h2 << 6) + (h2 >> 2);
-            }
-            return h1 ^ (h2 << 1);
-        }
-    };
-
+    using ArrayKey = util::HashUtils::CompositeKey<Type*, size_t>;
+    using ArrayHasher = util::HashUtils::CompositeHasher;
+    using FunctionKey = util::HashUtils::CompositeKey<Type*, std::vector<Type*>>;
+    using FunctionHasher = util::HashUtils::CompositeHasher;
 
     basic::Arena<> _typeArena;
     std::vector<Type*> _types; // by id
     ErrorType* _errorType = nullptr;
     std::vector<BuiltinType*> _builtinTypes; // by kind
     std::unordered_map<Type*, PointerType*> _pointerTypes; // by pointee
-    std::unordered_map<ArrayKey, ArrayType*, ArrayKeyHasher> _arrayTypes; // by (elementType, size)
-    std::unordered_map<FunctionKey, FunctionType*, FunctionKeyHasher> _functionTypes; // by (returnType, parameterTypes)
+    std::unordered_map<ArrayKey, ArrayType*, ArrayHasher> _arrayTypes; // by (elementType, size)
+    std::unordered_map<FunctionKey, FunctionType*, FunctionHasher> _functionTypes; // by (returnType, parameterTypes)
     std::unordered_map<symbols::ClassSymbol*, ClassType*> _classTypes; // by symbol
     
     std::unordered_map<const ast::AstNode*, Type*> _astNodeTypes;
