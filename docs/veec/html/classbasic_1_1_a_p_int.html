@@ -121,11 +121,22 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad7c40f7c9ad75b793a5a66d335976a21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance from a hexadecimal string representation.  <br /></td></tr>
 <tr class="memitem:a819aa265c7a2d7e4073f569f0bb8773e" id="r_a819aa265c7a2d7e4073f569f0bb8773e"><td class="memItemLeft">static APInt&#160;</td><td class="memItemRight"><a class="el" href="#a819aa265c7a2d7e4073f569f0bb8773e">fromBinary</a> (u32 bitWidth, std::string_view binaryStr, bool negative=false)</td></tr>
 <tr class="memdesc:a819aa265c7a2d7e4073f569f0bb8773e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance from a binary string representation.  <br /></td></tr>
+<tr class="memitem:a1b0d69abb3bf5e9ae3f4d4096e3b6de1" id="r_a1b0d69abb3bf5e9ae3f4d4096e3b6de1"><td class="memItemLeft">static APInt&#160;</td><td class="memItemRight"><a class="el" href="#a1b0d69abb3bf5e9ae3f4d4096e3b6de1">one</a> (u32 bitWidth)</td></tr>
+<tr class="memdesc:a1b0d69abb3bf5e9ae3f4d4096e3b6de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance with the value 1 for a given bit width.  <br /></td></tr>
+<tr class="memitem:a60739d86fff3b96ab905298238541aa4" id="r_a60739d86fff3b96ab905298238541aa4"><td class="memItemLeft">static APInt&#160;</td><td class="memItemRight"><a class="el" href="#a60739d86fff3b96ab905298238541aa4">zero</a> (u32 bitWidth)</td></tr>
+<tr class="memdesc:a60739d86fff3b96ab905298238541aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance with the value 0 for a given bit width.  <br /></td></tr>
 <tr class="memitem:ab51095ffc8d1d477cda3759129efe8ef" id="r_ab51095ffc8d1d477cda3759129efe8ef"><td class="memItemLeft">static APInt&#160;</td><td class="memItemRight"><a class="el" href="#ab51095ffc8d1d477cda3759129efe8ef">max</a> (u32 bitWidth)</td></tr>
 <tr class="memdesc:ab51095ffc8d1d477cda3759129efe8ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum value for a given bit width.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
+<tr class="memitem:a5e7841db9457f76a42e84b2e3dbb4f87" id="r_a5e7841db9457f76a42e84b2e3dbb4f87"><td class="memItemLeft">struct&#160;</td><td class="memItemRight"><a class="el" href="#a5e7841db9457f76a42e84b2e3dbb4f87">std::hash&lt; APInt &gt;</a></td></tr>
+<tr class="memitem:ac0e51620fee49d739ed22d64d3c14aba" id="r_ac0e51620fee49d739ed22d64d3c14aba"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac0e51620fee49d739ed22d64d3c14aba">operator==</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
+<tr class="memitem:a73672733f35c2363620993f27e038df1" id="r_a73672733f35c2363620993f27e038df1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a73672733f35c2363620993f27e038df1">operator!=</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
+<tr class="memitem:a92ff29e2f12a8a9afbd71eeaeeebf586" id="r_a92ff29e2f12a8a9afbd71eeaeeebf586"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a92ff29e2f12a8a9afbd71eeaeeebf586">operator&lt;</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
+<tr class="memitem:a48f2ae2ae38cfcadc5df86f7929f78d0" id="r_a48f2ae2ae38cfcadc5df86f7929f78d0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a48f2ae2ae38cfcadc5df86f7929f78d0">operator&lt;=</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
+<tr class="memitem:a013816b74491b7a3c51a55e7af5dc299" id="r_a013816b74491b7a3c51a55e7af5dc299"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a013816b74491b7a3c51a55e7af5dc299">operator&gt;</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
+<tr class="memitem:ae709419f63916a695a033dc891b005fb" id="r_ae709419f63916a695a033dc891b005fb"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae709419f63916a695a033dc891b005fb">operator&gt;=</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
 <tr class="memitem:a6b02152645c7d32d82963e7a5263aaac" id="r_a6b02152645c7d32d82963e7a5263aaac"><td class="memItemLeft">APInt&#160;</td><td class="memItemRight"><a class="el" href="#a6b02152645c7d32d82963e7a5263aaac">operator+</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
 <tr class="memitem:a36fb34195db7393b7d63a5aa8d1b9ef1" id="r_a36fb34195db7393b7d63a5aa8d1b9ef1"><td class="memItemLeft">APInt&#160;</td><td class="memItemRight"><a class="el" href="#a36fb34195db7393b7d63a5aa8d1b9ef1">operator-</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
 <tr class="memitem:ac8a55ac9244cd2ff516f936883b5e6e9" id="r_ac8a55ac9244cd2ff516f936883b5e6e9"><td class="memItemLeft">APInt&#160;</td><td class="memItemRight"><a class="el" href="#ac8a55ac9244cd2ff516f936883b5e6e9">operator*</a> (const APInt &amp;lhs, const APInt &amp;rhs)</td></tr>
@@ -136,7 +147,7 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00020">20</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00022">22</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a81c4393e7c687da392160d51fe89a7fd" name="a81c4393e7c687da392160d51fe89a7fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81c4393e7c687da392160d51fe89a7fd">&#9670;&#160;</a></span>~APInt()</h2>
@@ -431,7 +442,7 @@ Friends</h2></td></tr>
 <p>Gets the bit width of this <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>The bit width of this <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00081">81</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00100">100</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
 
 </div>
 </div>
@@ -483,7 +494,7 @@ Friends</h2></td></tr>
 <p>Checks if this <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> is positive. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if this <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &gt; 0, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00099">99</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00118">118</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
 
 </div>
 </div>
@@ -545,6 +556,42 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a1b0d69abb3bf5e9ae3f4d4096e3b6de1" name="a1b0d69abb3bf5e9ae3f4d4096e3b6de1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b0d69abb3bf5e9ae3f4d4096e3b6de1">&#9670;&#160;</a></span>one()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">APInt basic::APInt::one </td>
+          <td>(</td>
+          <td class="paramtype">u32</td>          <td class="paramname"><span class="paramname"><em>bitWidth</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance with the value 1 for a given bit width. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bitWidth</td><td>The bit width of the <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance with the value 1. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00077">77</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a91bc9391af3bd465ff325bedc2668545" name="a91bc9391af3bd465ff325bedc2668545"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91bc9391af3bd465ff325bedc2668545">&#9670;&#160;</a></span>toString()</h2>
 
@@ -573,7 +620,74 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a60739d86fff3b96ab905298238541aa4" name="a60739d86fff3b96ab905298238541aa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60739d86fff3b96ab905298238541aa4">&#9670;&#160;</a></span>zero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">APInt basic::APInt::zero </td>
+          <td>(</td>
+          <td class="paramtype">u32</td>          <td class="paramname"><span class="paramname"><em>bitWidth</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance with the value 0 for a given bit width. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bitWidth</td><td>The bit width of the <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> instance with the value 0. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00085">85</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
+
+</div>
+</div>
 <a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a73672733f35c2363620993f27e038df1" name="a73672733f35c2363620993f27e038df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73672733f35c2363620993f27e038df1">&#9670;&#160;</a></span>operator!=</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00169">169</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a05a33f12693b307b80754b9ee88c8531" name="a05a33f12693b307b80754b9ee88c8531"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a05a33f12693b307b80754b9ee88c8531">&#9670;&#160;</a></span>operator&amp;</h2>
 
@@ -601,7 +715,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00178">178</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00240">240</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -632,7 +746,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00155">155</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00217">217</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -663,7 +777,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00149">149</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00211">211</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -694,7 +808,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00152">152</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00214">214</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -725,7 +839,162 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00158">158</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00220">220</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a92ff29e2f12a8a9afbd71eeaeeebf586" name="a92ff29e2f12a8a9afbd71eeaeeebf586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92ff29e2f12a8a9afbd71eeaeeebf586">&#9670;&#160;</a></span>operator&lt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00172">172</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a48f2ae2ae38cfcadc5df86f7929f78d0" name="a48f2ae2ae38cfcadc5df86f7929f78d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f2ae2ae38cfcadc5df86f7929f78d0">&#9670;&#160;</a></span>operator&lt;=</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00201">201</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac0e51620fee49d739ed22d64d3c14aba" name="ac0e51620fee49d739ed22d64d3c14aba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0e51620fee49d739ed22d64d3c14aba">&#9670;&#160;</a></span>operator==</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00149">149</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a013816b74491b7a3c51a55e7af5dc299" name="a013816b74491b7a3c51a55e7af5dc299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a013816b74491b7a3c51a55e7af5dc299">&#9670;&#160;</a></span>operator&gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00204">204</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae709419f63916a695a033dc891b005fb" name="ae709419f63916a695a033dc891b005fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae709419f63916a695a033dc891b005fb">&#9670;&#160;</a></span>operator&gt;=</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const APInt &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00207">207</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -756,7 +1025,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00212">212</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00274">274</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -787,7 +1056,31 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00195">195</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00257">257</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5e7841db9457f76a42e84b2e3dbb4f87" name="a5e7841db9457f76a42e84b2e3dbb4f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e7841db9457f76a42e84b2e3dbb4f87">&#9670;&#160;</a></span>std::hash&lt; APInt &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend struct std::hash&lt; APInt &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8hpp_source.html#l00143">143</a> of file <a class="el" href="_a_p_int_8hpp_source.html">APInt.hpp</a>.</p>
 
 </div>
 </div>

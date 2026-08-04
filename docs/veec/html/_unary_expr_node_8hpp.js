@@ -10,5 +10,6 @@ var _unary_expr_node_8hpp =
       [ "ast::UnaryOp::BitwiseNot", "namespaceast.html#a7bead041c305b7f7b4b3efc977cbc5b5aca25eb7c1a601d84204b6fea438408ad", null ],
       [ "ast::UnaryOp::Dereference", "namespaceast.html#a7bead041c305b7f7b4b3efc977cbc5b5a106e561b2e17ce87f3ff681efa40f1dc", null ],
       [ "ast::UnaryOp::AddressOf", "namespaceast.html#a7bead041c305b7f7b4b3efc977cbc5b5a8e38d31e2a51baa7b9c137d55b58c086", null ]
-    ] ]
+    ] ],
+    [ "ast::toString", "namespaceast.html#a629acfa78cf2aeae742278e5c415daea", null ]
 ];

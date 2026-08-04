@@ -8,5 +8,8 @@ var searchData=
   ['passmanager_5',['PassManager',['../classsema_1_1_pass_manager.html#a70702f4d405d402d2ad36766c60a970f',1,'sema::PassManager']]],
   ['path_6',['Path',['../classfs_1_1_path.html#a5a563b449128c4a199cb7ede6605fcde',1,'fs::Path::Path()=default'],['../classfs_1_1_path.html#a1160ea64a6a260ffb6acd1441c1e1ee3',1,'fs::Path::Path(const StringType &amp;path)'],['../classfs_1_1_path.html#a2622f788591780e1db2f04f3946a42e7',1,'fs::Path::Path(StringType &amp;&amp;path)'],['../classfs_1_1_path.html#a71374694b2b2b77ac4a5f1db9e51aec3',1,'fs::Path::Path(StringViewType path)']]],
   ['pointertype_7',['PointerType',['../classtypes_1_1_pointer_type.html#aaa4cc6abe4b039697290c6390f7a5e9f',1,'types::PointerType']]],
-  ['printnode_8',['printNode',['../classast_1_1_ast_printer.html#a13f6ce149fdb1fa9b6993408e7779f00',1,'ast::AstPrinter']]]
+  ['pop_5fback_8',['pop_back',['../classbasic_1_1_small_vector.html#a46c73f8971cd4ce1984ca27e858a35fa',1,'basic::SmallVector']]],
+  ['printnode_9',['printNode',['../classast_1_1_ast_printer.html#a13f6ce149fdb1fa9b6993408e7779f00',1,'ast::AstPrinter::printNode()'],['../classmir_1_1pretty_1_1_mir_printer.html#afb92b2b00b823c8877146a03f43ed071',1,'mir::pretty::MirPrinter::printNode()']]],
+  ['producesvalue_10',['producesValue',['../classmir_1_1_instruction.html#a3fd4ac6539f1a41e78c0d9f78e9c093d',1,'mir::Instruction']]],
+  ['push_5fback_11',['push_back',['../classbasic_1_1_small_vector.html#a2b960010ef90c5d411cb78d6fbe34d0d',1,'basic::SmallVector::push_back(const T &amp;value)'],['../classbasic_1_1_small_vector.html#a3b5540264c31e807c0348d0b94ebc553',1,'basic::SmallVector::push_back(T &amp;&amp;value)']]]
 ];

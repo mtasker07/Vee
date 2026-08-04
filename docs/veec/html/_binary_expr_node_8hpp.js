@@ -15,5 +15,6 @@ var _binary_expr_node_8hpp =
       [ "ast::BinaryOp::GreaterThanOrEqual", "namespaceast.html#a9668d4e9a41e4705d211a4b398fbe083a25c44812e9d75f685d2a0b815dea1ebe", null ],
       [ "ast::BinaryOp::LogicalAnd", "namespaceast.html#a9668d4e9a41e4705d211a4b398fbe083a103aa83df42877d5f9baeafdbf620b55", null ],
       [ "ast::BinaryOp::LogicalOr", "namespaceast.html#a9668d4e9a41e4705d211a4b398fbe083a74ce78827b02c650a20b149765388247", null ]
-    ] ]
+    ] ],
+    [ "ast::toString", "namespaceast.html#a63124e1e22b6c760a2bf03c00268eeb9", null ]
 ];

@@ -8,5 +8,6 @@ var searchData=
   ['astkey_5',['AstKey',['../structast_1_1_ast_node_1_1_ast_key.html',1,'ast::AstNode']]],
   ['astnode_6',['AstNode',['../classast_1_1_ast_node.html',1,'ast']]],
   ['astprinter_7',['AstPrinter',['../classast_1_1_ast_printer.html',1,'ast']]],
-  ['astwalker_8',['AstWalker',['../classast_1_1_ast_walker.html',1,'ast']]]
+  ['asttomirlowerer_8',['AstToMirLowerer',['../classmirgen_1_1_ast_to_mir_lowerer.html',1,'mirgen']]],
+  ['astwalker_9',['AstWalker',['../classast_1_1_ast_walker.html',1,'ast']]]
 ];

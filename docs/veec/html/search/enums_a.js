@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['variabledeclkind_0',['VariableDeclKind',['../namespaceast.html#af1da0d12af0eef48b689848cff6f2fea',1,'ast']]],
-  ['variablesymbolstorage_1',['VariableSymbolStorage',['../namespacesymbols.html#a48aa2d951f3a12330a62aa675cb385b7',1,'symbols']]],
-  ['visibility_2',['Visibility',['../namespacesymbols.html#ad05610b29311320217be1cbd2a6335a4',1,'symbols']]]
+  ['unaryop_0',['UnaryOp',['../namespaceast.html#a7bead041c305b7f7b4b3efc977cbc5b5',1,'ast']]],
+  ['unaryoperatorkind_1',['UnaryOperatorKind',['../namespacesymbols.html#a10754546a67036b9341ce196fed48770',1,'symbols']]],
+  ['userdiagnostickind_2',['UserDiagnosticKind',['../namespacediagnostics.html#a9803d93f4774bd21198c49fd31e9337d',1,'diagnostics']]]
 ];

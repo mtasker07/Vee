@@ -112,14 +112,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7978b0eb59c02b7bb7082d97b61cac3d" id="r_a7978b0eb59c02b7bb7082d97b61cac3d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7978b0eb59c02b7bb7082d97b61cac3d">BuiltinType</a> (<a class="el" href="namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42">BuiltinTypeKind</a> builtinKind)</td></tr>
 <tr class="memdesc:a7978b0eb59c02b7bb7082d97b61cac3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a builtin type with the specified builtin kind.  <br /></td></tr>
 <tr class="memitem:a96bda21f440a7e67c27fdde1310a7d1a" id="r_a96bda21f440a7e67c27fdde1310a7d1a"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a96bda21f440a7e67c27fdde1310a7d1a">~BuiltinType</a> ()=default</td></tr>
+<tr class="memitem:a657d6f573641f7f8fa766e94a2165c4d" id="r_a657d6f573641f7f8fa766e94a2165c4d"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a657d6f573641f7f8fa766e94a2165c4d">toString</a> () const override</td></tr>
+<tr class="memdesc:a657d6f573641f7f8fa766e94a2165c4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts this builtin type to a string representation.  <br /></td></tr>
 <tr class="memitem:a52d6a78a0ad5127c672c405b99596ba0" id="r_a52d6a78a0ad5127c672c405b99596ba0"><td class="memItemLeft"><a class="el" href="namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42">BuiltinTypeKind</a>&#160;</td><td class="memItemRight"><a class="el" href="#a52d6a78a0ad5127c672c405b99596ba0">getBuiltinKind</a> () const</td></tr>
 <tr class="memdesc:a52d6a78a0ad5127c672c405b99596ba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the kind of this builtin type.  <br /></td></tr>
+<tr class="memitem:a3252c56dc7dceebefe5f73b9c734f429" id="r_a3252c56dc7dceebefe5f73b9c734f429"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3252c56dc7dceebefe5f73b9c734f429">isVoid</a> () const</td></tr>
+<tr class="memdesc:a3252c56dc7dceebefe5f73b9c734f429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this builtin type is a void type.  <br /></td></tr>
 <tr class="memitem:ae7098aca967f31f38926e6f0e23b1778" id="r_ae7098aca967f31f38926e6f0e23b1778"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae7098aca967f31f38926e6f0e23b1778">isBoolean</a> () const</td></tr>
 <tr class="memdesc:ae7098aca967f31f38926e6f0e23b1778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this builtin type is a boolean type.  <br /></td></tr>
 <tr class="memitem:a0656d4da87aa382b0059c50068034752" id="r_a0656d4da87aa382b0059c50068034752"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0656d4da87aa382b0059c50068034752">isInteger</a> () const</td></tr>
 <tr class="memdesc:a0656d4da87aa382b0059c50068034752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this builtin type is any integer type (signed or unsigned).  <br /></td></tr>
+<tr class="memitem:a7ec07d79a6eba98192fceb84591484b3" id="r_a7ec07d79a6eba98192fceb84591484b3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7ec07d79a6eba98192fceb84591484b3">isSignedInteger</a> () const</td></tr>
+<tr class="memdesc:a7ec07d79a6eba98192fceb84591484b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this builtin type is any signed integer type.  <br /></td></tr>
+<tr class="memitem:a5f1523435b9bb5380cbc50e28880284f" id="r_a5f1523435b9bb5380cbc50e28880284f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5f1523435b9bb5380cbc50e28880284f">isUnsignedInteger</a> () const</td></tr>
+<tr class="memdesc:a5f1523435b9bb5380cbc50e28880284f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this builtin type is any unsigned integer type.  <br /></td></tr>
 <tr class="memitem:abfc833ec39275d65ffa68753e822ac01" id="r_abfc833ec39275d65ffa68753e822ac01"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abfc833ec39275d65ffa68753e822ac01">isFloatingPoint</a> () const</td></tr>
 <tr class="memdesc:abfc833ec39275d65ffa68753e822ac01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this builtin type is any floating-point type.  <br /></td></tr>
+<tr class="memitem:afd23898ceb6ead61b3a3462c4e699a91" id="r_afd23898ceb6ead61b3a3462c4e699a91"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afd23898ceb6ead61b3a3462c4e699a91">isString</a> () const</td></tr>
+<tr class="memdesc:afd23898ceb6ead61b3a3462c4e699a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this builtin type is a string type.  <br /></td></tr>
+<tr class="memitem:a5706ef44cd98a0c29abb6caf81a38dc3" id="r_a5706ef44cd98a0c29abb6caf81a38dc3"><td class="memItemLeft">u32&#160;</td><td class="memItemRight"><a class="el" href="#a5706ef44cd98a0c29abb6caf81a38dc3">getBitWidth</a> () const</td></tr>
+<tr class="memdesc:a5706ef44cd98a0c29abb6caf81a38dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the bit width of this builtin type.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classtypes_1_1_type"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classtypes_1_1_type')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classtypes_1_1_type.html">types::Type</a></td></tr>
 <tr class="memitem:aec33a743fd9ac25776f4ed172ab80ac2 inherit pub_methods_classtypes_1_1_type" id="r_aec33a743fd9ac25776f4ed172ab80ac2"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="classtypes_1_1_type.html#aec33a743fd9ac25776f4ed172ab80ac2">~Type</a> ()=default</td></tr>
 <tr class="memitem:a77f1556215224007152c3df8366d7446 inherit pub_methods_classtypes_1_1_type" id="r_a77f1556215224007152c3df8366d7446"><td class="memItemLeft"><a class="el" href="namespacetypes.html#ac2184e1c807a4a5f82867e62ac054507">TypeId</a>&#160;</td><td class="memItemRight"><a class="el" href="classtypes_1_1_type.html#a77f1556215224007152c3df8366d7446">getId</a> () const</td></tr>
@@ -153,7 +165,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a builtin Vee type. </p>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00047">47</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00074">74</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7978b0eb59c02b7bb7082d97b61cac3d" name="a7978b0eb59c02b7bb7082d97b61cac3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7978b0eb59c02b7bb7082d97b61cac3d">&#9670;&#160;</a></span>BuiltinType()</h2>
@@ -186,7 +198,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00053">53</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00080">80</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
 
 </div>
 </div>
@@ -216,6 +228,37 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a5706ef44cd98a0c29abb6caf81a38dc3" name="a5706ef44cd98a0c29abb6caf81a38dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5706ef44cd98a0c29abb6caf81a38dc3">&#9670;&#160;</a></span>getBitWidth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u32 types::BuiltinType::getBitWidth </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the bit width of this builtin type. </p>
+<dl class="section return"><dt>Returns</dt><dd>The bit width of this builtin type. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function is only valid for integer and floating-point types. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00168">168</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a52d6a78a0ad5127c672c405b99596ba0" name="a52d6a78a0ad5127c672c405b99596ba0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a52d6a78a0ad5127c672c405b99596ba0">&#9670;&#160;</a></span>getBuiltinKind()</h2>
 
@@ -242,7 +285,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the kind of this builtin type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The kind of this builtin type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00062">62</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00097">97</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
 
 </div>
 </div>
@@ -272,7 +315,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the static kind of this type, which is Builtin. </p>
 <dl class="section return"><dt>Returns</dt><dd>The static kind of this type, which is Builtin. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00098">98</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00196">196</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +345,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Checks if this builtin type is a boolean type. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if this builtin type is a boolean type, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00068">68</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00110">110</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
 
 </div>
 </div>
@@ -332,7 +375,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Checks if this builtin type is any floating-point type. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if this builtin type is any floating-point type, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00089">89</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00151">151</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
 
 </div>
 </div>
@@ -362,7 +405,159 @@ Additional Inherited Members</h2></td></tr>
 <p>Checks if this builtin type is any integer type (signed or unsigned). </p>
 <dl class="section return"><dt>Returns</dt><dd>True if this builtin type is any integer type, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00075">75</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00117">117</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7ec07d79a6eba98192fceb84591484b3" name="a7ec07d79a6eba98192fceb84591484b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ec07d79a6eba98192fceb84591484b3">&#9670;&#160;</a></span>isSignedInteger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool types::BuiltinType::isSignedInteger </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this builtin type is any signed integer type. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if this builtin type is any signed integer type, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00131">131</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afd23898ceb6ead61b3a3462c4e699a91" name="afd23898ceb6ead61b3a3462c4e699a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd23898ceb6ead61b3a3462c4e699a91">&#9670;&#160;</a></span>isString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool types::BuiltinType::isString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this builtin type is a string type. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if this builtin type is a string type, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00159">159</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5f1523435b9bb5380cbc50e28880284f" name="a5f1523435b9bb5380cbc50e28880284f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f1523435b9bb5380cbc50e28880284f">&#9670;&#160;</a></span>isUnsignedInteger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool types::BuiltinType::isUnsignedInteger </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this builtin type is any unsigned integer type. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if this builtin type is any unsigned integer type, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00141">141</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3252c56dc7dceebefe5f73b9c734f429" name="a3252c56dc7dceebefe5f73b9c734f429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3252c56dc7dceebefe5f73b9c734f429">&#9670;&#160;</a></span>isVoid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool types::BuiltinType::isVoid </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this builtin type is a void type. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if this builtin type is a void type, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00103">103</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a657d6f573641f7f8fa766e94a2165c4d" name="a657d6f573641f7f8fa766e94a2165c4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a657d6f573641f7f8fa766e94a2165c4d">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string types::BuiltinType::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts this builtin type to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of this builtin type. </dd></dl>
+
+<p>Implements <a class="el" href="classtypes_1_1_type.html#a77e3acbe44825e60a9fbb0e516d9ad29">types::Type</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00089">89</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
 
 </div>
 </div>

@@ -104,6 +104,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an optional value of type T. A <a class="el" href="classbasic_1_1_maybe.html" title="Represents an optional value of type T. A Maybe can either contain a value or be empty.">Maybe</a> can either contain a value or be empty.  <a href="classbasic_1_1_maybe.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Result" id="r_Result"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbasic_1_1_result.html">Result</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the result of an operation that can either succeed with a value of type T or fail with an error of type E.  <a href="classbasic_1_1_result.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SmallVector" id="r_SmallVector"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbasic_1_1_small_vector.html">SmallVector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a small vector of type <span class="tt">T</span>. A <a class="el" href="classbasic_1_1_small_vector.html" title="Represents a small vector of type T. A SmallVector can store a small number of elements inline and dy...">SmallVector</a> can store a small number of elements inline and dynamically allocate memory for larger sizes, making it more efficient for small sizes.  <a href="classbasic_1_1_small_vector.html#details">More...</a><br /></td></tr>
 <tr class="memitem:StringPool" id="r_StringPool"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbasic_1_1_string_pool.html">StringPool</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="classbasic_1_1_string_pool.html" title="A StringPool is a data structure that stores unique strings and provides a way to retrieve them using...">StringPool</a> is a data structure that stores unique strings and provides a way to retrieve them using a unique identifier (<a class="el" href="#a40f50aebc8742ac2dcf353b385058ae1">StringId</a>).  <a href="classbasic_1_1_string_pool.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Token" id="r_Token"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbasic_1_1_token.html">Token</a></td></tr>
@@ -230,6 +232,12 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a377dc86e8c9e9cccbbb57767008910d9" id="r_a377dc86e8c9e9cccbbb57767008910d9"><td class="memItemLeft">std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a377dc86e8c9e9cccbbb57767008910d9">tokenTypeToString</a> (<a class="el" href="#a7daaf3356c922e0f5b4ba91560c367fa">TokenType</a> type)</td></tr>
 <tr class="memdesc:a377dc86e8c9e9cccbbb57767008910d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a token type to a human-readable string.  <br /></td></tr>
+<tr class="memitem:a7a28dc8c9a22cc7e74df6a0e1f61965a" id="r_a7a28dc8c9a22cc7e74df6a0e1f61965a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7a28dc8c9a22cc7e74df6a0e1f61965a">operator==</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
+<tr class="memitem:a31a2027a7542b4cec26d2b2a9391b797" id="r_a31a2027a7542b4cec26d2b2a9391b797"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a31a2027a7542b4cec26d2b2a9391b797">operator!=</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
+<tr class="memitem:ab22c84a379a1c13398b20131ba1a8fd1" id="r_ab22c84a379a1c13398b20131ba1a8fd1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab22c84a379a1c13398b20131ba1a8fd1">operator&lt;</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
+<tr class="memitem:a6eebdded742eb7be3187a88a0d046b2c" id="r_a6eebdded742eb7be3187a88a0d046b2c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6eebdded742eb7be3187a88a0d046b2c">operator&lt;=</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
+<tr class="memitem:a125c8a97231e5437d6d1763d4dd0926e" id="r_a125c8a97231e5437d6d1763d4dd0926e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a125c8a97231e5437d6d1763d4dd0926e">operator&gt;</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
+<tr class="memitem:a0ddf1e86e5ec54cbc0b4f58b254cf726" id="r_a0ddf1e86e5ec54cbc0b4f58b254cf726"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0ddf1e86e5ec54cbc0b4f58b254cf726">operator&gt;=</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
 <tr class="memitem:ab4d081dbbe695015147799bf5c446721" id="r_ab4d081dbbe695015147799bf5c446721"><td class="memItemLeft"><a class="el" href="classbasic_1_1_a_p_int.html">APInt</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab4d081dbbe695015147799bf5c446721">operator+</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
 <tr class="memitem:a835164d3925823c098aa88ff325df2f2" id="r_a835164d3925823c098aa88ff325df2f2"><td class="memItemLeft"><a class="el" href="classbasic_1_1_a_p_int.html">APInt</a>&#160;</td><td class="memItemRight"><a class="el" href="#a835164d3925823c098aa88ff325df2f2">operator-</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
 <tr class="memitem:a361ba0373e5ae5d06da2ac29373db19b" id="r_a361ba0373e5ae5d06da2ac29373db19b"><td class="memItemLeft"><a class="el" href="classbasic_1_1_a_p_int.html">APInt</a>&#160;</td><td class="memItemRight"><a class="el" href="#a361ba0373e5ae5d06da2ac29373db19b">operator*</a> (const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;lhs, const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;rhs)</td></tr>
@@ -383,8 +391,31 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a31a2027a7542b4cec26d2b2a9391b797" name="a31a2027a7542b4cec26d2b2a9391b797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31a2027a7542b4cec26d2b2a9391b797">&#9670;&#160;</a></span>operator!=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool basic::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00169">169</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a956c5c8a68e90e1278e6b5f999c5e03f" name="a956c5c8a68e90e1278e6b5f999c5e03f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a956c5c8a68e90e1278e6b5f999c5e03f">&#9670;&#160;</a></span>operator!=()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a956c5c8a68e90e1278e6b5f999c5e03f">&#9670;&#160;</a></span>operator!=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -425,7 +456,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00178">178</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00240">240</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -471,7 +502,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00155">155</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00217">217</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -517,7 +548,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00149">149</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00211">211</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -563,7 +594,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00152">152</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00214">214</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -609,7 +640,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00158">158</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00220">220</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -636,8 +667,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ab22c84a379a1c13398b20131ba1a8fd1" name="ab22c84a379a1c13398b20131ba1a8fd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab22c84a379a1c13398b20131ba1a8fd1">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool basic::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00172">172</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a349954d5a91c1cc7358decc250526b11" name="a349954d5a91c1cc7358decc250526b11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a349954d5a91c1cc7358decc250526b11">&#9670;&#160;</a></span>operator&lt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a349954d5a91c1cc7358decc250526b11">&#9670;&#160;</a></span>operator&lt;() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -659,8 +713,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a6eebdded742eb7be3187a88a0d046b2c" name="a6eebdded742eb7be3187a88a0d046b2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eebdded742eb7be3187a88a0d046b2c">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool basic::operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00201">201</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
 <a id="abb4c825f4bcd581accb5e98d5d7fe766" name="abb4c825f4bcd581accb5e98d5d7fe766"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb4c825f4bcd581accb5e98d5d7fe766">&#9670;&#160;</a></span>operator&lt;=()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb4c825f4bcd581accb5e98d5d7fe766">&#9670;&#160;</a></span>operator&lt;=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -682,8 +759,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7a28dc8c9a22cc7e74df6a0e1f61965a" name="a7a28dc8c9a22cc7e74df6a0e1f61965a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a28dc8c9a22cc7e74df6a0e1f61965a">&#9670;&#160;</a></span>operator==() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool basic::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00149">149</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
 <a id="ad7108e30876d8947c2a3b3b31d6894a6" name="ad7108e30876d8947c2a3b3b31d6894a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7108e30876d8947c2a3b3b31d6894a6">&#9670;&#160;</a></span>operator==()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7108e30876d8947c2a3b3b31d6894a6">&#9670;&#160;</a></span>operator==() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -705,8 +805,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a125c8a97231e5437d6d1763d4dd0926e" name="a125c8a97231e5437d6d1763d4dd0926e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a125c8a97231e5437d6d1763d4dd0926e">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool basic::operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00204">204</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a9e4cfe0fdeab0df202e3b25d2aeae169" name="a9e4cfe0fdeab0df202e3b25d2aeae169"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e4cfe0fdeab0df202e3b25d2aeae169">&#9670;&#160;</a></span>operator&gt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4cfe0fdeab0df202e3b25d2aeae169">&#9670;&#160;</a></span>operator&gt;() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -728,8 +851,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a0ddf1e86e5ec54cbc0b4f58b254cf726" name="a0ddf1e86e5ec54cbc0b4f58b254cf726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1e86e5ec54cbc0b4f58b254cf726">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool basic::operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classbasic_1_1_a_p_int.html">APInt</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00207">207</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a4c421ef1bac44a7b92b246aab75267b1" name="a4c421ef1bac44a7b92b246aab75267b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c421ef1bac44a7b92b246aab75267b1">&#9670;&#160;</a></span>operator&gt;=()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c421ef1bac44a7b92b246aab75267b1">&#9670;&#160;</a></span>operator&gt;=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -770,7 +916,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00212">212</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00274">274</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>
@@ -816,7 +962,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00195">195</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_p_int_8cpp_source.html#l00257">257</a> of file <a class="el" href="_a_p_int_8cpp_source.html">APInt.cpp</a>.</p>
 
 </div>
 </div>

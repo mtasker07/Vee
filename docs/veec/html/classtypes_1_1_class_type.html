@@ -112,6 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afd0dcdd4db0c286d22decf2b0d24d215" id="r_afd0dcdd4db0c286d22decf2b0d24d215"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afd0dcdd4db0c286d22decf2b0d24d215">ClassType</a> (<a class="el" href="classsymbols_1_1_class_symbol.html">symbols::ClassSymbol</a> *classSymbol)</td></tr>
 <tr class="memdesc:afd0dcdd4db0c286d22decf2b0d24d215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a class type with the specified name ID.  <br /></td></tr>
 <tr class="memitem:a79d7b679300417530cced8c276283a34" id="r_a79d7b679300417530cced8c276283a34"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a79d7b679300417530cced8c276283a34">~ClassType</a> ()=default</td></tr>
+<tr class="memitem:ae05abfa9cee5a26d0bad0f9e61a03564" id="r_ae05abfa9cee5a26d0bad0f9e61a03564"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#ae05abfa9cee5a26d0bad0f9e61a03564">toString</a> () const override</td></tr>
+<tr class="memdesc:ae05abfa9cee5a26d0bad0f9e61a03564"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts this class type to a string representation.  <br /></td></tr>
 <tr class="memitem:a933c97cf9a96402bdcd61ccf5d885d45" id="r_a933c97cf9a96402bdcd61ccf5d885d45"><td class="memItemLeft"><a class="el" href="classsymbols_1_1_class_symbol.html">symbols::ClassSymbol</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a933c97cf9a96402bdcd61ccf5d885d45">getClassSymbol</a> () const</td></tr>
 <tr class="memdesc:a933c97cf9a96402bdcd61ccf5d885d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name ID of this class type.  <br /></td></tr>
 <tr class="memitem:aae00afad71a90c2a59cdd30d34f4808a" id="r_aae00afad71a90c2a59cdd30d34f4808a"><td class="memItemLeft">const std::unordered_map&lt; <a class="el" href="namespacebasic.html#a40f50aebc8742ac2dcf353b385058ae1">basic::StringId</a>, <a class="el" href="classsymbols_1_1_field_symbol.html">symbols::FieldSymbol</a> * &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aae00afad71a90c2a59cdd30d34f4808a">getFields</a> () const</td></tr>
@@ -159,7 +161,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a class type in the Vee language. </p>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00030">30</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00033">33</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afd0dcdd4db0c286d22decf2b0d24d215" name="afd0dcdd4db0c286d22decf2b0d24d215"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd0dcdd4db0c286d22decf2b0d24d215">&#9670;&#160;</a></span>ClassType()</h2>
@@ -192,7 +194,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00036">36</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00039">39</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -253,7 +255,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00093">93</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00104">104</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -288,7 +290,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00102">102</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00113">113</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -318,7 +320,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the name ID of this class type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The name ID of this class type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00045">45</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00056">56</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -354,7 +356,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the field symbol with the specified name ID, or nullptr if no such field exists in this class type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00068">68</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00079">79</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -384,7 +386,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the fields of this class type. </p>
 <dl class="section return"><dt>Returns</dt><dd>A map of (name -&gt; field)s in this class type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00051">51</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00062">62</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +416,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the methods of this class type. </p>
 <dl class="section return"><dt>Returns</dt><dd>A map of (name -&gt; methods)s in this class type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00058">58</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00069">69</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -450,7 +452,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the vector of method symbols with the specified name ID, or nullptr if no such methods exist in this class type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00081">81</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00092">92</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>
@@ -480,7 +482,39 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the static kind of this type, which is Class. </p>
 <dl class="section return"><dt>Returns</dt><dd>The static kind of this type, which is Class. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00111">111</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00122">122</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae05abfa9cee5a26d0bad0f9e61a03564" name="ae05abfa9cee5a26d0bad0f9e61a03564"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae05abfa9cee5a26d0bad0f9e61a03564">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string types::ClassType::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts this class type to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of this class type. </dd></dl>
+
+<p>Implements <a class="el" href="classtypes_1_1_type.html#a77e3acbe44825e60a9fbb0e516d9ad29">types::Type</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_class_type_8hpp_source.html#l00048">48</a> of file <a class="el" href="_class_type_8hpp_source.html">ClassType.hpp</a>.</p>
 
 </div>
 </div>

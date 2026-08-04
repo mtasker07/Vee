@@ -16,5 +16,6 @@ var classast__passes_1_1_type_checker_pass =
     [ "visitNameExpr", "classast__passes_1_1_type_checker_pass.html#a1fc2c027ee21284ccc20b35f74bec4b3", null ],
     [ "visitParenthesizedExpr", "classast__passes_1_1_type_checker_pass.html#aca5c2568055e552135d128841cabad4d", null ],
     [ "visitStringLiteralExpr", "classast__passes_1_1_type_checker_pass.html#a8a3b212a8440974a195567493bba8cb0", null ],
-    [ "visitUnaryExpr", "classast__passes_1_1_type_checker_pass.html#a70f09332c7c555cd26257649f48ce74b", null ]
+    [ "visitUnaryExpr", "classast__passes_1_1_type_checker_pass.html#a70f09332c7c555cd26257649f48ce74b", null ],
+    [ "visitVariableDecl", "classast__passes_1_1_type_checker_pass.html#a2e29ecfa2f261a63dbc1a49f710d62ef", null ]
 ];

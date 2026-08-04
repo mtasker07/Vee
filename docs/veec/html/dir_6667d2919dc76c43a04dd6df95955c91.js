@@ -6,6 +6,7 @@ var dir_6667d2919dc76c43a04dd6df95955c91 =
     [ "BigInt.hpp", "_big_int_8hpp.html", "_big_int_8hpp" ],
     [ "Maybe.hpp", "_maybe_8hpp.html", "_maybe_8hpp" ],
     [ "Result.hpp", "_result_8hpp.html", "_result_8hpp" ],
+    [ "SmallVector.hpp", "_small_vector_8hpp.html", "_small_vector_8hpp" ],
     [ "StringId.hpp", "_string_id_8hpp.html", "_string_id_8hpp" ],
     [ "StringPool.hpp", "_string_pool_8hpp.html", "_string_pool_8hpp" ],
     [ "Token.hpp", "_token_8hpp.html", "_token_8hpp" ]

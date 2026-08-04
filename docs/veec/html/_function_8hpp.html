@@ -96,19 +96,24 @@ $(function(){initNavTree('_function_8hpp.html','',''); });
 <p>This file contains the definition of the Function class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>#include &quot;vee/core/CoreDefines.hpp&quot;</code><br />
 <code>#include &quot;vee/core/CoreTypedefs.hpp&quot;</code><br />
+<code>#include &quot;vee/core/InternalErrorHandling.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="_core_defines_8hpp_source.html">veec/CoreDefines.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_arena_8hpp_source.html">veec/basic/Arena.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_mir_context_8hpp_source.html">veec/mir/MirContext.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_small_vector_8hpp_source.html">veec/basic/SmallVector.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_mir_fwd_8hpp_source.html">veec/mir/MirFwd.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_mir_node_8hpp_source.html">veec/mir/MirNode.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_value_8hpp_source.html">veec/mir/Value.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_symbol_fwd_8hpp_source.html">veec/symbols/SymbolFwd.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_type_fwd_8hpp_source.html">veec/types/TypeFwd.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_function_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:mir_3A_3AFunction" id="r_mir_3A_3AFunction"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_function.html">mir::Function</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a function in the middle intermediate representation (MIR) of the compiler.  <a href="classmir_1_1_function.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a function in the MIR. A function is a collection of basic blocks that can be called and executed. Functions have parameters and a return type. Functions own all the local variables created within them. Functions can also be called from other functions, hence, <a class="el" href="classmir_1_1_function.html" title="Represents a function in the MIR. A function is a collection of basic blocks that can be called and e...">Function</a> is a subclass of <a class="el" href="classmir_1_1_value.html" title="Represents a value in the MIR. A value can be anything that either holds a value or produces a value....">Value</a>.  <a href="classmir_1_1_function.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>

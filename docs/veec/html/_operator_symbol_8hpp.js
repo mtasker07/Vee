@@ -13,6 +13,11 @@ var _operator_symbol_8hpp =
       [ "symbols::BinaryOperatorKind::LessThanOrEqual", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a4ab671acbbaacb0db7d8477cfe4f4e0b", null ],
       [ "symbols::BinaryOperatorKind::GreaterThan", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156af6d044fe1f01fb0c956b80099e2a3072", null ],
       [ "symbols::BinaryOperatorKind::GreaterThanOrEqual", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a25c44812e9d75f685d2a0b815dea1ebe", null ],
+      [ "symbols::BinaryOperatorKind::BitwiseAnd", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a50c15b40bc46de3e3528e17fe119209e", null ],
+      [ "symbols::BinaryOperatorKind::BitwiseOr", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a8041b508037c30ae59fe353b74918a1b", null ],
+      [ "symbols::BinaryOperatorKind::BitwiseXor", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156acc79304f89691dd71d71d9aab6fe3565", null ],
+      [ "symbols::BinaryOperatorKind::ShiftLeft", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156ad9382145a142cc7df5f733332c9cb812", null ],
+      [ "symbols::BinaryOperatorKind::ShiftRight", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156af17de5e0ea7a357b755aa9deeaf38f86", null ],
       [ "symbols::BinaryOperatorKind::LogicalAnd", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a103aa83df42877d5f9baeafdbf620b55", null ],
       [ "symbols::BinaryOperatorKind::LogicalOr", "namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a74ce78827b02c650a20b149765388247", null ]
     ] ],

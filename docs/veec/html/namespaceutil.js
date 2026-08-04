@@ -12,5 +12,6 @@ var namespaceutil =
       [ "isUppercase", "namespaceutil_1_1_char_utils.html#ac8c387bcf13f8831fbc406f3849625d3", null ],
       [ "isWhitespace", "namespaceutil_1_1_char_utils.html#ad5b3e004a00bb64fa439a1313136c7ab", null ],
       [ "valueToDigit", "namespaceutil_1_1_char_utils.html#aa0098f240e5c7900bb46d552144a4b68", null ]
-    ] ]
+    ] ],
+    [ "HashUtils", "namespaceutil_1_1_hash_utils.html", "namespaceutil_1_1_hash_utils" ]
 ];

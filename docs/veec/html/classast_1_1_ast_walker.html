@@ -109,7 +109,7 @@ Inheritance diagram for ast::AstWalker:</div>
 <area href="classast__passes_1_1_top_level_use_resolution_pass.html" title="A semantic analysis pass that resolves all top-level use statements in the program." alt="ast_passes::TopLevelUseResolutionPass" shape="rect" coords="496,112,734,136"/>
 <area href="classast__passes_1_1_type_checker_pass.html" title="A semantic analysis pass that type checks all expressions and statements in the program." alt="ast_passes::TypeCheckerPass" shape="rect" coords="744,112,982,136"/>
 <area href="classast__passes_1_1_type_construction_pass.html" title="A semantic analysis pass that constructs all types in the program." alt="ast_passes::TypeConstructionPass" shape="rect" coords="992,112,1230,136"/>
-<area href="classast__passes_1_1_type_inference_pass.html" title="A semantic analysis pass that infers all types in the program." alt="ast_passes::TypeInferencePass" shape="rect" coords="1240,112,1478,136"/>
+<area href="classast__passes_1_1_type_resolution_pass.html" title="A semantic analysis pass that resolves all explicit types in the program." alt="ast_passes::TypeResolutionPass" shape="rect" coords="1240,112,1478,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -361,7 +361,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_type_inference_pass.html#ab9dd7541dda80d70c5fc392b5298eaea">ast_passes::TypeInferencePass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_type_resolution_pass.html#ad8c20438e1eabd06bd4a68820289f9a3">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00393">393</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -419,7 +419,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#a468881d91a8e7adec12413d0b65e12b7">ast_passes::SymbolCollectionPass</a>, and <a class="el" href="classast__passes_1_1_type_construction_pass.html#ab3ac7ace1c6e53cc705093d4fff0dc52">ast_passes::TypeConstructionPass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#a468881d91a8e7adec12413d0b65e12b7">ast_passes::SymbolCollectionPass</a>, <a class="el" href="classast__passes_1_1_type_construction_pass.html#ab3ac7ace1c6e53cc705093d4fff0dc52">ast_passes::TypeConstructionPass</a>, and <a class="el" href="classast__passes_1_1_type_resolution_pass.html#a7635582075c70aaa1e51aed14e4bda9d">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00306">306</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -589,7 +589,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#abcee7db02f601de69a02d9931eae1bb1">ast_passes::SymbolCollectionPass</a>, and <a class="el" href="classast__passes_1_1_type_construction_pass.html#a362372bf7f840872838f5e81b31d8cdf">ast_passes::TypeConstructionPass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#abcee7db02f601de69a02d9931eae1bb1">ast_passes::SymbolCollectionPass</a>, <a class="el" href="classast__passes_1_1_type_construction_pass.html#a362372bf7f840872838f5e81b31d8cdf">ast_passes::TypeConstructionPass</a>, and <a class="el" href="classast__passes_1_1_type_resolution_pass.html#a4bd4df764eed735d584cc165be98b4b0">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00324">324</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -674,7 +674,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#ada2bb620a2d1e043246a774f0ba24db9">ast_passes::SymbolCollectionPass</a>, and <a class="el" href="classast__passes_1_1_symbol_resolution_pass.html#a095aae5555af48b0cb0894ad7fe95685">ast_passes::SymbolResolutionPass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#ada2bb620a2d1e043246a774f0ba24db9">ast_passes::SymbolCollectionPass</a>, <a class="el" href="classast__passes_1_1_symbol_resolution_pass.html#a095aae5555af48b0cb0894ad7fe95685">ast_passes::SymbolResolutionPass</a>, and <a class="el" href="classast__passes_1_1_type_resolution_pass.html#a3c29f2babd8cf24f7be0e61f1dfaf8fb">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00289">289</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -925,7 +925,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#ad57d272e808ea9d053c0ea4f99f3ad3e">ast_passes::SymbolCollectionPass</a>, and <a class="el" href="classast__passes_1_1_type_construction_pass.html#a361df7921648e5cc8f0d1200924cad5b">ast_passes::TypeConstructionPass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#ad57d272e808ea9d053c0ea4f99f3ad3e">ast_passes::SymbolCollectionPass</a>, <a class="el" href="classast__passes_1_1_type_construction_pass.html#a361df7921648e5cc8f0d1200924cad5b">ast_passes::TypeConstructionPass</a>, and <a class="el" href="classast__passes_1_1_type_resolution_pass.html#ae8820c9e042ebab172cf9a81800f4854">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00312">312</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -983,7 +983,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_type_inference_pass.html#ab51baebd42626cd5457ea0782d253136">ast_passes::TypeInferencePass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_type_resolution_pass.html#a372b665a86b4d7181f13ee1adcc665bd">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00396">396</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -1041,7 +1041,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#a53c482d15881d3bacf468fab3394652c">ast_passes::SymbolCollectionPass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#a53c482d15881d3bacf468fab3394652c">ast_passes::SymbolCollectionPass</a>, and <a class="el" href="classast__passes_1_1_type_resolution_pass.html#a73babf8613b88bb348d1d22b9d8a5a33">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00301">301</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -1209,7 +1209,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_type_inference_pass.html#a34a27125c21e7c06fa870e747e451626">ast_passes::TypeInferencePass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_type_resolution_pass.html#a350e15bfeb38e3b724c550b7f741302d">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00390">390</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 
@@ -1296,7 +1296,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#a39c59177fa669db124d985ae1d8e499a">ast_passes::SymbolCollectionPass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#a39c59177fa669db124d985ae1d8e499a">ast_passes::SymbolCollectionPass</a>, <a class="el" href="classast__passes_1_1_type_checker_pass.html#a2e29ecfa2f261a63dbc1a49f710d62ef">ast_passes::TypeCheckerPass</a>, and <a class="el" href="classast__passes_1_1_type_resolution_pass.html#ab2f40b20cfb4c26eaf6ac443d39b741d">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_ast_walker_8cpp_source.html#l00329">329</a> of file <a class="el" href="_ast_walker_8cpp_source.html">AstWalker.cpp</a>.</p>
 

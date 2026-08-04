@@ -1,14 +1,21 @@
 var searchData=
 [
-  ['semicolon_0',['SemiColon',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa787bbf4b07cc43f0ecfca56aa513707c',1,'basic']]],
-  ['slash_1',['Slash',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa358cfe58715d680d9ab09f82e4010cbc',1,'basic']]],
-  ['slashequal_2',['SlashEqual',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faac370916b13f9f2516436e7d77ea32c18',1,'basic']]],
-  ['star_3',['Star',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa26f93e6e68e28a698377e941cb59f29a',1,'basic']]],
-  ['starequal_4',['StarEqual',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faad4b24d87e4f9407fef0430e66965eb05',1,'basic']]],
-  ['starstar_5',['StarStar',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa33262a3331334ff995f1b363a0e5c48a',1,'basic']]],
-  ['string_6',['String',['../namespaceast.html#aec809173dbc59d6971bc2a33abd28321a27118326006d3829667a400ad23d5d98',1,'ast::String'],['../namespaceast.html#a179822b7e8e5816c488d9ef55cd404e0a27118326006d3829667a400ad23d5d98',1,'ast::String'],['../namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42a27118326006d3829667a400ad23d5d98',1,'types::String']]],
-  ['stringliteral_7',['StringLiteral',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa7029cff17180550e1214f19dba74a32a',1,'basic']]],
-  ['stringliteralexpr_8',['StringLiteralExpr',['../namespaceast.html#a4adf7a60b05f370f433eb99c38db3af1a1966feb1642c2bf3be9c43d8e6f5e446',1,'ast']]],
-  ['subtract_9',['Subtract',['../namespaceast.html#a9668d4e9a41e4705d211a4b398fbe083a1d9baf077ee87921f57a8fe42d510b65',1,'ast::Subtract'],['../namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a1d9baf077ee87921f57a8fe42d510b65',1,'symbols::Subtract']]],
-  ['subtractassign_10',['SubtractAssign',['../namespaceast.html#ae57ac6f84cfbd710aed309f7b5e721dba8fec37812f22926c99991b33b0c6e7c7',1,'ast']]]
+  ['sdiv_0',['SDiv',['../namespacemir.html#a315e3210f07ca80022751256979ae3c9a68186db1da877cd7d0d1cad88ac3ab85',1,'mir']]],
+  ['semicolon_1',['SemiColon',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa787bbf4b07cc43f0ecfca56aa513707c',1,'basic']]],
+  ['shiftleft_2',['ShiftLeft',['../namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156ad9382145a142cc7df5f733332c9cb812',1,'symbols']]],
+  ['shiftright_3',['ShiftRight',['../namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156af17de5e0ea7a357b755aa9deeaf38f86',1,'symbols']]],
+  ['signextendint_4',['SignExtendInt',['../namespacemir.html#a315e3210f07ca80022751256979ae3c9a0dda905bfb9a47bf068076cb586cf552',1,'mir']]],
+  ['slash_5',['Slash',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa358cfe58715d680d9ab09f82e4010cbc',1,'basic']]],
+  ['slashequal_6',['SlashEqual',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faac370916b13f9f2516436e7d77ea32c18',1,'basic']]],
+  ['smod_7',['SMod',['../namespacemir.html#a315e3210f07ca80022751256979ae3c9a69a7900268b9207621b50150307c9773',1,'mir']]],
+  ['star_8',['Star',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa26f93e6e68e28a698377e941cb59f29a',1,'basic']]],
+  ['starequal_9',['StarEqual',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faad4b24d87e4f9407fef0430e66965eb05',1,'basic']]],
+  ['starstar_10',['StarStar',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa33262a3331334ff995f1b363a0e5c48a',1,'basic']]],
+  ['store_11',['Store',['../namespacemir.html#a315e3210f07ca80022751256979ae3c9afdb0c388de01d545017cdf9ccf00eb72',1,'mir']]],
+  ['string_12',['String',['../namespaceast.html#aec809173dbc59d6971bc2a33abd28321a27118326006d3829667a400ad23d5d98',1,'ast::String'],['../namespaceast.html#a179822b7e8e5816c488d9ef55cd404e0a27118326006d3829667a400ad23d5d98',1,'ast::String'],['../namespacemir.html#a0197a64d4a7c8ae9eefb1ea9dfd44e2ea27118326006d3829667a400ad23d5d98',1,'mir::String'],['../namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42a27118326006d3829667a400ad23d5d98',1,'types::String']]],
+  ['stringliteral_13',['StringLiteral',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367faa7029cff17180550e1214f19dba74a32a',1,'basic']]],
+  ['stringliteralexpr_14',['StringLiteralExpr',['../namespaceast.html#a4adf7a60b05f370f433eb99c38db3af1a1966feb1642c2bf3be9c43d8e6f5e446',1,'ast']]],
+  ['sub_15',['Sub',['../namespacemir.html#a315e3210f07ca80022751256979ae3c9ae80155eceb940c89e2de63ad05868db2',1,'mir']]],
+  ['subtract_16',['Subtract',['../namespaceast.html#a9668d4e9a41e4705d211a4b398fbe083a1d9baf077ee87921f57a8fe42d510b65',1,'ast::Subtract'],['../namespacesymbols.html#a18087373dd68e754dcd38bdbb5bf6156a1d9baf077ee87921f57a8fe42d510b65',1,'symbols::Subtract']]],
+  ['subtractassign_17',['SubtractAssign',['../namespaceast.html#ae57ac6f84cfbd710aed309f7b5e721dba8fec37812f22926c99991b33b0c6e7c7',1,'ast']]]
 ];

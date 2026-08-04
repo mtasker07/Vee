@@ -89,14 +89,14 @@ $(function(){initNavTree('classtypes_1_1_type.html','','classtypes_1_1_type-memb
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">types::Type Class Reference</div></div>
+  <div class="headertitle"><div class="title">types::Type Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>The base class for all types in the semantic analysis phase. Types represent various entities in the program, such as functions.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_type_8hpp_source.html">Type.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for types::Type:</div>
 <div class="dyncontent">
@@ -119,6 +119,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a77f1556215224007152c3df8366d7446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the unique identifier of this type.  <br /></td></tr>
 <tr class="memitem:abfdf16a16605af354630b2eb2c664f77" id="r_abfdf16a16605af354630b2eb2c664f77"><td class="memItemLeft"><a class="el" href="namespacetypes.html#a9081052145f13501ce9cea6da2ae263f">TypeKind</a>&#160;</td><td class="memItemRight"><a class="el" href="#abfdf16a16605af354630b2eb2c664f77">getKind</a> () const</td></tr>
 <tr class="memdesc:abfdf16a16605af354630b2eb2c664f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the kind of this type.  <br /></td></tr>
+<tr class="memitem:a77e3acbe44825e60a9fbb0e516d9ad29" id="r_a77e3acbe44825e60a9fbb0e516d9ad29"><td class="memItemLeft">virtual std::string&#160;</td><td class="memItemRight"><a class="el" href="#a77e3acbe44825e60a9fbb0e516d9ad29">toString</a> () const =0</td></tr>
+<tr class="memdesc:a77e3acbe44825e60a9fbb0e516d9ad29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts this type to a string representation.  <br /></td></tr>
 <tr class="memitem:a716a37ab469289114a81ed04d3b76feb" id="r_a716a37ab469289114a81ed04d3b76feb"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a716a37ab469289114a81ed04d3b76feb template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a716a37ab469289114a81ed04d3b76feb">is</a> () const</td></tr>
 <tr class="memdesc:a716a37ab469289114a81ed04d3b76feb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the static kind of this type.  <br /></td></tr>
@@ -146,7 +148,7 @@ Friends</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The base class for all types in the semantic analysis phase. Types represent various entities in the program, such as functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00028">28</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00034">34</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aec33a743fd9ac25776f4ed172ab80ac2" name="aec33a743fd9ac25776f4ed172ab80ac2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec33a743fd9ac25776f4ed172ab80ac2">&#9670;&#160;</a></span>~Type()</h2>
@@ -204,7 +206,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00095">95</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00107">107</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 
 </div>
 </div>
@@ -243,7 +245,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to this type cast to the specified type, or nullptr if this type is not of the specified type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00082">82</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00094">94</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +283,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to this type cast to the specified type, or nullptr if this type is not of the specified type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00068">68</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00080">80</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +313,7 @@ template&lt;typename T&gt; </div>
 <p>Gets the unique identifier of this type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The unique identifier of this type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00045">45</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00051">51</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 
 </div>
 </div>
@@ -341,7 +343,7 @@ template&lt;typename T&gt; </div>
 <p>Gets the kind of this type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The kind of this type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00050">50</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00056">56</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +375,7 @@ template&lt;typename T&gt; </div>
 <p>Gets the static kind of this type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The static kind of this type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00057">57</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00069">69</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +411,37 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the type ID is valid, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00037">37</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00043">43</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a77e3acbe44825e60a9fbb0e516d9ad29" name="a77e3acbe44825e60a9fbb0e516d9ad29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77e3acbe44825e60a9fbb0e516d9ad29">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string types::Type::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts this type to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of this type. </dd></dl>
+
+<p>Implemented in <a class="el" href="classtypes_1_1_array_type.html#abe2ec3eacd9101476cbcfa5e5f12d244">types::ArrayType</a>, <a class="el" href="classtypes_1_1_builtin_type.html#a657d6f573641f7f8fa766e94a2165c4d">types::BuiltinType</a>, <a class="el" href="classtypes_1_1_class_type.html#ae05abfa9cee5a26d0bad0f9e61a03564">types::ClassType</a>, <a class="el" href="classtypes_1_1_error_type.html#a760afad68e90f4c59e6e7d31028cd0d8">types::ErrorType</a>, <a class="el" href="classtypes_1_1_function_type.html#ad4043abca92a13452c33e86ed4894bde">types::FunctionType</a>, and <a class="el" href="classtypes_1_1_pointer_type.html#a81f4b89f9c5016e6b29b85302fe1d7a6">types::PointerType</a>.</p>
 
 </div>
 </div>
@@ -434,12 +466,12 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_2_type_8hpp_source.html#l00099">99</a> of file <a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_8hpp_source.html#l00111">111</a> of file <a class="el" href="_type_8hpp_source.html">Type.hpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>veec/include/veec/types/<a class="el" href="types_2_type_8hpp_source.html">Type.hpp</a></li>
+<li>veec/include/veec/types/<a class="el" href="_type_8hpp_source.html">Type.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

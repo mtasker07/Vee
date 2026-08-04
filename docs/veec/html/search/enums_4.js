@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['literaltype_0',['LiteralType',['../namespaceast.html#aec809173dbc59d6971bc2a33abd28321',1,'ast']]]
+  ['instructionopcode_0',['InstructionOpcode',['../namespacemir.html#a315e3210f07ca80022751256979ae3c9',1,'mir']]]
 ];

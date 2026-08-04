@@ -11,8 +11,10 @@ var searchData=
   ['fromhex_8',['fromHex',['../classbasic_1_1_a_p_int.html#ad7c40f7c9ad75b793a5a66d335976a21',1,'basic::APInt::fromHex()'],['../classbasic_1_1_big_int.html#aa087c344a5b3d440f2e2ecc0043e95cc',1,'basic::BigInt::fromHex()']]],
   ['fromstring_9',['fromString',['../classbasic_1_1_a_p_int.html#a72e102923ccc6c3b1a1b935051928e02',1,'basic::APInt::fromString()'],['../classbasic_1_1_big_int.html#a32effea146eb99e0c4badba313a99e8e',1,'basic::BigInt::fromString()']]],
   ['fromu64_10',['fromU64',['../classbasic_1_1_a_p_int.html#a4aa8035a5bd21d7924aeecceb10bd15e',1,'basic::APInt::fromU64()'],['../classbasic_1_1_big_int.html#a7b0521248617dd7a5c76e1ae6dd7549b',1,'basic::BigInt::fromU64()']]],
-  ['functiondeclnode_11',['FunctionDeclNode',['../classast_1_1_function_decl_node.html#a745f4ec564e874f6b729d7663e81b4d5',1,'ast::FunctionDeclNode']]],
-  ['functionsetsymbol_12',['FunctionSetSymbol',['../classsymbols_1_1_function_set_symbol.html#ad1b7e8484b6581879d3db350d3de1c0b',1,'symbols::FunctionSetSymbol::FunctionSetSymbol(basic::StringId nameId)'],['../classsymbols_1_1_function_set_symbol.html#a183cd18bc75235362bf86191565bac3d',1,'symbols::FunctionSetSymbol::FunctionSetSymbol(basic::StringId nameId, const std::vector&lt; FunctionSymbol * &gt; &amp;overloads)']]],
-  ['functionsymbol_13',['FunctionSymbol',['../classsymbols_1_1_function_symbol.html#a84496b21ed3af45e45f07f019073fa3e',1,'symbols::FunctionSymbol']]],
-  ['functiontype_14',['FunctionType',['../classtypes_1_1_function_type.html#a3b4912c0d8da88d017d59bc16bc5c753',1,'types::FunctionType']]]
+  ['front_11',['front',['../classbasic_1_1_small_vector.html#a4ba7c1b964a8bd4bb39df33169faf3be',1,'basic::SmallVector::front() const'],['../classbasic_1_1_small_vector.html#ad594732501c39befa7a47cae32656434',1,'basic::SmallVector::front()']]],
+  ['function_12',['Function',['../classmir_1_1_function.html#a09bce3feb5db25d0bc7dddb01642de8a',1,'mir::Function']]],
+  ['functiondeclnode_13',['FunctionDeclNode',['../classast_1_1_function_decl_node.html#a745f4ec564e874f6b729d7663e81b4d5',1,'ast::FunctionDeclNode']]],
+  ['functionsetsymbol_14',['FunctionSetSymbol',['../classsymbols_1_1_function_set_symbol.html#ad1b7e8484b6581879d3db350d3de1c0b',1,'symbols::FunctionSetSymbol::FunctionSetSymbol(basic::StringId nameId)'],['../classsymbols_1_1_function_set_symbol.html#a183cd18bc75235362bf86191565bac3d',1,'symbols::FunctionSetSymbol::FunctionSetSymbol(basic::StringId nameId, const std::vector&lt; FunctionSymbol * &gt; &amp;overloads)']]],
+  ['functionsymbol_15',['FunctionSymbol',['../classsymbols_1_1_function_symbol.html#a84496b21ed3af45e45f07f019073fa3e',1,'symbols::FunctionSymbol']]],
+  ['functiontype_16',['FunctionType',['../classtypes_1_1_function_type.html#a3b4912c0d8da88d017d59bc16bc5c753',1,'types::FunctionType']]]
 ];

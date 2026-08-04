@@ -135,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a14755cea23dba0d61e15b59776839a92 inherit pub_methods_classast_1_1_ast_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the kind of this AST node.  <br /></td></tr>
 <tr class="memitem:a95425552052d3d18124be25bfb2432b8 inherit pub_methods_classast_1_1_ast_node" id="r_a95425552052d3d18124be25bfb2432b8"><td class="memItemLeft">const <a class="el" href="structsource_1_1_source_range.html">source::SourceRange</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_ast_node.html#a95425552052d3d18124be25bfb2432b8">getRange</a> () const</td></tr>
 <tr class="memdesc:a95425552052d3d18124be25bfb2432b8 inherit pub_methods_classast_1_1_ast_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the source range that corresponds to this AST node.  <br /></td></tr>
-<tr class="memitem:a3a6cd06eafb275c6dc15e601e6fe0d40 inherit pub_methods_classast_1_1_ast_node" id="r_a3a6cd06eafb275c6dc15e601e6fe0d40"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_ast_node.html#a3a6cd06eafb275c6dc15e601e6fe0d40">toString</a> (const <a class="el" href="struct_compilation_context.html">CompilationContext</a> &amp;ctx) const</td></tr>
+<tr class="memitem:a3a6cd06eafb275c6dc15e601e6fe0d40 inherit pub_methods_classast_1_1_ast_node" id="r_a3a6cd06eafb275c6dc15e601e6fe0d40"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_ast_node.html#a3a6cd06eafb275c6dc15e601e6fe0d40">toString</a> (const <a class="el" href="class_compilation_context.html">CompilationContext</a> &amp;ctx) const</td></tr>
 <tr class="memdesc:a3a6cd06eafb275c6dc15e601e6fe0d40 inherit pub_methods_classast_1_1_ast_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts this AST node to a human-readable string representation for debugging and informational purposes.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -145,6 +145,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classast_1_1_expression_node"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classast_1_1_expression_node')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Static Public Member Functions inherited from <a class="el" href="classast_1_1_expression_node.html">ast::ExpressionNode</a></td></tr>
 <tr class="memitem:a342b67f7fad6efa80cb6fb08ef41f488 inherit pub_static_methods_classast_1_1_expression_node" id="r_a342b67f7fad6efa80cb6fb08ef41f488"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_expression_node.html#a342b67f7fad6efa80cb6fb08ef41f488">isClassOf</a> (const <a class="el" href="classast_1_1_ast_node.html#a4c52b258cd365b93119a2f5eb39569e9">AstNode</a> *node)</td></tr>
 <tr class="memdesc:a342b67f7fad6efa80cb6fb08ef41f488 inherit pub_static_methods_classast_1_1_expression_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given AST node is an <a class="el" href="classast_1_1_expression_node.html" title="Base class for all expressions. Expressions are any constructs that can be evaluated to produce a val...">ExpressionNode</a>.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a8bcae8690d67ab1b86a4b7917ee71160" id="r_a8bcae8690d67ab1b86a4b7917ee71160"><td class="memItemLeft"><a class="el" href="classsymbols_1_1_operator_symbol.html">symbols::OperatorSymbol</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a8bcae8690d67ab1b86a4b7917ee71160">symbol</a> = nullptr</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -157,7 +161,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a binary expression in the AST. A binary expression consists of a left operand, a right operand, and an operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00044">44</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00071">71</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6fad7ae5a2abf0a2fc45a3794b44b57e" name="a6fad7ae5a2abf0a2fc45a3794b44b57e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6fad7ae5a2abf0a2fc45a3794b44b57e">&#9670;&#160;</a></span>BinaryExprNode()</h2>
@@ -206,7 +210,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00052">52</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00081">81</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 
 </div>
 </div>
@@ -262,7 +266,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the left operand of this binary expression. </p>
 <dl class="section return"><dt>Returns</dt><dd>The left operand of this binary expression. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00061">61</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00090">90</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +296,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the left operand of this binary expression (immutable). </p>
 <dl class="section return"><dt>Returns</dt><dd>The left operand of this binary expression. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00066">66</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00095">95</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +326,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the operator of this binary expression. </p>
 <dl class="section return"><dt>Returns</dt><dd>The operator of this binary expression. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00081">81</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00110">110</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +356,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the right operand of this binary expression. </p>
 <dl class="section return"><dt>Returns</dt><dd>The right operand of this binary expression. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00071">71</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00100">100</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 
 </div>
 </div>
@@ -382,7 +386,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the right operand of this binary expression (immutable). </p>
 <dl class="section return"><dt>Returns</dt><dd>The right operand of this binary expression. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00076">76</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00105">105</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 
 </div>
 </div>
@@ -418,7 +422,24 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the given AST node is an <a class="el" href="classast_1_1_binary_expr_node.html" title="Represents a binary expression in the AST. A binary expression consists of a left operand,...">BinaryExprNode</a>, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00088">88</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00117">117</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a8bcae8690d67ab1b86a4b7917ee71160" name="a8bcae8690d67ab1b86a4b7917ee71160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bcae8690d67ab1b86a4b7917ee71160">&#9670;&#160;</a></span>symbol</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsymbols_1_1_operator_symbol.html">symbols::OperatorSymbol</a>* ast::BinaryExprNode::symbol = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_binary_expr_node_8hpp_source.html#l00073">73</a> of file <a class="el" href="_binary_expr_node_8hpp_source.html">BinaryExprNode.hpp</a>.</p>
 
 </div>
 </div>

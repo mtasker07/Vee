@@ -14,6 +14,8 @@ var searchData=
   ['astnode_2ehpp_11',['AstNode.hpp',['../_ast_node_8hpp.html',1,'']]],
   ['astprinter_2ecpp_12',['AstPrinter.cpp',['../_ast_printer_8cpp.html',1,'']]],
   ['astprinter_2ehpp_13',['AstPrinter.hpp',['../_ast_printer_8hpp.html',1,'']]],
-  ['astwalker_2ecpp_14',['AstWalker.cpp',['../_ast_walker_8cpp.html',1,'']]],
-  ['astwalker_2ehpp_15',['AstWalker.hpp',['../_ast_walker_8hpp.html',1,'']]]
+  ['asttomirlowerer_2ecpp_14',['AstToMirLowerer.cpp',['../_ast_to_mir_lowerer_8cpp.html',1,'']]],
+  ['asttomirlowerer_2ehpp_15',['AstToMirLowerer.hpp',['../_ast_to_mir_lowerer_8hpp.html',1,'']]],
+  ['astwalker_2ecpp_16',['AstWalker.cpp',['../_ast_walker_8cpp.html',1,'']]],
+  ['astwalker_2ehpp_17',['AstWalker.hpp',['../_ast_walker_8hpp.html',1,'']]]
 ];

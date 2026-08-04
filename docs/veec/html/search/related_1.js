@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['block_0',['Block',['../classmir_1_1_mir_context.html#ac2af81cbc457d21a00f09f5e7e5c4ddf',1,'mir::MirContext']]]
+  ['function_0',['Function',['../classmir_1_1_basic_block.html#ab7194606aa12931e96f8f5448d418ed0',1,'mir::BasicBlock::Function()'],['../classmir_1_1_local.html#ab7194606aa12931e96f8f5448d418ed0',1,'mir::Local::Function()']]]
 ];

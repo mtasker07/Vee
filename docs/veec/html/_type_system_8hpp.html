@@ -102,12 +102,14 @@ $(function(){initNavTree('_type_system_8hpp.html','',''); });
 <code>#include &quot;<a class="el" href="_core_defines_8hpp_source.html">veec/CoreDefines.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_type_kind_8hpp_source.html">veec/types/TypeKind.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_type_fwd_8hpp_source.html">veec/types/TypeFwd.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_type_table_8hpp_source.html">veec/types/TypeTable.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_type_system_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:types_3A_3AConversionRule" id="r_types_3A_3AConversionRule"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structtypes_1_1_conversion_rule.html">types::ConversionRule</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a type conversion rule. A conversion rule defines how one type can be converted to another type, along with the rank of the conversion.  <a href="structtypes_1_1_conversion_rule.html#details">More...</a><br /></td></tr>
 <tr class="memitem:types_3A_3ATypeSystem" id="r_types_3A_3ATypeSystem"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtypes_1_1_type_system.html">types::TypeSystem</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles all type-related operations, such as conversion compatibility, etc.  <a href="classtypes_1_1_type_system.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
@@ -117,15 +119,27 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:a9e1cf53eb4168c179d5698126fa01f71" id="r_a9e1cf53eb4168c179d5698126fa01f71"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">types::ConversionMode</a> : u8 { <a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">types::Implicit</a>
+, <a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a9d71760e2dd451db2df354d0fd29cd7f">types::Explicit</a>
+ }</td></tr>
+<tr class="memdesc:a9e1cf53eb4168c179d5698126fa01f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the mode of a type conversion.  <a href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">More...</a><br /></td></tr>
 <tr class="memitem:a16f68860a6fc338ccf5e9ef74b9d6254" id="r_a16f68860a6fc338ccf5e9ef74b9d6254"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254">types::ConversionRank</a> : u8 { <br />
 &#160;&#160;<a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a9ba95bbc0af89aca6c6c6ac908cd4c27">types::ExactMatch</a>
 , <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a626a54d37d402d449d6d7541911e0952">types::Promotion</a>
 , <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a3bb1503332637805beddb73a2dd1fe1b">types::Conversion</a>
-, <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d">types::UserDefinedConversion</a>
+, <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a4160e7abee97a346fc01fc6940ad026e">types::NarrowingConversion</a>
 , <br />
-&#160;&#160;<a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1">types::NoConversion</a>
+&#160;&#160;<a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d">types::UserDefinedConversion</a>
+, <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a4442a8146cd169c3660767648a513ac1">types::ExplicitConversion</a>
+, <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1">types::NoConversion</a>
 <br />
  }</td></tr>
+<tr class="memdesc:a16f68860a6fc338ccf5e9ef74b9d6254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the rank of a type conversion. The rank indicates the "quality" of the conversion, with lower ranks representing better conversions.  <a href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a79dc2006da27cff7c9efd1965bb0f417" id="r_a79dc2006da27cff7c9efd1965bb0f417"><td class="memItemLeft">constexpr u32&#160;</td><td class="memItemRight"><a class="el" href="namespacetypes.html#a79dc2006da27cff7c9efd1965bb0f417">types::kNoConversionCost</a> = std::numeric_limits&lt;u32&gt;::max()</td></tr>
+<tr class="memdesc:a79dc2006da27cff7c9efd1965bb0f417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sentinel value representing the cost of an invalid type conversion.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains the definition of the TypeSystem class. </p>

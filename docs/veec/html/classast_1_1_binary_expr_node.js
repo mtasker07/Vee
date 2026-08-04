@@ -6,5 +6,6 @@ var classast_1_1_binary_expr_node =
     [ "getLeft", "classast_1_1_binary_expr_node.html#ad8822f9bdcdbe44fbf82008afcf6bd81", null ],
     [ "getOperator", "classast_1_1_binary_expr_node.html#af79a1b9e97dd55fd319061f29cb1d05c", null ],
     [ "getRight", "classast_1_1_binary_expr_node.html#adf342020f8156749cb6079a82c76877c", null ],
-    [ "getRight", "classast_1_1_binary_expr_node.html#a711e1ec0b9fe2dfefa60436c4544983c", null ]
+    [ "getRight", "classast_1_1_binary_expr_node.html#a711e1ec0b9fe2dfefa60436c4544983c", null ],
+    [ "symbol", "classast_1_1_binary_expr_node.html#a8bcae8690d67ab1b86a4b7917ee71160", null ]
 ];

@@ -109,7 +109,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a pointer Vee type.  <a href="classtypes_1_1_pointer_type.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Type" id="r_Type"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtypes_1_1_type.html">Type</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base class for all types in the semantic analysis phase. Types represent various entities in the program, such as functions.  <a href="classtypes_1_1_type.html#details">More...</a><br /></td></tr>
+<tr class="memitem:TypeContext" id="r_TypeContext"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtypes_1_1_type_context.html">TypeContext</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to hold context for type-related objects.  <a href="classtypes_1_1_type_context.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ConversionRule" id="r_ConversionRule"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structtypes_1_1_conversion_rule.html">ConversionRule</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a type conversion rule. A conversion rule defines how one type can be converted to another type, along with the rank of the conversion.  <a href="structtypes_1_1_conversion_rule.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TypeSystem" id="r_TypeSystem"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtypes_1_1_type_system.html">TypeSystem</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles all type-related operations, such as conversion compatibility, etc.  <a href="classtypes_1_1_type_system.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TypeTable" id="r_TypeTable"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classtypes_1_1_type_table.html">TypeTable</a></td></tr>
@@ -153,15 +156,32 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:a9081052145f13501ce9cea6da2ae263f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the kind of a type.  <a href="#a9081052145f13501ce9cea6da2ae263f">More...</a><br /></td></tr>
+<tr class="memitem:a9e1cf53eb4168c179d5698126fa01f71" id="r_a9e1cf53eb4168c179d5698126fa01f71"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a9e1cf53eb4168c179d5698126fa01f71">ConversionMode</a> : u8 { <a class="el" href="#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">Implicit</a>
+, <a class="el" href="#a9e1cf53eb4168c179d5698126fa01f71a9d71760e2dd451db2df354d0fd29cd7f">Explicit</a>
+ }</td></tr>
+<tr class="memdesc:a9e1cf53eb4168c179d5698126fa01f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the mode of a type conversion.  <a href="#a9e1cf53eb4168c179d5698126fa01f71">More...</a><br /></td></tr>
 <tr class="memitem:a16f68860a6fc338ccf5e9ef74b9d6254" id="r_a16f68860a6fc338ccf5e9ef74b9d6254"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254">ConversionRank</a> : u8 { <br />
 &#160;&#160;<a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a9ba95bbc0af89aca6c6c6ac908cd4c27">ExactMatch</a>
 , <a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a626a54d37d402d449d6d7541911e0952">Promotion</a>
 , <a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a3bb1503332637805beddb73a2dd1fe1b">Conversion</a>
-, <a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d">UserDefinedConversion</a>
+, <a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a4160e7abee97a346fc01fc6940ad026e">NarrowingConversion</a>
 , <br />
-&#160;&#160;<a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1">NoConversion</a>
+&#160;&#160;<a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d">UserDefinedConversion</a>
+, <a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a4442a8146cd169c3660767648a513ac1">ExplicitConversion</a>
+, <a class="el" href="#a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1">NoConversion</a>
 <br />
  }</td></tr>
+<tr class="memdesc:a16f68860a6fc338ccf5e9ef74b9d6254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the rank of a type conversion. The rank indicates the "quality" of the conversion, with lower ranks representing better conversions.  <a href="#a16f68860a6fc338ccf5e9ef74b9d6254">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a13118bc5ab16c1694236fe643b82fdc6" id="r_a13118bc5ab16c1694236fe643b82fdc6"><td class="memItemLeft">std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a13118bc5ab16c1694236fe643b82fdc6">toString</a> (<a class="el" href="#af4e2b6ed10fc30a163a1fec8a0294e42">BuiltinTypeKind</a> kind)</td></tr>
+<tr class="memdesc:a13118bc5ab16c1694236fe643b82fdc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="#af4e2b6ed10fc30a163a1fec8a0294e42" title="Represents the different kinds of builtin types in the Vee language.">BuiltinTypeKind</a> to its string representation.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a79dc2006da27cff7c9efd1965bb0f417" id="r_a79dc2006da27cff7c9efd1965bb0f417"><td class="memItemLeft">constexpr u32&#160;</td><td class="memItemRight"><a class="el" href="#a79dc2006da27cff7c9efd1965bb0f417">kNoConversionCost</a> = std::numeric_limits&lt;u32&gt;::max()</td></tr>
+<tr class="memdesc:a79dc2006da27cff7c9efd1965bb0f417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sentinel value representing the cost of an invalid type conversion.  <br /></td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="ac2184e1c807a4a5f82867e62ac054507" name="ac2184e1c807a4a5f82867e62ac054507"></a>
@@ -219,7 +239,39 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="af4e2b6ed10fc30a163a1fec8a0294e42ae93f994f01c537c4e2f7d8528c3eb5e9" name="af4e2b6ed10fc30a163a1fec8a0294e42ae93f994f01c537c4e2f7d8528c3eb5e9"></a>Count&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00026">26</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00028">28</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9e1cf53eb4168c179d5698126fa01f71" name="a9e1cf53eb4168c179d5698126fa01f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e1cf53eb4168c179d5698126fa01f71">&#9670;&#160;</a></span>ConversionMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a9e1cf53eb4168c179d5698126fa01f71">types::ConversionMode</a> : u8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Represents the mode of a type conversion. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788" name="a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788"></a>Implicit&#160;</td><td class="fielddoc"><p>An automatic conversion that does not require a cast. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9e1cf53eb4168c179d5698126fa01f71a9d71760e2dd451db2df354d0fd29cd7f" name="a9e1cf53eb4168c179d5698126fa01f71a9d71760e2dd451db2df354d0fd29cd7f"></a>Explicit&#160;</td><td class="fielddoc"><p>A conversion that requires an explicit cast in the program. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_type_system_8hpp_source.html#l00032">32</a> of file <a class="el" href="_type_system_8hpp_source.html">TypeSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -242,15 +294,26 @@ Enumerations</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Represents the rank of a type conversion. The rank indicates the "quality" of the conversion, with lower ranks representing better conversions. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a9ba95bbc0af89aca6c6c6ac908cd4c27" name="a16f68860a6fc338ccf5e9ef74b9d6254a9ba95bbc0af89aca6c6c6ac908cd4c27"></a>ExactMatch&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a626a54d37d402d449d6d7541911e0952" name="a16f68860a6fc338ccf5e9ef74b9d6254a626a54d37d402d449d6d7541911e0952"></a>Promotion&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a3bb1503332637805beddb73a2dd1fe1b" name="a16f68860a6fc338ccf5e9ef74b9d6254a3bb1503332637805beddb73a2dd1fe1b"></a>Conversion&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d" name="a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d"></a>UserDefinedConversion&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1" name="a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1"></a>NoConversion&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a9ba95bbc0af89aca6c6c6ac908cd4c27" name="a16f68860a6fc338ccf5e9ef74b9d6254a9ba95bbc0af89aca6c6c6ac908cd4c27"></a>ExactMatch&#160;</td><td class="fielddoc"><p>Types are the same. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a626a54d37d402d449d6d7541911e0952" name="a16f68860a6fc338ccf5e9ef74b9d6254a626a54d37d402d449d6d7541911e0952"></a>Promotion&#160;</td><td class="fielddoc"><p>A safe widening conversion. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a3bb1503332637805beddb73a2dd1fe1b" name="a16f68860a6fc338ccf5e9ef74b9d6254a3bb1503332637805beddb73a2dd1fe1b"></a>Conversion&#160;</td><td class="fielddoc"><p>A safe-ish conversion that may lose some information. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a4160e7abee97a346fc01fc6940ad026e" name="a16f68860a6fc338ccf5e9ef74b9d6254a4160e7abee97a346fc01fc6940ad026e"></a>NarrowingConversion&#160;</td><td class="fielddoc"><p>An unsafe conversion that is potentially lossy or narrowing. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d" name="a16f68860a6fc338ccf5e9ef74b9d6254a39599a8681949b0cf54e1a7cce91a95d"></a>UserDefinedConversion&#160;</td><td class="fielddoc"><p>A User-defined conversion. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a4442a8146cd169c3660767648a513ac1" name="a16f68860a6fc338ccf5e9ef74b9d6254a4442a8146cd169c3660767648a513ac1"></a>ExplicitConversion&#160;</td><td class="fielddoc"><p>An explicit conversion that requires a cast. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1" name="a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1"></a>NoConversion&#160;</td><td class="fielddoc"><p>No conversion is possible. </p>
+</td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_type_system_8hpp_source.html#l00022">22</a> of file <a class="el" href="_type_system_8hpp_source.html">TypeSystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_type_system_8hpp_source.html#l00043">43</a> of file <a class="el" href="_type_system_8hpp_source.html">TypeSystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -285,6 +348,71 @@ Enumerations</h2></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="_type_kind_8hpp_source.html#l00023">23</a> of file <a class="el" href="_type_kind_8hpp_source.html">TypeKind.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a13118bc5ab16c1694236fe643b82fdc6" name="a13118bc5ab16c1694236fe643b82fdc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13118bc5ab16c1694236fe643b82fdc6">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view types::toString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#af4e2b6ed10fc30a163a1fec8a0294e42">BuiltinTypeKind</a></td>          <td class="paramname"><span class="paramname"><em>kind</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts a <a class="el" href="#af4e2b6ed10fc30a163a1fec8a0294e42" title="Represents the different kinds of builtin types in the Vee language.">BuiltinTypeKind</a> to its string representation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">kind</td><td>The <a class="el" href="#af4e2b6ed10fc30a163a1fec8a0294e42" title="Represents the different kinds of builtin types in the Vee language.">BuiltinTypeKind</a> to convert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of the <a class="el" href="#af4e2b6ed10fc30a163a1fec8a0294e42" title="Represents the different kinds of builtin types in the Vee language.">BuiltinTypeKind</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_builtin_type_8hpp_source.html#l00051">51</a> of file <a class="el" href="_builtin_type_8hpp_source.html">BuiltinType.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a79dc2006da27cff7c9efd1965bb0f417" name="a79dc2006da27cff7c9efd1965bb0f417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79dc2006da27cff7c9efd1965bb0f417">&#9670;&#160;</a></span>kNoConversionCost</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u32 types::kNoConversionCost = std::numeric_limits&lt;u32&gt;::max()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sentinel value representing the cost of an invalid type conversion. </p>
+<dl class="section note"><dt>Note</dt><dd>This is just a shorthand for <span class="tt">std::numeric_limits&lt;u32&gt;::max()</span>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_type_system_8hpp_source.html#l00027">27</a> of file <a class="el" href="_type_system_8hpp_source.html">TypeSystem.hpp</a>.</p>
 
 </div>
 </div>

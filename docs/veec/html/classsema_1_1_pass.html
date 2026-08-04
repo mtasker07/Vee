@@ -109,7 +109,7 @@ Inheritance diagram for sema::Pass:</div>
 <area href="classast__passes_1_1_top_level_use_resolution_pass.html" title="A semantic analysis pass that resolves all top-level use statements in the program." alt="ast_passes::TopLevelUseResolutionPass" shape="rect" coords="496,112,734,136"/>
 <area href="classast__passes_1_1_type_checker_pass.html" title="A semantic analysis pass that type checks all expressions and statements in the program." alt="ast_passes::TypeCheckerPass" shape="rect" coords="744,112,982,136"/>
 <area href="classast__passes_1_1_type_construction_pass.html" title="A semantic analysis pass that constructs all types in the program." alt="ast_passes::TypeConstructionPass" shape="rect" coords="992,112,1230,136"/>
-<area href="classast__passes_1_1_type_inference_pass.html" title="A semantic analysis pass that infers all types in the program." alt="ast_passes::TypeInferencePass" shape="rect" coords="1240,112,1478,136"/>
+<area href="classast__passes_1_1_type_resolution_pass.html" title="A semantic analysis pass that resolves all explicit types in the program." alt="ast_passes::TypeResolutionPass" shape="rect" coords="1240,112,1478,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -125,7 +125,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a97e3fcb065996121c112d1a8c8414402" id="r_a97e3fcb065996121c112d1a8c8414402"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a97e3fcb065996121c112d1a8c8414402">Pass</a> (<a class="el" href="struct_compilation_context.html">CompilationContext</a> &amp;ctx, <a class="el" href="classsema_1_1_sema_context.html">SemaContext</a> &amp;<a class="el" href="namespacesema.html">sema</a>)</td></tr>
+<tr class="memitem:a97e3fcb065996121c112d1a8c8414402" id="r_a97e3fcb065996121c112d1a8c8414402"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a97e3fcb065996121c112d1a8c8414402">Pass</a> (<a class="el" href="class_compilation_context.html">CompilationContext</a> &amp;ctx, <a class="el" href="classsema_1_1_sema_context.html">SemaContext</a> &amp;<a class="el" href="namespacesema.html">sema</a>)</td></tr>
 <tr class="memdesc:a97e3fcb065996121c112d1a8c8414402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classsema_1_1_pass.html" title="This is the base class for all semantic analysis passes which are responsible for analyzing the AST a...">Pass</a> instance with the given context.  <br /></td></tr>
 <tr class="inherit_header pro_methods_classast_1_1_ast_walker"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classast_1_1_ast_walker')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected Member Functions inherited from <a class="el" href="classast_1_1_ast_walker.html">ast::AstWalker</a></td></tr>
 <tr class="memitem:a1a5d3cb19c1bc658eeb2231e766a0b55 inherit pro_methods_classast_1_1_ast_walker" id="r_a1a5d3cb19c1bc658eeb2231e766a0b55"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_ast_walker.html#a1a5d3cb19c1bc658eeb2231e766a0b55">AstWalker</a> ()=default</td></tr>
@@ -172,7 +172,7 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a2118c3ab4738bad14615ae7f10e23c6f" id="r_a2118c3ab4738bad14615ae7f10e23c6f"><td class="memItemLeft"><a class="el" href="struct_compilation_context.html">CompilationContext</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2118c3ab4738bad14615ae7f10e23c6f">_ctx</a></td></tr>
+<tr class="memitem:a2118c3ab4738bad14615ae7f10e23c6f" id="r_a2118c3ab4738bad14615ae7f10e23c6f"><td class="memItemLeft"><a class="el" href="class_compilation_context.html">CompilationContext</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2118c3ab4738bad14615ae7f10e23c6f">_ctx</a></td></tr>
 <tr class="memitem:aeb89613dba7c88203b87367fcb3e01ce" id="r_aeb89613dba7c88203b87367fcb3e01ce"><td class="memItemLeft"><a class="el" href="classsema_1_1_sema_context.html">SemaContext</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aeb89613dba7c88203b87367fcb3e01ce">_sema</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -217,7 +217,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">sema::Pass::Pass </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_compilation_context.html">CompilationContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+          <td class="paramtype"><a class="el" href="class_compilation_context.html">CompilationContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -235,7 +235,7 @@ Protected Attributes</h2></td></tr>
 <p>Creates a new <a class="el" href="classsema_1_1_pass.html" title="This is the base class for all semantic analysis passes which are responsible for analyzing the AST a...">Pass</a> instance with the given context. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ctx</td><td>The <a class="el" href="struct_compilation_context.html" title="Used to hold context for the compilation process.">CompilationContext</a> to use for this <a class="el" href="classsema_1_1_pass.html" title="This is the base class for all semantic analysis passes which are responsible for analyzing the AST a...">Pass</a>. </td></tr>
+    <tr><td class="paramname">ctx</td><td>The <a class="el" href="class_compilation_context.html" title="Used to hold context for the compilation process.">CompilationContext</a> to use for this <a class="el" href="classsema_1_1_pass.html" title="This is the base class for all semantic analysis passes which are responsible for analyzing the AST a...">Pass</a>. </td></tr>
     <tr><td class="paramname"><a class="el" href="namespacesema.html">sema</a></td><td>The <a class="el" href="classsema_1_1_sema_context.html" title="Used to hold context for semantic analysis stages during the compilation process.">SemaContext</a> to use for this <a class="el" href="classsema_1_1_pass.html" title="This is the base class for all semantic analysis passes which are responsible for analyzing the AST a...">Pass</a>. </td></tr>
   </table>
   </dd>
@@ -272,7 +272,7 @@ Protected Attributes</h2></td></tr>
 <p>Runs this semantic analysis pass on the given CompilationUnit AST node. This function can be overriden to provide custom behavior, for example resetting internal state before running the pass. </p>
 <p>We use a CompilationUnitNode here because all semantic analysis passes should be run on the entire program and not individual nodes which could lead to incorrect behaviour. </p>
 
-<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#acdf9b44335ff9b5f62fd10c7e591f56e">ast_passes::SymbolCollectionPass</a>, <a class="el" href="classast__passes_1_1_symbol_resolution_pass.html#a495074870bb6e7c29050834151e5121a">ast_passes::SymbolResolutionPass</a>, <a class="el" href="classast__passes_1_1_top_level_use_resolution_pass.html#aa0516ac2a83f30ae769097077c7fd15d">ast_passes::TopLevelUseResolutionPass</a>, <a class="el" href="classast__passes_1_1_type_checker_pass.html#a6b185619eb7c49a120bdf4727daee00f">ast_passes::TypeCheckerPass</a>, <a class="el" href="classast__passes_1_1_type_construction_pass.html#aebba168b9385c770d2450ea3bfe54f6a">ast_passes::TypeConstructionPass</a>, and <a class="el" href="classast__passes_1_1_type_inference_pass.html#ac2db3b3b8772a94d8b88ae085b6f6c9f">ast_passes::TypeInferencePass</a>.</p>
+<p>Reimplemented in <a class="el" href="classast__passes_1_1_symbol_collection_pass.html#acdf9b44335ff9b5f62fd10c7e591f56e">ast_passes::SymbolCollectionPass</a>, <a class="el" href="classast__passes_1_1_symbol_resolution_pass.html#a495074870bb6e7c29050834151e5121a">ast_passes::SymbolResolutionPass</a>, <a class="el" href="classast__passes_1_1_top_level_use_resolution_pass.html#aa0516ac2a83f30ae769097077c7fd15d">ast_passes::TopLevelUseResolutionPass</a>, <a class="el" href="classast__passes_1_1_type_checker_pass.html#a6b185619eb7c49a120bdf4727daee00f">ast_passes::TypeCheckerPass</a>, <a class="el" href="classast__passes_1_1_type_construction_pass.html#aebba168b9385c770d2450ea3bfe54f6a">ast_passes::TypeConstructionPass</a>, and <a class="el" href="classast__passes_1_1_type_resolution_pass.html#a6186090a9ec2cf81d75de86c4f23f202">ast_passes::TypeResolutionPass</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_pass_8hpp_source.html#l00048">48</a> of file <a class="el" href="_pass_8hpp_source.html">Pass.hpp</a>.</p>
 
@@ -289,7 +289,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_compilation_context.html">CompilationContext</a>&amp; sema::Pass::_ctx</td>
+          <td class="memname"><a class="el" href="class_compilation_context.html">CompilationContext</a>&amp; sema::Pass::_ctx</td>
         </tr>
       </table>
   </td>

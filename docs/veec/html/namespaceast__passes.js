@@ -5,5 +5,5 @@ var namespaceast__passes =
     [ "TopLevelUseResolutionPass", "classast__passes_1_1_top_level_use_resolution_pass.html", "classast__passes_1_1_top_level_use_resolution_pass" ],
     [ "TypeCheckerPass", "classast__passes_1_1_type_checker_pass.html", "classast__passes_1_1_type_checker_pass" ],
     [ "TypeConstructionPass", "classast__passes_1_1_type_construction_pass.html", "classast__passes_1_1_type_construction_pass" ],
-    [ "TypeInferencePass", "classast__passes_1_1_type_inference_pass.html", "classast__passes_1_1_type_inference_pass" ]
+    [ "TypeResolutionPass", "classast__passes_1_1_type_resolution_pass.html", "classast__passes_1_1_type_resolution_pass" ]
 ];

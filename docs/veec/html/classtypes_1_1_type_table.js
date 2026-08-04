@@ -10,7 +10,7 @@ var classtypes_1_1_type_table =
     [ "getClass", "classtypes_1_1_type_table.html#a29dfe2287ea85eab944d38b89b6d366a", null ],
     [ "getError", "classtypes_1_1_type_table.html#a3f7a6351bbde608862f4154a04ea3016", null ],
     [ "getFunction", "classtypes_1_1_type_table.html#a26fb0c82759d65f95f8639da08ed68c9", null ],
-    [ "getNodeType", "classtypes_1_1_type_table.html#a641b2fc3e5b778a5a7eb0bff1fb0617b", null ],
+    [ "getNodeType", "classtypes_1_1_type_table.html#a480f5cd2360f302a29811ca9196006a7", null ],
     [ "getPointer", "classtypes_1_1_type_table.html#a0dc08b4e321bca1a5a4c69c5099d4f68", null ],
-    [ "setNodeType", "classtypes_1_1_type_table.html#a3cc111d4c1257a182d9094df4fb91700", null ]
+    [ "setNodeType", "classtypes_1_1_type_table.html#a8bbfca92b3a62da1ab42cede0eba93f6", null ]
 ];

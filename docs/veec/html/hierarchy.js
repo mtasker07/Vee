@@ -59,30 +59,57 @@ var hierarchy =
         [ "ast_passes::TopLevelUseResolutionPass", "classast__passes_1_1_top_level_use_resolution_pass.html", null ],
         [ "ast_passes::TypeCheckerPass", "classast__passes_1_1_type_checker_pass.html", null ],
         [ "ast_passes::TypeConstructionPass", "classast__passes_1_1_type_construction_pass.html", null ],
-        [ "ast_passes::TypeInferencePass", "classast__passes_1_1_type_inference_pass.html", null ]
+        [ "ast_passes::TypeResolutionPass", "classast__passes_1_1_type_resolution_pass.html", null ]
       ] ]
     ] ],
     [ "basic::BigInt", "classbasic_1_1_big_int.html", null ],
-    [ "mir::Block", "classmir_1_1_block.html", null ],
+    [ "BuiltinRegistrar", "class_builtin_registrar.html", null ],
     [ "Compilation", "class_compilation.html", null ],
     [ "CompilationConfig", "struct_compilation_config.html", null ],
-    [ "CompilationContext", "struct_compilation_context.html", null ],
+    [ "CompilationContext", "class_compilation_context.html", null ],
     [ "CompilationResult", "struct_compilation_result.html", null ],
-    [ "ast::ConstAstWalker", "classast_1_1_const_ast_walker.html", null ],
+    [ "util::HashUtils::CompositeHasher", "structutil_1_1_hash_utils_1_1_composite_hasher.html", null ],
+    [ "CompositeKey", "struct_composite_key.html", null ],
+    [ "mir::support::ConstantTable", "classmir_1_1support_1_1_constant_table.html", null ],
+    [ "ast::ConstAstWalker", "classast_1_1_const_ast_walker.html", [
+      [ "mirgen::AstToMirLowerer", "classmirgen_1_1_ast_to_mir_lowerer.html", null ]
+    ] ],
     [ "types::ConversionRule", "structtypes_1_1_conversion_rule.html", null ],
     [ "diagnostics::DiagnosticDescriptor&lt; ArgCount &gt;", "structdiagnostics_1_1_diagnostic_descriptor.html", null ],
     [ "diagnostics::DiagnosticEngine", "classdiagnostics_1_1_diagnostic_engine.html", null ],
     [ "std::equal_to&lt; VEEC_NAMESPACE::fs::Path &gt;", "structstd_1_1equal__to_3_01_v_e_e_c___n_a_m_e_s_p_a_c_e_1_1fs_1_1_path_01_4.html", null ],
-    [ "mir::Function", "classmir_1_1_function.html", null ],
+    [ "std::hash&lt; veec::basic::APInt &gt;", "structstd_1_1hash_3_01veec_1_1basic_1_1_a_p_int_01_4.html", null ],
     [ "std::hash&lt; VEEC_NAMESPACE::fs::Path &gt;", "structstd_1_1hash_3_01_v_e_e_c___n_a_m_e_s_p_a_c_e_1_1fs_1_1_path_01_4.html", null ],
     [ "source::Identifier", "structsource_1_1_identifier.html", null ],
     [ "symbols::IdentifierTable", "classsymbols_1_1_identifier_table.html", null ],
+    [ "mir::support::InstructionOverload", "structmir_1_1support_1_1_instruction_overload.html", null ],
+    [ "mir::support::InstructionTable", "classmir_1_1support_1_1_instruction_table.html", null ],
     [ "lexing::Lexer", "classlexing_1_1_lexer.html", null ],
     [ "lexing::LexerState", "structlexing_1_1_lexer_state.html", null ],
     [ "source::LineColumn", "structsource_1_1_line_column.html", null ],
     [ "basic::Maybe&lt; T &gt;", "classbasic_1_1_maybe.html", null ],
-    [ "mir::MIRBuilder", "classmir_1_1_m_i_r_builder.html", null ],
+    [ "mir::MirBuilder", "classmir_1_1_mir_builder.html", null ],
     [ "mir::MirContext", "classmir_1_1_mir_context.html", null ],
+    [ "mir::MirFactory", "classmir_1_1_mir_factory.html", null ],
+    [ "mir::MirNode::MirKey", "structmir_1_1_mir_node_1_1_mir_key.html", null ],
+    [ "mir::MirNode", "classmir_1_1_mir_node.html", [
+      [ "mir::Module", "classmir_1_1_module.html", null ],
+      [ "mir::Value", "classmir_1_1_value.html", [
+        [ "mir::BasicBlock", "classmir_1_1_basic_block.html", null ],
+        [ "mir::Constant", "classmir_1_1_constant.html", [
+          [ "mir::ConstantBool", "classmir_1_1_constant_bool.html", null ],
+          [ "mir::ConstantFloat", "classmir_1_1_constant_float.html", null ],
+          [ "mir::ConstantInt", "classmir_1_1_constant_int.html", null ],
+          [ "mir::ConstantString", "classmir_1_1_constant_string.html", null ]
+        ] ],
+        [ "mir::Function", "classmir_1_1_function.html", null ],
+        [ "mir::Local", "classmir_1_1_local.html", null ],
+        [ "mir::User", "classmir_1_1_user.html", [
+          [ "mir::Instruction", "classmir_1_1_instruction.html", null ]
+        ] ]
+      ] ]
+    ] ],
+    [ "mir::pretty::MirPrinter", "classmir_1_1pretty_1_1_mir_printer.html", null ],
     [ "symbols::OperatorTable", "classsymbols_1_1_operator_table.html", null ],
     [ "parsing::Parser", "classparsing_1_1_parser.html", null ],
     [ "sema::PassManager", "classsema_1_1_pass_manager.html", null ],
@@ -93,6 +120,7 @@ var hierarchy =
     [ "sema::ScopeGuard", "classsema_1_1_scope_guard.html", null ],
     [ "sema::ScopeManager", "classsema_1_1_scope_manager.html", null ],
     [ "sema::SemaContext", "classsema_1_1_sema_context.html", null ],
+    [ "basic::SmallVector&lt; T, N, Allocator &gt;", "classbasic_1_1_small_vector.html", null ],
     [ "source::SourceFile", "classsource_1_1_source_file.html", null ],
     [ "source::SourceLoadError", "structsource_1_1_source_load_error.html", null ],
     [ "source::SourceLocation", "structsource_1_1_source_location.html", null ],
@@ -111,7 +139,6 @@ var hierarchy =
       ] ],
       [ "symbols::VariableSymbol", "classsymbols_1_1_variable_symbol.html", null ]
     ] ],
-    [ "symbols::SymbolHandle&lt; T &gt;", "classsymbols_1_1_symbol_handle.html", null ],
     [ "symbols::SymbolTable", "classsymbols_1_1_symbol_table.html", null ],
     [ "basic::Token", "classbasic_1_1_token.html", null ],
     [ "parsing::TokenList", "structparsing_1_1_token_list.html", null ],
@@ -123,7 +150,10 @@ var hierarchy =
       [ "types::FunctionType", "classtypes_1_1_function_type.html", null ],
       [ "types::PointerType", "classtypes_1_1_pointer_type.html", null ]
     ] ],
+    [ "types::TypeContext", "classtypes_1_1_type_context.html", null ],
     [ "types::TypeSystem", "classtypes_1_1_type_system.html", null ],
     [ "types::TypeTable", "classtypes_1_1_type_table.html", null ],
-    [ "diagnostics::UserDiagnostic", "classdiagnostics_1_1_user_diagnostic.html", null ]
+    [ "diagnostics::UserDiagnostic", "classdiagnostics_1_1_user_diagnostic.html", null ],
+    [ "mir::pretty::ValueNameMap", "classmir_1_1pretty_1_1_value_name_map.html", null ],
+    [ "mir::support::ValueTypeMap", "classmir_1_1support_1_1_value_type_map.html", null ]
 ];

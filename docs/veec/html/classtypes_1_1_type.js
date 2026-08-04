@@ -7,5 +7,6 @@ var classtypes_1_1_type =
     [ "getId", "classtypes_1_1_type.html#a77f1556215224007152c3df8366d7446", null ],
     [ "getKind", "classtypes_1_1_type.html#abfdf16a16605af354630b2eb2c664f77", null ],
     [ "is", "classtypes_1_1_type.html#a716a37ab469289114a81ed04d3b76feb", null ],
+    [ "toString", "classtypes_1_1_type.html#a77e3acbe44825e60a9fbb0e516d9ad29", null ],
     [ "TypeTable", "classtypes_1_1_type.html#a51be9b63c917657ae1f9f67c5f0098bf", null ]
 ];

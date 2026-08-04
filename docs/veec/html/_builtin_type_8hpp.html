@@ -95,13 +95,15 @@ $(function(){initNavTree('_builtin_type_8hpp.html','',''); });
 
 <p>This file contains the definition of the builtin type class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string_view&gt;</code><br />
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;format&gt;</code><br />
 <code>#include &quot;vee/core/CoreDefines.hpp&quot;</code><br />
 <code>#include &quot;vee/core/CoreTypedefs.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="_core_defines_8hpp_source.html">veec/CoreDefines.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_type_id_8hpp_source.html">veec/types/TypeId.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_type_kind_8hpp_source.html">veec/types/TypeKind.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="types_2_type_8hpp_source.html">veec/types/Type.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_type_8hpp_source.html">veec/types/Type.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_builtin_type_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -137,6 +139,11 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:af4e2b6ed10fc30a163a1fec8a0294e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the different kinds of builtin types in the Vee language.  <a href="namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a13118bc5ab16c1694236fe643b82fdc6" id="r_a13118bc5ab16c1694236fe643b82fdc6"><td class="memItemLeft">std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacetypes.html#a13118bc5ab16c1694236fe643b82fdc6">types::toString</a> (<a class="el" href="namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42">BuiltinTypeKind</a> kind)</td></tr>
+<tr class="memdesc:a13118bc5ab16c1694236fe643b82fdc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42" title="Represents the different kinds of builtin types in the Vee language.">BuiltinTypeKind</a> to its string representation.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains the definition of the builtin type class. </p>

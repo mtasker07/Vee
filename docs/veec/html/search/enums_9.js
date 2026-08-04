@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['unaryop_0',['UnaryOp',['../namespaceast.html#a7bead041c305b7f7b4b3efc977cbc5b5',1,'ast']]],
-  ['unaryoperatorkind_1',['UnaryOperatorKind',['../namespacesymbols.html#a10754546a67036b9341ce196fed48770',1,'symbols']]],
-  ['userdiagnostickind_2',['UserDiagnosticKind',['../namespacediagnostics.html#a9803d93f4774bd21198c49fd31e9337d',1,'diagnostics']]]
+  ['tokentype_0',['TokenType',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367fa',1,'basic']]],
+  ['typekind_1',['TypeKind',['../namespacetypes.html#a9081052145f13501ce9cea6da2ae263f',1,'types']]]
 ];

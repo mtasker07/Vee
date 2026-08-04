@@ -100,16 +100,98 @@ $(function(){initNavTree('classtypes_1_1_type_system.html','','classtypes_1_1_ty
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab923911f4f0039713c33f604c810704c" id="r_ab923911f4f0039713c33f604c810704c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab923911f4f0039713c33f604c810704c">canConvert</a> (<a class="el" href="classtypes_1_1_type.html">Type</a> *from, <a class="el" href="classtypes_1_1_type.html">Type</a> *to) const</td></tr>
-<tr class="memitem:ace3ccc5ba0858d8018007979cb34c2f1" id="r_ace3ccc5ba0858d8018007979cb34c2f1"><td class="memItemLeft"><a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254">ConversionRank</a>&#160;</td><td class="memItemRight"><a class="el" href="#ace3ccc5ba0858d8018007979cb34c2f1">rankConversion</a> (<a class="el" href="classtypes_1_1_type.html">Type</a> *from, <a class="el" href="classtypes_1_1_type.html">Type</a> *to) const</td></tr>
+<tr class="memitem:aca05fb2214debed1f9ea185b3488cc30" id="r_aca05fb2214debed1f9ea185b3488cc30"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aca05fb2214debed1f9ea185b3488cc30">TypeSystem</a> (<a class="el" href="classtypes_1_1_type_table.html">TypeTable</a> &amp;typeTable)</td></tr>
+<tr class="memdesc:aca05fb2214debed1f9ea185b3488cc30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classtypes_1_1_type_system.html" title="Handles all type-related operations, such as conversion compatibility, etc.">TypeSystem</a> instance with the specified <a class="el" href="classtypes_1_1_type_table.html" title="Manages all types.">TypeTable</a>.  <br /></td></tr>
+<tr class="memitem:ae0f7a6b8174a901b052449b316d4ffbf" id="r_ae0f7a6b8174a901b052449b316d4ffbf"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae0f7a6b8174a901b052449b316d4ffbf">addConversionRule</a> (<a class="el" href="classtypes_1_1_type.html">Type</a> *from, <a class="el" href="classtypes_1_1_type.html">Type</a> *to, <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254">ConversionRank</a> rank)</td></tr>
+<tr class="memdesc:ae0f7a6b8174a901b052449b316d4ffbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a conversion rule to the type system.  <br /></td></tr>
+<tr class="memitem:aa279403061b548825c7d42bf85f5cf51" id="r_aa279403061b548825c7d42bf85f5cf51"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa279403061b548825c7d42bf85f5cf51">canConvert</a> (<a class="el" href="classtypes_1_1_type.html">Type</a> *from, <a class="el" href="classtypes_1_1_type.html">Type</a> *to, <a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">ConversionMode</a> mode=<a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">ConversionMode::Implicit</a>) const</td></tr>
+<tr class="memdesc:aa279403061b548825c7d42bf85f5cf51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a conversion from one type to another is possible.  <br /></td></tr>
+<tr class="memitem:a60bce138ccc0b22a9e5b889b92ad2f70" id="r_a60bce138ccc0b22a9e5b889b92ad2f70"><td class="memItemLeft"><a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254">ConversionRank</a>&#160;</td><td class="memItemRight"><a class="el" href="#a60bce138ccc0b22a9e5b889b92ad2f70">rankConversion</a> (<a class="el" href="classtypes_1_1_type.html">Type</a> *from, <a class="el" href="classtypes_1_1_type.html">Type</a> *to, <a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">ConversionMode</a> mode=<a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">ConversionMode::Implicit</a>) const</td></tr>
+<tr class="memdesc:a60bce138ccc0b22a9e5b889b92ad2f70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the rank of a conversion from one type to another.  <br /></td></tr>
+<tr class="memitem:a93ad17366e69c02a36fa472b457ec47c" id="r_a93ad17366e69c02a36fa472b457ec47c"><td class="memItemLeft">u32&#160;</td><td class="memItemRight"><a class="el" href="#a93ad17366e69c02a36fa472b457ec47c">conversionCost</a> (<a class="el" href="classtypes_1_1_type.html">Type</a> *from, <a class="el" href="classtypes_1_1_type.html">Type</a> *to, <a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">ConversionMode</a> mode=<a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">ConversionMode::Implicit</a>) const</td></tr>
+<tr class="memdesc:a93ad17366e69c02a36fa472b457ec47c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the cost of a conversion from one type to another.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handles all type-related operations, such as conversion compatibility, etc. </p>
 
-<p class="definition">Definition at line <a class="el" href="_type_system_8hpp_source.html#l00040">40</a> of file <a class="el" href="_type_system_8hpp_source.html">TypeSystem.hpp</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ab923911f4f0039713c33f604c810704c" name="ab923911f4f0039713c33f604c810704c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab923911f4f0039713c33f604c810704c">&#9670;&#160;</a></span>canConvert()</h2>
+<p class="definition">Definition at line <a class="el" href="_type_system_8hpp_source.html#l00084">84</a> of file <a class="el" href="_type_system_8hpp_source.html">TypeSystem.hpp</a>.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aca05fb2214debed1f9ea185b3488cc30" name="aca05fb2214debed1f9ea185b3488cc30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca05fb2214debed1f9ea185b3488cc30">&#9670;&#160;</a></span>TypeSystem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">types::TypeSystem::TypeSystem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtypes_1_1_type_table.html">TypeTable</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>typeTable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new <a class="el" href="classtypes_1_1_type_system.html" title="Handles all type-related operations, such as conversion compatibility, etc.">TypeSystem</a> instance with the specified <a class="el" href="classtypes_1_1_type_table.html" title="Manages all types.">TypeTable</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeTable</td><td>The <a class="el" href="classtypes_1_1_type_table.html" title="Manages all types.">TypeTable</a> instance to use for getting existing types. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_type_system_8hpp_source.html#l00090">90</a> of file <a class="el" href="_type_system_8hpp_source.html">TypeSystem.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ae0f7a6b8174a901b052449b316d4ffbf" name="ae0f7a6b8174a901b052449b316d4ffbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f7a6b8174a901b052449b316d4ffbf">&#9670;&#160;</a></span>addConversionRule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void types::TypeSystem::addConversionRule </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>from</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>to</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254">ConversionRank</a></td>          <td class="paramname"><span class="paramname"><em>rank</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a conversion rule to the type system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from</td><td>The source type of the conversion. </td></tr>
+    <tr><td class="paramname">to</td><td>The target type of the conversion. </td></tr>
+    <tr><td class="paramname">rank</td><td>The rank of the conversion. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_type_system_8cpp_source.html#l00022">22</a> of file <a class="el" href="_type_system_8cpp_source.html">TypeSystem.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa279403061b548825c7d42bf85f5cf51" name="aa279403061b548825c7d42bf85f5cf51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa279403061b548825c7d42bf85f5cf51">&#9670;&#160;</a></span>canConvert()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -122,17 +204,72 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>to</em></span>&#160;) const</td>
+          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>to</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">ConversionMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">ConversionMode::Implicit</a></span>&#160;) const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_type_system_8cpp_source.html#l00021">21</a> of file <a class="el" href="_type_system_8cpp_source.html">TypeSystem.cpp</a>.</p>
+<p>Checks if a conversion from one type to another is possible. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from</td><td>The source type of the conversion. </td></tr>
+    <tr><td class="paramname">to</td><td>The target type of the conversion. </td></tr>
+    <tr><td class="paramname">mode</td><td>The mode of the conversion (implicit or explicit). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the conversion is possible, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_type_system_8cpp_source.html#l00035">35</a> of file <a class="el" href="_type_system_8cpp_source.html">TypeSystem.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ace3ccc5ba0858d8018007979cb34c2f1" name="ace3ccc5ba0858d8018007979cb34c2f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace3ccc5ba0858d8018007979cb34c2f1">&#9670;&#160;</a></span>rankConversion()</h2>
+<a id="a93ad17366e69c02a36fa472b457ec47c" name="a93ad17366e69c02a36fa472b457ec47c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93ad17366e69c02a36fa472b457ec47c">&#9670;&#160;</a></span>conversionCost()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u32 types::TypeSystem::conversionCost </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>from</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>to</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">ConversionMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">ConversionMode::Implicit</a></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the cost of a conversion from one type to another. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from</td><td>The source type of the conversion. </td></tr>
+    <tr><td class="paramname">to</td><td>The target type of the conversion. </td></tr>
+    <tr><td class="paramname">mode</td><td>The mode of the conversion (implicit or explicit). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The cost of the conversion, or <span class="tt">std::numeric_limits&lt;u32&gt;::max()</span> if no conversion is possible. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_type_system_8cpp_source.html#l00062">62</a> of file <a class="el" href="_type_system_8cpp_source.html">TypeSystem.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a60bce138ccc0b22a9e5b889b92ad2f70" name="a60bce138ccc0b22a9e5b889b92ad2f70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60bce138ccc0b22a9e5b889b92ad2f70">&#9670;&#160;</a></span>rankConversion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,12 +282,28 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>to</em></span>&#160;) const</td>
+          <td class="paramtype"><a class="el" href="classtypes_1_1_type.html">Type</a> *</td>          <td class="paramname"><span class="paramname"><em>to</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71">ConversionMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacetypes.html#a9e1cf53eb4168c179d5698126fa01f71a07e01d7a96d9fd76cf08aa5916f7c788">ConversionMode::Implicit</a></span>&#160;) const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_type_system_8cpp_source.html#l00024">24</a> of file <a class="el" href="_type_system_8cpp_source.html">TypeSystem.cpp</a>.</p>
+<p>Gets the rank of a conversion from one type to another. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from</td><td>The source type of the conversion. </td></tr>
+    <tr><td class="paramname">to</td><td>The target type of the conversion. </td></tr>
+    <tr><td class="paramname">mode</td><td>The mode of the conversion (implicit or explicit). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The rank of the conversion, or <a class="el" href="namespacetypes.html#a16f68860a6fc338ccf5e9ef74b9d6254a27a2f55c82cd42b2957dd162121d2bb1" title="No conversion is possible.">ConversionRank::NoConversion</a> if no conversion is possible. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_type_system_8cpp_source.html#l00038">38</a> of file <a class="el" href="_type_system_8cpp_source.html">TypeSystem.cpp</a>.</p>
 
 </div>
 </div>

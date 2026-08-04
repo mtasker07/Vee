@@ -118,7 +118,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa4e4c390cbc1237bfdefc397c7b7895a" id="r_aa4e4c390cbc1237bfdefc397c7b7895a"><td class="memItemLeft"><a class="el" href="classast_1_1_qualified_name_node.html">QualifiedNameNode</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa4e4c390cbc1237bfdefc397c7b7895a">getQualifiedName</a> ()</td></tr>
 <tr class="memdesc:aa4e4c390cbc1237bfdefc397c7b7895a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the qualified name forming this name expression.  <br /></td></tr>
 <tr class="memitem:a106ef55f8351adb32964fbfa82693df5" id="r_a106ef55f8351adb32964fbfa82693df5"><td class="memItemLeft">const <a class="el" href="classsymbols_1_1_symbol.html">symbols::Symbol</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a106ef55f8351adb32964fbfa82693df5">getResolvedSymbol</a> () const</td></tr>
-<tr class="memdesc:a106ef55f8351adb32964fbfa82693df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resolved symbol for this name expression, if any. This is basically just a shorthand for <span class="tt"><a class="el" href="#aa4e4c390cbc1237bfdefc397c7b7895a" title="Gets the qualified name forming this name expression.">getQualifiedName()</a>-&gt;resolvedSymbol</span>.  <br /></td></tr>
+<tr class="memdesc:a106ef55f8351adb32964fbfa82693df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resolved symbol for this name expression, if any (read-only). This is basically just a shorthand for <span class="tt"><a class="el" href="#aa4e4c390cbc1237bfdefc397c7b7895a" title="Gets the qualified name forming this name expression.">getQualifiedName()</a>-&gt;resolvedSymbol</span>.  <br /></td></tr>
+<tr class="memitem:ad081e9dc1f7474446f37565e5026c83a" id="r_ad081e9dc1f7474446f37565e5026c83a"><td class="memItemLeft"><a class="el" href="classsymbols_1_1_symbol.html">symbols::Symbol</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ad081e9dc1f7474446f37565e5026c83a">getResolvedSymbol</a> ()</td></tr>
+<tr class="memdesc:ad081e9dc1f7474446f37565e5026c83a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resolved symbol for this name expression, if any (read-write). This is basically just a shorthand for <span class="tt"><a class="el" href="#aa4e4c390cbc1237bfdefc397c7b7895a" title="Gets the qualified name forming this name expression.">getQualifiedName()</a>-&gt;resolvedSymbol</span>.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classast_1_1_expression_node"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classast_1_1_expression_node')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classast_1_1_expression_node.html">ast::ExpressionNode</a></td></tr>
 <tr class="memitem:affebdc6756b7eeb5fd0505005b1a8196 inherit pub_methods_classast_1_1_expression_node" id="r_affebdc6756b7eeb5fd0505005b1a8196"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_expression_node.html#affebdc6756b7eeb5fd0505005b1a8196">~ExpressionNode</a> ()=default</td></tr>
 <tr class="inherit_header pub_methods_classast_1_1_ast_node"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classast_1_1_ast_node')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classast_1_1_ast_node.html">ast::AstNode</a></td></tr>
@@ -131,7 +133,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a14755cea23dba0d61e15b59776839a92 inherit pub_methods_classast_1_1_ast_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the kind of this AST node.  <br /></td></tr>
 <tr class="memitem:a95425552052d3d18124be25bfb2432b8 inherit pub_methods_classast_1_1_ast_node" id="r_a95425552052d3d18124be25bfb2432b8"><td class="memItemLeft">const <a class="el" href="structsource_1_1_source_range.html">source::SourceRange</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_ast_node.html#a95425552052d3d18124be25bfb2432b8">getRange</a> () const</td></tr>
 <tr class="memdesc:a95425552052d3d18124be25bfb2432b8 inherit pub_methods_classast_1_1_ast_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the source range that corresponds to this AST node.  <br /></td></tr>
-<tr class="memitem:a3a6cd06eafb275c6dc15e601e6fe0d40 inherit pub_methods_classast_1_1_ast_node" id="r_a3a6cd06eafb275c6dc15e601e6fe0d40"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_ast_node.html#a3a6cd06eafb275c6dc15e601e6fe0d40">toString</a> (const <a class="el" href="struct_compilation_context.html">CompilationContext</a> &amp;ctx) const</td></tr>
+<tr class="memitem:a3a6cd06eafb275c6dc15e601e6fe0d40 inherit pub_methods_classast_1_1_ast_node" id="r_a3a6cd06eafb275c6dc15e601e6fe0d40"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="classast_1_1_ast_node.html#a3a6cd06eafb275c6dc15e601e6fe0d40">toString</a> (const <a class="el" href="class_compilation_context.html">CompilationContext</a> &amp;ctx) const</td></tr>
 <tr class="memdesc:a3a6cd06eafb275c6dc15e601e6fe0d40 inherit pub_methods_classast_1_1_ast_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts this AST node to a human-readable string representation for debugging and informational purposes.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -280,8 +282,38 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="ad081e9dc1f7474446f37565e5026c83a" name="ad081e9dc1f7474446f37565e5026c83a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad081e9dc1f7474446f37565e5026c83a">&#9670;&#160;</a></span>getResolvedSymbol() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsymbols_1_1_symbol.html">symbols::Symbol</a> * ast::NameExprNode::getResolvedSymbol </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the resolved symbol for this name expression, if any (read-write). This is basically just a shorthand for <span class="tt"><a class="el" href="#aa4e4c390cbc1237bfdefc397c7b7895a" title="Gets the qualified name forming this name expression.">getQualifiedName()</a>-&gt;resolvedSymbol</span>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The resolved symbol for this name expression, or nullptr if not resolved. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_name_expr_node_8hpp_source.html#l00064">64</a> of file <a class="el" href="_name_expr_node_8hpp_source.html">NameExprNode.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a106ef55f8351adb32964fbfa82693df5" name="a106ef55f8351adb32964fbfa82693df5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a106ef55f8351adb32964fbfa82693df5">&#9670;&#160;</a></span>getResolvedSymbol()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a106ef55f8351adb32964fbfa82693df5">&#9670;&#160;</a></span>getResolvedSymbol() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,7 +335,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the resolved symbol for this name expression, if any. This is basically just a shorthand for <span class="tt"><a class="el" href="#aa4e4c390cbc1237bfdefc397c7b7895a" title="Gets the qualified name forming this name expression.">getQualifiedName()</a>-&gt;resolvedSymbol</span>. </p>
+<p>Gets the resolved symbol for this name expression, if any (read-only). This is basically just a shorthand for <span class="tt"><a class="el" href="#aa4e4c390cbc1237bfdefc397c7b7895a" title="Gets the qualified name forming this name expression.">getQualifiedName()</a>-&gt;resolvedSymbol</span>. </p>
 <dl class="section return"><dt>Returns</dt><dd>The resolved symbol for this name expression, or nullptr if not resolved. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_name_expr_node_8hpp_source.html#l00056">56</a> of file <a class="el" href="_name_expr_node_8hpp_source.html">NameExprNode.hpp</a>.</p>
@@ -342,7 +374,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the given AST node is a <a class="el" href="classast_1_1_name_expr_node.html" title="Name expressions represent a sequence of identifiers forming a name.">NameExprNode</a>, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_name_expr_node_8hpp_source.html#l00065">65</a> of file <a class="el" href="_name_expr_node_8hpp_source.html">NameExprNode.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_name_expr_node_8hpp_source.html#l00073">73</a> of file <a class="el" href="_name_expr_node_8hpp_source.html">NameExprNode.hpp</a>.</p>
 
 </div>
 </div>

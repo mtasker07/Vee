@@ -152,5 +152,7 @@ var namespaceast =
       [ "Let", "namespaceast.html#af1da0d12af0eef48b689848cff6f2feaacae6404c4aecf46684930fe2a86676a6", null ],
       [ "Var", "namespaceast.html#af1da0d12af0eef48b689848cff6f2feaa5a92344ee95acf10c31901b36418be77", null ]
     ] ],
-    [ "ast_cast", "namespaceast.html#ad4b123f2b7e2e7278bf54a417339a572", null ]
+    [ "ast_cast", "namespaceast.html#ad4b123f2b7e2e7278bf54a417339a572", null ],
+    [ "toString", "namespaceast.html#a63124e1e22b6c760a2bf03c00268eeb9", null ],
+    [ "toString", "namespaceast.html#a629acfa78cf2aeae742278e5c415daea", null ]
 ];

@@ -119,8 +119,6 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base class for all symbols in the semantic analysis phase. Symbols represent various entities in the program, such as functions.  <a href="classsymbols_1_1_symbol.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SymbolTable" id="r_SymbolTable"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsymbols_1_1_symbol_table.html">SymbolTable</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages all symbols during semantic analysis.  <a href="classsymbols_1_1_symbol_table.html#details">More...</a><br /></td></tr>
-<tr class="memitem:SymbolHandle" id="r_SymbolHandle"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsymbols_1_1_symbol_handle.html">SymbolHandle</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a handle to a symbol, which may or may not be resolved. A symbol handle can be resolved to a specific symbol during semantic analysis.  <a href="classsymbols_1_1_symbol_handle.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -163,9 +161,15 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a4ab671acbbaacb0db7d8477cfe4f4e0b">LessThanOrEqual</a>
 , <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156af6d044fe1f01fb0c956b80099e2a3072">GreaterThan</a>
 , <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a25c44812e9d75f685d2a0b815dea1ebe">GreaterThanOrEqual</a>
-, <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a103aa83df42877d5f9baeafdbf620b55">LogicalAnd</a>
+, <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a50c15b40bc46de3e3528e17fe119209e">BitwiseAnd</a>
 , <br />
-&#160;&#160;<a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a74ce78827b02c650a20b149765388247">LogicalOr</a>
+&#160;&#160;<a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a8041b508037c30ae59fe353b74918a1b">BitwiseOr</a>
+, <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156acc79304f89691dd71d71d9aab6fe3565">BitwiseXor</a>
+, <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156ad9382145a142cc7df5f733332c9cb812">ShiftLeft</a>
+, <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156af17de5e0ea7a357b755aa9deeaf38f86">ShiftRight</a>
+, <br />
+&#160;&#160;<a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a103aa83df42877d5f9baeafdbf620b55">LogicalAnd</a>
+, <a class="el" href="#a18087373dd68e754dcd38bdbb5bf6156a74ce78827b02c650a20b149765388247">LogicalOr</a>
 <br />
  }</td></tr>
 <tr class="memdesc:a18087373dd68e754dcd38bdbb5bf6156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the kind of a binary operator, such as addition (+).  <a href="#a18087373dd68e754dcd38bdbb5bf6156">More...</a><br /></td></tr>
@@ -225,6 +229,11 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156a4ab671acbbaacb0db7d8477cfe4f4e0b" name="a18087373dd68e754dcd38bdbb5bf6156a4ab671acbbaacb0db7d8477cfe4f4e0b"></a>LessThanOrEqual&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156af6d044fe1f01fb0c956b80099e2a3072" name="a18087373dd68e754dcd38bdbb5bf6156af6d044fe1f01fb0c956b80099e2a3072"></a>GreaterThan&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156a25c44812e9d75f685d2a0b815dea1ebe" name="a18087373dd68e754dcd38bdbb5bf6156a25c44812e9d75f685d2a0b815dea1ebe"></a>GreaterThanOrEqual&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156a50c15b40bc46de3e3528e17fe119209e" name="a18087373dd68e754dcd38bdbb5bf6156a50c15b40bc46de3e3528e17fe119209e"></a>BitwiseAnd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156a8041b508037c30ae59fe353b74918a1b" name="a18087373dd68e754dcd38bdbb5bf6156a8041b508037c30ae59fe353b74918a1b"></a>BitwiseOr&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156acc79304f89691dd71d71d9aab6fe3565" name="a18087373dd68e754dcd38bdbb5bf6156acc79304f89691dd71d71d9aab6fe3565"></a>BitwiseXor&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156ad9382145a142cc7df5f733332c9cb812" name="a18087373dd68e754dcd38bdbb5bf6156ad9382145a142cc7df5f733332c9cb812"></a>ShiftLeft&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156af17de5e0ea7a357b755aa9deeaf38f86" name="a18087373dd68e754dcd38bdbb5bf6156af17de5e0ea7a357b755aa9deeaf38f86"></a>ShiftRight&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156a103aa83df42877d5f9baeafdbf620b55" name="a18087373dd68e754dcd38bdbb5bf6156a103aa83df42877d5f9baeafdbf620b55"></a>LogicalAnd&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a18087373dd68e754dcd38bdbb5bf6156a74ce78827b02c650a20b149765388247" name="a18087373dd68e754dcd38bdbb5bf6156a74ce78827b02c650a20b149765388247"></a>LogicalOr&#160;</td><td class="fielddoc"></td></tr>
 </table>
@@ -259,7 +268,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a867590cd0cd17e74fecf10efe8ae386ba4c3880bb027f159e801041b1021e88e8" name="a867590cd0cd17e74fecf10efe8ae386ba4c3880bb027f159e801041b1021e88e8"></a>Method&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_function_symbol_8hpp_source.html#l00028">28</a> of file <a class="el" href="_function_symbol_8hpp_source.html">FunctionSymbol.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_symbol_8hpp_source.html#l00033">33</a> of file <a class="el" href="_function_symbol_8hpp_source.html">FunctionSymbol.hpp</a>.</p>
 
 </div>
 </div>

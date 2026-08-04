@@ -93,8 +93,121 @@ $(function(){initNavTree('_instruction_8hpp.html','',''); });
 </div><!--header-->
 <div class="contents">
 
+<p>This file contains the definition of the Instruction class.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;vee/core/CoreDefines.hpp&quot;</code><br />
+<code>#include &quot;vee/core/CoreTypedefs.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="_core_defines_8hpp_source.html">veec/CoreDefines.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_mir_fwd_8hpp_source.html">veec/mir/MirFwd.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_mir_kind_8hpp_source.html">veec/mir/MirKind.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_mir_node_8hpp_source.html">veec/mir/MirNode.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_value_8hpp_source.html">veec/mir/Value.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_type_fwd_8hpp_source.html">veec/types/TypeFwd.hpp</a>&quot;</code><br />
+</div>
 <p><a href="_instruction_8hpp_source.html">Go to the source code of this file.</a></p>
-</div><!-- contents -->
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:mir_3A_3AInstruction" id="r_mir_3A_3AInstruction"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_instruction.html">mir::Instruction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an instruction in the MIR. An instruction is a single operation that can be carried out on the machine.  <a href="classmir_1_1_instruction.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:mir" id="r_mir"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacemir.html">mir</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a315e3210f07ca80022751256979ae3c9" id="r_a315e3210f07ca80022751256979ae3c9"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9">mir::InstructionOpcode</a> : u8 { <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ab7e7f2b46723f5b08d763041108f8fed">mir::Nop</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a5a82bece4586ad7cb17ba739a2db7f67">mir::Phi</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9afb278fa5defd7e699fcbc930c3e76ccd">mir::Neg</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9aec211f7c20af43e742bf2570c3cb84f9">mir::Add</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ae80155eceb940c89e2de63ad05868db2">mir::Sub</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a62b6d55816cf737bfc6f42e60df1a3f2">mir::Mul</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a68186db1da877cd7d0d1cad88ac3ab85">mir::SDiv</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a100a973b58634646d669bda4a2da9ea1">mir::UDiv</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a69a7900268b9207621b50150307c9773">mir::SMod</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a5af20709b9040d09eb75fc9e9923280c">mir::UMod</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a63fdae580c8a3012c60caacddcde30c3">mir::BitNot</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ae5c7b3dc6fa17e0c1d0586d1a169c77d">mir::BitAnd</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a04306ca0b4b3ed9a5cedc16d4acbc2b8">mir::BitOr</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ac23bb1635c2e183c276b68ecdcf076c1">mir::BitXor</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a7777198898361dc10a9c1f72ee797147">mir::BitShl</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a1f647025a9203166dd8bb1b08c40f2a4">mir::BitLShr</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a4f49bc8c43505b5b696c7e1aa4c8633e">mir::BitAShr</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a6ce38fa7e961d7d8f6ba51a99c36f4c3">mir::FNeg</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9af552e181879ad14956985859308d77d9">mir::FAdd</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a68c7d4b416f9c8f6a073fb295dfd4c6b">mir::FSub</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ab48b2a9934af7a531cfd7236ded9d50e">mir::FMul</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a9ad1bfdd971accbd0c529c8efcfe4fb6">mir::FDiv</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a2a25ebd8c909241e3f7818389b804ecc">mir::LogicalNot</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a103aa83df42877d5f9baeafdbf620b55">mir::LogicalAnd</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a74ce78827b02c650a20b149765388247">mir::LogicalOr</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ac3d4c871a243e08a2e960e875ab7fef2">mir::ICmpEq</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a4f87c58ae126d50d4a7f768810084835">mir::ICmpNe</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a2519b6f66e6bdd5d3ac5b16763268689">mir::ICmpSlt</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ad3e8469f9474f8a3591c847289cfb776">mir::ICmpSle</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9afce244e4c486161ac3b33f07de5f7a87">mir::ICmpSgt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a1791faf4f8aeb9dcb9a629db9cfa42a9">mir::ICmpSge</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ae2da71587ee19d06b6b4e7045e25a0e5">mir::ICmpUlt</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a49b1e4f3e71f36fc85b63adbc993139e">mir::ICmpUle</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a4235690e6e1b13dbb2f1f87f49da0ee8">mir::ICmpUgt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a7be3b094dfd51b969db7e903f117fb56">mir::ICmpUge</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a98c35b9570b2b7754b96615bbad7e1d5">mir::FCmpEq</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9aa6b98cb96c0d7c37a6fdf4cc796ee5aa">mir::FCmpNe</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a062dc42035ea9b5b753eb69392375c33">mir::FCmpLt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a82331ba930e30cf44f9ec1f945116fa8">mir::FCmpLe</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a4de89d267c0e0c6214ef9a7bf19be89d">mir::FCmpGt</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a253771ee21ba8655bbda7d54145e9f73">mir::FCmpGe</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9afdb0c388de01d545017cdf9ccf00eb72">mir::Store</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9af19dbf2edb3a0bd74b0524d960ff21eb">mir::Load</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a280a09d571703899a5244cf6befe28e3">mir::Construct</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a07ab17b806ac12b518fee16edb9f9fa9">mir::TruncateInt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a41865c9f1dfe82589484624118f81af7">mir::ZeroExtendInt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a0dda905bfb9a47bf068076cb586cf552">mir::SignExtendInt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9aa8fcf526f59f3101ad133c24500adef7">mir::TruncateFloat</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ab7b70ec22dc0e82036e7529a7ecc5924">mir::ExtendFloat</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a4379147f3bfa8098d64fa26ff754c70b">mir::IntToFloat</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a7968ae81b9b796eaf56cdafa0b1d1974">mir::UIntToFloat</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a013d9f2dd8d7d68e9cdd91f3441fbd5a">mir::FloatToInt</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ac33e037a1d795e87b5a4402b068a3669">mir::FloatToUInt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a2ffefea422139f305414c5cbd43f634a">mir::PtrToInt</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9afdd8572da64d59d598b084399690f10b">mir::IntToPtr</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9af0368c43b98cff179e7cb55daa205add">mir::Bitcast</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9ac3755e61202abd74da5885d2e9c9160e">mir::Call</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9aa4228a09dd66155de8e93a39245768bd">mir::Ret</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a8d37869ebc7af08a31df14fe3f48bee2">mir::Br</a>
+, <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9aa7438498b20c25b5e98e14b77e864ced">mir::CondBr</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9a4bed942140642650ca78039de000796a">mir::Unreachable</a>
+<br />
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aad546fe63ab8662a5b7f87e784c74272" id="r_aad546fe63ab8662a5b7f87e784c74272"><td class="memItemLeft">std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacemir.html#aad546fe63ab8662a5b7f87e784c74272">mir::toString</a> (<a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a> opcode)</td></tr>
+<tr class="memdesc:aad546fe63ab8662a5b7f87e784c74272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts an <a class="el" href="namespacemir.html#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a> to a human-readable string representation.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This file contains the definition of the Instruction class. </p>
+<p>The Instruction class represents an instruction in the MIR. An instruction is a single operation that can be carried out on the machine. </p>
+
+<p class="definition">Definition in file <a class="el" href="_instruction_8hpp_source.html">Instruction.hpp</a>.</p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

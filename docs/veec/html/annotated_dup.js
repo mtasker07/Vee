@@ -53,7 +53,7 @@ var annotated_dup =
       [ "TopLevelUseResolutionPass", "classast__passes_1_1_top_level_use_resolution_pass.html", "classast__passes_1_1_top_level_use_resolution_pass" ],
       [ "TypeCheckerPass", "classast__passes_1_1_type_checker_pass.html", "classast__passes_1_1_type_checker_pass" ],
       [ "TypeConstructionPass", "classast__passes_1_1_type_construction_pass.html", "classast__passes_1_1_type_construction_pass" ],
-      [ "TypeInferencePass", "classast__passes_1_1_type_inference_pass.html", "classast__passes_1_1_type_inference_pass" ]
+      [ "TypeResolutionPass", "classast__passes_1_1_type_resolution_pass.html", "classast__passes_1_1_type_resolution_pass" ]
     ] ],
     [ "basic", "namespacebasic.html", [
       [ "APInt", "classbasic_1_1_a_p_int.html", "classbasic_1_1_a_p_int" ],
@@ -61,6 +61,7 @@ var annotated_dup =
       [ "BigInt", "classbasic_1_1_big_int.html", "classbasic_1_1_big_int" ],
       [ "Maybe", "classbasic_1_1_maybe.html", "classbasic_1_1_maybe" ],
       [ "Result", "classbasic_1_1_result.html", "classbasic_1_1_result" ],
+      [ "SmallVector", "classbasic_1_1_small_vector.html", "classbasic_1_1_small_vector" ],
       [ "StringPool", "classbasic_1_1_string_pool.html", "classbasic_1_1_string_pool" ],
       [ "Token", "classbasic_1_1_token.html", "classbasic_1_1_token" ]
     ] ],
@@ -77,10 +78,35 @@ var annotated_dup =
       [ "Lexer", "classlexing_1_1_lexer.html", "classlexing_1_1_lexer" ]
     ] ],
     [ "mir", "namespacemir.html", [
-      [ "Block", "classmir_1_1_block.html", "classmir_1_1_block" ],
+      [ "support", "namespacemir_1_1support.html", [
+        [ "ConstantTable", "classmir_1_1support_1_1_constant_table.html", "classmir_1_1support_1_1_constant_table" ],
+        [ "InstructionOverload", "structmir_1_1support_1_1_instruction_overload.html", "structmir_1_1support_1_1_instruction_overload" ],
+        [ "InstructionTable", "classmir_1_1support_1_1_instruction_table.html", "classmir_1_1support_1_1_instruction_table" ],
+        [ "ValueTypeMap", "classmir_1_1support_1_1_value_type_map.html", "classmir_1_1support_1_1_value_type_map" ]
+      ] ],
+      [ "pretty", "namespacemir_1_1pretty.html", [
+        [ "MirPrinter", "classmir_1_1pretty_1_1_mir_printer.html", "classmir_1_1pretty_1_1_mir_printer" ],
+        [ "ValueNameMap", "classmir_1_1pretty_1_1_value_name_map.html", "classmir_1_1pretty_1_1_value_name_map" ]
+      ] ],
+      [ "BasicBlock", "classmir_1_1_basic_block.html", "classmir_1_1_basic_block" ],
+      [ "Constant", "classmir_1_1_constant.html", "classmir_1_1_constant" ],
+      [ "ConstantInt", "classmir_1_1_constant_int.html", "classmir_1_1_constant_int" ],
+      [ "ConstantFloat", "classmir_1_1_constant_float.html", "classmir_1_1_constant_float" ],
+      [ "ConstantString", "classmir_1_1_constant_string.html", "classmir_1_1_constant_string" ],
+      [ "ConstantBool", "classmir_1_1_constant_bool.html", "classmir_1_1_constant_bool" ],
       [ "Function", "classmir_1_1_function.html", "classmir_1_1_function" ],
-      [ "MIRBuilder", "classmir_1_1_m_i_r_builder.html", "classmir_1_1_m_i_r_builder" ],
-      [ "MirContext", "classmir_1_1_mir_context.html", "classmir_1_1_mir_context" ]
+      [ "Instruction", "classmir_1_1_instruction.html", "classmir_1_1_instruction" ],
+      [ "MirBuilder", "classmir_1_1_mir_builder.html", "classmir_1_1_mir_builder" ],
+      [ "MirContext", "classmir_1_1_mir_context.html", "classmir_1_1_mir_context" ],
+      [ "MirFactory", "classmir_1_1_mir_factory.html", "classmir_1_1_mir_factory" ],
+      [ "MirNode", "classmir_1_1_mir_node.html", "classmir_1_1_mir_node" ],
+      [ "Module", "classmir_1_1_module.html", "classmir_1_1_module" ],
+      [ "Value", "classmir_1_1_value.html", "classmir_1_1_value" ],
+      [ "User", "classmir_1_1_user.html", "classmir_1_1_user" ],
+      [ "Local", "classmir_1_1_local.html", "classmir_1_1_local" ]
+    ] ],
+    [ "mirgen", "namespacemirgen.html", [
+      [ "AstToMirLowerer", "classmirgen_1_1_ast_to_mir_lowerer.html", "classmirgen_1_1_ast_to_mir_lowerer" ]
     ] ],
     [ "parsing", "namespaceparsing.html", [
       [ "TokenList", "structparsing_1_1_token_list.html", "structparsing_1_1_token_list" ],
@@ -105,6 +131,7 @@ var annotated_dup =
       [ "SourceView", "classsource_1_1_source_view.html", "classsource_1_1_source_view" ]
     ] ],
     [ "std", "namespacestd.html", [
+      [ "hash&lt; veec::basic::APInt &gt;", "structstd_1_1hash_3_01veec_1_1basic_1_1_a_p_int_01_4.html", "structstd_1_1hash_3_01veec_1_1basic_1_1_a_p_int_01_4" ],
       [ "hash&lt; VEEC_NAMESPACE::fs::Path &gt;", "structstd_1_1hash_3_01_v_e_e_c___n_a_m_e_s_p_a_c_e_1_1fs_1_1_path_01_4.html", "structstd_1_1hash_3_01_v_e_e_c___n_a_m_e_s_p_a_c_e_1_1fs_1_1_path_01_4" ],
       [ "equal_to&lt; VEEC_NAMESPACE::fs::Path &gt;", "structstd_1_1equal__to_3_01_v_e_e_c___n_a_m_e_s_p_a_c_e_1_1fs_1_1_path_01_4.html", "structstd_1_1equal__to_3_01_v_e_e_c___n_a_m_e_s_p_a_c_e_1_1fs_1_1_path_01_4" ]
     ] ],
@@ -120,8 +147,7 @@ var annotated_dup =
       [ "OperatorTable", "classsymbols_1_1_operator_table.html", "classsymbols_1_1_operator_table" ],
       [ "ScopeOwnerSymbol", "classsymbols_1_1_scope_owner_symbol.html", "classsymbols_1_1_scope_owner_symbol" ],
       [ "Symbol", "classsymbols_1_1_symbol.html", "classsymbols_1_1_symbol" ],
-      [ "SymbolTable", "classsymbols_1_1_symbol_table.html", "classsymbols_1_1_symbol_table" ],
-      [ "SymbolHandle", "classsymbols_1_1_symbol_handle.html", "classsymbols_1_1_symbol_handle" ]
+      [ "SymbolTable", "classsymbols_1_1_symbol_table.html", "classsymbols_1_1_symbol_table" ]
     ] ],
     [ "types", "namespacetypes.html", [
       [ "ArrayType", "classtypes_1_1_array_type.html", "classtypes_1_1_array_type" ],
@@ -131,12 +157,20 @@ var annotated_dup =
       [ "FunctionType", "classtypes_1_1_function_type.html", "classtypes_1_1_function_type" ],
       [ "PointerType", "classtypes_1_1_pointer_type.html", "classtypes_1_1_pointer_type" ],
       [ "Type", "classtypes_1_1_type.html", "classtypes_1_1_type" ],
+      [ "TypeContext", "classtypes_1_1_type_context.html", "classtypes_1_1_type_context" ],
       [ "ConversionRule", "structtypes_1_1_conversion_rule.html", "structtypes_1_1_conversion_rule" ],
       [ "TypeSystem", "classtypes_1_1_type_system.html", "classtypes_1_1_type_system" ],
       [ "TypeTable", "classtypes_1_1_type_table.html", "classtypes_1_1_type_table" ]
     ] ],
+    [ "util", "namespaceutil.html", [
+      [ "HashUtils", "namespaceutil_1_1_hash_utils.html", [
+        [ "CompositeHasher", "structutil_1_1_hash_utils_1_1_composite_hasher.html", "structutil_1_1_hash_utils_1_1_composite_hasher" ]
+      ] ]
+    ] ],
+    [ "BuiltinRegistrar", "class_builtin_registrar.html", "class_builtin_registrar" ],
     [ "Compilation", "class_compilation.html", "class_compilation" ],
     [ "CompilationConfig", "struct_compilation_config.html", null ],
-    [ "CompilationContext", "struct_compilation_context.html", "struct_compilation_context" ],
-    [ "CompilationResult", "struct_compilation_result.html", "struct_compilation_result" ]
+    [ "CompilationContext", "class_compilation_context.html", "class_compilation_context" ],
+    [ "CompilationResult", "struct_compilation_result.html", "struct_compilation_result" ],
+    [ "CompositeKey", "struct_composite_key.html", null ]
 ];

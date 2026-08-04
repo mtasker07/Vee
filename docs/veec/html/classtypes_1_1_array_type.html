@@ -112,6 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c9afb9ee9a785da6603a25f12e0630e" id="r_a7c9afb9ee9a785da6603a25f12e0630e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7c9afb9ee9a785da6603a25f12e0630e">ArrayType</a> (<a class="el" href="classtypes_1_1_type.html#abd36b3a51dec93736be756b8f20d4551">Type</a> *elementType, size_t size)</td></tr>
 <tr class="memdesc:a7c9afb9ee9a785da6603a25f12e0630e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an array type with the specified element type and size.  <br /></td></tr>
 <tr class="memitem:a0b27a7a3ab2712247e75562e165833fc" id="r_a0b27a7a3ab2712247e75562e165833fc"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a0b27a7a3ab2712247e75562e165833fc">~ArrayType</a> ()=default</td></tr>
+<tr class="memitem:abe2ec3eacd9101476cbcfa5e5f12d244" id="r_abe2ec3eacd9101476cbcfa5e5f12d244"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#abe2ec3eacd9101476cbcfa5e5f12d244">toString</a> () const override</td></tr>
+<tr class="memdesc:abe2ec3eacd9101476cbcfa5e5f12d244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts this array type to a string representation.  <br /></td></tr>
 <tr class="memitem:a411ea1b5f0caedb545cd92d0817a197b" id="r_a411ea1b5f0caedb545cd92d0817a197b"><td class="memItemLeft"><a class="el" href="classtypes_1_1_type.html#abd36b3a51dec93736be756b8f20d4551">Type</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a411ea1b5f0caedb545cd92d0817a197b">getElementType</a> () const</td></tr>
 <tr class="memdesc:a411ea1b5f0caedb545cd92d0817a197b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the element type of this array type.  <br /></td></tr>
 <tr class="memitem:ac3e7c39336e3d36ca817f01c0a27ec3a" id="r_ac3e7c39336e3d36ca817f01c0a27ec3a"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ac3e7c39336e3d36ca817f01c0a27ec3a">getSize</a> () const</td></tr>
@@ -149,7 +151,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a array Vee type. </p>
 
-<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00025">25</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00027">27</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7c9afb9ee9a785da6603a25f12e0630e" name="a7c9afb9ee9a785da6603a25f12e0630e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c9afb9ee9a785da6603a25f12e0630e">&#9670;&#160;</a></span>ArrayType()</h2>
@@ -187,7 +189,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00032">32</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00034">34</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
 
 </div>
 </div>
@@ -243,7 +245,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the element type of this array type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The element type of this array type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00041">41</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00051">51</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +275,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the size of this array type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The size of this array type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00047">47</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00057">57</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +305,39 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the static kind of this type, which is Array. </p>
 <dl class="section return"><dt>Returns</dt><dd>The static kind of this type, which is Array. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00053">53</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00063">63</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abe2ec3eacd9101476cbcfa5e5f12d244" name="abe2ec3eacd9101476cbcfa5e5f12d244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe2ec3eacd9101476cbcfa5e5f12d244">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string types::ArrayType::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts this array type to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of this array type. </dd></dl>
+
+<p>Implements <a class="el" href="classtypes_1_1_type.html#a77e3acbe44825e60a9fbb0e516d9ad29">types::Type</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_array_type_8hpp_source.html#l00043">43</a> of file <a class="el" href="_array_type_8hpp_source.html">ArrayType.hpp</a>.</p>
 
 </div>
 </div>

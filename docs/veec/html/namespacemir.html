@@ -93,17 +93,414 @@ $(function(){initNavTree('namespacemir.html','',''); });
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:support" id="r_support"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacemir_1_1support.html">support</a></td></tr>
+<tr class="memitem:pretty" id="r_pretty"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacemir_1_1pretty.html">pretty</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:Block" id="r_Block"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_block.html">Block</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a block in the middle intermediate representation (MIR) of the compiler.  <a href="classmir_1_1_block.html#details">More...</a><br /></td></tr>
+<tr class="memitem:BasicBlock" id="r_BasicBlock"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_basic_block.html">BasicBlock</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a basic block in the MIR. A basic block is a sequence of instructions that has a single entry point and a single exit point.  <a href="classmir_1_1_basic_block.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Constant" id="r_Constant"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_constant.html">Constant</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a constant value in the MIR. This can be an integer, float, string, or boolean.  <a href="classmir_1_1_constant.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ConstantInt" id="r_ConstantInt"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_constant_int.html">ConstantInt</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a constant integer value in the MIR.  <a href="classmir_1_1_constant_int.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ConstantFloat" id="r_ConstantFloat"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_constant_float.html">ConstantFloat</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a constant float value in the MIR.  <a href="classmir_1_1_constant_float.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ConstantString" id="r_ConstantString"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_constant_string.html">ConstantString</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a constant string value in the MIR.  <a href="classmir_1_1_constant_string.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ConstantBool" id="r_ConstantBool"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_constant_bool.html">ConstantBool</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a constant boolean value in the MIR.  <a href="classmir_1_1_constant_bool.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Function" id="r_Function"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_function.html">Function</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a function in the middle intermediate representation (MIR) of the compiler.  <a href="classmir_1_1_function.html#details">More...</a><br /></td></tr>
-<tr class="memitem:MIRBuilder" id="r_MIRBuilder"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_m_i_r_builder.html">MIRBuilder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Responsible for constructing the middle intermediate representation (MIR) of the compiler.  <a href="classmir_1_1_m_i_r_builder.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a function in the MIR. A function is a collection of basic blocks that can be called and executed. Functions have parameters and a return type. Functions own all the local variables created within them. Functions can also be called from other functions, hence, <a class="el" href="classmir_1_1_function.html" title="Represents a function in the MIR. A function is a collection of basic blocks that can be called and e...">Function</a> is a subclass of <a class="el" href="classmir_1_1_value.html" title="Represents a value in the MIR. A value can be anything that either holds a value or produces a value....">Value</a>.  <a href="classmir_1_1_function.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Instruction" id="r_Instruction"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_instruction.html">Instruction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an instruction in the MIR. An instruction is a single operation that can be carried out on the machine.  <a href="classmir_1_1_instruction.html#details">More...</a><br /></td></tr>
+<tr class="memitem:MirBuilder" id="r_MirBuilder"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_mir_builder.html">MirBuilder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Responsible for constructing MIR.  <a href="classmir_1_1_mir_builder.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MirContext" id="r_MirContext"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_mir_context.html">MirContext</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the context for the middle intermediate representation (MIR) of the compiler.  <a href="classmir_1_1_mir_context.html#details">More...</a><br /></td></tr>
+<tr class="memitem:MirFactory" id="r_MirFactory"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_mir_factory.html">MirFactory</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Responsible for creating MIR nodes.  <a href="classmir_1_1_mir_factory.html#details">More...</a><br /></td></tr>
+<tr class="memitem:MirNode" id="r_MirNode"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_mir_node.html">MirNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for all MIR nodes.  <a href="classmir_1_1_mir_node.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Module" id="r_Module"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_module.html">Module</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a module in the MIR. A module is a collection of Functions.  <a href="classmir_1_1_module.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Value" id="r_Value"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_value.html">Value</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a value in the MIR. A value can be anything that either holds a value or produces a value. For example, an instruction is a value because it sometimes produces one.  <a href="classmir_1_1_value.html#details">More...</a><br /></td></tr>
+<tr class="memitem:User" id="r_User"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_user.html">User</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A user is a value that can have other values as operands.  <a href="classmir_1_1_user.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Local" id="r_Local"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmir_1_1_local.html">Local</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a local variable or parameter in the middle intermediate representation (MIR) of the compiler.  <a href="classmir_1_1_local.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a0197a64d4a7c8ae9eefb1ea9dfd44e2e" id="r_a0197a64d4a7c8ae9eefb1ea9dfd44e2e"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2e">ConstantKind</a> : u8 { <a class="el" href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2ea1686a6c336b71b36d77354cea19a8b52">Int</a>
+, <a class="el" href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2ea22ae0e2b89e5e3d477f988cc36d3272b">Float</a>
+, <a class="el" href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2ea27118326006d3829667a400ad23d5d98">String</a>
+, <a class="el" href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2eac26f15e86e3de4c398a8273272aba034">Bool</a>
+ }</td></tr>
+<tr class="memdesc:a0197a64d4a7c8ae9eefb1ea9dfd44e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the kind of a constant value, e.g. integer.  <a href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2e">More...</a><br /></td></tr>
+<tr class="memitem:a315e3210f07ca80022751256979ae3c9" id="r_a315e3210f07ca80022751256979ae3c9"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a> : u8 { <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9ab7e7f2b46723f5b08d763041108f8fed">Nop</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a5a82bece4586ad7cb17ba739a2db7f67">Phi</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9afb278fa5defd7e699fcbc930c3e76ccd">Neg</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9aec211f7c20af43e742bf2570c3cb84f9">Add</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9ae80155eceb940c89e2de63ad05868db2">Sub</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a62b6d55816cf737bfc6f42e60df1a3f2">Mul</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a68186db1da877cd7d0d1cad88ac3ab85">SDiv</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a100a973b58634646d669bda4a2da9ea1">UDiv</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a69a7900268b9207621b50150307c9773">SMod</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a5af20709b9040d09eb75fc9e9923280c">UMod</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a63fdae580c8a3012c60caacddcde30c3">BitNot</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9ae5c7b3dc6fa17e0c1d0586d1a169c77d">BitAnd</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a04306ca0b4b3ed9a5cedc16d4acbc2b8">BitOr</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9ac23bb1635c2e183c276b68ecdcf076c1">BitXor</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a7777198898361dc10a9c1f72ee797147">BitShl</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a1f647025a9203166dd8bb1b08c40f2a4">BitLShr</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a4f49bc8c43505b5b696c7e1aa4c8633e">BitAShr</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a6ce38fa7e961d7d8f6ba51a99c36f4c3">FNeg</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9af552e181879ad14956985859308d77d9">FAdd</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a68c7d4b416f9c8f6a073fb295dfd4c6b">FSub</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9ab48b2a9934af7a531cfd7236ded9d50e">FMul</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a9ad1bfdd971accbd0c529c8efcfe4fb6">FDiv</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a2a25ebd8c909241e3f7818389b804ecc">LogicalNot</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a103aa83df42877d5f9baeafdbf620b55">LogicalAnd</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a74ce78827b02c650a20b149765388247">LogicalOr</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9ac3d4c871a243e08a2e960e875ab7fef2">ICmpEq</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a4f87c58ae126d50d4a7f768810084835">ICmpNe</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a2519b6f66e6bdd5d3ac5b16763268689">ICmpSlt</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9ad3e8469f9474f8a3591c847289cfb776">ICmpSle</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9afce244e4c486161ac3b33f07de5f7a87">ICmpSgt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a1791faf4f8aeb9dcb9a629db9cfa42a9">ICmpSge</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9ae2da71587ee19d06b6b4e7045e25a0e5">ICmpUlt</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a49b1e4f3e71f36fc85b63adbc993139e">ICmpUle</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a4235690e6e1b13dbb2f1f87f49da0ee8">ICmpUgt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a7be3b094dfd51b969db7e903f117fb56">ICmpUge</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a98c35b9570b2b7754b96615bbad7e1d5">FCmpEq</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9aa6b98cb96c0d7c37a6fdf4cc796ee5aa">FCmpNe</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a062dc42035ea9b5b753eb69392375c33">FCmpLt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a82331ba930e30cf44f9ec1f945116fa8">FCmpLe</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a4de89d267c0e0c6214ef9a7bf19be89d">FCmpGt</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a253771ee21ba8655bbda7d54145e9f73">FCmpGe</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9afdb0c388de01d545017cdf9ccf00eb72">Store</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9af19dbf2edb3a0bd74b0524d960ff21eb">Load</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a280a09d571703899a5244cf6befe28e3">Construct</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a07ab17b806ac12b518fee16edb9f9fa9">TruncateInt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a41865c9f1dfe82589484624118f81af7">ZeroExtendInt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a0dda905bfb9a47bf068076cb586cf552">SignExtendInt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9aa8fcf526f59f3101ad133c24500adef7">TruncateFloat</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9ab7b70ec22dc0e82036e7529a7ecc5924">ExtendFloat</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a4379147f3bfa8098d64fa26ff754c70b">IntToFloat</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a7968ae81b9b796eaf56cdafa0b1d1974">UIntToFloat</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a013d9f2dd8d7d68e9cdd91f3441fbd5a">FloatToInt</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9ac33e037a1d795e87b5a4402b068a3669">FloatToUInt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a2ffefea422139f305414c5cbd43f634a">PtrToInt</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9afdd8572da64d59d598b084399690f10b">IntToPtr</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9af0368c43b98cff179e7cb55daa205add">Bitcast</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9ac3755e61202abd74da5885d2e9c9160e">Call</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9aa4228a09dd66155de8e93a39245768bd">Ret</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9a8d37869ebc7af08a31df14fe3f48bee2">Br</a>
+, <a class="el" href="#a315e3210f07ca80022751256979ae3c9aa7438498b20c25b5e98e14b77e864ced">CondBr</a>
+, <br />
+&#160;&#160;<a class="el" href="#a315e3210f07ca80022751256979ae3c9a4bed942140642650ca78039de000796a">Unreachable</a>
+<br />
+ }</td></tr>
+<tr class="memitem:a129063af1c978eea48614350b6eeaaba" id="r_a129063af1c978eea48614350b6eeaaba"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a129063af1c978eea48614350b6eeaaba">MirKind</a> : u8 { <br />
+&#160;&#160;<a class="el" href="#a129063af1c978eea48614350b6eeaabaae55f75a29310d7b60f7ac1d390c8ae42">Module</a>
+, <a class="el" href="#a129063af1c978eea48614350b6eeaabaa86408593c34af77fdd90df932f8b5261">Function</a>
+, <a class="el" href="#a129063af1c978eea48614350b6eeaabaaf1126a9217043b7573685178ffb792eb">BasicBlock</a>
+, <a class="el" href="#a129063af1c978eea48614350b6eeaabaac742c5a36b6307267bb709355feb2c41">Instruction</a>
+, <br />
+&#160;&#160;<a class="el" href="#a129063af1c978eea48614350b6eeaabaa509820290d57f333403f490dde7316f4">Local</a>
+, <a class="el" href="#a129063af1c978eea48614350b6eeaabaacb17869fe51048b5a5c4c6106551a255">Constant</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a129063af1c978eea48614350b6eeaaba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to differentiate between different kinds of MIR nodes.  <a href="#a129063af1c978eea48614350b6eeaaba">More...</a><br /></td></tr>
+<tr class="memitem:a745d29f5fa47830b986c4222c03e781b" id="r_a745d29f5fa47830b986c4222c03e781b"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a745d29f5fa47830b986c4222c03e781b">LocalKind</a> : u8 { <a class="el" href="#a745d29f5fa47830b986c4222c03e781ba47c14840d8e15331fa420b9b2f757cd9">Variable</a>
+, <a class="el" href="#a745d29f5fa47830b986c4222c03e781ba83f499a540b1323009c200d6f8cc9396">Parameter</a>
+ }</td></tr>
+<tr class="memdesc:a745d29f5fa47830b986c4222c03e781b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the kind of a local.  <a href="#a745d29f5fa47830b986c4222c03e781b">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aad546fe63ab8662a5b7f87e784c74272" id="r_aad546fe63ab8662a5b7f87e784c74272"><td class="memItemLeft">std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#aad546fe63ab8662a5b7f87e784c74272">toString</a> (<a class="el" href="#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a> opcode)</td></tr>
+<tr class="memdesc:aad546fe63ab8662a5b7f87e784c74272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts an <a class="el" href="#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a> to a human-readable string representation.  <br /></td></tr>
+<tr class="memitem:a650976d1442f0451f2b38b1eefb5ae12" id="r_a650976d1442f0451f2b38b1eefb5ae12"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a650976d1442f0451f2b38b1eefb5ae12 template"><td class="memItemLeft">T *&#160;</td><td class="memItemRight"><a class="el" href="#a650976d1442f0451f2b38b1eefb5ae12">mir_cast</a> (<a class="el" href="classmir_1_1_mir_node.html">MirNode</a> *node)</td></tr>
+<tr class="memdesc:a650976d1442f0451f2b38b1eefb5ae12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to safely cast a MIR node to a specific type. Always use this over dynamic_cast as its significantly faster!!  <br /></td></tr>
 </table>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a0197a64d4a7c8ae9eefb1ea9dfd44e2e" name="a0197a64d4a7c8ae9eefb1ea9dfd44e2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2e">&#9670;&#160;</a></span>ConstantKind</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a0197a64d4a7c8ae9eefb1ea9dfd44e2e">mir::ConstantKind</a> : u8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Represents the kind of a constant value, e.g. integer. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0197a64d4a7c8ae9eefb1ea9dfd44e2ea1686a6c336b71b36d77354cea19a8b52" name="a0197a64d4a7c8ae9eefb1ea9dfd44e2ea1686a6c336b71b36d77354cea19a8b52"></a>Int&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0197a64d4a7c8ae9eefb1ea9dfd44e2ea22ae0e2b89e5e3d477f988cc36d3272b" name="a0197a64d4a7c8ae9eefb1ea9dfd44e2ea22ae0e2b89e5e3d477f988cc36d3272b"></a>Float&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0197a64d4a7c8ae9eefb1ea9dfd44e2ea27118326006d3829667a400ad23d5d98" name="a0197a64d4a7c8ae9eefb1ea9dfd44e2ea27118326006d3829667a400ad23d5d98"></a>String&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0197a64d4a7c8ae9eefb1ea9dfd44e2eac26f15e86e3de4c398a8273272aba034" name="a0197a64d4a7c8ae9eefb1ea9dfd44e2eac26f15e86e3de4c398a8273272aba034"></a>Bool&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_constant_8hpp_source.html#l00036">36</a> of file <a class="el" href="_constant_8hpp_source.html">Constant.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a315e3210f07ca80022751256979ae3c9" name="a315e3210f07ca80022751256979ae3c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a315e3210f07ca80022751256979ae3c9">&#9670;&#160;</a></span>InstructionOpcode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a315e3210f07ca80022751256979ae3c9">mir::InstructionOpcode</a> : u8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ab7e7f2b46723f5b08d763041108f8fed" name="a315e3210f07ca80022751256979ae3c9ab7e7f2b46723f5b08d763041108f8fed"></a>Nop&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a5a82bece4586ad7cb17ba739a2db7f67" name="a315e3210f07ca80022751256979ae3c9a5a82bece4586ad7cb17ba739a2db7f67"></a>Phi&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9afb278fa5defd7e699fcbc930c3e76ccd" name="a315e3210f07ca80022751256979ae3c9afb278fa5defd7e699fcbc930c3e76ccd"></a>Neg&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9aec211f7c20af43e742bf2570c3cb84f9" name="a315e3210f07ca80022751256979ae3c9aec211f7c20af43e742bf2570c3cb84f9"></a>Add&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ae80155eceb940c89e2de63ad05868db2" name="a315e3210f07ca80022751256979ae3c9ae80155eceb940c89e2de63ad05868db2"></a>Sub&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a62b6d55816cf737bfc6f42e60df1a3f2" name="a315e3210f07ca80022751256979ae3c9a62b6d55816cf737bfc6f42e60df1a3f2"></a>Mul&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a68186db1da877cd7d0d1cad88ac3ab85" name="a315e3210f07ca80022751256979ae3c9a68186db1da877cd7d0d1cad88ac3ab85"></a>SDiv&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a100a973b58634646d669bda4a2da9ea1" name="a315e3210f07ca80022751256979ae3c9a100a973b58634646d669bda4a2da9ea1"></a>UDiv&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a69a7900268b9207621b50150307c9773" name="a315e3210f07ca80022751256979ae3c9a69a7900268b9207621b50150307c9773"></a>SMod&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a5af20709b9040d09eb75fc9e9923280c" name="a315e3210f07ca80022751256979ae3c9a5af20709b9040d09eb75fc9e9923280c"></a>UMod&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a63fdae580c8a3012c60caacddcde30c3" name="a315e3210f07ca80022751256979ae3c9a63fdae580c8a3012c60caacddcde30c3"></a>BitNot&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ae5c7b3dc6fa17e0c1d0586d1a169c77d" name="a315e3210f07ca80022751256979ae3c9ae5c7b3dc6fa17e0c1d0586d1a169c77d"></a>BitAnd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a04306ca0b4b3ed9a5cedc16d4acbc2b8" name="a315e3210f07ca80022751256979ae3c9a04306ca0b4b3ed9a5cedc16d4acbc2b8"></a>BitOr&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ac23bb1635c2e183c276b68ecdcf076c1" name="a315e3210f07ca80022751256979ae3c9ac23bb1635c2e183c276b68ecdcf076c1"></a>BitXor&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a7777198898361dc10a9c1f72ee797147" name="a315e3210f07ca80022751256979ae3c9a7777198898361dc10a9c1f72ee797147"></a>BitShl&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a1f647025a9203166dd8bb1b08c40f2a4" name="a315e3210f07ca80022751256979ae3c9a1f647025a9203166dd8bb1b08c40f2a4"></a>BitLShr&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a4f49bc8c43505b5b696c7e1aa4c8633e" name="a315e3210f07ca80022751256979ae3c9a4f49bc8c43505b5b696c7e1aa4c8633e"></a>BitAShr&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a6ce38fa7e961d7d8f6ba51a99c36f4c3" name="a315e3210f07ca80022751256979ae3c9a6ce38fa7e961d7d8f6ba51a99c36f4c3"></a>FNeg&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9af552e181879ad14956985859308d77d9" name="a315e3210f07ca80022751256979ae3c9af552e181879ad14956985859308d77d9"></a>FAdd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a68c7d4b416f9c8f6a073fb295dfd4c6b" name="a315e3210f07ca80022751256979ae3c9a68c7d4b416f9c8f6a073fb295dfd4c6b"></a>FSub&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ab48b2a9934af7a531cfd7236ded9d50e" name="a315e3210f07ca80022751256979ae3c9ab48b2a9934af7a531cfd7236ded9d50e"></a>FMul&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a9ad1bfdd971accbd0c529c8efcfe4fb6" name="a315e3210f07ca80022751256979ae3c9a9ad1bfdd971accbd0c529c8efcfe4fb6"></a>FDiv&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a2a25ebd8c909241e3f7818389b804ecc" name="a315e3210f07ca80022751256979ae3c9a2a25ebd8c909241e3f7818389b804ecc"></a>LogicalNot&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a103aa83df42877d5f9baeafdbf620b55" name="a315e3210f07ca80022751256979ae3c9a103aa83df42877d5f9baeafdbf620b55"></a>LogicalAnd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a74ce78827b02c650a20b149765388247" name="a315e3210f07ca80022751256979ae3c9a74ce78827b02c650a20b149765388247"></a>LogicalOr&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ac3d4c871a243e08a2e960e875ab7fef2" name="a315e3210f07ca80022751256979ae3c9ac3d4c871a243e08a2e960e875ab7fef2"></a>ICmpEq&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a4f87c58ae126d50d4a7f768810084835" name="a315e3210f07ca80022751256979ae3c9a4f87c58ae126d50d4a7f768810084835"></a>ICmpNe&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a2519b6f66e6bdd5d3ac5b16763268689" name="a315e3210f07ca80022751256979ae3c9a2519b6f66e6bdd5d3ac5b16763268689"></a>ICmpSlt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ad3e8469f9474f8a3591c847289cfb776" name="a315e3210f07ca80022751256979ae3c9ad3e8469f9474f8a3591c847289cfb776"></a>ICmpSle&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9afce244e4c486161ac3b33f07de5f7a87" name="a315e3210f07ca80022751256979ae3c9afce244e4c486161ac3b33f07de5f7a87"></a>ICmpSgt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a1791faf4f8aeb9dcb9a629db9cfa42a9" name="a315e3210f07ca80022751256979ae3c9a1791faf4f8aeb9dcb9a629db9cfa42a9"></a>ICmpSge&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ae2da71587ee19d06b6b4e7045e25a0e5" name="a315e3210f07ca80022751256979ae3c9ae2da71587ee19d06b6b4e7045e25a0e5"></a>ICmpUlt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a49b1e4f3e71f36fc85b63adbc993139e" name="a315e3210f07ca80022751256979ae3c9a49b1e4f3e71f36fc85b63adbc993139e"></a>ICmpUle&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a4235690e6e1b13dbb2f1f87f49da0ee8" name="a315e3210f07ca80022751256979ae3c9a4235690e6e1b13dbb2f1f87f49da0ee8"></a>ICmpUgt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a7be3b094dfd51b969db7e903f117fb56" name="a315e3210f07ca80022751256979ae3c9a7be3b094dfd51b969db7e903f117fb56"></a>ICmpUge&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a98c35b9570b2b7754b96615bbad7e1d5" name="a315e3210f07ca80022751256979ae3c9a98c35b9570b2b7754b96615bbad7e1d5"></a>FCmpEq&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9aa6b98cb96c0d7c37a6fdf4cc796ee5aa" name="a315e3210f07ca80022751256979ae3c9aa6b98cb96c0d7c37a6fdf4cc796ee5aa"></a>FCmpNe&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a062dc42035ea9b5b753eb69392375c33" name="a315e3210f07ca80022751256979ae3c9a062dc42035ea9b5b753eb69392375c33"></a>FCmpLt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a82331ba930e30cf44f9ec1f945116fa8" name="a315e3210f07ca80022751256979ae3c9a82331ba930e30cf44f9ec1f945116fa8"></a>FCmpLe&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a4de89d267c0e0c6214ef9a7bf19be89d" name="a315e3210f07ca80022751256979ae3c9a4de89d267c0e0c6214ef9a7bf19be89d"></a>FCmpGt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a253771ee21ba8655bbda7d54145e9f73" name="a315e3210f07ca80022751256979ae3c9a253771ee21ba8655bbda7d54145e9f73"></a>FCmpGe&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9afdb0c388de01d545017cdf9ccf00eb72" name="a315e3210f07ca80022751256979ae3c9afdb0c388de01d545017cdf9ccf00eb72"></a>Store&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9af19dbf2edb3a0bd74b0524d960ff21eb" name="a315e3210f07ca80022751256979ae3c9af19dbf2edb3a0bd74b0524d960ff21eb"></a>Load&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a280a09d571703899a5244cf6befe28e3" name="a315e3210f07ca80022751256979ae3c9a280a09d571703899a5244cf6befe28e3"></a>Construct&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a07ab17b806ac12b518fee16edb9f9fa9" name="a315e3210f07ca80022751256979ae3c9a07ab17b806ac12b518fee16edb9f9fa9"></a>TruncateInt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a41865c9f1dfe82589484624118f81af7" name="a315e3210f07ca80022751256979ae3c9a41865c9f1dfe82589484624118f81af7"></a>ZeroExtendInt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a0dda905bfb9a47bf068076cb586cf552" name="a315e3210f07ca80022751256979ae3c9a0dda905bfb9a47bf068076cb586cf552"></a>SignExtendInt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9aa8fcf526f59f3101ad133c24500adef7" name="a315e3210f07ca80022751256979ae3c9aa8fcf526f59f3101ad133c24500adef7"></a>TruncateFloat&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ab7b70ec22dc0e82036e7529a7ecc5924" name="a315e3210f07ca80022751256979ae3c9ab7b70ec22dc0e82036e7529a7ecc5924"></a>ExtendFloat&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a4379147f3bfa8098d64fa26ff754c70b" name="a315e3210f07ca80022751256979ae3c9a4379147f3bfa8098d64fa26ff754c70b"></a>IntToFloat&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a7968ae81b9b796eaf56cdafa0b1d1974" name="a315e3210f07ca80022751256979ae3c9a7968ae81b9b796eaf56cdafa0b1d1974"></a>UIntToFloat&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a013d9f2dd8d7d68e9cdd91f3441fbd5a" name="a315e3210f07ca80022751256979ae3c9a013d9f2dd8d7d68e9cdd91f3441fbd5a"></a>FloatToInt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ac33e037a1d795e87b5a4402b068a3669" name="a315e3210f07ca80022751256979ae3c9ac33e037a1d795e87b5a4402b068a3669"></a>FloatToUInt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a2ffefea422139f305414c5cbd43f634a" name="a315e3210f07ca80022751256979ae3c9a2ffefea422139f305414c5cbd43f634a"></a>PtrToInt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9afdd8572da64d59d598b084399690f10b" name="a315e3210f07ca80022751256979ae3c9afdd8572da64d59d598b084399690f10b"></a>IntToPtr&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9af0368c43b98cff179e7cb55daa205add" name="a315e3210f07ca80022751256979ae3c9af0368c43b98cff179e7cb55daa205add"></a>Bitcast&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9ac3755e61202abd74da5885d2e9c9160e" name="a315e3210f07ca80022751256979ae3c9ac3755e61202abd74da5885d2e9c9160e"></a>Call&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9aa4228a09dd66155de8e93a39245768bd" name="a315e3210f07ca80022751256979ae3c9aa4228a09dd66155de8e93a39245768bd"></a>Ret&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a8d37869ebc7af08a31df14fe3f48bee2" name="a315e3210f07ca80022751256979ae3c9a8d37869ebc7af08a31df14fe3f48bee2"></a>Br&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9aa7438498b20c25b5e98e14b77e864ced" name="a315e3210f07ca80022751256979ae3c9aa7438498b20c25b5e98e14b77e864ced"></a>CondBr&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315e3210f07ca80022751256979ae3c9a4bed942140642650ca78039de000796a" name="a315e3210f07ca80022751256979ae3c9a4bed942140642650ca78039de000796a"></a>Unreachable&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_instruction_8hpp_source.html#l00023">23</a> of file <a class="el" href="_instruction_8hpp_source.html">Instruction.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a745d29f5fa47830b986c4222c03e781b" name="a745d29f5fa47830b986c4222c03e781b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745d29f5fa47830b986c4222c03e781b">&#9670;&#160;</a></span>LocalKind</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a745d29f5fa47830b986c4222c03e781b">mir::LocalKind</a> : u8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Represents the kind of a local. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a745d29f5fa47830b986c4222c03e781ba47c14840d8e15331fa420b9b2f757cd9" name="a745d29f5fa47830b986c4222c03e781ba47c14840d8e15331fa420b9b2f757cd9"></a>Variable&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a745d29f5fa47830b986c4222c03e781ba83f499a540b1323009c200d6f8cc9396" name="a745d29f5fa47830b986c4222c03e781ba83f499a540b1323009c200d6f8cc9396"></a>Parameter&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_value_8hpp_source.html#l00111">111</a> of file <a class="el" href="_value_8hpp_source.html">Value.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a129063af1c978eea48614350b6eeaaba" name="a129063af1c978eea48614350b6eeaaba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a129063af1c978eea48614350b6eeaaba">&#9670;&#160;</a></span>MirKind</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a129063af1c978eea48614350b6eeaaba">mir::MirKind</a> : u8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used to differentiate between different kinds of MIR nodes. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a129063af1c978eea48614350b6eeaabaae55f75a29310d7b60f7ac1d390c8ae42" name="a129063af1c978eea48614350b6eeaabaae55f75a29310d7b60f7ac1d390c8ae42"></a>Module&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a129063af1c978eea48614350b6eeaabaa86408593c34af77fdd90df932f8b5261" name="a129063af1c978eea48614350b6eeaabaa86408593c34af77fdd90df932f8b5261"></a>Function&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a129063af1c978eea48614350b6eeaabaaf1126a9217043b7573685178ffb792eb" name="a129063af1c978eea48614350b6eeaabaaf1126a9217043b7573685178ffb792eb"></a>BasicBlock&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a129063af1c978eea48614350b6eeaabaac742c5a36b6307267bb709355feb2c41" name="a129063af1c978eea48614350b6eeaabaac742c5a36b6307267bb709355feb2c41"></a>Instruction&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a129063af1c978eea48614350b6eeaabaa509820290d57f333403f490dde7316f4" name="a129063af1c978eea48614350b6eeaabaa509820290d57f333403f490dde7316f4"></a>Local&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a129063af1c978eea48614350b6eeaabaacb17869fe51048b5a5c4c6106551a255" name="a129063af1c978eea48614350b6eeaabaacb17869fe51048b5a5c4c6106551a255"></a>Constant&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_mir_kind_8hpp_source.html#l00025">25</a> of file <a class="el" href="_mir_kind_8hpp_source.html">MirKind.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a650976d1442f0451f2b38b1eefb5ae12" name="a650976d1442f0451f2b38b1eefb5ae12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a650976d1442f0451f2b38b1eefb5ae12">&#9670;&#160;</a></span>mir_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * mir::mir_cast </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmir_1_1_mir_node.html">MirNode</a> *</td>          <td class="paramname"><span class="paramname"><em>node</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to safely cast a MIR node to a specific type. Always use this over dynamic_cast as its significantly faster!! </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type to cast to, which must be derived from <a class="el" href="classmir_1_1_mir_node.html" title="Base class for all MIR nodes.">MirNode</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>The MIR node to cast. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the casted MIR node if the cast is valid, or nullptr if the cast is invalid. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_mir_node_8hpp_source.html#l00081">81</a> of file <a class="el" href="_mir_node_8hpp_source.html">MirNode.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aad546fe63ab8662a5b7f87e784c74272" name="aad546fe63ab8662a5b7f87e784c74272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad546fe63ab8662a5b7f87e784c74272">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view mir::toString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a></td>          <td class="paramname"><span class="paramname"><em>opcode</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Converts an <a class="el" href="#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a> to a human-readable string representation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">opcode</td><td>The <a class="el" href="#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a> to convert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of the <a class="el" href="#a315e3210f07ca80022751256979ae3c9">InstructionOpcode</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_instruction_8cpp_source.html#l00012">12</a> of file <a class="el" href="_instruction_8cpp_source.html">Instruction.cpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

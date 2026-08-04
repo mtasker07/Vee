@@ -112,6 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b4912c0d8da88d017d59bc16bc5c753" id="r_a3b4912c0d8da88d017d59bc16bc5c753"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3b4912c0d8da88d017d59bc16bc5c753">FunctionType</a> (<a class="el" href="classtypes_1_1_type.html#abd36b3a51dec93736be756b8f20d4551">Type</a> *returnType, const std::vector&lt; <a class="el" href="classtypes_1_1_type.html#abd36b3a51dec93736be756b8f20d4551">Type</a> * &gt; &amp;parameterTypes)</td></tr>
 <tr class="memdesc:a3b4912c0d8da88d017d59bc16bc5c753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a function type with the specified return type and parameter types.  <br /></td></tr>
 <tr class="memitem:a5536797db96d38e7d8dbdb2ae1184199" id="r_a5536797db96d38e7d8dbdb2ae1184199"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a5536797db96d38e7d8dbdb2ae1184199">~FunctionType</a> ()=default</td></tr>
+<tr class="memitem:ad4043abca92a13452c33e86ed4894bde" id="r_ad4043abca92a13452c33e86ed4894bde"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#ad4043abca92a13452c33e86ed4894bde">toString</a> () const override</td></tr>
+<tr class="memdesc:ad4043abca92a13452c33e86ed4894bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts this function type to a string representation.  <br /></td></tr>
 <tr class="memitem:a333138ebcfef21268f8e6985676dfdd3" id="r_a333138ebcfef21268f8e6985676dfdd3"><td class="memItemLeft"><a class="el" href="classtypes_1_1_type.html#abd36b3a51dec93736be756b8f20d4551">Type</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a333138ebcfef21268f8e6985676dfdd3">getReturnType</a> () const</td></tr>
 <tr class="memdesc:a333138ebcfef21268f8e6985676dfdd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the return type of this function type.  <br /></td></tr>
 <tr class="memitem:a190f166994da191c2ea291c660eef86e" id="r_a190f166994da191c2ea291c660eef86e"><td class="memItemLeft">const std::vector&lt; <a class="el" href="classtypes_1_1_type.html#abd36b3a51dec93736be756b8f20d4551">Type</a> * &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a190f166994da191c2ea291c660eef86e">getParameterTypes</a> () const</td></tr>
@@ -153,7 +155,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a function type in the Vee language. </p>
 
-<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00028">28</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00030">30</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3b4912c0d8da88d017d59bc16bc5c753" name="a3b4912c0d8da88d017d59bc16bc5c753"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3b4912c0d8da88d017d59bc16bc5c753">&#9670;&#160;</a></span>FunctionType()</h2>
@@ -191,7 +193,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00035">35</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00037">37</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
 
 </div>
 </div>
@@ -247,7 +249,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the number of parameters of this function type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of parameters of this function type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00068">68</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00087">87</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
 
 </div>
 </div>
@@ -283,7 +285,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The parameter type at the specified index. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00060">60</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00079">79</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
 
 </div>
 </div>
@@ -313,7 +315,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the parameter types of this function type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The parameter types of this function type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00052">52</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00071">71</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
 
 </div>
 </div>
@@ -343,7 +345,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the return type of this function type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The return type of this function type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00044">44</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00063">63</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +375,39 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the static kind of this type, which is Function. </p>
 <dl class="section return"><dt>Returns</dt><dd>The static kind of this type, which is Function. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00076">76</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00095">95</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad4043abca92a13452c33e86ed4894bde" name="ad4043abca92a13452c33e86ed4894bde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4043abca92a13452c33e86ed4894bde">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string types::FunctionType::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts this function type to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of this function type. </dd></dl>
+
+<p>Implements <a class="el" href="classtypes_1_1_type.html#a77e3acbe44825e60a9fbb0e516d9ad29">types::Type</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_function_type_8hpp_source.html#l00046">46</a> of file <a class="el" href="_function_type_8hpp_source.html">FunctionType.hpp</a>.</p>
 
 </div>
 </div>

@@ -61,15 +61,19 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_p_float_8hpp.html",
-"_type_construction_pass_8cpp.html",
-"classast_1_1_class_decl_node.html#a069f1baa54ba7579f7b817324575afb5",
-"classast_1_1_index_expr_node.html#a30712fd35a0231b4aa14808db4d9895e",
-"classast_1_1_while_stmt_node.html#a0fe6e16b21783954392f149445f3b6ef",
-"classbasic_1_1_maybe.html#ae3e313f805599bb642ed7ec4f306124b",
-"classsource_1_1_source_manager.html#a7073dc6d00b56ba07d6ab3f871b45d5a",
-"classtypes_1_1_class_type.html",
-"namespaceast.html#a4adf7a60b05f370f433eb99c38db3af1aea982dca224a8e46b107ed9e959f95f6",
-"namespacesymbols.html"
+"_source_manager_8cpp.html",
+"classast_1_1_ast_walker.html#af3d86208f56088d21d11742cc26bbe01",
+"classast_1_1_float_literal_expr_node.html#afb89edd6d1cd4eef5f28bb12b494192a",
+"classast_1_1_return_stmt_node.html#aaeefa679b6edabc44d3948981072ba1e",
+"classbasic_1_1_a_p_int.html#a81c4393e7c687da392160d51fe89a7fd",
+"classbasic_1_1_token.html#a51ecf2f7770b8037895885891a10f8dc",
+"classmir_1_1_mir_builder.html#a1f77d077985de166f52ab654b25301e9",
+"classmir_1_1_user.html#ab1c79d3e81477b5a461f34844c0724f3",
+"classsymbols_1_1_field_symbol.html#a53cf98ab863dd3e36d8045708304a317",
+"classtypes_1_1_pointer_type.html#af2cd72fd33a431945ccf21fad00e4805",
+"namespaceast.html#a812ad0d406fc77fed35936f8042d5502",
+"namespacemir.html#a129063af1c978eea48614350b6eeaabaaf1126a9217043b7573685178ffb792eb",
+"structsource_1_1_source_load_error.html#aae3efaa07b36fd66187a654ff0142bcd"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

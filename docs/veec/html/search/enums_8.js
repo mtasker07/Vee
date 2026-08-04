@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tokentype_0',['TokenType',['../namespacebasic.html#a7daaf3356c922e0f5b4ba91560c367fa',1,'basic']]],
-  ['typekind_1',['TypeKind',['../namespacetypes.html#a9081052145f13501ce9cea6da2ae263f',1,'types']]]
+  ['sourceloaderrorkind_0',['SourceLoadErrorKind',['../namespacesource.html#ab89dd66011c4cdbd768dde477e2e341d',1,'source']]],
+  ['symbolkind_1',['SymbolKind',['../namespacesymbols.html#aa475890fb0be93a6b888ec26a673e9d3',1,'symbols']]]
 ];

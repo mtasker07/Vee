@@ -8,5 +8,6 @@ var classtypes_1_1_class_type =
     [ "getField", "classtypes_1_1_class_type.html#a9d718286e0daa8505709892319a452d6", null ],
     [ "getFields", "classtypes_1_1_class_type.html#aae00afad71a90c2a59cdd30d34f4808a", null ],
     [ "getMethods", "classtypes_1_1_class_type.html#ab4413b3ffe2058766599fed1e644f3d1", null ],
-    [ "getMethods", "classtypes_1_1_class_type.html#a81fbbb122a116606108e52f63e06c83e", null ]
+    [ "getMethods", "classtypes_1_1_class_type.html#a81fbbb122a116606108e52f63e06c83e", null ],
+    [ "toString", "classtypes_1_1_class_type.html#ae05abfa9cee5a26d0bad0f9e61a03564", null ]
 ];

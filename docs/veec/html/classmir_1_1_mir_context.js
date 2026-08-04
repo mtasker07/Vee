@@ -1,11 +1,13 @@
 var classmir_1_1_mir_context =
 [
-    [ "MirContext", "classmir_1_1_mir_context.html#ae47e953a878c447ae1e91cb1e8aac6eb", null ],
+    [ "MirContext", "classmir_1_1_mir_context.html#af9c7ce36158523fdaee35c0e49857f32", null ],
     [ "~MirContext", "classmir_1_1_mir_context.html#a98fcca24228f8b7481cd820eb460fc99", null ],
-    [ "Block", "classmir_1_1_mir_context.html#ac2af81cbc457d21a00f09f5e7e5c4ddf", null ],
-    [ "Function", "classmir_1_1_mir_context.html#ab7194606aa12931e96f8f5448d418ed0", null ],
-    [ "Instruction", "classmir_1_1_mir_context.html#a87273cb892a8182f137567e6b631695e", null ],
-    [ "MirBuilder", "classmir_1_1_mir_context.html#adf5a5a3842f24fd9777f9e1f872e5916", null ],
-    [ "Type", "classmir_1_1_mir_context.html#a18dba29b4f3e91d6d2bc53472a6bb7cc", null ],
-    [ "Value", "classmir_1_1_mir_context.html#aeceedf6e1a7d48a588516ce2b1983d6f", null ]
+    [ "MirContext", "classmir_1_1_mir_context.html#aecbde2e93b7d01a2871600c6a682ed77", null ],
+    [ "MirContext", "classmir_1_1_mir_context.html#a695956c9514076c8554315c9ef652ede", null ],
+    [ "operator=", "classmir_1_1_mir_context.html#a53015304d966641c17fa30ea39e86941", null ],
+    [ "operator=", "classmir_1_1_mir_context.html#aa2c0f7cd9cedb375672ed299b47dd16b", null ],
+    [ "factory", "classmir_1_1_mir_context.html#af4ad32b39e585c9fef6f59d0e2d213e8", null ],
+    [ "instructionTable", "classmir_1_1_mir_context.html#a14ebbf7b1f2d0a37d2ed84c722401ef6", null ],
+    [ "valueNames", "classmir_1_1_mir_context.html#ad4ae737967fdec5c4570994f7c68334c", null ],
+    [ "valueTypes", "classmir_1_1_mir_context.html#a15374f2deee5acf16b0985fd32dfda38", null ]
 ];

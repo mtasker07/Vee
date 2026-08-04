@@ -16,5 +16,6 @@ var _builtin_type_8hpp =
       [ "types::BuiltinTypeKind::F32", "namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42a44ad4ef5a76e6aa6fb3e3fa079a54fda", null ],
       [ "types::BuiltinTypeKind::F64", "namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42a1ad5f6f3069070ec4cbbdc94d5e61e0e", null ],
       [ "types::BuiltinTypeKind::Count", "namespacetypes.html#af4e2b6ed10fc30a163a1fec8a0294e42ae93f994f01c537c4e2f7d8528c3eb5e9", null ]
-    ] ]
+    ] ],
+    [ "types::toString", "namespacetypes.html#a13118bc5ab16c1694236fe643b82fdc6", null ]
 ];
