@@ -31,6 +31,7 @@ public:
     FunctionDeclNode(
         AstKey,
         source::Identifier name,
+        GenericArgsNode* genericParameters,
         std::vector<ParameterDeclNode*> parameters,
         TypeNode* returnType,
         BlockStmtNode* body
@@ -49,6 +50,20 @@ public:
      */
     inline const source::Identifier& getName() const {
         return _name;
+    }
+    /**
+     * @brief Gets the generic type parameters of this function declaration (read-only).
+     * @return The generic type parameters of this function declaration.
+     */
+    inline const GenericArgsNode* getGenericParams() const {
+        return _genericParameters;
+    }
+    /**
+     * @brief Gets the generic type parameters of this function declaration.
+     * @return The generic type parameters of this function declaration.
+     */
+    inline GenericArgsNode* getGenericParams() {
+        return _genericParameters;
     }
     /**
      * @brief Gets the parameters of this function declaration (read-only).
@@ -104,6 +119,7 @@ public:
 
 private:
     source::Identifier _name;
+    GenericArgsNode* _genericParameters;
     std::vector<ParameterDeclNode*> _parameters;
     TypeNode* _returnType;
     BlockStmtNode* _body;

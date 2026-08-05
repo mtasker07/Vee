@@ -275,7 +275,7 @@ ast::ModuleDeclNode* Parser::parseModuleDeclaration() {
 }
 ast::FunctionDeclNode* Parser::parseFunctionDeclaration() {
     // Syntax:
-    // func <identifier>(<parameters>) [-> <return_type>] {
+    // func <identifier>[<types>]([<params>]) [-> <return_type>] {
     //     <body>
     // }
 
@@ -285,6 +285,11 @@ ast::FunctionDeclNode* Parser::parseFunctionDeclaration() {
     const Token* idToken = expect(TokenType::Identifier, diagnostics::ERROR_IDENTIFIER_EXPECTED);
     if (!idToken) {
         return nullptr;
+    }
+
+    ast::GenericArgsNode* genericParams = nullptr;
+    if (check(TokenType::Less)) {
+        genericParams = parseGenericArgs();
     }
 
     expect(TokenType::LParen, diagnostics::ERROR_LPAREN_EXPECTED);
@@ -321,6 +326,7 @@ ast::FunctionDeclNode* Parser::parseFunctionDeclaration() {
     return _ast.makeNode<ast::FunctionDeclNode>(
         funcRange,                  // range
         funcName,                   // name
+        genericParams,              // generic parameters
         std::move(parameters),      // parameters
         returnType,                 // return type
         body                        // body
