@@ -13,6 +13,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Result.hpp"
 #include "veec/fs/Path.hpp"
 #include "veec/source/SourceFileId.hpp"
@@ -105,6 +106,10 @@ std::string_view SourceManager::getText(SourceRange range) const {
     const SourceFile& file = getFile(range.fileId);
     return file.getContents().substr(range.startOffset, range.endOffset - range.startOffset);
 }
+basic::Maybe<fs::Path> SourceManager::getPath(SourceFileId fileId) const {
+    const SourceFile& file = getFile(fileId);
+    return file.getPath();
+}
 
 const SourceFile& SourceManager::getFile(SourceFileId fileId) const {
     VEE_ASSERT(fileId < _files.size(), "Invalid SourceFileId: {}", (u32)fileId);
@@ -113,6 +118,15 @@ const SourceFile& SourceManager::getFile(SourceFileId fileId) const {
 SourceFile& SourceManager::getFile(SourceFileId fileId) {
     VEE_ASSERT(fileId < _files.size(), "Invalid SourceFileId: {}", (u32)fileId);
     return _files.at(fileId);
+}
+
+std::vector<SourceFileId> SourceManager::getAllFileIds() const {
+    std::vector<SourceFileId> fileIds;
+    fileIds.reserve(_files.size());
+    for (const auto& file : _files) {
+        fileIds.push_back(file.getId());
+    }
+    return fileIds;
 }
 
 } // namespace source

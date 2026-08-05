@@ -13,6 +13,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Result.hpp"
 #include "veec/fs/Path.hpp"
 #include "veec/source/SourceFileId.hpp"
@@ -111,6 +112,12 @@ public:
      * @return A string_view representing the slice of the source file.
      */
     std::string_view getText(SourceRange range) const;
+    /**
+     * @brief Retrieves the file path of the source file corresponding to the given SourceFileId.
+     * @param fileId The SourceFileId of the source file.
+     * @return The path of the source file, if it exists.
+     */
+    basic::Maybe<fs::Path> getPath(SourceFileId fileId) const;
 
     /**
      * @brief Retrieves the SourceFile corresponding to the given SourceFileId (immutable).
@@ -126,6 +133,12 @@ public:
       * @return A reference to the SourceFile.
       */
 	SourceFile& getFile(SourceFileId fileId);
+
+    /**
+     * @brief Retrieves a list of all SourceFileIds managed by the SourceManager.
+     * @return A list of all SourceFileIds.
+     */
+    std::vector<SourceFileId> getAllFileIds() const;
 
 private:
     std::vector<SourceFile> _files;
