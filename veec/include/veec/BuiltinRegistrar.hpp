@@ -14,7 +14,9 @@
 
 VEEC_NAMESPACE_BEGIN
 
-class CompilationContext;
+namespace compilation {
+    class CompilationContext;
+} // namespace compilation
 
 /**
  * @class BuiltinRegistrar
@@ -26,7 +28,7 @@ public:
      * @brief Creates a new BuiltinRegistrar instance with the given CompilationContext.
      * @param ctx The CompilationContext to register built-in functionality into.
      */
-    BuiltinRegistrar(CompilationContext& ctx)
+    BuiltinRegistrar(compilation::CompilationContext& ctx)
         : _ctx(ctx) {}
 
     ~BuiltinRegistrar() = default;
@@ -40,7 +42,7 @@ public:
     void registerAll();
 
 private:
-    CompilationContext& _ctx;
+    compilation::CompilationContext& _ctx;
 
     void registerBuiltinOperators();
     void registerBuiltinConversions();

@@ -11,7 +11,7 @@
 
 #include "vee/core/CoreDefines.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/StringPool.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/ast/AstFwd.hpp"
@@ -31,7 +31,7 @@ public:
      * @param sm The SourceManager to use for retrieving source text.
      * @param sp The StringPool to use for retrieving string text.
      */
-    AstPrinter(const CompilationContext& ctx)
+    AstPrinter(const compilation::CompilationContext& ctx)
         : _sm(ctx.sources), _sp(ctx.strings) {}
 
     ~AstPrinter() = default;

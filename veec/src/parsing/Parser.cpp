@@ -4,7 +4,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/Maybe.hpp"
 #include "veec/basic/StringId.hpp"
 #include "veec/basic/StringPool.hpp"

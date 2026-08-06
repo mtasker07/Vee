@@ -11,7 +11,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
@@ -21,7 +21,7 @@
 #include "veec/sema/Scope.hpp"
 
 VEEC_NAMESPACE_BEGIN
-namespace ast_passes {
+namespace sema_passes {
 
 /**
  * @class TopLevelUseResolutionPass
@@ -34,7 +34,7 @@ public:
      * @param ctx The CompilationContext to use for this pass.
      * @param sema The SemaContext to use for this pass.
      */
-    TopLevelUseResolutionPass(CompilationContext& ctx, sema::SemaContext& sema)
+    TopLevelUseResolutionPass(compilation::CompilationContext& ctx, sema::SemaContext& sema)
         : sema::Pass(ctx, sema) {}
         
     virtual ~TopLevelUseResolutionPass() = default;
@@ -59,5 +59,5 @@ private:
     void resolveImports(ast::UseStmtNode& node);
 };
 
-} // namespace ast_passes
+} // namespace sema_passes
 VEEC_NAMESPACE_END

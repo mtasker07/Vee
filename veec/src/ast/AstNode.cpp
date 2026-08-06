@@ -5,7 +5,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/StringPool.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/ast/AstFwd.hpp"
@@ -14,7 +14,7 @@
 VEEC_NAMESPACE_BEGIN
 namespace ast {
 
-std::string AstNode::toString(const CompilationContext& ctx) const {
+std::string AstNode::toString(const compilation::CompilationContext& ctx) const {
     AstPrinter printer(ctx);
     return printer.printNode(*this);
 }

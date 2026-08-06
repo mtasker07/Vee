@@ -12,7 +12,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/APInt.hpp"
 #include "veec/basic/SmallVector.hpp"
 #include "veec/mir/MirContext.hpp"
@@ -34,7 +34,7 @@ public:
      * @brief Creates a new MirBuilder instance.
      * @param ctx The CompilationContext object.
      */
-    MirBuilder(CompilationContext& ctx)
+    MirBuilder(compilation::CompilationContext& ctx)
         : _ctx(ctx), _mir(ctx.mir) {}
 
     ~MirBuilder() = default;
@@ -645,7 +645,7 @@ public:
     void createUnreachable();
 
 private:
-    CompilationContext& _ctx;
+    compilation::CompilationContext& _ctx;
     MirContext& _mir;
 
     BasicBlock* _insertBlock = nullptr;

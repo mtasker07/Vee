@@ -4,7 +4,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/sema/SemaContext.hpp"
 #include "veec/symbols/OperatorTable.hpp"
 #include "veec/types/TypeContext.hpp"

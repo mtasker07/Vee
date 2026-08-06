@@ -1,4 +1,4 @@
-#include "veec/ast_passes/TypeCheckerPass.hpp"
+#include "veec/sema_passes/TypeCheckerPass.hpp"
 
 #include <span>
 #include <vector>
@@ -9,7 +9,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/BigInt.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
@@ -57,7 +57,7 @@
 #include "veec/diagnostics/DiagnosticCatalog.hpp"
 
 VEEC_NAMESPACE_BEGIN
-namespace ast_passes {
+namespace sema_passes {
 
 void TypeCheckerPass::visitExpression(ast::ExpressionNode& node) {
     ast::AstWalker::visitExpression(node);
@@ -801,5 +801,5 @@ void TypeCheckerPass::emitImplicitConversionDiagnostics(
     }
 }
 
-} // namespace ast_passes
+} // namespace sema_passes
 VEEC_NAMESPACE_END

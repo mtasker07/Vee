@@ -16,7 +16,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
@@ -50,7 +50,7 @@ public:
     }
 
 protected:
-    CompilationContext& _ctx;
+    compilation::CompilationContext& _ctx;
     SemaContext& _sema;
 
     /**
@@ -58,7 +58,7 @@ protected:
      * @param ctx The CompilationContext to use for this Pass.
      * @param sema The SemaContext to use for this Pass.
      */
-    Pass(CompilationContext& ctx, SemaContext& sema)
+    Pass(compilation::CompilationContext& ctx, SemaContext& sema)
         : _ctx(ctx), _sema(sema) {}
 };
 

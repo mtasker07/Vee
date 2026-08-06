@@ -11,7 +11,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
@@ -25,7 +25,7 @@ namespace mirgen {
 
 class AstToMirLowerer : private ast::ConstAstWalker {
 public:
-    AstToMirLowerer(CompilationContext& ctx)
+    AstToMirLowerer(compilation::CompilationContext& ctx)
         : _ctx(ctx), _mir(ctx.mir), _builder(ctx) {}
 
     ~AstToMirLowerer() = default;
@@ -38,7 +38,7 @@ public:
     mir::Module* lower(ast::CompilationUnitNode& node);    
 
 private:
-    CompilationContext& _ctx;
+    compilation::CompilationContext& _ctx;
     mir::MirContext& _mir;
     mir::MirBuilder _builder;
 

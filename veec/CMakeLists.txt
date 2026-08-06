@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.20)
 
 # VEEC shared library
 set(VEEC_SOURCES
-    #src/Compilation.cpp
     src/BuiltinRegistrar.cpp
+
+    src/compilation/Compilation.cpp
 
     src/basic/APInt.cpp
     src/basic/BigInt.cpp

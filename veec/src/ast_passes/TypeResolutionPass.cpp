@@ -1,10 +1,10 @@
-#include "veec/ast_passes/TypeResolutionPass.hpp"
+#include "veec/sema_passes/TypeResolutionPass.hpp"
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
@@ -36,7 +36,7 @@
 #include "veec/diagnostics/DiagnosticCatalog.hpp"
 
 VEEC_NAMESPACE_BEGIN
-namespace ast_passes {
+namespace sema_passes {
 
 void TypeResolutionPass::visitFunctionDecl(ast::FunctionDeclNode& node) {
     ast::AstWalker::visitFunctionDecl(node);
@@ -167,5 +167,5 @@ void TypeResolutionPass::visitNamedType(ast::NamedTypeNode& node) {
     _ctx.types.table.setNodeType(&node, classType);
 }
 
-} // namespace ast_passes
+} // namespace sema_passes
 VEEC_NAMESPACE_END

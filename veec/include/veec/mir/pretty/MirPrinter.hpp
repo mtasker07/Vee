@@ -13,7 +13,7 @@
 
 #include "vee/core/CoreDefines.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/StringPool.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/mir/MirFwd.hpp"
@@ -34,7 +34,7 @@ public:
      * @brief Creates a new MirPrinter instance with the given SourceManager.
      * @param ctx The compilation context object.
      */
-    MirPrinter(const CompilationContext& ctx)
+    MirPrinter(const compilation::CompilationContext& ctx)
         : _ctx(ctx), _sm(ctx.sources), _sp(ctx.strings) {}
 
     ~MirPrinter() = default;
@@ -50,7 +50,7 @@ private:
     std::ostringstream _oss;
     i32 _indent = 0;
 
-    const CompilationContext& _ctx;
+    const compilation::CompilationContext& _ctx;
     const source::SourceManager& _sm;
     const basic::StringPool& _sp;
 

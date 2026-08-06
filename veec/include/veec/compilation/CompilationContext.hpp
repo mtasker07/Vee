@@ -11,6 +11,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/compilation/UnitManager.hpp"
 #include "veec/basic/StringPool.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/ast/AstContext.hpp"
@@ -20,6 +21,7 @@
 #include "veec/diagnostics/DiagnosticEngine.hpp"
 
 VEEC_NAMESPACE_BEGIN
+namespace compilation {
 
 /**
  * @class CompilationContext
@@ -27,6 +29,7 @@ VEEC_NAMESPACE_BEGIN
  */
 class CompilationContext {
 public:
+    UnitManager units;
     basic::StringPool strings;
     source::SourceManager sources;
     diagnostics::DiagnosticEngine diagnostics;
@@ -41,4 +44,5 @@ public:
     ~CompilationContext() = default;
 };
 
+} // namespace compilation
 VEEC_NAMESPACE_END

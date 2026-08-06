@@ -16,9 +16,10 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/Maybe.hpp"
 #include "veec/basic/Token.hpp"
+#include "veec/basic/TokenList.hpp"
 #include "veec/basic/StringId.hpp"
 #include "veec/source/Identifier.hpp"
 #include "veec/source/SourceManager.hpp"
@@ -35,31 +36,16 @@ using Token = basic::Token;
 using TokenType = basic::TokenType;
 
 /**
- * @brief Represents a list of tokens to be parsed, along with the source file they originate from.
- */
-struct TokenList {
-    /**
-     * @brief The ID of the source file from which these tokens were generated.
-     */
-    source::SourceFileId fileId;
-    /**
-     * @brief The list of tokens to be parsed.
-     */
-    const std::vector<Token>& tokens;
-};
-
-/**
  * @brief Responsible for producing an AST from a list of tokens.
  */
 class Parser {
 public:
     /**
      * @brief Creates a parser with the given context.
-     * @param ctx The compilation context to use for this parser.
-     * @param ast The AST context to use for this parser.
+     * @param ctx The compilation context object.
      */
-    Parser(CompilationContext& ctx, ast::AstContext& ast, const TokenList& tokenList)
-        : _ctx(ctx), _ast(ast), _tokenList(tokenList) {}
+    Parser(compilation::CompilationContext& ctx, const basic::TokenList& tokenList)
+        : _ctx(ctx), _ast(ctx.ast), _tokenList(tokenList) {}
 
     ~Parser() = default;
 
@@ -79,10 +65,10 @@ private:
             : left(left), right(right) {}
     };
 
-    CompilationContext& _ctx;
+    compilation::CompilationContext& _ctx;
     ast::AstContext& _ast;
     int _currentTokenIndex = 0;
-    const TokenList& _tokenList;
+    const basic::TokenList& _tokenList;
 
     //
     // Parse methods

@@ -7,11 +7,19 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
+#include <memory>
+#include <utility>
+#include <type_traits>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
+#include "veec/compilation/TranslationUnit.hpp"
+#include "veec/source/SourceFileId.hpp"
+#include "veec/ast/AstContext.hpp"
+#include "veec/ast/AstFwd.hpp"
 #include "veec/sema/SemaContext.hpp"
 #include "veec/sema/Pass.hpp"
 #include "veec/diagnostics/DiagnosticEngine.hpp"
@@ -30,8 +38,8 @@ public:
      * @brief Creates a new PassManager instance with the given context.
      * @param ctx The context to use for all semantic analysis passes managed by this pass manager.
      */
-    PassManager(CompilationContext& ctx, SemaContext& sema)
-        : _ctx(ctx), _sema(sema) {}
+    PassManager(compilation::CompilationContext& ctx)
+        : _ctx(ctx), _sema(ctx.sema) {}
 
     ~PassManager() = default;
 
@@ -50,8 +58,8 @@ public:
     }
 
     /**
-     * @brief Runs all passes in this semantic pass manager on the given ModuleNode AST node.
-     * @param root The ModuleNode AST node to run all passes on.
+     * @brief Runs all passes in this semantic pass manager on the given compilation unit node.
+     * @param root The CompilationUnitNode node to run all passes on.
      * @return True if all passes ran successfully without reporting any errors, false if any pass reported an error
      * (accounting for the current error level).
      */
@@ -64,9 +72,48 @@ public:
         }
         return true;
     }
+    /**
+     * @brief Runs all passes over a given translation unit.
+     * @param unit The translation unit to run all passes on.
+     * @return True if all passes ran successfully without reporting any errors, false if any pass reported an error
+     * (accounting for the current error level).
+     */
+    inline bool runAllForUnit(const compilation::TranslationUnit* unit) {
+        bool success = true;
+        for (const std::unique_ptr<Pass>& pass : _passes) {
+            ast::CompilationUnitNode* root = unit->ast;
+            pass->run(*root);
+            if (_ctx.diagnostics.hasErrors()) {
+                success = false;
+            }
+        }
+        return success;
+    }
+    /**
+     * @brief Runs all passes over each translation unit. Each pass is run for every unit before continuing to the next pass,
+     * unlike runAllForUnit() which runs ALL passes over a given unit before continuing to the next unit. Meaning
+     * symbols and other semantic tables won't be populated for all units yet.
+     * @param units The list of translation units to run all passes on. The compilation unit must have been
+     * set for each in the context.
+     * @return True if all passes ran successfully without reporting any errors, false if any pass reported an error
+     * (accounting for the current error level).
+     */
+    inline bool runAllForUnits(const std::vector<compilation::TranslationUnit*>& units) {
+        bool success = true;
+        for (const std::unique_ptr<Pass>& pass : _passes) {
+            for (const compilation::TranslationUnit* unit : units) {
+                ast::CompilationUnitNode* root = unit->ast;
+                pass->run(*root);
+                if (_ctx.diagnostics.hasErrors()) {
+                    success = false;
+                }
+            }
+        }
+        return success;
+    }
 
 private:
-    CompilationContext& _ctx;
+    compilation::CompilationContext& _ctx;
     SemaContext& _sema;
     std::vector<std::unique_ptr<Pass>> _passes;
 };

@@ -9,18 +9,19 @@
 #include <vector>
 
 #include "veec/lexing/Lexer.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 
 using veec::lexing::Lexer;
 using veec::lexing::Token;
 using veec::lexing::TokenType;
-using veec::CompilationContext;
+using veec::compilation::CompilationContext;
 
 namespace {
 
 std::vector<Token> lex(CompilationContext& ctx, std::string_view sourceText) {
 	auto fileId = ctx.sources.addVirtualFile("LexerTests.vee", sourceText);
 	Lexer lexer(ctx, ctx.sources.getView(fileId));
-	return lexer.tokenize();
+	return lexer.tokenize().tokens;
 }
 
 void expectTypes(const std::vector<Token>& tokens, const std::vector<TokenType>& expected) {

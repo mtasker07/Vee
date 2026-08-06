@@ -11,8 +11,10 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
+#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Token.hpp"
+#include "veec/basic/TokenList.hpp"
 #include "veec/source/SourceView.hpp"
 #include "veec/source/SourceLocation.hpp"
 #include "veec/source/SourceRange.hpp"
@@ -20,7 +22,7 @@
 VEEC_NAMESPACE_BEGIN
 namespace lexing {
 
-std::vector<Token> Lexer::tokenize() {
+basic::TokenList Lexer::tokenize() {
     _state.currentIndex = 0;
     _state.tokens.clear();
 
@@ -32,7 +34,10 @@ std::vector<Token> Lexer::tokenize() {
     beginToken();
     emitEOFToken();
 
-    return std::move(_state.tokens);
+    return basic::TokenList{
+        _source.getFileId(),
+        std::move(_state.tokens)
+    };
 }
 
 char Lexer::advance() {

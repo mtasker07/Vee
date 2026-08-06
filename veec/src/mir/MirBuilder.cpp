@@ -7,7 +7,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/MirContext.hpp"
 #include "veec/mir/MirFactory.hpp"

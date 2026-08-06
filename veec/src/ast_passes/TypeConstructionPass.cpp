@@ -1,10 +1,10 @@
-#include "veec/ast_passes/TypeConstructionPass.hpp"
+#include "veec/sema_passes/TypeConstructionPass.hpp"
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
@@ -25,7 +25,7 @@
 #include "veec/diagnostics/DiagnosticCatalog.hpp"
 
 VEEC_NAMESPACE_BEGIN
-namespace ast_passes {
+namespace sema_passes {
 
 void TypeConstructionPass::visitClassDecl(ast::ClassDeclNode& node) {
     VEE_ASSERT(node.symbol != nullptr, "ClassDeclNode assigned no symbol!");
@@ -59,5 +59,5 @@ void TypeConstructionPass::visitFieldDecl(ast::FieldDeclNode& node) {
     _currentClass->getType()->addField(fieldSym);
 }
 
-} // namespace ast_passes
+} // namespace sema_passes
 VEEC_NAMESPACE_END

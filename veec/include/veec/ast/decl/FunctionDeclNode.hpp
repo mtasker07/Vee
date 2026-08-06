@@ -38,6 +38,7 @@ public:
     )
         : DeclarationNode(AstKey{}, AstKind::FunctionDecl),
         _name(name),
+        _genericParameters(genericParameters),
         _parameters(std::move(parameters)),
         _returnType(returnType),
         _body(body) {}

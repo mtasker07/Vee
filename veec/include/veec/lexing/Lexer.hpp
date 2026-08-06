@@ -15,8 +15,10 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
+#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Token.hpp"
+#include "veec/basic/TokenList.hpp"
 #include "veec/source/SourceView.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -49,7 +51,7 @@ public:
      * @param source The source view to tokenize.
      * @param ctx The context for this compilation process.
      */
-    Lexer(CompilationContext& ctx, source::SourceView source)
+    Lexer(compilation::CompilationContext& ctx, source::SourceView source)
         : _ctx(ctx), _source(source) {}
         
     ~Lexer() = default;
@@ -58,10 +60,10 @@ public:
      * @brief Tokenizes the given source code and returns a list of generated tokens.
      * @return A vector containing the generated tokens.
      */
-    std::vector<Token> tokenize();
+    basic::TokenList tokenize();
 
 private:
-    CompilationContext& _ctx;
+    compilation::CompilationContext& _ctx;
     source::SourceView _source;
     LexerState _state;
 

@@ -27,7 +27,9 @@
 
 VEEC_NAMESPACE_BEGIN
 
-class CompilationContext;
+namespace compilation {
+    class CompilationContext;
+}
 
 namespace ast {
 
@@ -68,7 +70,7 @@ public:
      * @note This method internally wraps AstPrinter and is mostly for convenience,
      * if you want more control it is recommended to use AstPrinter directly.
      */
-    std::string toString(const CompilationContext& ctx) const;
+    std::string toString(const compilation::CompilationContext& ctx) const;
 
 protected:
     struct AstKey {};

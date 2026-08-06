@@ -11,6 +11,7 @@
 #include "veec/CoreDefines.hpp"
 
 VEEC_NAMESPACE_BEGIN
+namespace compilation {
 
 /**
  * @struct CompilationConfig
@@ -19,4 +20,5 @@ VEEC_NAMESPACE_BEGIN
 struct CompilationConfig {
 };
 
+} // namespace compilation
 VEEC_NAMESPACE_END

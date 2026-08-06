@@ -12,7 +12,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
@@ -22,7 +22,7 @@
 #include "veec/symbols/SymbolFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
-namespace ast_passes {
+namespace sema_passes {
 
 /**
  * @class TypeConstructionPass
@@ -35,7 +35,7 @@ public:
      * @param ctx The CompilationContext to use for this pass.
      * @param sema The SemaContext to use for this pass.
      */
-    TypeConstructionPass(CompilationContext& ctx, sema::SemaContext& sema)
+    TypeConstructionPass(compilation::CompilationContext& ctx, sema::SemaContext& sema)
         : sema::Pass(ctx, sema) {}
         
     virtual ~TypeConstructionPass() = default;
@@ -57,5 +57,5 @@ private:
     symbols::ClassSymbol* _currentClass = nullptr;
 };
 
-} // namespace ast_passes
+} // namespace sema_passes
 VEEC_NAMESPACE_END

@@ -1,4 +1,4 @@
-#include "veec/ast_passes/SymbolResolutionPass.hpp"
+#include "veec/sema_passes/SymbolResolutionPass.hpp"
 
 #include <string_view>
 
@@ -6,7 +6,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/CompilationContext.hpp"
+#include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/StringId.hpp"
 #include "veec/basic/StringPool.hpp"
 #include "veec/source/Identifier.hpp"
@@ -36,7 +36,7 @@
 
 
 VEEC_NAMESPACE_BEGIN
-namespace ast_passes {
+namespace sema_passes {
 
 void SymbolResolutionPass::visitCompilationUnit(ast::CompilationUnitNode& node) {
     // Get scope for unit
@@ -140,5 +140,5 @@ symbols::Symbol* SymbolResolutionPass::lookupNameInScope(basic::StringId nameId,
     return scope->getIdentifierTable().lookup(nameId);
 }
 
-} // namespace ast_passes
+} // namespace sema_passes
 VEEC_NAMESPACE_END
