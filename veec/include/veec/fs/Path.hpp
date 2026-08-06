@@ -49,6 +49,10 @@ public:
      */
     explicit Path(StringViewType path) : _path(path) {}
 
+    /**
+     * @brief Gets the underlying string view of this Path.
+     * @return The path as a string view.
+     */
     StringViewType str() const {
         return _path;
     }
