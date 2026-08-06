@@ -13,7 +13,6 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Result.hpp"
 #include "veec/fs/Path.hpp"
 #include "veec/source/SourceFileId.hpp"
@@ -106,7 +105,7 @@ std::string_view SourceManager::getText(SourceRange range) const {
     const SourceFile& file = getFile(range.fileId);
     return file.getContents().substr(range.startOffset, range.endOffset - range.startOffset);
 }
-basic::Maybe<fs::Path> SourceManager::getPath(SourceFileId fileId) const {
+fs::Path SourceManager::getPath(SourceFileId fileId) const {
     const SourceFile& file = getFile(fileId);
     return file.getPath();
 }

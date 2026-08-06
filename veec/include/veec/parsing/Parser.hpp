@@ -11,13 +11,13 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#include <optional>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/CompilationContext.hpp"
-#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Token.hpp"
 #include "veec/basic/TokenList.hpp"
 #include "veec/basic/StringId.hpp"
@@ -186,8 +186,8 @@ private:
     // Pratt engine helpers
     //
 
-    basic::Maybe<u8> getPrefixBindingPower(TokenType type) const;
-    basic::Maybe<BindingPower> getInfixBindingPower(TokenType type) const;
+    std::optional<u8> getPrefixBindingPower(TokenType type) const;
+    std::optional<BindingPower> getInfixBindingPower(TokenType type) const;
 
     //
     // Parser state helpers

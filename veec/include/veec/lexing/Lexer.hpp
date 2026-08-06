@@ -16,7 +16,6 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/CompilationContext.hpp"
-#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Token.hpp"
 #include "veec/basic/TokenList.hpp"
 #include "veec/source/SourceView.hpp"

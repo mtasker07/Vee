@@ -13,7 +13,6 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/basic/Maybe.hpp"
 #include "veec/basic/Result.hpp"
 #include "veec/fs/Path.hpp"
 #include "veec/source/SourceFileId.hpp"
@@ -115,9 +114,9 @@ public:
     /**
      * @brief Retrieves the file path of the source file corresponding to the given SourceFileId.
      * @param fileId The SourceFileId of the source file.
-     * @return The path of the source file, if it exists.
+     * @return The path of the source file.
      */
-    basic::Maybe<fs::Path> getPath(SourceFileId fileId) const;
+    fs::Path getPath(SourceFileId fileId) const;
 
     /**
      * @brief Retrieves the SourceFile corresponding to the given SourceFileId (immutable).

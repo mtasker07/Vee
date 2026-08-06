@@ -9,12 +9,12 @@
 #pragma once
 
 #include <string_view>
+#include <optional>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/basic/Maybe.hpp"
 #include "veec/basic/StringId.hpp"
 #include "veec/symbols/SymbolKind.hpp"
 
@@ -46,14 +46,14 @@ public:
      * @brief Gets the name? of this symbol, if any.
      * @return The name? of this symbol.
      */
-    inline basic::Maybe<basic::StringId> getName() const { return _name; }
+    inline std::optional<basic::StringId> getName() const { return _name; }
     /**
      * @brief Gets the name! of this symbol, if any.
      * @return The name! of this symbol.
      * @note Asserts if the symbol has no name, check first using getName().
      */
     inline basic::StringId getNameValue() const {
-        VEE_ASSERT(_name.hasValue(), "Cannot get definitive name of symbol when it has no name");
+        VEE_ASSERT(_name.has_value(), "Cannot get definitive name of symbol when it has no name");
         return _name.value();
     }
 
@@ -114,7 +114,7 @@ protected:
 
 private:
     SymbolKind _kind;
-    basic::Maybe<basic::StringId> _name;
+    std::optional<basic::StringId> _name;
 };
 
 } // namespace symbols

@@ -1,11 +1,12 @@
 #include "veec/parsing/Parser.hpp"
 
+#include <optional>
+
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/CompilationContext.hpp"
-#include "veec/basic/Maybe.hpp"
 #include "veec/basic/StringId.hpp"
 #include "veec/basic/StringPool.hpp"
 #include "veec/basic/Token.hpp"
@@ -998,7 +999,7 @@ ast::ExpressionNode* Parser::parsePrefixUnaryExpression() {
     const Token& opToken = advance();
 
     auto bp = getPrefixBindingPower(opToken.type());
-    VEE_ASSERT(bp.hasValue(), "Expected binding power for unary operator");
+    VEE_ASSERT(bp.has_value(), "Expected binding power for unary operator");
 
     ast::ExpressionNode* operand = parseExpressionBP(*bp);
     if (!operand) {
@@ -1022,7 +1023,7 @@ ast::ExpressionNode* Parser::parseBinaryExpression(ast::ExpressionNode* lhs) {
     const Token& opToken = advance();
 
     auto bp = getInfixBindingPower(opToken.type());
-    VEE_ASSERT(bp.hasValue(), "Expected binding power for binary operator");
+    VEE_ASSERT(bp.has_value(), "Expected binding power for binary operator");
 
     ast::ExpressionNode* rhs = parseExpressionBP(bp->right);
     if (!rhs) {
@@ -1044,7 +1045,7 @@ ast::ExpressionNode* Parser::parseAssignmentExpression(ast::ExpressionNode* lhs)
     const Token& opToken = advance();
 
     auto bp = getInfixBindingPower(opToken.type());
-    VEE_ASSERT(bp.hasValue(), "Expected binding power for assignment operator");
+    VEE_ASSERT(bp.has_value(), "Expected binding power for assignment operator");
 
     ast::ExpressionNode* rhs = parseExpressionBP(bp->right);
     if (!rhs) {
@@ -1272,9 +1273,9 @@ ast::BuiltinTypeKind Parser::tokenTypeToBuiltinType(TokenType type) const {
     }
 }
 
-basic::Maybe<u8> Parser::getPrefixBindingPower(TokenType type) const {
+std::optional<u8> Parser::getPrefixBindingPower(TokenType type) const {
     switch (type) {
-
+        
         // Unary operators
         case TokenType::Plus:
         case TokenType::Minus:
@@ -1284,14 +1285,14 @@ basic::Maybe<u8> Parser::getPrefixBindingPower(TokenType type) const {
         case TokenType::Tilde:
         case TokenType::Star:       // dereference
         case TokenType::Ampersand:  // reference/address-of
-            return 95;
+            return (u8)95;
 
 
         default:
-            return {};
+            return std::nullopt;
     }
 }
-basic::Maybe<Parser::BindingPower> Parser::getInfixBindingPower(TokenType type) const {
+std::optional<Parser::BindingPower> Parser::getInfixBindingPower(TokenType type) const {
     switch (type) {
 
         // Assignment (right associative)
@@ -1361,7 +1362,7 @@ basic::Maybe<Parser::BindingPower> Parser::getInfixBindingPower(TokenType type) 
 
 
         default:
-            return {};
+            return std::nullopt;
     }
 }
 
