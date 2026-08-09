@@ -954,7 +954,7 @@ ast::IntLiteralExprNode* Parser::parseIntLiteralExpression() {
     VEE_ASSERT(match(TokenType::IntegerLiteral), "Expected integer literal token before parsing int literal expression");
     const Token& valueToken = previous();
 
-    std::string_view valueStr = tokenText(valueToken);
+    std::string_view valueStr = valueToken.text();
     return _ast.makeNode<ast::IntLiteralExprNode>(
         valueToken.range(),    // range
         valueToken,            // token
@@ -966,7 +966,7 @@ ast::FloatLiteralExprNode* Parser::parseFloatLiteralExpression() {
     VEE_ASSERT(match(TokenType::FloatLiteral), "Expected float literal token before parsing float literal expression");
     const Token& valueToken = previous();
 
-    std::string valueStr = std::string(tokenText(valueToken));
+    std::string valueStr = std::string(valueToken.text());
     return _ast.makeNode<ast::FloatLiteralExprNode>(
         valueToken.range(),    // range
         valueToken,            // token
@@ -977,7 +977,7 @@ ast::StringLiteralExprNode* Parser::parseStringLiteralExpression() {
     VEE_ASSERT(match(TokenType::StringLiteral), "Expected string literal token before parsing string literal expression");
     const Token& valueToken = previous();
 
-    std::string_view valueStr = tokenText(valueToken);
+    std::string_view valueStr = valueToken.text();
     return _ast.makeNode<ast::StringLiteralExprNode>(
         valueToken.range(),    // range
         valueToken,            // token

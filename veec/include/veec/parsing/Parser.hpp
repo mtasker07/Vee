@@ -142,16 +142,8 @@ private:
 
     inline source::Identifier tokenToIdentifier(const Token& token) const {
         VEE_ASSERT(token.type() == TokenType::Identifier, "Token is not an identifier");
-        basic::StringId id = _ctx.strings.intern(tokenText(token));
+        basic::StringId id = _ctx.strings.intern(token.text());
         return source::Identifier{id, token.range()};
-    }
-    /**
-     * @brief Gets the text of a token from the source file.
-     * @param token The token to get the text for.
-     * @return A string_view of the text corresponding to the token.
-     */
-    inline std::string_view tokenText(const Token& token) const {
-        return token.range().getText();
     }
     /**
      * @brief Combines the ranges of two tokens into a single range.
