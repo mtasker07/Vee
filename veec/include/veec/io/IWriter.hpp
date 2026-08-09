@@ -27,11 +27,6 @@ public:
     virtual ~IWriter() = default;
 
     /**
-     * @brief Writes the given string to the output.
-     * @param str The string to write.
-     */
-    virtual void write(const std::string& str) = 0;
-    /**
      * @brief Writes the given string view to the output.
      * @param str The string view to write.
      */

@@ -35,11 +35,6 @@ public:
     virtual ~StreamWriter() = default;
 
     /**
-     * @brief Writes the given string to the stream.
-     * @param str The string to write.
-     */
-    void write(const std::string& str) override;
-    /**
      * @brief Writes the given string view to the stream.
      * @param str The string view to write.
      */
