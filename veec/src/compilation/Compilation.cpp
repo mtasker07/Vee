@@ -13,7 +13,6 @@
 #include "veec/basic/TokenList.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/source/SourceFile.hpp"
-#include "veec/source/SourceFileId.hpp"
 #include "veec/source/SourceView.hpp"
 #include "veec/lexing/Lexer.hpp"
 #include "veec/parsing/Parser.hpp"
@@ -33,8 +32,8 @@ namespace compilation {
 
 CompilationResult Compilation::compile() {
     // Create units for all source files
-    runForEachFile([this](source::SourceFileId fileId) {
-        _ctx.units.createUnit(fileId);
+    runForEachFile([this](source::SourceFile* sourceFile) {
+        _ctx.units.createUnit(sourceFile);
         return true;
     });
 
@@ -78,7 +77,7 @@ void Compilation::registerBuiltins() {
 }
 bool Compilation::tokenize() {
     return runForEachUnit([this](TranslationUnit* unit) {
-        source::SourceView sourceView = _ctx.sources.getView(unit->fileId);
+        source::SourceView sourceView = source::SourceView(unit->sourceFile);
         lexing::Lexer lexer(_ctx, sourceView);
         basic::TokenList tokens = lexer.tokenize();
         unit->tokens = std::move(tokens);

@@ -151,7 +151,7 @@ private:
      * @return A string_view of the text corresponding to the token.
      */
     inline std::string_view tokenText(const Token& token) const {
-        return _ctx.sources.getText(token.range());
+        return token.range().getText();
     }
     /**
      * @brief Combines the ranges of two tokens into a single range.
@@ -160,7 +160,14 @@ private:
      * @return A SourceRange that spans from the start of the first token to the end of the last token.
      */
     inline source::SourceRange tokenRange(const Token& begin, const Token& end) const {
-        return source::SourceRange{begin.range().startOffset, end.range().endOffset};
+        VEE_ASSERT(begin.range().getFile() == end.range().getFile(),
+            "Tokens must be from the same source file to combine ranges");
+
+        return source::SourceRange(
+            begin.range().getFile(),
+            begin.range().getBegin(),
+            end.range().getEnd()
+        );
     }
     /**
      * @brief Combines the ranges of two SourceRanges into a single range.
@@ -169,7 +176,14 @@ private:
      * @return A SourceRange that spans from the start of the first range to the end of the last range.
      */
     inline source::SourceRange combineRanges(const source::SourceRange& begin, const source::SourceRange& end) const {
-        return source::SourceRange{begin.startOffset, end.endOffset};
+        VEE_ASSERT(begin.getFile() == end.getFile(),
+            "SourceRanges must be from the same source file to combine ranges");
+        
+        return source::SourceRange(
+            begin.getFile(),
+            begin.getBegin(),
+            end.getEnd()
+        );
     }
 
     //

@@ -12,7 +12,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/basic/Token.hpp"
-#include "veec/source/SourceFileId.hpp"
+#include "veec/source/SourceFile.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace basic {
@@ -22,9 +22,9 @@ namespace basic {
  */
 struct TokenList {
     /**
-     * @brief The ID of the source file from which these tokens were generated.
+     * @brief The source file from which these tokens were generated.
      */
-    source::SourceFileId fileId;
+    source::SourceFile* sourceFile = nullptr;
     /**
      * @brief The list of tokens generated from this file.
      */

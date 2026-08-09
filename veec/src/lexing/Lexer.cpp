@@ -34,7 +34,7 @@ basic::TokenList Lexer::tokenize() {
     emitEOFToken();
 
     return basic::TokenList{
-        _source.getFileId(),
+        _source.getFile(),
         std::move(_state.tokens)
     };
 }
@@ -90,21 +90,11 @@ void Lexer::beginToken() {
     _state.startLocation = _state.currentIndex;
 }
 source::SourceRange Lexer::currentTokenRange() const {
-#if VEEC_DEBUG
-	std::string_view dbgText = slice(_state.startLocation, _state.currentIndex);
-    return source::SourceRange{
-        _source.getFileId(),
-        _state.startLocation,
-        _state.currentIndex,
-		dbgText
-    };
-#else
-    return source::SourceRange{
-        _source.getFileId(),
+    return source::SourceRange(
+        _source.getFile(),
         _state.startLocation,
         _state.currentIndex
-    };
-#endif
+    );
 }
 void Lexer::emitToken(TokenType type) {
     VEE_ASSERT(type != TokenType::EndOfFile, "Use emitEOFToken for EndOfFile tokens");
@@ -112,12 +102,11 @@ void Lexer::emitToken(TokenType type) {
 }
 void Lexer::emitEOFToken() {
     // Special case: EOF token will throw out-of-range if we try to slice
-    auto range = source::SourceRange{
-        _source.getFileId(),
+    auto range = source::SourceRange(
+        _source.getFile(),
         _state.startLocation,
-        _state.currentIndex,
-        "EOF TOKEN"
-    };
+        _state.currentIndex
+    );
 	_state.tokens.emplace_back(Token{ TokenType::EndOfFile, range });
 }
 

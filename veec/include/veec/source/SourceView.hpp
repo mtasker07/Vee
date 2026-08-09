@@ -6,11 +6,11 @@
 #pragma once
 
 #include <string_view>
+#include <span>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/source/SourceFileId.hpp"
 #include "veec/source/SourceFile.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -28,23 +28,26 @@ public:
      * @brief Constructs a SourceView from a SourceFile.
      * @param file The source file to create a view from.
      */
-    SourceView(const SourceFile& file)
-        : data(file.getContents().data()), length(file.getLength()), fileId(file.getId()) {}
+    SourceView(SourceFile* file)
+        : file(file), data(std::span<const char>(file->getContents().data(), file->getLength())), length(file->getLength()) {}
     /**
-     * @brief Constructs a SourceView from a string view and a file ID.
-     * @param str The string view representing the source data.
-     * @param id The ID of the source file.
+     * @brief Constructs a SourceView from a slice of a SourceFile.
+     * @param file The source file to create a view from.
+     * @param begin The starting offset of the slice in the source file.
+     * @param end The ending offset of the slice in the source file.
      */
-    SourceView(std::string_view str, SourceFileId id)
-        : data(str.data()), length(static_cast<u32>(str.size())), fileId(id) {}
+    SourceView(SourceFile* file, u32 begin, u32 end)
+        : file(file), data(std::span<const char>(file->getContents().data() + begin, end - begin)), length(end - begin) {
+        VEE_ASSERT(file != nullptr, "SourceView file cannot be null");
+        VEE_ASSERT(end >= begin, "SourceView end must be >= to begin");
+        VEE_ASSERT(end <= file->getLength(), "SourceView end must be <= to file length");
+    }
 
     /**
-     * @brief Returns a pointer to the underlying character data.
-     * It is generally recommended to use toStringView() rather than
-     * the character array directly.
-     * @return A pointer to the character data.
+     * @brief Returns the underlying character span of this view.
+     * @return A span representing the character data.
      */
-    inline const char* getData() const { return data; }
+    inline std::span<const char> getData() const { return data; }
     /**
      * @brief Returns the length of the source view.
      * @return The length of the source view.
@@ -61,20 +64,20 @@ public:
      * @brief Returns the ID of the source file associated with this view.
      * @return The source file ID.
      */
-    inline SourceFileId getFileId() const { return fileId; }
+    inline SourceFile* getFile() const { return file; }
 
     /**
      * @brief Returns a string view representing the source data.
      * @return A string view of the source data.
      */
     inline std::string_view str() const {
-        return std::string_view(data, length);
+        return std::string_view(data.data(), data.size());
     }
 
 private:
-    const char* data = nullptr;
+    SourceFile* file = nullptr;
+    std::span<const char> data = {};
     u32 length = 0;
-    SourceFileId fileId;
 };
 
 } // namespace source

@@ -12,9 +12,9 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/basic/TokenList.hpp"
-#include "veec/source/SourceFileId.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/mir/MirFwd.hpp"
+#include "veec/source/SourceFile.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace compilation {
@@ -25,10 +25,10 @@ namespace compilation {
  */
 class TranslationUnit {
 public:
-    source::SourceFileId fileId;
-    basic::TokenList tokens;
-    ast::CompilationUnitNode* ast;
-    mir::Module* mir;
+    source::SourceFile* sourceFile = nullptr;
+    basic::TokenList tokens = {};
+    ast::CompilationUnitNode* ast = nullptr;
+    mir::Module* mir = nullptr;
 
     TranslationUnit() = default;
     ~TranslationUnit() = default;

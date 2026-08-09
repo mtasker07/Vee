@@ -657,10 +657,10 @@ void AstPrinterWalker::addLineIndented(const std::string& str) {
     _result += indentStr() + str + "\n";
 }
 std::string_view AstPrinterWalker::tokenText(const Token& token) const {
-    return _sm.getText(token.range());
+    return token.range().getText();
 }
 std::string_view AstPrinterWalker::srcText(const source::SourceRange& range) const {
-    return _sm.getText(range);
+    return range.getText();
 }
 std::string_view AstPrinterWalker::poolText(basic::StringId id) const {
     return _sp.get(id);

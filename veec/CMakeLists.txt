@@ -15,6 +15,7 @@ set(VEEC_SOURCES
 
     src/source/SourceFile.cpp
     src/source/SourceManager.cpp
+    src/source/SourceRange.cpp
 
     src/lexing/Lexer.cpp
 
@@ -52,6 +53,8 @@ set(VEEC_SOURCES
 
     src/types/TypeTable.cpp
     src/types/TypeSystem.cpp
+
+    src/diagnostics/DiagnosticRange.cpp
 )
 
 add_library(veec_lib

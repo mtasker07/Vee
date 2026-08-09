@@ -12,7 +12,7 @@
 #include "veec/compilation/CompilationConfig.hpp"
 #include "veec/fs/Path.hpp"
 #include "veec/source/SourceManager.hpp"
-#include "veec/source/SourceFileId.hpp"
+#include "veec/source/SourceFile.hpp"
 #include "veec/diagnostics/DiagnosticEngine.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -78,8 +78,8 @@ private:
 template<typename Fn>
 inline bool Compilation::runForEachFile(Fn fn, bool stopOnFail) {
     bool success = true;
-    for (source::SourceFileId fileId : _ctx.sources.getAllFileIds()) {
-        if (!fn(fileId)) {
+    for (source::SourceFile* sourceFile : _ctx.sources.getAllFiles()) {
+        if (!fn(sourceFile)) {
             success = false;
             if (stopOnFail) {
                 break;

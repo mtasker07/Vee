@@ -9,18 +9,26 @@
 #include <vector>
 
 #include "veec/lexing/Lexer.hpp"
+
+#include "veec/compilation/CompilationContext.hpp"
+#include "veec/basic/Token.hpp"
+#include "veec/source/SourceManager.hpp"
+#include "veec/source/SourceFile.hpp"
+#include "veec/source/SourceView.hpp"
 #include "veec/compilation/CompilationContext.hpp"
 
 using veec::lexing::Lexer;
-using veec::lexing::Token;
-using veec::lexing::TokenType;
+using veec::basic::Token;
+using veec::basic::TokenType;
+using veec::source::SourceFile;
+using veec::source::SourceView;
 using veec::compilation::CompilationContext;
 
 namespace {
 
 std::vector<Token> lex(CompilationContext& ctx, std::string_view sourceText) {
-	auto fileId = ctx.sources.addVirtualFile("LexerTests.vee", sourceText);
-	Lexer lexer(ctx, ctx.sources.getView(fileId));
+	SourceFile* file = ctx.sources.addVirtualFile("LexerTests.vee", sourceText);
+	Lexer lexer(ctx, SourceView(file));
 	return lexer.tokenize().tokens;
 }
 
@@ -33,8 +41,8 @@ void expectTypes(const std::vector<Token>& tokens, const std::vector<TokenType>&
 	}
 }
 
-std::string_view lexeme(const CompilationContext& ctx, const Token& token) {
-	return ctx.sources.getText(token.range());
+std::string_view lexeme(const Token& token) {
+	return token.range().getText();
 }
 
 } // namespace
@@ -56,8 +64,8 @@ TEST(LexerTests, EmptyInputProducesOnlyEndOfFile) {
 
 	ASSERT_EQ(tokens.size(), 1u);
 	EXPECT_EQ(tokens[0].type(), TokenType::EndOfFile);
-	EXPECT_EQ(tokens[0].range().startOffset, 0u);
-	EXPECT_EQ(tokens[0].range().endOffset, 0u);
+	EXPECT_EQ(tokens[0].range().getBegin(), 0u);
+	EXPECT_EQ(tokens[0].range().getEnd(), 0u);
 }
 
 /**
@@ -283,7 +291,7 @@ TEST(LexerTests, LexesWhitespaceAndNewlineTrivia) {
 		TokenType::EndOfFile
 	});
 
-	EXPECT_EQ(lexeme(ctx, tokens[0]), " \t\t\n\n");
+	EXPECT_EQ(lexeme(tokens[0]), " \t\t\n\n");
 }
 
 /**
@@ -308,7 +316,7 @@ TEST(LexerTests, LexesSingleLineComment) {
 		TokenType::EndOfFile
 	});
 
-	EXPECT_EQ(lexeme(ctx, tokens[0]), "// comment");
+	EXPECT_EQ(lexeme(tokens[0]), "// comment");
 }
 
 /**
@@ -335,9 +343,9 @@ TEST(LexerTests, LexesBlockCommentUsingCurrentImplementationBehavior) {
 		TokenType::EndOfFile
 	});
 
-	EXPECT_EQ(lexeme(ctx, tokens[0]), "/*x");
-	EXPECT_EQ(lexeme(ctx, tokens[1]), "*");
-	EXPECT_EQ(lexeme(ctx, tokens[2]), "/");
+	EXPECT_EQ(lexeme(tokens[0]), "/*x");
+	EXPECT_EQ(lexeme(tokens[1]), "*");
+	EXPECT_EQ(lexeme(tokens[2]), "/");
 }
 
 /**
@@ -380,14 +388,14 @@ TEST(LexerTests, TokenRangesMatchSourceSlices) {
 	std::vector<Token> tokens = lex(ctx, "func add");
 
 	ASSERT_GE(tokens.size(), 3u);
-	EXPECT_EQ(lexeme(ctx, tokens[0]), "func");
-	EXPECT_EQ(lexeme(ctx, tokens[1]), " ");
-	EXPECT_EQ(lexeme(ctx, tokens[2]), "add");
+	EXPECT_EQ(lexeme(tokens[0]), "func");
+	EXPECT_EQ(lexeme(tokens[1]), " ");
+	EXPECT_EQ(lexeme(tokens[2]), "add");
 
-	EXPECT_EQ(tokens[0].range().startOffset, 0u);
-	EXPECT_EQ(tokens[0].range().endOffset, 4u);
-	EXPECT_EQ(tokens[2].range().startOffset, 5u);
-	EXPECT_EQ(tokens[2].range().endOffset, 8u);
+	EXPECT_EQ(tokens[0].range().getBegin(), 0u);
+	EXPECT_EQ(tokens[0].range().getEnd(), 4u);
+	EXPECT_EQ(tokens[2].range().getBegin(), 5u);
+	EXPECT_EQ(tokens[2].range().getEnd(), 8u);
 }
 
 /**

@@ -12,7 +12,7 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/TranslationUnit.hpp"
-#include "veec/source/SourceFileId.hpp"
+#include "veec/source/SourceFile.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace compilation {
@@ -27,26 +27,26 @@ public:
     ~UnitManager() = default;
 
     /**
-     * @brief Gets the translation unit for a given source file ID.
-     * @param fileId The source file ID of the translation unit to retrieve.
+     * @param sourceFile The source file of the translation unit to retrieve.
+     * @param sourceFile The source file of the translation unit to retrieve.
      * @return A pointer to the translation unit, or nullptr if it does not exist.
      */
-    inline TranslationUnit* getUnit(source::SourceFileId fileId) {
-        auto it = _units.find(fileId);
+    inline TranslationUnit* getUnit(source::SourceFile* sourceFile) {
+        auto it = _units.find(sourceFile);
         if (it != _units.end()) {
             return &it->second;
         }
         return nullptr;
     }
     /**
-     * @brief Creates a new translation unit for a given source file ID.
-     * @param fileId The source file ID of the translation unit to create.
+     * @brief Creates a new translation unit for a given source file.
+     * @param sourceFile The source file of the translation unit to create.
      * @return A pointer to the newly created translation unit.
      */
-    inline TranslationUnit* createUnit(source::SourceFileId fileId) {
-        auto [it, inserted] = _units.emplace(fileId, TranslationUnit{});
+    inline TranslationUnit* createUnit(source::SourceFile* sourceFile) {
+        auto [it, inserted] = _units.emplace(sourceFile, TranslationUnit{});
         if (inserted) {
-            it->second.fileId = fileId;
+            it->second.sourceFile = sourceFile;
         }
         return &it->second;
     }
@@ -58,14 +58,14 @@ public:
     inline std::vector<TranslationUnit*> getAllUnits() {
         std::vector<TranslationUnit*> units;
         units.reserve(_units.size());
-        for (auto& [fileId, unit] : _units) {
+        for (auto& [sourceFile, unit] : _units) {
             units.push_back(&unit);
         }
         return units;
     }
 
 private:
-    std::unordered_map<source::SourceFileId, TranslationUnit> _units;
+    std::unordered_map<source::SourceFile*, TranslationUnit> _units;
 };
 
 } // namespace compilation

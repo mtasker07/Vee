@@ -17,7 +17,6 @@
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/CompilationContext.hpp"
 #include "veec/compilation/TranslationUnit.hpp"
-#include "veec/source/SourceFileId.hpp"
 #include "veec/ast/AstContext.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/sema/SemaContext.hpp"

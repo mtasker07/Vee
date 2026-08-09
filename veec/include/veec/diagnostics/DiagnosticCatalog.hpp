@@ -45,6 +45,8 @@ struct DiagnosticDescriptor {
 //                        ERRORS
 // ------------------------------------------------------
 
+// -------------------- CLI ERRORS ----------------------
+
 // ------------------ LEXING ERRORS ---------------------
 
 inline constexpr DiagnosticDescriptor<1> ERROR_UNEXPECTED_CHARACTER {

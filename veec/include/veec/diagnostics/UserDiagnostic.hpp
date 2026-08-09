@@ -19,7 +19,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/source/SourceRange.hpp"
+#include "veec/diagnostics/DiagnosticRange.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace diagnostics {
@@ -43,12 +43,20 @@ public:
     /**
      * @brief Constructs a new UserDiagnostic instance with the given kind, range, code, and message.
      * @param kind The kind of the diagnostic (error, warning, info).
-     * @param range The source range of the diagnostic in the source code.
+     * @param range The range of text the diagnostic corresponds to.
      * @param code The diagnostic code (optional).
      * @param message The diagnostic message.
      */
-    UserDiagnostic(UserDiagnosticKind kind, source::SourceRange range, u16 code, std::string message)
-        : _kind(kind), _range(range), _code(code), _message(std::move(message)) {}
+    UserDiagnostic(
+        UserDiagnosticKind kind,
+        DiagnosticRange range,
+        u16 code,
+        std::string message
+    )
+        : _kind(kind),
+        _range(range),
+        _code(code),
+        _message(std::move(message)) {}
 
     /**
      * @brief Gets the kind of this diagnostic.
@@ -56,10 +64,10 @@ public:
      */
     UserDiagnosticKind getKind() const { return _kind; }
     /**
-     * @brief Gets the source range of this diagnostic.
-     * @return The source range of this diagnostic.
+     * @brief Gets the range of this diagnostic.
+     * @return The range of this diagnostic.
      */
-    source::SourceRange getRange() const { return _range; }
+    DiagnosticRange getRange() const { return _range; }
     /**
      * @brief Gets the diagnostic code of this diagnostic.
      * @return The diagnostic code of this diagnostic.
@@ -69,11 +77,10 @@ public:
      * @brief Gets the diagnostic message of this diagnostic.
      * @return The diagnostic message of this diagnostic.
      */
-    const std::string& getMessage() const { return _message; }
+    std::string_view getMessage() const { return _message; }
 
     /**
-     * @brief Converts this diagnostic to a string for display to the user
-     * in the format: "[line:column] kind: message".
+     * @brief Converts this diagnostic to a string for display to the user.
      * @return A string representation of this diagnostic.
      */
     std::string toString() const {
@@ -83,12 +90,13 @@ public:
             case UserDiagnosticKind::Warning: kindStr = "warning"; break;
             case UserDiagnosticKind::Info: kindStr = "info"; break;
         }
-        return std::format("[{}:{}] {}: {}", _range.startOffset, _range.endOffset, kindStr, _message);
+        std::string_view context = _range.getText(); // (TEMPORARY)
+        return std::format("[{}:{}] {}: {}\nContext:\n{}", _range.getBegin(), _range.getEnd(), kindStr, _message, context);
     }
 
 private:
     UserDiagnosticKind _kind;
-    source::SourceRange _range;
+    DiagnosticRange _range;
     u16 _code;
     std::string _message;
 };

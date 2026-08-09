@@ -9,19 +9,20 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/source/SourceFileId.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace source {
+
+class SourceFile;
 
 /**
  * @brief Represents a specific location in a source file.
  */
 struct SourceLocation {
     /**
-     * @brief The ID of the source file this location belongs to.
+     * @brief The source file this location belongs to.
      */
-    SourceFileId fileId;
+    SourceFile* file = nullptr;
     /**
      * @brief The offset of the location in the source file.
      */

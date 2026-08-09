@@ -13,44 +13,42 @@
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
+#include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/fs/Path.hpp"
-#include "veec/source/SourceFileId.hpp"
-#include "veec/source/SourceLocation.hpp"
+#include "veec/source/SourceLocation.hpp" // < for LineColumn
+#include "veec/diagnostics/DiagnosticSource.hpp"
+#include "veec/diagnostics/DiagnosticRange.hpp"
 
 VEEC_NAMESPACE_BEGIN
+
+namespace basic {
+    template<size_t BlockSize>
+    class Arena;
+}
+
 namespace source {
 
-class SourceFile {
+class SourceRange;
+
+class SourceFile : public diagnostics::DiagnosticSource {
 public:
     SourceFile(const SourceFile& other) = delete;
     SourceFile& operator=(const SourceFile& other) = delete;
     
     SourceFile(SourceFile&& other) noexcept
-        : _fileId(other._fileId),
-          _filePath(std::move(other._filePath)),
+        : _filePath(std::move(other._filePath)),
           _contents(std::move(other._contents)) {
-        other._fileId = 0;
     }
     SourceFile& operator=(SourceFile&& other) noexcept {
         if (this != &other) {
-            _fileId = other._fileId;
             _filePath = std::move(other._filePath);
             _contents = std::move(other._contents);
-            other._fileId = 0;
         }
         return *this;
     }
 
     ~SourceFile() = default;
-
-    /**
-     * @brief Returns the unique identifier of the source file.
-     * @return The SourceFileId of the source file.
-     */
-    inline SourceFileId getId() const {
-        return _fileId;
-    }
 
     /**
      * @brief Returns the path of the source file.
@@ -72,6 +70,17 @@ public:
      */
     inline u32 getLength() const {
         return static_cast<u32>(_contents.size());
+    }
+    /**
+     * @brief Returns the text corresponding to the given SourceRange.
+     * @param range The SourceRange for which to retrieve the text.
+     * @return A string_view of the text corresponding to the SourceRange.
+     */
+    inline std::string_view getText(const SourceRange& range) const {
+        VEE_ASSERT(range.getFile() == this, "SourceRange file does not match this SourceFile");
+        VEE_ASSERT(range.getBegin() <= range.getEnd(), "Invalid SourceRange: begin > end");
+        VEE_ASSERT(range.getEnd() <= _contents.size(), "Invalid SourceRange: end > contents size");
+		return getView(range.getBegin(), range.getEnd());
     }
 
     /**
@@ -98,24 +107,47 @@ public:
         };
     }
 
-private:
-    friend class SourceManager;
+    //
+    // DiagnosticSource
+    //
 
-    SourceFileId _fileId;
-    fs::Path _filePath;
-    std::string _contents;
-
-	// Only constructable by SourceManager
-    SourceFile(SourceFileId fileId, const fs::Path& filePath, std::string contents) {
-        _fileId = fileId;
-        _filePath = filePath;
-        _contents = std::move(contents);
+    /**
+     * @brief Gets the kind of this diagnostic source, which is SourceCode.
+     */
+    diagnostics::DiagnosticSourceKind getDiagnosticSourceKind() const override {
+        return diagnostics::DiagnosticSourceKind::SourceCode;
+    }
+    /**
+     * @brief Gets the text corresponding to a given DiagnosticRange.
+     * @param range The DiagnosticRange for which to retrieve the text.
+     * @return A string_view of the text corresponding to the DiagnosticRange.
+     */
+    std::string_view getDiagnosticRangeText(diagnostics::DiagnosticRange range) const override {
+        VEE_ASSERT(range.getEnd() <= _contents.size(), "Invalid DiagnosticRange: end > contents size");
+        return getView(range.getBegin(), range.getEnd());
     }
 
+private:
+    template<size_t>
+    friend class basic::Arena; // For alloc
+    friend class SourceManager;
+
+    fs::Path _filePath;
+    std::string _contents;
+    
     // Cached line offsets
     mutable std::vector<u32> _lineOffsets;
 
+	// Only constructable by SourceManager
+    SourceFile(const fs::Path& filePath, std::string&& contents)
+        : _filePath(filePath), _contents(std::move(contents)) {
+    }
+
     void buildLineTable() const;
+
+    std::string_view getView(u32 begin, u32 end) const {
+		return std::string_view(_contents.data() + begin, end - begin);
+    }
 };
 
 } // namespace source

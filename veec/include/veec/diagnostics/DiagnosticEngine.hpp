@@ -15,7 +15,9 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/basic/Token.hpp"
-#include "veec/source/SourceLocation.hpp"
+#include "veec/source/SourceRange.hpp"
+#include "veec/diagnostics/DiagnosticSource.hpp"
+#include "veec/diagnostics/DiagnosticRange.hpp"
 #include "veec/diagnostics/UserDiagnostic.hpp"
 #include "veec/diagnostics/DiagnosticCatalog.hpp"
 
@@ -34,14 +36,14 @@ public:
     ~DiagnosticEngine() = default;
 
     /**
-     * @brief Reports a diagnostic to the engine.
-     * @param descriptor The descriptor for the diagnostic to report,
-     * Get this from the diagnostic catalog.
-     * @param range The source range that corresponds to this diagnostic.
+     * @brief Reports a generic diagnostic to the engine.
+     * @param descriptor The descriptor for the diagnostic to report, get this from the
+     * diagnostic catalog.
+     * @param range The range that corresponds to this diagnostic.
      * @param args The arguments to format into the diagnostic message template, if any.
      */
     template<size_t ArgCount, typename... Args>
-    inline void report(DiagnosticDescriptor<ArgCount> descriptor, source::SourceRange range, const Args&... args) {
+    inline void report(DiagnosticDescriptor<ArgCount> descriptor, DiagnosticRange range, const Args&... args) {
         static_assert(sizeof...(Args) == ArgCount,
             "Argument count does not match descriptor");
 
@@ -54,6 +56,17 @@ public:
         );
 
         _diagnostics.push_back(std::move(d));
+    }
+    /**
+     * @brief Reports a source code diagnostic to the engine.
+     * @param descriptor The descriptor for the diagnostic to report, get this from the
+     * diagnostic catalog.
+     * @param range The source range that corresponds to this diagnostic.
+     * @param args The arguments to format into the diagnostic message template, if any.
+     */
+    template<size_t ArgCount, typename... Args>
+    inline void report(DiagnosticDescriptor<ArgCount> descriptor, const source::SourceRange& range, const Args&... args) {
+        report(descriptor, DiagnosticRange::fromSourceRange(range), args...);
     }
     
     /**
