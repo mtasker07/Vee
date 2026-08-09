@@ -84,6 +84,26 @@ public:
     }
 
     /**
+     * @brief Returns the text of a specific line in the source file.
+     * @param line The line number (1-based) to retrieve.
+     * @param includeNewline Whether to include the newline character at the end of the line.
+     * @return A string_view of the text of the specified line.
+     */
+    inline std::string_view getLineText(u32 line, bool includeNewline = false) const {
+        VEE_ASSERT(line > 0 && line <= _lineOffsets.size(), "Invalid line number");
+
+        if (_lineOffsets.empty()) {
+            buildLineTable();
+        }
+
+        u32 begin = _lineOffsets[line - 1];
+        u32 end = (line < _lineOffsets.size()) ? _lineOffsets[line] : static_cast<u32>(_contents.size());
+        if (!includeNewline && end > begin && _contents[end - 1] == '\n') {
+            --end;
+        }
+        return getView(begin, end);
+    }
+    /**
      * @brief Returns the line and column corresponding to the given offset in the source file.
      * @param offset The offset in the source file.
      * @return The line and column corresponding to the offset.
@@ -105,6 +125,16 @@ public:
             .line = line + 1,
             .column = column + 1,
         };
+    }
+    /**
+     * @brief Returns the number of lines in the source file.
+     * @return The number of lines in the source file.
+     */
+    inline size_t getLineCount() const {
+        if (_lineOffsets.empty()) {
+            buildLineTable();
+        }
+        return _lineOffsets.size();
     }
 
     //
