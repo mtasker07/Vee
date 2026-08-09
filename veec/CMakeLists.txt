@@ -11,27 +11,27 @@ set(VEEC_SOURCES
     src/basic/Arena.cpp
     src/basic/StringPool.cpp
     
-    src/util/CharUtils.cpp
-
+    src/io/StreamWriter.cpp
+    
     src/source/SourceFile.cpp
     src/source/SourceManager.cpp
     src/source/SourceRange.cpp
-
+    
     src/lexing/Lexer.cpp
-
+    
     src/parsing/Parser.cpp
-
+    
     src/ast/AstNode.cpp
     src/ast/AstWalker.cpp
     src/ast/AstPrinter.cpp
-
+    
     src/ast_passes/SymbolCollectionPass.cpp
     src/ast_passes/TopLevelUseResolutionPass.cpp
     src/ast_passes/SymbolResolutionPass.cpp
     src/ast_passes/TypeConstructionPass.cpp
     src/ast_passes/TypeResolutionPass.cpp
     src/ast_passes/TypeCheckerPass.cpp
-
+    
     src/mir/MirNode.cpp
     src/mir/MirFactory.cpp
     src/mir/MirBuilder.cpp
@@ -43,20 +43,23 @@ set(VEEC_SOURCES
     src/mir/Constant.cpp
     src/mir/pretty/MirPrinter.cpp
     src/mir/support/ConstantTable.cpp
-
+    
     src/mirgen/AstToMirLowerer.cpp
     
     src/sema/ScopeManager.cpp
-
+    
     src/symbols/Symbol.cpp
     src/symbols/SymbolTable.cpp
-
+    
     src/types/TypeTable.cpp
     src/types/TypeSystem.cpp
-
+    
     src/diagnostics/DiagnosticRange.cpp
-)
+    src/diagnostics/rendering/TerminalDiagnosticRenderer.cpp
+    src/util/CharUtils.cpp
 
+)
+    
 add_library(veec_lib
     ${VEEC_SOURCES}
 )

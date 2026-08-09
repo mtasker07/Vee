@@ -6,8 +6,10 @@
 #include "veec/compilation/Compilation.hpp"
 #include "veec/compilation/CompilationContext.hpp"
 #include "veec/compilation/CompilationConfig.hpp"
+#include "veec/io/StreamWriter.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/diagnostics/DiagnosticEngine.hpp"
+#include "veec/diagnostics/rendering/TerminalDiagnosticRenderer.hpp"
 
 int main() {
     using namespace veec;
@@ -34,8 +36,11 @@ func main() -> i32 {
     compilation::CompilationResult result = compilation.compile();
 
     if (!result.success) {
+        io::StreamWriter terminalWriter(std::cout);
+        diagnostics::TerminalDiagnosticRenderer diagRenderer;
         for (const auto& diag : result.diagnostics) {
-            std::cout << diag.toString() << std::endl;
+            diagRenderer.render(diag, terminalWriter);
+            terminalWriter.write("\n");
         }
         return 1;
     }
