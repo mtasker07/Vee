@@ -36,7 +36,7 @@ enum class UserDiagnosticKind {
     Info,
 };
 
-std::string_view toString(UserDiagnosticKind kind) {
+inline std::string_view toString(UserDiagnosticKind kind) {
     switch (kind) {
         case UserDiagnosticKind::Error: return "error";
         case UserDiagnosticKind::Warning: return "warning";
