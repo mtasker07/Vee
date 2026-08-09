@@ -14,10 +14,12 @@
 #pragma once
 
 #include <string>
+#include <string_view>
 #include <format>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
+#include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/diagnostics/DiagnosticRange.hpp"
 
@@ -33,6 +35,16 @@ enum class UserDiagnosticKind {
     Warning,
     Info,
 };
+
+std::string_view toString(UserDiagnosticKind kind) {
+    switch (kind) {
+        case UserDiagnosticKind::Error: return "error";
+        case UserDiagnosticKind::Warning: return "warning";
+        case UserDiagnosticKind::Info: return "info";
+        default:
+            VEE_UNREACHABLE("Invalid UserDiagnosticKind");
+    }
+}
 
 /**
  * @struct UserDiagnostic
@@ -84,14 +96,8 @@ public:
      * @return A string representation of this diagnostic.
      */
     std::string toString() const {
-        std::string kindStr;
-        switch (_kind) {
-            case UserDiagnosticKind::Error: kindStr = "error"; break;
-            case UserDiagnosticKind::Warning: kindStr = "warning"; break;
-            case UserDiagnosticKind::Info: kindStr = "info"; break;
-        }
         std::string_view context = _range.getText(); // (TEMPORARY)
-        return std::format("[{}:{}] {}: {}\nContext:\n{}", _range.getBegin(), _range.getEnd(), kindStr, _message, context);
+        return std::format("[{}:{}] {}: {}\nContext:\n{}", _range.getBegin(), _range.getEnd(), diagnostics::toString(_kind), _message, context);
     }
 
 private:
