@@ -12,9 +12,6 @@
 VEEC_NAMESPACE_BEGIN
 namespace io {
 
-void StreamWriter::write(const std::string& str) {
-    _outputStream << str;
-}
 void StreamWriter::write(std::string_view str) {
     _outputStream << str;
 }
