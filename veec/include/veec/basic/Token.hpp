@@ -249,6 +249,13 @@ public:
      * @return The source range of this token.
      */
     source::SourceRange range() const { return _range; }
+    /**
+     * @brief Gets the text of this token.
+     * @return A string_view of the text corresponding to this token.
+     */
+    std::string_view text() const {
+        return _range.getText();
+    }
 
     // BASIC UTILITIES
 
