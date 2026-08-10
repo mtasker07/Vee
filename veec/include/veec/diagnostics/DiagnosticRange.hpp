@@ -33,7 +33,7 @@ public:
      * @param begin The starting offset of the range in the diagnostic source.
      * @param end The ending offset of the range in the diagnostic source.
      */
-    DiagnosticRange(DiagnosticSource* source, u32 begin, u32 end)
+    DiagnosticRange(const DiagnosticSource* source, u32 begin, u32 end)
         : _source(source), _begin(begin), _end(end) {
         VEE_ASSERT(_source != nullptr, "DiagnosticRange source cannot be null");
         VEE_ASSERT(_end >= _begin, "DiagnosticRange end must be >= to begin");
@@ -58,7 +58,7 @@ public:
      * @brief Gets the diagnostic source associated with this range.
      * @return The diagnostic source associated with this range.
      */
-    DiagnosticSource* getSource() const { return _source; }
+    const DiagnosticSource* getSource() const { return _source; }
     /**
      * @brief Gets the starting offset of this DiagnosticRange in the diagnostic source.
      * @return The starting offset of this DiagnosticRange.
@@ -71,7 +71,7 @@ public:
     u32 getEnd() const { return _end; }
 
 private:
-    DiagnosticSource* _source;
+    const DiagnosticSource* _source;
     u32 _begin;
     u32 _end;
 };

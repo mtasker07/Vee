@@ -50,7 +50,7 @@ void TerminalDiagnosticRenderer::renderSourceCode(const UserDiagnostic& diagnost
     u32 contextStartLine = 0;
     u32 contextEndLine = 0;
 
-    source::SourceFile* sourceFile = dynamic_cast<source::SourceFile*>(diagnostic.getRange().getSource());
+    const source::SourceFile* sourceFile = dynamic_cast<const source::SourceFile*>(diagnostic.getRange().getSource());
     if (sourceFile) {
         filePath = sourceFile->getPath().str();
 
