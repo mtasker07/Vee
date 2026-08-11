@@ -43,7 +43,7 @@ public:
      * @param args The arguments to format into the diagnostic message template, if any.
      */
     template<size_t ArgCount, typename... Args>
-    inline void report(DiagnosticDescriptor<ArgCount> descriptor, DiagnosticRange range, const Args&... args) {
+    inline UserDiagnostic& report(DiagnosticDescriptor<ArgCount> descriptor, DiagnosticRange range, const Args&... args) {
         static_assert(sizeof...(Args) == ArgCount,
             "Argument count does not match descriptor");
 
@@ -56,6 +56,7 @@ public:
         );
 
         _diagnostics.push_back(std::move(d));
+        return _diagnostics.back();
     }
     /**
      * @brief Reports a source code diagnostic to the engine.
@@ -65,8 +66,8 @@ public:
      * @param args The arguments to format into the diagnostic message template, if any.
      */
     template<size_t ArgCount, typename... Args>
-    inline void report(DiagnosticDescriptor<ArgCount> descriptor, const source::SourceRange& range, const Args&... args) {
-        report(descriptor, DiagnosticRange::fromSourceRange(range), args...);
+    inline UserDiagnostic& report(DiagnosticDescriptor<ArgCount> descriptor, const source::SourceRange& range, const Args&... args) {
+        return report(descriptor, DiagnosticRange::fromSourceRange(range), args...);
     }
     
     /**
