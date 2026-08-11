@@ -115,18 +115,23 @@ void TerminalDiagnosticRenderer::renderGenericText(const UserDiagnostic& diagnos
 
     std::string_view kindStr = toString(diagnostic.getKind());
     diagnostics::DiagnosticRange range = diagnostic.getRange();
-    std::string_view context = range.getText();
-
+    
     const u32 begin = range.getBegin();
     const u32 end = range.getEnd();
-
+    
     writeLine(std::format(
         "{} {}: {}",
         kindStr,
         diagnostic.getCode(),
         diagnostic.getMessage()
     ), terminalWriter);
+    
+    // Dont show context for empty ranges
+    if (begin == end) {
+        return;
+    }
 
+    std::string_view context = range.getText();
     writeLine(context, terminalWriter);
 
     const size_t highlightLen = std::max<size_t>(1, static_cast<size_t>(end - begin));
