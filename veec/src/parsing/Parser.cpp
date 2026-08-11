@@ -69,13 +69,17 @@ ast::CompilationUnitNode* Parser::parse() {
 }
 
 ast::CompilationUnitNode* Parser::parseCompilationUnit() {
+    source::SourceRange moduleRange = source::SourceRange(_tokenList.sourceFile, 0, 0);
+
     // Cant parse if there are no tokens
 	if (_tokenList.tokens.empty()) {
-		return nullptr;
+        return _ast.makeNode<ast::CompilationUnitNode>(
+            moduleRange,
+            std::vector<ast::ItemNode*>{}
+        );
 	}
-
+    
     std::vector<ast::ItemNode*> items;
-
     while (!isAtEnd()) {
         // Parse a top-level item
         ast::ItemNode* node = parseItem();
@@ -85,22 +89,19 @@ ast::CompilationUnitNode* Parser::parseCompilationUnit() {
         else synchronize();
     }
 
-	// If no statements were parsed, return nullptr to indicate an empty module.
-    // This also avoids using statements.front() and back() which throw
-    // on an empty vector
-    if (items.empty()) {
-        return nullptr;
+    if (!items.empty()) {
+        moduleRange = combineRanges(
+            items.front()->getRange(),
+            items.back()->getRange()
+        );
     }
 
-    source::SourceRange moduleRange = combineRanges(
-        items.front()->getRange(),
-        items.back()->getRange()
-    );
     ast::CompilationUnitNode* compilationUnit = _ast.makeNode<ast::CompilationUnitNode>(
         moduleRange,
         std::move(items)
     );
     _ast.modules.push_back(compilationUnit);
+
     return compilationUnit;
 }
 ast::ItemNode* Parser::parseItem() {
