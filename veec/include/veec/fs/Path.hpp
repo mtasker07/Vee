@@ -34,16 +34,6 @@ public:
      */
     Path() = default;
     /**
-     * @brief Constructs a new Path instance from the given string.
-     * @param path The string representing the path.
-     */
-    explicit Path(const StringType& path) : _path(path) {}
-    /**
-     * @brief Constructs a new Path instance from the given string.
-     * @param path The string representing the path.
-     */
-    explicit Path(StringType&& path) : _path(std::move(path)) {}
-    /**
      * @brief Constructs a new Path instance from the given string view.
      * @param path The string view representing the path.
      */
