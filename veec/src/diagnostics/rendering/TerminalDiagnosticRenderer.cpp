@@ -91,8 +91,38 @@ void TerminalDiagnosticRenderer::renderSourceCode(const UserDiagnostic& diagnost
         }
     }
 }
-void TerminalDiagnosticRenderer::renderGenericText(const UserDiagnostic&, io::StreamWriter&) const {
-    // TODO
+void TerminalDiagnosticRenderer::renderGenericText(const UserDiagnostic& diagnostic, io::StreamWriter& terminalWriter) const {
+    // Format:
+    //
+    // <text>:<begin>:<end> - {KIND} {code}: {message}
+    // <context>
+    // ^~~~~~ HERE
+
+    std::string_view kindStr = toString(diagnostic.getKind());
+    diagnostics::DiagnosticRange range = diagnostic.getRange();
+    std::string_view context = range.getText();
+
+    const u32 begin = range.getBegin();
+    const u32 end = range.getEnd();
+
+    writeLine(std::format(
+        "<text>:{}:{} - {} {}: {}",
+        begin,
+        end,
+        kindStr,
+        diagnostic.getCode(),
+        diagnostic.getMessage()
+    ), terminalWriter);
+
+    writeLine(context, terminalWriter);
+
+    const size_t highlightLen = std::max<size_t>(1, static_cast<size_t>(end - begin));
+    std::string indicator = "^";
+    if (highlightLen > 1) {
+        indicator += std::string(highlightLen - 1, '~');
+    }
+    indicator += " HERE";
+    writeLine(indicator, terminalWriter);
 }
 
 void TerminalDiagnosticRenderer::writeLine(std::string_view line, io::StreamWriter& terminalWriter) const {
