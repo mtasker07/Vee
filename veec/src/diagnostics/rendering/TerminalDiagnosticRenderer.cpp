@@ -85,8 +85,23 @@ void TerminalDiagnosticRenderer::renderSourceCode(const UserDiagnostic& diagnost
         writeLine(std::format("{:>{}} | {}", i, lnoWidth, lineText), terminalWriter);
 
         if (i == line) {
+            const diagnostics::DiagnosticRange range = diagnostic.getRange();
+            const size_t rangeLen = std::max<size_t>(1, static_cast<size_t>(range.getEnd() - range.getBegin()));
+            const size_t caretOffset = static_cast<size_t>(column - 1);
+            const size_t lineLen = lineText.size();
+
+            size_t maxHighlightLen = 1;
+            if (caretOffset < lineLen) {
+                maxHighlightLen = lineLen - caretOffset;
+            }
+
+            const size_t highlightLen = std::min(rangeLen, maxHighlightLen);
             std::string indicator(column - 1, ' ');
-            indicator += "^~~~~~ HERE";
+            indicator += "^";
+            if (highlightLen > 1) {
+                indicator += std::string(highlightLen - 1, '~');
+            }
+            indicator += " HERE";
             writeLine(std::format("{:>{}} | {}", "", lnoWidth, indicator), terminalWriter);
         }
     }
@@ -94,7 +109,7 @@ void TerminalDiagnosticRenderer::renderSourceCode(const UserDiagnostic& diagnost
 void TerminalDiagnosticRenderer::renderGenericText(const UserDiagnostic& diagnostic, io::StreamWriter& terminalWriter) const {
     // Format:
     //
-    // <text>:<begin>:<end> - {KIND} {code}: {message}
+    // {KIND} {code}: {message}
     // <context>
     // ^~~~~~ HERE
 
@@ -106,9 +121,7 @@ void TerminalDiagnosticRenderer::renderGenericText(const UserDiagnostic& diagnos
     const u32 end = range.getEnd();
 
     writeLine(std::format(
-        "<text>:{}:{} - {} {}: {}",
-        begin,
-        end,
+        "{} {}: {}",
         kindStr,
         diagnostic.getCode(),
         diagnostic.getMessage()
