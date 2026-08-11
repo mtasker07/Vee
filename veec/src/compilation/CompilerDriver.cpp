@@ -21,8 +21,14 @@ VEEC_NAMESPACE_BEGIN
 namespace compilation {
 
 int CompilerDriver::run(int argc, const char** argv) {    
+    compilation::Compilation compilation;
+
     cli::args::CLIArgs cliArgs(argc, argv);
-    compilation::Compilation compilation(cliArgs);
+    cli::args::CLIOptions cliOptions = cliArgs.generateOptions(compilation.getContext());
+
+    compilation::CompilationConfig config
+        = compilation::CompilationConfig::fromCLIOptions(cliOptions);
+    compilation.setConfig(config);
 
     compilation::CompilationResult result = compilation.compile();
 

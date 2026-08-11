@@ -77,12 +77,6 @@ CompilationResult Compilation::compile() {
     return result;
 }
 
-void Compilation::handleArgs(const cli::args::CLIArgs& args) {
-    cli::args::CLIOptions options = args.generateOptions(_ctx);
-
-    _config = CompilationConfig::fromCLIOptions(options);
-}
-
 void Compilation::registerBuiltins() {
     BuiltinRegistrar registrar(_ctx);
     registrar.registerAll();

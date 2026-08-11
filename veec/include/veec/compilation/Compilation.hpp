@@ -40,19 +40,40 @@ public:
      */
     Compilation() = default;
     /**
-     * @brief Creates a new Compilation instance with a config generated from
-     * the given command-line args.
-     * @param args The cli args.
-     */
-    Compilation(const cli::args::CLIArgs& args) {
-        handleArgs(args);
-    }
-    /**
      * @brief Creates a new Compilation instance with the provided config.
      * @param cfg The configuration for this compilation.
      */
     Compilation(const CompilationConfig& cfg)
         : _config(cfg) {}
+
+    /**
+     * @brief Gets the compilation context for this compilation. The context holds all the state
+     * and data structures used during the compilation process (read-only).
+     * @return A reference to the compilation context.
+     */
+    inline const CompilationContext& getContext() const { return _ctx; }
+    /**
+     * @brief Gets the compilation context for this compilation. The context holds all the state
+     * and data structures used during the compilation process.
+     * @return A reference to the compilation context.
+     */
+    inline CompilationContext& getContext() { return _ctx; }
+
+    /**
+     * @brief Gets the compilation config for this compilation (read-only).
+     * @return A reference to the compilation config.
+     */
+    inline const CompilationConfig& getConfig() const { return _config; }
+    /**
+     * @brief Gets the compilation config for this compilation.
+     * @return A reference to the compilation config.
+     */
+    inline CompilationConfig& getConfig() { return _config; }
+    /**
+     * @brief Sets the compilation config for this compilation.
+     * @param cfg The new compilation config.
+     */
+    inline void setConfig(const CompilationConfig& cfg) { _config = cfg; }
 
     /**
      * @brief Gets the source manager for this compilation. Use this for adding
@@ -71,8 +92,6 @@ public:
 private:
     CompilationConfig _config;
     CompilationContext _ctx;
-
-    void handleArgs(const cli::args::CLIArgs& args);
 
     template<typename Fn>
     inline bool runForEachFile(Fn fn, bool stopOnFail = false);
