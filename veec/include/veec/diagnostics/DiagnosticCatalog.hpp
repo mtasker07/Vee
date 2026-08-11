@@ -47,6 +47,25 @@ struct DiagnosticDescriptor {
 
 // -------------------- CLI ERRORS ----------------------
 
+inline constexpr DiagnosticDescriptor<1> ERROR_CLI_UNKNOWN_OPTION {
+    UserDiagnosticKind::Error, 5001, "unknown option: {}"
+};
+inline constexpr DiagnosticDescriptor<3> ERROR_CLI_OPTION_VALUE_TYPE_MISMATCH {
+    UserDiagnosticKind::Error, 5002, "value '{}' cannot be converted to '{}' which '{}' expects"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_CLI_OPTION_DUPLICATE {
+    UserDiagnosticKind::Error, 5003, "option {} specified more than once"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_CLI_OPTION_EXPECTS_MIN_VALUES {
+    UserDiagnosticKind::Error, 5004, "option {} expects at least {} value(s), but less were provided"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_CLI_OPTION_EXPECTS_MAX_VALUES {
+    UserDiagnosticKind::Error, 5005, "option {} expects at most {} value(s), but more were provided"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_CLI_OPTION_REQUIRED {
+    UserDiagnosticKind::Error, 5006, "option {} required but not specified"
+};
+
 // ------------------ LEXING ERRORS ---------------------
 
 inline constexpr DiagnosticDescriptor<1> ERROR_UNEXPECTED_CHARACTER {
