@@ -76,13 +76,6 @@ public:
     inline void setConfig(const CompilationConfig& cfg) { _config = cfg; }
 
     /**
-     * @brief Gets the source manager for this compilation. Use this for adding
-     * your source files to the compilation process.
-     * @return A reference to the source manager.
-     */
-    inline source::SourceManager& sources() { return _ctx.sources; }
-
-    /**
      * @brief Runs the compilation process.
      * @return A CompilationResult containing the success
      * status and any diagnostics generated during compilation.
