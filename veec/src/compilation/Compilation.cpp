@@ -40,6 +40,9 @@ CompilationResult Compilation::compile() {
         return result;
     }
 
+    // Load all source files
+    loadSourcesFromConfig();
+
     // Create units for all source files
     runForEachFile([this](source::SourceFile* sourceFile) {
         _ctx.units.createUnit(sourceFile);
@@ -75,6 +78,15 @@ CompilationResult Compilation::compile() {
 
     result.success = true;
     return result;
+}
+
+void Compilation::loadSourcesFromConfig() {
+    VEE_ASSERT(!_config.inputFiles.empty(),
+        "No input files specified in compilation config");
+
+    for (const fs::Path& path : _config.inputFiles) {
+        _ctx.sources.loadFile(path);
+    }
 }
 
 void Compilation::registerBuiltins() {

@@ -86,6 +86,8 @@ private:
     CompilationConfig _config;
     CompilationContext _ctx;
 
+    void loadSourcesFromConfig();
+
     template<typename Fn>
     inline bool runForEachFile(Fn fn, bool stopOnFail = false);
     template<typename Fn>
