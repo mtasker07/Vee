@@ -31,14 +31,20 @@ VEEC_NAMESPACE_BEGIN
 namespace compilation {
 
 CompilationResult Compilation::compile() {
+    CompilationResult result;
+    result.success = false;
+    
+    // Handle diagnostics generated before main process
+    if (_ctx.diagnostics.hasErrors()) {
+        result.diagnostics = _ctx.diagnostics.getDiagnostics();
+        return result;
+    }
+
     // Create units for all source files
     runForEachFile([this](source::SourceFile* sourceFile) {
         _ctx.units.createUnit(sourceFile);
         return true;
     });
-
-    CompilationResult result;
-    result.success = false;
 
     auto runPhase = [this, &result](auto phaseFn) -> bool {
         if (!phaseFn()) {
@@ -69,6 +75,12 @@ CompilationResult Compilation::compile() {
 
     result.success = true;
     return result;
+}
+
+void Compilation::handleArgs(const cli::args::CLIArgs& args) {
+    cli::args::CLIOptions options = args.generateOptions(_ctx);
+
+    _config = CompilationConfig::fromCLIOptions(options);
 }
 
 void Compilation::registerBuiltins() {

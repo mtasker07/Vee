@@ -6,5 +6,8 @@ vee_add_unit_tests(veec
     basic/APIntTests.cpp
     basic/BigIntTests.cpp
     basic/SmallVectorTests.cpp
+
+    cli/args/CLIArgsLexerTests.cpp
+
     lexing/LexerTests.cpp
 )

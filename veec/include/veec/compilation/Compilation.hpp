@@ -13,6 +13,7 @@
 #include "veec/fs/Path.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/source/SourceFile.hpp"
+#include "veec/cli/args/CLIArgs.hpp"
 #include "veec/diagnostics/DiagnosticEngine.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -39,11 +40,19 @@ public:
      */
     Compilation() = default;
     /**
+     * @brief Creates a new Compilation instance with a config generated from
+     * the given command-line args.
+     * @param args The cli args.
+     */
+    Compilation(const cli::args::CLIArgs& args) {
+        handleArgs(args);
+    }
+    /**
      * @brief Creates a new Compilation instance with the provided config.
      * @param cfg The configuration for this compilation.
      */
     Compilation(const CompilationConfig& cfg)
-        : _config(cfg), _ctx() {}
+        : _config(cfg) {}
 
     /**
      * @brief Gets the source manager for this compilation. Use this for adding
@@ -62,6 +71,8 @@ public:
 private:
     CompilationConfig _config;
     CompilationContext _ctx;
+
+    void handleArgs(const cli::args::CLIArgs& args);
 
     template<typename Fn>
     inline bool runForEachFile(Fn fn, bool stopOnFail = false);
@@ -91,7 +102,7 @@ inline bool Compilation::runForEachFile(Fn fn, bool stopOnFail) {
 template<typename Fn>
 inline bool Compilation::runForEachUnit(Fn fn, bool stopOnFail) {
     bool success = true;
-    for (TranslationUnit* unit : _ctx.units.getAllUnits()) {
+    for (compilation::TranslationUnit* unit : _ctx.units.getAllUnits()) {
         if (!fn(unit)) {
             success = false;
             if (stopOnFail) {

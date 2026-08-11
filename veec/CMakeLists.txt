@@ -5,6 +5,8 @@ set(VEEC_SOURCES
     src/BuiltinRegistrar.cpp
 
     src/compilation/Compilation.cpp
+    src/compilation/CompilationConfig.cpp
+    src/compilation/CompilerDriver.cpp
 
     src/basic/APInt.cpp
     src/basic/BigInt.cpp
@@ -16,6 +18,14 @@ set(VEEC_SOURCES
     src/source/SourceFile.cpp
     src/source/SourceManager.cpp
     src/source/SourceRange.cpp
+
+    src/cli/args/CLIArgs.cpp
+    src/cli/args/CLIOptions.cpp
+    src/cli/args/CLIOptionsGenerator.cpp
+    src/cli/args/CLIValue.cpp
+    src/cli/args/lexing/CLIArgsLexer.cpp
+    src/cli/args/parsing/CLIArgsParser.cpp
+    src/cli/args/validation/CLIArgsValidator.cpp
     
     src/lexing/Lexer.cpp
     

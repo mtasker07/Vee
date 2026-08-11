@@ -6,11 +6,21 @@
 
 #pragma once
 
+#include <vector>
+
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/fs/Path.hpp"
 
 VEEC_NAMESPACE_BEGIN
+
+namespace cli {
+    namespace args {
+        class CLIOptions;
+    }
+}
+
 namespace compilation {
 
 /**
@@ -18,6 +28,22 @@ namespace compilation {
  * @brief Used to configure the compilation process.
  */
 struct CompilationConfig {
+    /**
+     * @brief Creates a CompilationConfig from the given CLIOptions. The options passed
+     * must be valid as this function asserts otherwise.
+     * @param options The CLIOptions to use for generating the CompilationConfig.
+     * @return A CompilationConfig generated from the given CLIOptions.
+     */
+    static CompilationConfig fromCLIOptions(const cli::args::CLIOptions& options);
+
+    /**
+     * @brief A list of input files to use for the compilation process.
+     */
+    std::vector<fs::Path> inputFiles;
+    /**
+     * @brief The final output file generated from the compilation of the source files.
+     */
+    fs::Path outputFile;
 };
 
 } // namespace compilation
