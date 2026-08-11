@@ -102,6 +102,7 @@ public:
         for (const std::unique_ptr<Pass>& pass : _passes) {
             for (const compilation::TranslationUnit* unit : units) {
                 ast::CompilationUnitNode* root = unit->ast;
+                VEE_ASSERT(root != nullptr, "Translation unit has no AST set");
                 pass->run(*root);
                 if (_ctx.diagnostics.hasErrors()) {
                     success = false;
