@@ -34,6 +34,7 @@ enum class CLIOption : u8 {
     InputFile,
     OutputFile,
     OptimizationLevel,
+    OutputMir,
 };
 
 /**
@@ -193,6 +194,22 @@ static constexpr CLIOptionDescriptor CLI_OPTION_DESCRIPTORS[] = {
         /* description          */ "Optimization level",
         /* type                 */ CLIOptionType::Value,
         /* valueType            */ CLIValueType::Integer,
+        /* defaultValue         */ {},
+        /* flagDefaultValue     */ false,
+        /* minValues            */ 1,
+        /* maxValues            */ 1,
+        /* required             */ false,
+    },
+
+    // OUTPUT MIR
+
+    {
+        /* option               */ CLIOption::OutputMir,
+        /* nameShort            */ '\0',
+        /* nameLong             */ "output-mir",
+        /* description          */ "Output MIR to directory",
+        /* type                 */ CLIOptionType::Value,
+        /* valueType            */ CLIValueType::String,
         /* defaultValue         */ {},
         /* flagDefaultValue     */ false,
         /* minValues            */ 1,
