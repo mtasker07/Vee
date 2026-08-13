@@ -59,19 +59,17 @@ basic::Result<SourceFile*, SourceLoadError> SourceManager::loadFile(const fs::Pa
 
     return source;
 }
-SourceFile* SourceManager::addVirtualFile(fs::Path::StringViewType name, std::string_view contents) {
-    fs::Path path(name);
-
+SourceFile* SourceManager::addVirtualFile(const fs::Path& name, std::string_view contents) {
     // File already loaded?
-    auto it = _fileMap.find(path);
+    auto it = _fileMap.find(name);
     if (it != _fileMap.end()) {
         return it->second;
     }
 
     // Create new file
-    SourceFile* source = _fileArena.create<SourceFile>(path, std::string(contents));
+    SourceFile* source = _fileArena.create<SourceFile>(name, std::string(contents));
     _files.push_back(source);
-    _fileMap[path] = source;
+    _fileMap[name] = source;
 
     return source;
 }

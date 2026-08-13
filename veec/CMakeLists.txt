@@ -19,6 +19,8 @@ set(VEEC_SOURCES
     src/source/SourceManager.cpp
     src/source/SourceRange.cpp
 
+    src/fs/Path.cpp
+
     src/cli/args/CLIArgs.cpp
     src/cli/args/CLIOptions.cpp
     src/cli/args/CLIOptionsGenerator.cpp

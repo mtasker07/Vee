@@ -15,19 +15,20 @@
 #include "veec/source/SourceManager.hpp"
 #include "veec/source/SourceFile.hpp"
 #include "veec/source/SourceView.hpp"
-#include "veec/compilation/CompilationContext.hpp"
+#include "veec/fs/Path.hpp"
 
 using veec::lexing::Lexer;
 using veec::basic::Token;
 using veec::basic::TokenType;
 using veec::source::SourceFile;
 using veec::source::SourceView;
+using veec::fs::Path;
 using veec::compilation::CompilationContext;
 
 namespace {
 
 std::vector<Token> lex(CompilationContext& ctx, std::string_view sourceText) {
-	SourceFile* file = ctx.sources.addVirtualFile("LexerTests.vee", sourceText);
+	SourceFile* file = ctx.sources.addVirtualFile(Path::fromStringView("LexerTests.vee"), sourceText);
 	Lexer lexer(ctx, SourceView(file));
 	return lexer.tokenize().tokens;
 }

@@ -69,7 +69,7 @@ public:
      * @param contents The contents of the virtual source file.
      * @return A pointer to the new virtual source file instance.
      */
-    SourceFile* addVirtualFile(fs::Path::StringViewType name, std::string_view contents);
+    SourceFile* addVirtualFile(const fs::Path& name, std::string_view contents);
 
     /**
      * @brief Creates a SourceLocation for the given SourceFileId and offset.
