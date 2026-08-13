@@ -65,6 +65,24 @@ inline constexpr DiagnosticDescriptor<2> ERROR_CLI_OPTION_EXPECTS_MAX_VALUES {
 inline constexpr DiagnosticDescriptor<1> ERROR_CLI_OPTION_REQUIRED {
     UserDiagnosticKind::Error, 5006, "option {} required but not specified"
 };
+inline constexpr DiagnosticDescriptor<1> ERROR_CLI_FILE_DOESNT_EXIST {
+    UserDiagnosticKind::Error, 5007, "file '{}' does not exist"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_CLI_NOT_A_FILE {
+    UserDiagnosticKind::Error, 5008, "path '{}' is not a file"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_CLI_DIRECTORY_DOESNT_EXIST {
+    UserDiagnosticKind::Error, 5010, "directory '{}' does not exist"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_CLI_NOT_A_DIRECTORY {
+    UserDiagnosticKind::Error, 5011, "path '{}' is not a directory"
+};
+inline constexpr DiagnosticDescriptor<2> ERROR_CLI_INVALID_VALUE {
+    UserDiagnosticKind::Error, 5012, "invalid value '{}' for option {}"
+};
+inline constexpr DiagnosticDescriptor<3> ERROR_CLI_INVALID_VALUE_WITH_MSG {
+    UserDiagnosticKind::Error, 5013, "invalid value '{}' for option {}: '{}'"
+};
 
 // ------------------ LEXING ERRORS ---------------------
 

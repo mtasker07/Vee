@@ -22,7 +22,7 @@ set(VEEC_SOURCES
     src/fs/Path.cpp
 
     src/cli/args/CLIArgs.cpp
-    src/cli/args/CLIOptions.cpp
+    src/cli/args/CLIOption.cpp
     src/cli/args/CLIOptionsGenerator.cpp
     src/cli/args/CLIValue.cpp
     src/cli/args/lexing/CLIArgsLexer.cpp

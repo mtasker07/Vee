@@ -44,6 +44,11 @@ struct CompilationConfig {
      * @brief The final output file generated from the compilation of the source files.
      */
     fs::Path outputFile;
+
+    /**
+     * @brief The directory specified to output mir. Empty indicates no mir output is desired.
+     */
+    fs::Path outputMirDirectory;
 };
 
 } // namespace compilation

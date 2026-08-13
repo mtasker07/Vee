@@ -92,8 +92,8 @@ void CLIArgsValidator::validateSingleValue(const parsing::CLIArgsParsedOption& p
             getOptionFullName(parsedOption.option),
             1
         );
-        // Still set the value to indicate it *was* specified just in an
-        // invalid state
+        
+        // Mark option *was* specified
         _result.setValue(descriptor.option, CLIValue());
         return;
     }
@@ -101,11 +101,21 @@ void CLIArgsValidator::validateSingleValue(const parsing::CLIArgsParsedOption& p
     VEE_ASSERT(parsedOption.values.size() == 1, "Single-value option must have exactly one value");
 
     const CLIValue& value = parsedOption.values.front();
-    if (!validateValueType(value, parsedOption, descriptor)) {
-        return;
+    validateValueType(value, parsedOption, descriptor);
+
+    // Option validation delegate
+    if (descriptor.validateValue) {
+        CLIOptionValidationContext ctx{
+            _ctx.diagnostics,
+            _args.getArgRange(parsedOption.argIndex),
+            descriptor
+        };
+        descriptor.validateValue(ctx, value);
     }
 
-    _result.setValue(descriptor.option, value);
+    // Always set despite validation above, we dont want further diagnostics
+    // if it thinks this value wasnt specified at all.
+	_result.setValue(descriptor.option, value);
 }
 void CLIArgsValidator::validateListValues(const parsing::CLIArgsParsedOption& parsedOption, const CLIOptionDescriptor& descriptor) {
     if (parsedOption.values.empty()) {
@@ -116,8 +126,20 @@ void CLIArgsValidator::validateListValues(const parsing::CLIArgsParsedOption& pa
     }
     
     for (const CLIValue& value : parsedOption.values) {
-        if (!validateValueType(value, parsedOption, descriptor)) {
-            continue;
+        // We dont use the retun values of any validation methods below as we
+        // still want to add broken values to the result to indicate it was specified.
+        // The validator user should check for diagnostics to see if validation failed
+        // and prevent actual usage.
+        validateValueType(value, parsedOption, descriptor);
+
+        // Option validation delegate
+        if (descriptor.validateValue) {
+            CLIOptionValidationContext ctx{
+                _ctx.diagnostics,
+                _args.getArgRange(parsedOption.argIndex),
+                descriptor
+            };
+            descriptor.validateValue(ctx, value);
         }
 
         _result.addListValue(descriptor.option, value);

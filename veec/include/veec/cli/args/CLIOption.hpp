@@ -16,6 +16,12 @@
 #include "veec/cli/args/CLIValue.hpp"
 
 VEEC_NAMESPACE_BEGIN
+
+namespace diagnostics {
+    class DiagnosticEngine;
+    class DiagnosticRange;
+}
+
 namespace cli {
 namespace args {
 
@@ -59,6 +65,9 @@ enum class CLIOptionType : u8 {
     Value,
     List, // Option can be specified multiple times and collects required values into a list
 };
+
+// vv Needed for function pointer in descriptor
+struct CLIOptionValidationContext;
 
 struct CLIOptionDescriptor {
     /**
@@ -113,7 +122,45 @@ struct CLIOptionDescriptor {
      * error if the option is not specified.
      */
     bool required = false;
+    /**
+     * @brief Optional callback for additional validation of a single value.
+     *
+     * For list options, this is intended to be called once per element.
+     * Report necessary diagnostics through the engine, and return true/false to indicate
+     * whether the value is valid or not. The caller (validator) won't report any
+     * diagnostics if validation fails, so you should never blindly return false.
+     * 
+     * This is intended for more complex validation that cannot be expressed through the descriptor.
+     * For example, dont bother checking things like value type, as the validator does that already
+     * through the descriptor's valueType field.
+     * 
+	 * @return True if the value is valid, false otherwise.
+     */
+    bool (*validateValue)(CLIOptionValidationContext& ctx, const CLIValue& value) = nullptr;
 };
+
+/**
+ * @struct CLIOptionValidationContext
+ * @brief Holds context for validating a CLI option.
+ */
+struct CLIOptionValidationContext {
+    /// @brief Diagnostic engine for reporting diagnostics.
+    diagnostics::DiagnosticEngine& diagnostics;
+    /// @brief The range of the value being validated (mostly for report(...)).
+    const diagnostics::DiagnosticRange& valueRange;
+	/// @brief The descriptor of the option being validated.
+	const CLIOptionDescriptor& descriptor;
+};
+
+// Validation helpers
+bool validateValidFilePath(const CLIValue& value, bool ensureExists = true);
+bool validateValidDirectoryPath(const CLIValue& value, bool ensureExists = true);
+
+// Option validators
+bool validateInputFile(CLIOptionValidationContext& ctx, const CLIValue& value);
+bool validateOutputFile(CLIOptionValidationContext& ctx, const CLIValue& value);
+bool validateOptimizationLevel(CLIOptionValidationContext& ctx, const CLIValue& value);
+bool validateMirOutputDirectory(CLIOptionValidationContext& ctx, const CLIValue& value);
 
 /**
  * @brief A static array that stores all the CLI option descriptors. To add additional command-line options, add them to this array
@@ -135,6 +182,7 @@ static constexpr CLIOptionDescriptor CLI_OPTION_DESCRIPTORS[] = {
         /* minValues            */ 0,
         /* maxValues            */ 1,
         /* required             */ false,
+        /* validateValue        */ nullptr,
     },
 
     // VERSION
@@ -151,6 +199,7 @@ static constexpr CLIOptionDescriptor CLI_OPTION_DESCRIPTORS[] = {
         /* minValues            */ 0,
         /* maxValues            */ 1,
         /* required             */ false,
+        /* validateValue        */ nullptr,
     },
 
     // INPUT FILE(S)
@@ -167,6 +216,7 @@ static constexpr CLIOptionDescriptor CLI_OPTION_DESCRIPTORS[] = {
         /* minValues            */ 1,
         /* maxValues            */ -1,
         /* required             */ true,
+        /* validateValue        */ validateInputFile,
     },
 
     // OUTPUT FILE
@@ -183,6 +233,7 @@ static constexpr CLIOptionDescriptor CLI_OPTION_DESCRIPTORS[] = {
         /* minValues            */ 1,
         /* maxValues            */ 1,
         /* required             */ true,
+        /* validateValue        */ validateOutputFile,
     },
 
     // OPTIMIZATION LEVEL
@@ -199,6 +250,7 @@ static constexpr CLIOptionDescriptor CLI_OPTION_DESCRIPTORS[] = {
         /* minValues            */ 1,
         /* maxValues            */ 1,
         /* required             */ false,
+        /* validateValue        */ validateOptimizationLevel,
     },
 
     // OUTPUT MIR
@@ -215,6 +267,7 @@ static constexpr CLIOptionDescriptor CLI_OPTION_DESCRIPTORS[] = {
         /* minValues            */ 1,
         /* maxValues            */ 1,
         /* required             */ false,
+        /* validateValue        */ validateMirOutputDirectory,
     },
 };
 /**
