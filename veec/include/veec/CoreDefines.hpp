@@ -17,3 +17,23 @@
 #define VEEC_DEBUG 1
 #endif
 #endif
+
+// VEEC_WINDOWS/VEEC_LINUX/VEEC_OSX
+#if !defined(VEEC_WINDOWS) && !defined(VEEC_LINUX) && !defined(VEEC_OSX)
+#if defined(_WIN32) || defined(_WIN64)
+#define VEEC_WINDOWS 1
+#define VEEC_LINUX 0
+#define VEEC_OSX 0
+#elif defined (__linux__)
+#define VEEC_WINDOWS 0
+#define VEEC_LINUX 1
+#define VEEC_OSX 0
+#elif defined (__APPLE__) || defined(__MACH__)
+#define VEEC_WINDOWS 0
+#define VEEC_LINUX 0
+#define VEEC_OSX 1
+#else
+#error "Unsupported platform"
+#endif
+#endif
+
