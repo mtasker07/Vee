@@ -35,6 +35,14 @@ public:
      */
     Path() = default;
     /**
+	 * @brief Constructs a new Path instance from the given std::filesystem::path.
+	 * @param path The std::filesystem::path representing the path.
+     */
+    explicit Path(const std::filesystem::path& path)
+        : _path(path) {
+        normalize();
+    }
+    /**
      * @brief Constructs a new Path instance from the given string view.
      * @param path The string representing the path.
      */
