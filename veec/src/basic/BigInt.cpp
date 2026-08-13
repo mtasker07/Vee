@@ -109,6 +109,60 @@ bool BigInt::fitsInUnsigned(u32 bitWidth) const {
     return *this <= maxValue;
 }
 
+i8 BigInt::toI8() const {
+	if (!fitsInSigned(8)) {
+		VEE_FATAL("Value does not fit in i8");
+	}
+	return static_cast<i8>(_words.empty() ? 0 : _words[0]);
+}
+i16 BigInt::toI16() const {
+	if (!fitsInSigned(16)) {
+		VEE_FATAL("Value does not fit in i16");
+	}
+	return static_cast<i16>(_words.empty() ? 0 : _words[0]);
+}
+i32 BigInt::toI32() const {
+	if (!fitsInSigned(32)) {
+		VEE_FATAL("Value does not fit in i32");
+	}
+	return static_cast<i32>(_words.empty() ? 0 : _words[0]);
+}
+i64 BigInt::toI64() const {
+	if (!fitsInSigned(64)) {
+		VEE_FATAL("Value does not fit in i64");
+	}
+	u64 low = _words.empty() ? 0 : _words[0];
+	u64 high = _words.size() > 1 ? _words[1] : 0;
+	return static_cast<i64>((high << 32) | low);
+}
+
+u8 BigInt::toU8() const {
+	if (!fitsInUnsigned(8)) {
+		VEE_FATAL("Value does not fit in u8");
+	}
+	return static_cast<u8>(_words.empty() ? 0 : _words[0]);
+}
+u16 BigInt::toU16() const {
+	if (!fitsInUnsigned(16)) {
+		VEE_FATAL("Value does not fit in u16");
+	}
+	return static_cast<u16>(_words.empty() ? 0 : _words[0]);
+}
+u32 BigInt::toU32() const {
+	if (!fitsInUnsigned(32)) {
+		VEE_FATAL("Value does not fit in u32");
+	}
+	return static_cast<u32>(_words.empty() ? 0 : _words[0]);
+}
+u64 BigInt::toU64() const {
+	if (!fitsInUnsigned(64)) {
+		VEE_FATAL("Value does not fit in u64");
+	}
+	u64 low = _words.empty() ? 0 : _words[0];
+	u64 high = _words.size() > 1 ? _words[1] : 0;
+	return (high << 32) | low;
+}
+
 std::string BigInt::toString(u32 radix) const {
     if (radix < 2 || radix > 36) {
         VEE_FATAL("Radix must be between 2 and 36");

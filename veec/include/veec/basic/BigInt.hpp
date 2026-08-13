@@ -101,6 +101,48 @@ public:
      */
     bool fitsInUnsigned(u32 bitWidth) const;
 
+	/**
+	 * @brief Converts this BigInt to an i8. Asserts if this value does not fit in an i8.
+	 * @return An i8 with the value of this BigInt.
+	 */
+	i8 toI8() const;
+	/**
+	 * @brief Converts this BigInt to an i16. Asserts if this value does not fit in an i16.
+	 * @return An i16 with the value of this BigInt.
+	 */
+	i16 toI16() const;
+	/**
+	 * @brief Converts this BigInt to an i32. Asserts if this value does not fit in an i32.
+	 * @return An i32 with the value of this BigInt.
+	 */
+	i32 toI32() const;
+	/**
+	 * @brief Converts this BigInt to an i64. Asserts if this value does not fit in an i64.
+	 * @return An i64 with the value of this BigInt.
+	 */
+	i64 toI64() const;
+
+    /**
+     * @brief Converts this BigInt to a u8. Asserts if this value does not fit in a u8.
+     * @return A u8 with the value of this BigInt.
+     */
+    u8 toU8() const;
+    /**
+     * @brief Converts this BigInt to a u16. Asserts if this value does not fit in a u16.
+     * @return A u16 with the value of this BigInt.
+     */
+    u16 toU16() const;
+    /**
+     * @brief Converts this BigInt to a u32. Asserts if this value does not fit in a u32.
+     * @return A u32 with the value of this BigInt.
+     */
+    u32 toU32() const;
+    /**
+     * @brief Converts this BigInt to a u64. Asserts if this value does not fit in a u64.
+     * @return A u64 with the value of this BigInt.
+     */
+    u64 toU64() const;
+
     /**
      * @brief Converts this BigInt to a human-readable string.
      * @param radix Base for conversion (2-36, default 10).
