@@ -120,6 +120,17 @@ public:
         return _path.generic_string();
     }
 
+    //
+    // Operators
+    //
+
+	inline Path operator/(const Path& other) const {
+		return Path(_path / other._path);
+	}
+    inline Path operator/(std::string_view other) const {
+        return Path(_path / other);
+    }
+
 private:
     std::filesystem::path _path;
 
