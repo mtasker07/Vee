@@ -15,6 +15,7 @@
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/StringPool.hpp"
+#include "veec/io/IWriter.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/mir/MirFwd.hpp"
 #include "veec/types/TypeFwd.hpp"
@@ -40,11 +41,12 @@ public:
     ~MirPrinter() = default;
 
     /**
-     * @brief Converts the given MIR node to a human-readable string representation.
+     * @brief Converts the given MIR node to a human-readable text representation.
      * @param node The MIR node to convert.
-     * @return A human-readable string representation of the MIR node.
+     * @param writer The writer to which the text representation will be written.
      */
-    std::string printNode(const MirNode& node);
+    void printNode(const MirNode& node, io::IWriter& writer);
+    // TODO: ^^ Make const maybe
 
 private:
     std::ostringstream _oss;

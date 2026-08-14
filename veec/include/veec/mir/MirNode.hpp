@@ -52,10 +52,9 @@ public:
     }
 
     /**
-     * @brief Converts this MIR node to a human-readable string representation for debugging and
-     * informational purposes.
-     * @return A human-readable string representation of this MIR node.
-     * @note This method internally wraps MirPrinter and is mostly for convenience,
+     * @brief Converts this MIR node to a human-readable text representation.
+     * @return A human-readable text representation of this MIR node.
+     * @note This method internally wraps MirPrinter + StringWriter and is mostly for convenience,
      * if you want more control it is recommended to use MirPrinter directly.
      */
     std::string toString(const compilation::CompilationContext& ctx) const;
