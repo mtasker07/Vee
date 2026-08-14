@@ -597,6 +597,11 @@ std::vector<T*> TypeCheckerPass::findBestCandidates(std::span<T* const> candidat
     for (const auto& candidate : candidates) {
         u32 cost = costFn(candidate);
 
+        // Skip candidates that cannot be converted
+        if (cost == types::kNoConversionCost) {
+            continue;
+        }
+
         if (cost < lowestCost) {
             lowestCost = cost;
             results.clear();
