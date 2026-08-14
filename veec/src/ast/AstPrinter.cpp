@@ -10,6 +10,7 @@
 #include "veec/basic/BigInt.hpp"
 #include "veec/basic/Token.hpp"
 #include "veec/basic/StringPool.hpp"
+#include "veec/io/IWriter.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/source/Identifier.hpp"
 #include "veec/ast/AstKind.hpp"
@@ -666,10 +667,11 @@ std::string_view AstPrinterWalker::poolText(basic::StringId id) const {
     return _sp.get(id);
 }
 
-std::string AstPrinter::printNode(const AstNode& node) {
+void AstPrinter::printNode(const AstNode& node, io::IWriter& writer) const {
     AstPrinterWalker walker(_sm, _sp);
     walker.walk(node);
-    return walker.getResult();
+    writer.write(walker.getResult());
+    // TODO: ^^ Walker should write directly to the writer
 }
 
 } // namespace ast
