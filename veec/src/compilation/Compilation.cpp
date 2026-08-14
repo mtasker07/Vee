@@ -1,6 +1,10 @@
 #include "veec/compilation/Compilation.hpp"
 
 #include <utility>
+#include <string>
+#include <string_view>
+#include <vector>
+#include <iostream>
 
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
@@ -11,6 +15,8 @@
 #include "veec/compilation/CompilationContext.hpp"
 #include "veec/compilation/TranslationUnit.hpp"
 #include "veec/basic/TokenList.hpp"
+#include "veec/io/IWriter.hpp"
+#include "veec/io/FileWriter.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/source/SourceFile.hpp"
 #include "veec/source/SourceView.hpp"
@@ -25,6 +31,9 @@
 #include "veec/sema_passes/TypeResolutionPass.hpp"
 #include "veec/sema_passes/TypeCheckerPass.hpp"
 #include "veec/mir/MirFwd.hpp"
+#include "veec/mir/MirNode.hpp"
+#include "veec/mir/Module.hpp"
+#include "veec/mir/pretty/MirPrinter.hpp"
 #include "veec/mirgen/AstToMirLowerer.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -132,7 +141,7 @@ bool Compilation::generateMir() {
     // If mirgen fails, it indicates a bug in the compiler. Therefore we always
     // return success here.
     mirgen::AstToMirLowerer lowerer(_ctx);
-    return runForEachUnit([this, &lowerer](TranslationUnit* unit) {
+    runForEachUnit([this, &lowerer](TranslationUnit* unit) {
         ast::CompilationUnitNode* ast = unit->ast;
         VEE_ASSERT(ast != nullptr, "AST for unit is null");
 
@@ -141,6 +150,27 @@ bool Compilation::generateMir() {
 
         return true;
     });
+
+    // Output if necessary
+    // TODO: Probably delegate this somewhere else
+    if (!_config.outputMirDirectory.isEmpty()) {
+        runForEachUnit([this](TranslationUnit* unit) {
+            mir::Module* module = unit->mir;
+
+            // TODO: Handle name collisions
+            std::string sourceName = unit->sourceFile->getName();
+            fs::Path outputPath = _config.outputMirDirectory / (sourceName + ".mir");
+            VEE_ASSERT(!outputPath.isEmpty(), "Output path is empty");
+            
+            io::FileWriter writer(outputPath, std::ios_base::out | std::ios_base::trunc, true);
+            mir::pretty::MirPrinter printer(_ctx);
+            printer.printNode(*module, writer);
+
+            return true;
+        });
+    }
+
+    return true;
 }
 
 } // namespace compilation
