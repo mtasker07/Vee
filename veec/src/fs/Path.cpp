@@ -35,8 +35,8 @@ bool Path::isDirectory() const {
 fs::Path Path::getParentDirectory() const {
     return Path(_path.parent_path());
 }
-fs::Path Path::getFileName() const {
-    return Path(_path.filename());
+std::string Path::getFileName() const {
+    return _path.filename().string();
 }
 
 void Path::resolveSymbolicLinks() {

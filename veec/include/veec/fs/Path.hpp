@@ -111,9 +111,9 @@ public:
     fs::Path getParentDirectory() const;
     /**
      * @brief Gets the file name (last component) of the path.
-     * @return A new Path instance representing the file name. Empty if the path has no file name.
+     * @return A string representing the file name. Empty if the path has no file name.
      */
-    fs::Path getFileName() const;
+    std::string getFileName() const;
 
     /**
      * @brief Resolves any symbolic links in the path. Must be valid and exist in the filesystem,

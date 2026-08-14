@@ -54,7 +54,7 @@ public:
      * @brief Returns the file name of this source file.
      * @return The file name of this source file.
      */
-    inline fs::Path getName() const {
+    inline std::string getName() const {
         return _filePath.getFileName();
     }
     /**
