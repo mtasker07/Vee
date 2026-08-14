@@ -7,12 +7,11 @@
 
 #pragma once
 
-#include <string>
-
 #include "vee/core/CoreDefines.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/CompilationContext.hpp"
 #include "veec/basic/StringPool.hpp"
+#include "veec/io/IWriter.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/ast/AstFwd.hpp"
 
@@ -37,11 +36,11 @@ public:
     ~AstPrinter() = default;
 
     /**
-     * @brief Converts the given AST node to a human-readable string representation.
+     * @brief Converts the given AST node into a human-readable text representation.
      * @param node The AST node to convert.
-     * @return A human-readable string representation of the AST node.
+     * @param writer The writer to which the text representation will be written.
      */
-    std::string printNode(const AstNode& node);
+    void printNode(const AstNode& node, io::IWriter& writer) const;
 
 private:
     const source::SourceManager& _sm;

@@ -65,9 +65,9 @@ public:
     }
 
     /**
-     * @brief Converts this AST node to a human-readable string representation for debugging and informational purposes.
-     * @return A human-readable string representation of this AST node.
-     * @note This method internally wraps AstPrinter and is mostly for convenience,
+     * @brief Converts this AST node to a human-readable text representation.
+     * @return A human-readable text representation of this AST node.
+     * @note This method internally wraps AstPrinter + StringWriter and is mostly for convenience,
      * if you want more control it is recommended to use AstPrinter directly.
      */
     std::string toString(const compilation::CompilationContext& ctx) const;
