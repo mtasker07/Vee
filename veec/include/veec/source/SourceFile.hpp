@@ -51,6 +51,13 @@ public:
     ~SourceFile() = default;
 
     /**
+     * @brief Returns the file name of this source file.
+     * @return The file name of this source file.
+     */
+    inline fs::Path getName() const {
+        return _filePath.getFileName();
+    }
+    /**
      * @brief Returns the path of the source file.
      * @return The path of the source file.
      */
