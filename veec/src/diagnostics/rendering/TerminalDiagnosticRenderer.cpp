@@ -42,7 +42,7 @@ void TerminalDiagnosticRenderer::renderSourceCode(const UserDiagnostic& diagnost
     // {notes}
 
     std::string_view kindStr = toString(diagnostic.getKind());
-    std::string_view filePath = "<unknown>";
+    std::string filePath = "<unknown>";
     u32 line = 0;
     u32 column = 0;
     std::vector<std::string_view> contextLines;
@@ -52,7 +52,7 @@ void TerminalDiagnosticRenderer::renderSourceCode(const UserDiagnostic& diagnost
 
     const source::SourceFile* sourceFile = dynamic_cast<const source::SourceFile*>(diagnostic.getRange().getSource());
     if (sourceFile) {
-        filePath = sourceFile->getPath().str();
+        filePath = sourceFile->getPath().toString();
 
         source::LineColumn lineCol = sourceFile->getLineColumn(diagnostic.getRange().getBegin());
         line = lineCol.line;
@@ -79,6 +79,11 @@ void TerminalDiagnosticRenderer::renderSourceCode(const UserDiagnostic& diagnost
     ), terminalWriter);
 
     // Context
+    if (sourceFile == nullptr) {
+		writeLine("<no source context available>", terminalWriter);
+		return;
+    }
+
     size_t lnoWidth = std::to_string(contextEndLine).size();
     for (u32 i = contextStartLine; i <= contextEndLine; ++i) {
         std::string_view lineText = sourceFile->getLineText(i, false);

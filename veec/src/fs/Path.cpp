@@ -35,8 +35,33 @@ bool Path::isDirectory() const {
 fs::Path Path::getParentDirectory() const {
     return Path(_path.parent_path());
 }
-std::string Path::getFileName() const {
-    return _path.filename().string();
+fs::Path Path::getFileName() const {
+    return Path(_path.filename());
+}
+fs::Path Path::getFileStem() const {
+    return Path(_path.stem());
+}
+fs::Path Path::getFileExtension() const {
+    return Path(_path.extension());
+}
+
+//
+// Relativity
+//
+
+fs::Path Path::relativeTo(const fs::Path& base) const {
+	VEE_ASSERT(!base.isEmpty(), "Base path cannot be empty");
+
+	std::error_code ec;
+	std::filesystem::path relativePath = std::filesystem::relative(_path, base._path, ec);
+	if (ec) {
+		// Absolute as fallback
+		return absolute();
+	}
+	return Path(relativePath);
+}
+fs::Path Path::absolute() const {
+    return Path(std::filesystem::absolute(_path));
 }
 
 void Path::resolveSymbolicLinks() {
@@ -48,7 +73,7 @@ void Path::resolveSymbolicLinks() {
 void Path::normalize() {
     if (_path.empty()) return;
 
-    _path = std::filesystem::absolute(_path).lexically_normal();
+    _path = _path.lexically_normal();
     _path.make_preferred();
 }
 

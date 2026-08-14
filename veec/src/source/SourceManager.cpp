@@ -37,7 +37,7 @@ basic::Result<SourceFile*, SourceLoadError> SourceManager::loadFile(const fs::Pa
     // TODO: abstract into file system class/subsystem
     std::string contents;
     try {
-        std::ifstream file(path.str().data());
+        std::ifstream file(path.toString().data());
         if (!file) {
             SourceLoadError error;
             error.kind = SourceLoadErrorKind::FileNotFound;

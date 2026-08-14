@@ -20,7 +20,7 @@ std::vector<fs::Path> getPathValues(const cli::args::CLIOptions& options, cli::a
     const std::vector<cli::args::CLIValue>& valueList = options.getListValues(option);
     values.reserve(valueList.size());
     for (const cli::args::CLIValue& value : valueList) {
-        values.push_back(fs::Path::fromStringView(value.getStringValue()));
+        values.push_back(fs::Path(value.getStringValue()));
     }
     return values;
 }
@@ -37,7 +37,7 @@ std::vector<std::string_view> getStringValues(const cli::args::CLIOptions& optio
 fs::Path getPathValueOr(const cli::args::CLIOptions& options, cli::args::CLIOption option, const fs::Path& defaultValue) {
     const cli::args::CLIValue* value = options.getValue(option);
     if (value != nullptr) {
-        return fs::Path::fromStringView(value->getStringValue());
+        return fs::Path(value->getStringValue());
     }
     return defaultValue;
 }

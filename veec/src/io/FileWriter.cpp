@@ -33,14 +33,14 @@ void FileWriter::open(
 
     // TODO: This should all be in the Path API so we dont need to use filesystem
     if (createDirectories) {
-        fs::Path parentDir = fs::Path(filePath.filesystemPath().parent_path());
+		fs::Path parentDir = filePath.getParentDirectory();
         if (!parentDir.isEmpty() && !parentDir.exists()) {
             std::filesystem::create_directories(parentDir.filesystemPath());
         }
     }
 
-    _fileStream.open(filePath.str(), mode);
-    VEE_ASSERT(_fileStream.is_open(), "Failed to open file: {}", filePath.str());
+    _fileStream.open(filePath.toString(), mode);
+    VEE_ASSERT(_fileStream.is_open(), "Failed to open file: {}", filePath.toString());
 }
 void FileWriter::close() {
     if (_fileStream.is_open()) {

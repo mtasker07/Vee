@@ -1,6 +1,6 @@
 /**
- * @file LexerTests.cpp
- * @brief This file contains unit tests for the lexing::Lexer class.
+ * @file ParserTests.cpp
+ * @brief This file contains unit tests for the parsing::Parser class.
  */
 
 #include <gtest/gtest.h>
@@ -8,18 +8,25 @@
 #include <string_view>
 #include <vector>
 
-#include "veec/lexing/Lexer.hpp"
+#include "veec/parsing/Parser.hpp"
 
 #include "veec/compilation/CompilationContext.hpp"
+#include "veec/lexing/Lexer.hpp"
 #include "veec/basic/Token.hpp"
+#include "veec/basic/TokenList.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/source/SourceFile.hpp"
 #include "veec/source/SourceView.hpp"
 #include "veec/fs/Path.hpp"
+#include "veec/ast/AstFwd.hpp"
+#include "veec/ast/CompilationUnitNode.hpp"
 
+using namespace veec;
+using veec::parsing::Parser;
 using veec::lexing::Lexer;
 using veec::basic::Token;
 using veec::basic::TokenType;
+using veec::basic::TokenList;
 using veec::source::SourceFile;
 using veec::source::SourceView;
 using veec::fs::Path;
@@ -27,56 +34,47 @@ using veec::compilation::CompilationContext;
 
 namespace {
 
-std::vector<Token> lex(CompilationContext& ctx, std::string_view sourceText) {
-	SourceFile* file = ctx.sources.addVirtualFile("LexerTests.vee", sourceText);
+ast::CompilationUnitNode* parse(CompilationContext& ctx, std::string_view sourceText) {
+	SourceFile* file = ctx.sources.addVirtualFile(Path::fromStringView("ParserTests.vee"), sourceText);
 	Lexer lexer(ctx, SourceView(file));
-	return lexer.tokenize().tokens;
-}
-
-void expectTypes(const std::vector<Token>& tokens, const std::vector<TokenType>& expected) {
-	ASSERT_EQ(tokens.size(), expected.size());
-
-	for (size_t i = 0; i < expected.size(); ++i) {
-		SCOPED_TRACE(i);
-		EXPECT_EQ(tokens[i].type(), expected[i]);
-	}
-}
-
-std::string_view lexeme(const Token& token) {
-	return token.range().getText();
+	TokenList tokens = lexer.tokenize();
+    Parser parser(ctx, tokens);
+    return parser.parse();
 }
 
 } // namespace
 
 /**
- * TEST: EmptyInputProducesOnlyEndOfFile
+ * TEST: EmptyInputProducesEmptyUnit
  * 
  * Tests:
- * - Tokenizing an empty source string.
+ * - Parsing an empty source string.
  * 
  * Expected Result:
- * - Exactly one EndOfFile token is produced.
+ * - A compilation unit node is produced with no items.
  * 
  * Notes:
  */
-TEST(LexerTests, EmptyInputProducesOnlyEndOfFile) {
+TEST(ParserTests, EmptyInputProducesEmptyUnit) {
 	CompilationContext ctx;
-	std::vector<Token> tokens = lex(ctx, "");
+	ast::CompilationUnitNode* unit = parse(ctx, "");
 
-	ASSERT_EQ(tokens.size(), 1u);
-	EXPECT_EQ(tokens[0].type(), TokenType::EndOfFile);
-	EXPECT_EQ(tokens[0].range().getBegin(), 0u);
-	EXPECT_EQ(tokens[0].range().getEnd(), 0u);
+	ASSERT_NE(unit, nullptr);
+	EXPECT_TRUE(unit->getItems().empty());
 }
 
+//
+// Construct parsing tests
+//
+
 /**
- * TEST: LexesGrammarPunctuation
+ * TEST: ParsesSimpleFunctionDeclaration
  * 
  * Tests:
- * - Lexing grammar punctuation symbols.
+ * - Parsing a basic global function declaration with no parameters and no body.
  * 
  * Expected Result:
- * - Each symbol maps to its corresponding grammar token type.
+ * - A function declaration node is produced with the correct name and no parameters or body.
  * 
  * Notes:
  */

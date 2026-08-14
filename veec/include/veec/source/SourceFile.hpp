@@ -55,7 +55,7 @@ public:
      * @return The file name of this source file.
      */
     inline std::string getName() const {
-        return _filePath.getFileName();
+        return _filePath.getFileName().toString();
     }
     /**
      * @brief Returns the path of the source file.

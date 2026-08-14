@@ -16,7 +16,7 @@ namespace args {
 
 bool validateValidFilePath(const CLIValue& value, bool ensureExists) {
     std::string_view pathStr = value.getStringValue();
-    fs::Path path = fs::Path::fromStringView(pathStr);
+    fs::Path path = fs::Path(pathStr);
 
     if (path.isEmpty()) {
         return false;
@@ -30,7 +30,7 @@ bool validateValidFilePath(const CLIValue& value, bool ensureExists) {
 }
 bool validateValidDirectoryPath(const CLIValue& value, bool ensureExists) {
 	std::string_view pathStr = value.getStringValue();
-	fs::Path path = fs::Path::fromStringView(pathStr);
+	fs::Path path = fs::Path(pathStr);
 	if (path.isEmpty()) {
 		return false;
 	}
