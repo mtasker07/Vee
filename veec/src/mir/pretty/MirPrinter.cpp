@@ -13,6 +13,7 @@
 #include "veec/basic/BigInt.hpp"
 #include "veec/basic/APInt.hpp"
 #include "veec/basic/StringPool.hpp"
+#include "veec/io/IWriter.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/mir/MirContext.hpp"
 #include "veec/mir/MirKind.hpp"
@@ -33,7 +34,7 @@ VEEC_NAMESPACE_BEGIN
 namespace mir {
 namespace pretty {
 
-std::string MirPrinter::printNode(const MirNode& node) {
+void MirPrinter::printNode(const MirNode& node, io::IWriter& writer) {
     _oss.str("");
     _oss.clear();
     _indent = 0;
@@ -58,7 +59,7 @@ std::string MirPrinter::printNode(const MirNode& node) {
         default:
             VEE_UNREACHABLE("Unknown MIR node kind");
     }
-    return _oss.str();
+    writer.write(_oss.str());
 }
 
 void MirPrinter::printModule(const Module& module) {

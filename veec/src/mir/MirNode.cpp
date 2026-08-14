@@ -6,6 +6,8 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/CompilationContext.hpp"
+#include "veec/io/IWriter.hpp"
+#include "veec/io/StringWriter.hpp"
 #include "veec/mir/pretty/MirPrinter.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -13,7 +15,9 @@ namespace mir {
 
 std::string MirNode::toString(const compilation::CompilationContext& ctx) const {
     pretty::MirPrinter printer(ctx);
-    return printer.printNode(*this);
+    io::StringWriter writer;
+    printer.printNode(*this, writer);
+    return writer.str();
 }
 
 } // namespace mir
