@@ -36,6 +36,11 @@ enum class UserDiagnosticKind {
     Info,
 };
 
+/**
+ * @brief Converts a UserDiagnosticKind to a string representation.
+ * @param kind The UserDiagnosticKind to convert.
+ * @return A string representation of the UserDiagnosticKind.
+ */
 inline std::string_view toString(UserDiagnosticKind kind) {
     switch (kind) {
         case UserDiagnosticKind::Error: return "error";
