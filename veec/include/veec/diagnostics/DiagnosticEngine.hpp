@@ -41,9 +41,14 @@ public:
      * diagnostic catalog.
      * @param range The range that corresponds to this diagnostic.
      * @param args The arguments to format into the diagnostic message template, if any.
+     * @return The reported diagnostic.
      */
     template<size_t ArgCount, typename... Args>
-    inline UserDiagnostic& report(DiagnosticDescriptor<ArgCount> descriptor, DiagnosticRange range, const Args&... args) {
+    inline UserDiagnostic& report(
+        DiagnosticDescriptor<ArgCount> descriptor,
+        DiagnosticRange range,
+        const Args&... args
+    ) {
         static_assert(sizeof...(Args) == ArgCount,
             "Argument count does not match descriptor");
 
@@ -64,10 +69,41 @@ public:
      * diagnostic catalog.
      * @param range The source range that corresponds to this diagnostic.
      * @param args The arguments to format into the diagnostic message template, if any.
+     * @return The reported diagnostic.
      */
     template<size_t ArgCount, typename... Args>
-    inline UserDiagnostic& report(DiagnosticDescriptor<ArgCount> descriptor, const source::SourceRange& range, const Args&... args) {
+    inline UserDiagnostic& report(
+        DiagnosticDescriptor<ArgCount> descriptor,
+        const source::SourceRange& range,
+        const Args&... args
+    ) {
         return report(descriptor, DiagnosticRange::fromSourceRange(range), args...);
+    }
+
+    /**
+     * @brief Adds a note to a diagnostic.
+     * @param diagnostic The diagnostic to add the note to.
+     * @param descriptor The descriptor for the note to add, get this from the diagnostic catalog.
+     * @param range The range that corresponds to this note.
+     * @param args The arguments to format into the note message template, if any.
+     */
+    template<size_t ArgCount, typename... Args>
+    inline void addNote(
+        UserDiagnostic& diagnostic,
+        DiagnosticNoteDescriptor<ArgCount> descriptor,
+        DiagnosticRange range,
+        const Args&... args
+    ) {
+        static_assert(sizeof...(Args) == ArgCount,
+            "Argument count does not match descriptor");
+
+        UserDiagnosticNote note = UserDiagnosticNote(
+            range,
+            descriptor.code,
+            std::vformat(descriptor.templateMsg, std::make_format_args(args...))
+        );
+
+        diagnostic.addNote(std::move(note));
     }
     
     /**

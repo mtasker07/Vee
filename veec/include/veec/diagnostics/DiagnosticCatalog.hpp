@@ -41,6 +41,18 @@ struct DiagnosticDescriptor {
     std::string_view templateMsg;
 };
 
+/**
+ * @brief Represents a diagnostic note that can be displayed to the user.
+ * @tparam ArgCount The number of arguments to format into the message template.
+ */
+template<size_t ArgCount>
+struct DiagnosticNoteDescriptor {
+    /// @brief The unique code for this diagnostic.
+    u16 code;
+    /// @brief The message template for this diagnostic.
+    std::string_view templateMsg;
+};
+
 // ------------------------------------------------------
 //                        ERRORS
 // ------------------------------------------------------
@@ -305,6 +317,15 @@ inline constexpr DiagnosticDescriptor<2> WARNING_NARROWING_CONVERSION {
 // ------------------------------------------------------
 //                        INFOS
 // ------------------------------------------------------
+
+
+// ------------------------------------------------------
+//                        NOTES
+// ------------------------------------------------------
+
+inline constexpr DiagnosticNoteDescriptor<2> NOTE_PREVIOUS_DECLARATION_HERE {
+    10000, "previous declaration is here"
+};
 
 }
 VEEC_NAMESPACE_END

@@ -1,7 +1,7 @@
 /**
  * @file UserDiagnostic.hpp
  * @brief This file contains the definition of the UserDiagnostic
- * struct.
+ * class.
  * 
  * The user diagnostic represents a diagnostic message that should be displayed to the user,
  * such as an error or warning.
@@ -21,7 +21,9 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "vee/core/InternalErrorHandling.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/basic/SmallVector.hpp"
 #include "veec/diagnostics/DiagnosticRange.hpp"
+#include "veec/diagnostics/UserDiagnosticNote.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace diagnostics {
@@ -97,6 +99,19 @@ public:
     std::string_view getMessage() const { return _message; }
 
     /**
+     * @brief Gets the notes attached to this diagnostic.
+     * @return A list of notes attached to this diagnostic.
+     */
+	inline const basic::SmallVector<UserDiagnosticNote>& getNotes() const { return _notes; }
+    /**
+     * @brief Adds a note to this diagnostic.
+     * @param note The note to add to this diagnostic.
+     */
+	inline void addNote(UserDiagnosticNote&& note) {
+        _notes.emplace_back(std::move(note));
+    }
+
+    /**
      * @brief Converts this diagnostic to a string for display to the user.
      * @return A string representation of this diagnostic.
      */
@@ -110,6 +125,7 @@ private:
     DiagnosticRange _range;
     u16 _code;
     std::string _message;
+    basic::SmallVector<UserDiagnosticNote> _notes;
 };
 
 } // namespace diagnostics
