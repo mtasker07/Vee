@@ -14,6 +14,8 @@ set(VEEC_SOURCES
     src/basic/StringPool.cpp
     
     src/io/StreamWriter.cpp
+    src/io/StringWriter.cpp
+    src/io/FileWriter.cpp
     
     src/source/SourceFile.cpp
     src/source/SourceManager.cpp
