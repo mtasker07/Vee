@@ -62,6 +62,8 @@ CompilationConfig CompilationConfig::fromCLIOptions(const cli::args::CLIOptions&
     config.inputFiles = getPathValues(options, CLIOption::InputFile);
     config.outputFile = getPathValueOr(options, CLIOption::OutputFile, fs::Path("out.bin"));
 
+    config.outputMirDirectory = getPathValueOr(options, CLIOption::OutputMir, fs::Path(""));
+
     return config;
 }
 
