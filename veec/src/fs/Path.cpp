@@ -28,6 +28,17 @@ bool Path::isDirectory() const {
     return std::filesystem::is_directory(_path);
 }
 
+//
+// Path slicing
+//
+
+fs::Path Path::getParentDirectory() const {
+    return Path(_path.parent_path());
+}
+fs::Path Path::getFileName() const {
+    return Path(_path.filename());
+}
+
 void Path::resolveSymbolicLinks() {
     VEE_ASSERT(exists(), "Path does not exist, cannot resolve symbolic links");
 

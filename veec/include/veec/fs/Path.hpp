@@ -99,6 +99,22 @@ public:
      */
     bool isDirectory() const;
 
+    //
+    // Path slicing
+    //
+
+    /**
+     * @brief Gets the parent directory of the path.
+     * @return A new Path instance representing the parent directory. Empty
+     * if the path has no parent (e.g., root directory).
+     */
+    fs::Path getParentDirectory() const;
+    /**
+     * @brief Gets the file name (last component) of the path.
+     * @return A new Path instance representing the file name. Empty if the path has no file name.
+     */
+    fs::Path getFileName() const;
+
     /**
      * @brief Resolves any symbolic links in the path. Must be valid and exist in the filesystem,
      * otherwise this function will assert.
