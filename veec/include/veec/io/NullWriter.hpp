@@ -37,7 +37,7 @@ public:
      * @brief Writes the given string view, but discards it.
      * @param str The string view to write (will be discarded).
      */
-    void write(std::string_view str) override {}
+    void write(std::string_view) override {}
     /**
      * @brief This does nothing, as the NullWriter does not buffer any output.
      */
