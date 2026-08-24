@@ -42,12 +42,6 @@ namespace compilation {
 CompilationResult Compilation::compile() {
     CompilationResult result;
     result.success = false;
-    
-    // Handle diagnostics generated before main process
-    if (_ctx.diagnostics.hasErrors()) {
-        result.diagnostics = _ctx.diagnostics.getDiagnostics();
-        return result;
-    }
 
     // Load all source files
     loadSourcesFromConfig();

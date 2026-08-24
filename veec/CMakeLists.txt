@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.20)
 
 # VEEC shared library
 set(VEEC_SOURCES
+    src/Driver.cpp
     src/BuiltinRegistrar.cpp
 
     src/compilation/Compilation.cpp
     src/compilation/CompilationConfig.cpp
-    src/compilation/CompilerDriver.cpp
 
     src/basic/APInt.cpp
     src/basic/BigInt.cpp
@@ -23,14 +23,19 @@ set(VEEC_SOURCES
 
     src/fs/Path.cpp
 
-    src/cli/args/CLIArgs.cpp
-    src/cli/args/CLIOption.cpp
-    src/cli/args/CLIOptionsGenerator.cpp
-    src/cli/args/CLIValue.cpp
-    src/cli/args/lexing/CLIArgsLexer.cpp
-    src/cli/args/parsing/CLIArgsParser.cpp
-    src/cli/args/validation/CLIArgsValidator.cpp
-    
+    src/cli/CLI.cpp
+    src/cli/CLIOption.cpp
+    src/cli/CLIRawArgs.cpp
+    src/cli/CLIValue.cpp
+    src/cli/commands/Compile.cpp
+    src/cli/delegate/CLIOptionValidationDelegates.cpp
+    src/cli/descriptor/CLICommandDescriptor.cpp
+    src/cli/descriptor/CLIOptionDescriptor.cpp
+    src/cli/descriptor/CLIRootDescriptor.cpp
+    src/cli/lexing/CLIArgsLexer.cpp
+    src/cli/parsing/CLIArgsParser.cpp
+    src/cli/validation/CLIArgsValidator.cpp
+
     src/lexing/Lexer.cpp
     
     src/parsing/Parser.cpp
@@ -71,7 +76,6 @@ set(VEEC_SOURCES
     src/diagnostics/DiagnosticRange.cpp
     src/diagnostics/rendering/TerminalDiagnosticRenderer.cpp
     src/util/CharUtils.cpp
-
 )
     
 add_library(veec_lib

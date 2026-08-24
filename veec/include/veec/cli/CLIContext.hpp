@@ -6,13 +6,11 @@
 
 #pragma once
 
-#include <string_view>
-
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
-#include "veec/cli/args/CLIArgs.hpp"
-#include "veec/cli/args/CLIOptions.hpp"
+#include "veec/cli/CLIRawArgs.hpp"
+#include "veec/diagnostics/DiagnosticEngine.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace cli {
@@ -23,7 +21,8 @@ namespace cli {
  */
 class CLIContext {
 public:
-    args::CLIOptions options;
+    CLIRawArgs args;
+    diagnostics::DiagnosticEngine diagnostics;
 
     CLIContext() = default;
     ~CLIContext() = default;

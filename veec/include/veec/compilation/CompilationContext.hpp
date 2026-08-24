@@ -15,7 +15,6 @@
 #include "veec/basic/StringPool.hpp"
 #include "veec/io/IWriter.hpp"
 #include "veec/source/SourceManager.hpp"
-#include "veec/cli/CLIContext.hpp"
 #include "veec/ast/AstContext.hpp"
 #include "veec/sema/SemaContext.hpp"
 #include "veec/mir/MirContext.hpp"
@@ -37,7 +36,6 @@ public:
     diagnostics::DiagnosticEngine diagnostics;
 
     // Subcontexts
-    cli::CLIContext cli;
     ast::AstContext ast;
     sema::SemaContext sema;
     types::TypeContext types;

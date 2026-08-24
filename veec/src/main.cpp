@@ -1,6 +1,6 @@
-#include "veec/compilation/CompilerDriver.hpp"
+#include "veec/Driver.hpp"
 
 int main(int argc, const char** argv) {
-    veec::compilation::CompilerDriver driver;
-    return driver.run(argc, argv);
+    veec::Driver driver;
+    return driver.main(argc, argv);
 }

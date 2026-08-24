@@ -16,9 +16,7 @@
 VEEC_NAMESPACE_BEGIN
 
 namespace cli {
-    namespace args {
-        class CLIOptions;
-    }
+    class CLICommandOptions;
 }
 
 namespace compilation {
@@ -34,7 +32,7 @@ struct CompilationConfig {
      * @param options The CLIOptions to use for generating the CompilationConfig.
      * @return A CompilationConfig generated from the given CLIOptions.
      */
-    static CompilationConfig fromCLIOptions(const cli::args::CLIOptions& options);
+    static CompilationConfig fromCLIOptions(const cli::CLICommandOptions& options);
 
     /**
      * @brief A list of input files to use for the compilation process.
