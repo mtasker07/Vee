@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
@@ -13,8 +15,9 @@
 #include "veec/fs/Path.hpp"
 #include "veec/source/SourceManager.hpp"
 #include "veec/source/SourceFile.hpp"
-#include "veec/cli/args/CLIArgs.hpp"
+#include "veec/cli/CLIRawArgs.hpp"
 #include "veec/diagnostics/DiagnosticEngine.hpp"
+#include "veec/diagnostics/UserDiagnostic.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace compilation {
@@ -74,6 +77,14 @@ public:
      * @param cfg The new compilation config.
      */
     inline void setConfig(const CompilationConfig& cfg) { _config = cfg; }
+
+    /**
+     * @brief Gets the diagnostics generated during the compilation process (read-only).
+     * @return A list of diagnostics generated during the compilation process.
+     */
+    inline const std::vector<diagnostics::UserDiagnostic>& getDiagnostics() const {
+        return _ctx.diagnostics.getDiagnostics();
+    }
 
     /**
      * @brief Runs the compilation process.
