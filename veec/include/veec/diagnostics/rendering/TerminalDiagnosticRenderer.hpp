@@ -17,6 +17,7 @@
 #include "veec/diagnostics/DiagnosticSource.hpp"
 #include "veec/diagnostics/DiagnosticRange.hpp"
 #include "veec/diagnostics/UserDiagnostic.hpp"
+#include "veec/diagnostics/UserDiagnosticNote.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace diagnostics {
@@ -43,6 +44,9 @@ public:
 private:
     void renderSourceCode(const UserDiagnostic& diagnostic, io::StreamWriter& terminalWriter) const;
     void renderGenericText(const UserDiagnostic& diagnostic, io::StreamWriter& terminalWriter) const;
+
+    void renderNoteSourceCode(const UserDiagnosticNote& note, io::StreamWriter& terminalWriter) const;
+    void renderNoteGenericText(const UserDiagnosticNote& note, io::StreamWriter& terminalWriter) const;
 
     // Helpers
     void writeLine(std::string_view line, io::StreamWriter& terminalWriter) const;
