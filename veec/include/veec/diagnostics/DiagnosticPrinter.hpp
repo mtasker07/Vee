@@ -33,10 +33,12 @@ public:
      * @brief Prints a list of diagnostics to the given output stream.
      * @param diagnostics The list of diagnostics to print.
      * @param writer The output stream to print the diagnostics to.
+     * @param spaceBetween Whether to add a space between diagnostics. Defaults to true.
      */
-    inline void printDiagnostics(const std::vector<UserDiagnostic>& diagnostics, io::StreamWriter& writer) const {
+    inline void printDiagnostics(const std::vector<UserDiagnostic>& diagnostics, io::StreamWriter& writer, bool spaceBetween = true) const {
         for (const auto& diagnostic : diagnostics) {
             printDiagnostic(diagnostic, writer);
+            if (spaceBetween) writer.write("\n");
         }
     }
     /**
