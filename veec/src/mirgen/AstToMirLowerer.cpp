@@ -42,6 +42,7 @@
 #include "veec/mir/BasicBlock.hpp"
 #include "veec/mir/Value.hpp"
 #include "veec/mir/Constant.hpp"
+#include "veec/mirgen/support/FunctionCollector.hpp"
 #include "veec/symbols/ent/FunctionSymbol.hpp"
 #include "veec/types/TypeContext.hpp"
 #include "veec/types/TypeTable.hpp"
@@ -58,6 +59,24 @@ mir::Module* AstToMirLowerer::lower(ast::CompilationUnitNode& node) {
     return _currentModule;
 }
 
+// Entry point vv
+
+void AstToMirLowerer::lowerAllFunctions(const ast::AstNode& node) {
+    // Collect all function declarations
+    support::FunctionCollector collector;
+    std::vector<const ast::FunctionDeclNode*> functionDecls = collector.collectFunctions(node);
+
+    // Lower declarations
+    for (const ast::FunctionDeclNode* funcDecl : functionDecls) {
+        lowerFunctionDecl(*funcDecl);
+    }
+
+    // Lower bodies
+    for (const ast::FunctionDeclNode* funcDecl : functionDecls) {
+        lowerFunctionBody(*funcDecl);
+    }
+}
+
 //
 // Basic
 //
@@ -66,18 +85,8 @@ void AstToMirLowerer::visitCompilationUnit(const ast::CompilationUnitNode& node)
     // Create new module
     _currentModule = _mir.factory.createModule();
 
-    // Create all functions before hand (for forward references)
-    std::vector<ast::FunctionDeclNode*> functionDecls;
-    for (ast::ItemNode* item : node.getItems()) {
-        if (ast::FunctionDeclNode* funcDecl = ast::ast_cast<ast::FunctionDeclNode>(item)) {
-            lowerFunctionDecl(*funcDecl);
-            functionDecls.push_back(funcDecl);
-        }
-    }
-    // Lower function bodies
-    for (ast::FunctionDeclNode* funcDecl : functionDecls) {
-        lowerFunctionBody(*funcDecl);
-    }
+    // Lower all functions in the unit
+    lowerAllFunctions(node);
 }
 
 //

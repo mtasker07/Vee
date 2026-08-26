@@ -51,6 +51,9 @@ private:
     std::unordered_map<const symbols::FunctionSymbol*, mir::Function*> _functionMap;
     std::unordered_map<const symbols::VariableSymbol*, mir::Value*> _variableMap;
 
+    // Entry point
+    void lowerAllFunctions(const ast::AstNode& node);
+
     //
     // Basic
     //
