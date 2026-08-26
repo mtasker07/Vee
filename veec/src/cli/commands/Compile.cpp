@@ -6,7 +6,9 @@
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
 #include "veec/compilation/Compilation.hpp"
+#include "veec/compilation/CompilationConfig.hpp"
 #include "veec/io/StdStreams.hpp"
+#include "veec/fs/Path.hpp"
 #include "veec/cli/CLICommand.hpp"
 #include "veec/cli/CLIOption.hpp"
 #include "veec/cli/CLIOptionType.hpp"
@@ -22,6 +24,21 @@
 VEEC_NAMESPACE_BEGIN
 namespace cli {
 namespace commands {
+
+namespace {
+
+compilation::CompilationConfig generateCompilationConfigFromOptions(const CLICommandOptions& options) {
+    compilation::CompilationConfig config;
+
+    config.inputFiles = options.getListValuesAsPaths(CLIOption::InputFile);
+    config.outputFile = options.getValueAsPathOr(CLIOption::OutputFile, fs::Path("a.out"));
+    config.outputMirDirectory = options.getValueAsPathOr(CLIOption::OutputMir, fs::Path());
+    // TODO: Optimization level etc.
+
+    return config;
+}
+
+} // namespace
 
 const std::vector<descriptor::CLIOptionDescriptor>& getCompileCommandOptionDescriptors() {
     static const std::vector<descriptor::CLIOptionDescriptor> compileCommandOptionDescriptors = {
@@ -119,9 +136,10 @@ const descriptor::CLICommandDescriptor& getCompileCommandDescriptor() {
 }
 const delegate::CLICommandInvocationDelegate& getCompileCommandInvocationDelegate() {
     static const delegate::CLICommandInvocationDelegate compileCommandInvocationDelegate
-        = [](descriptor::CLICommandInvocationContext&, const CLICommandOptions&) -> int
+        = [](descriptor::CLICommandInvocationContext&, const CLICommandOptions& options) -> int
     {
-        compilation::Compilation compilation;
+        compilation::CompilationConfig config = generateCompilationConfigFromOptions(options);
+        compilation::Compilation compilation = compilation::Compilation(config);
         compilation.compile();
 
         const std::vector<diagnostics::UserDiagnostic>& diagnostics = compilation.getDiagnostics();
