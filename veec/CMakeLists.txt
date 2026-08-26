@@ -63,6 +63,7 @@ set(VEEC_SOURCES
     src/mir/support/ConstantTable.cpp
     
     src/mirgen/AstToMirLowerer.cpp
+    src/mirgen/support/FunctionCollector.cpp
     
     src/sema/ScopeManager.cpp
     
