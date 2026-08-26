@@ -15,6 +15,7 @@
 #include "vee/core/CoreDefines.hpp"
 #include "vee/core/CoreTypedefs.hpp"
 #include "veec/CoreDefines.hpp"
+#include "veec/fs/Path.hpp"
 #include "veec/cli/CLIOption.hpp"
 #include "veec/cli/CLIValue.hpp"
 #include "veec/cli/CLIArgsToken.hpp"
@@ -138,6 +139,34 @@ public:
         return defaultValue;
     }
     /**
+     * @brief Gets the value of a value option as a path.
+     * @param option The value option to get the value for. Must be a value option.
+     * @return The path of the value option, or an empty path if not specified.
+     */
+    inline fs::Path getValueAsPath(CLIOption option) const {
+        VEE_ASSERT(isValueOption(option), "Option is not a value option");
+
+        auto it = _valueOptions.find(option);
+        if (it != _valueOptions.end()) {
+            return fs::Path(it->second.getStringValue());
+        }
+        return fs::Path();
+    }
+    /**
+     * @brief Gets the value of a value option as a path.
+     * @param option The value option to get the value for. Must be a value option.
+     * @return The path of the value option, or defaultValue if not specified.
+     */
+    inline fs::Path getValueAsPathOr(CLIOption option, const fs::Path& defaultValue) const {
+        VEE_ASSERT(isValueOption(option), "Option is not a value option");
+
+        auto it = _valueOptions.find(option);
+        if (it != _valueOptions.end()) {
+            return fs::Path(it->second.getStringValue());
+        }
+        return defaultValue;
+    }
+    /**
      * @brief Sets the value of a value option. Asserts if set more than once for
      * a given option, so that should be checked beforehand.
      * @param option The value option to set the value for. Must be a value option.
@@ -169,6 +198,26 @@ public:
         }
         static const std::vector<CLIValue> empty;
         return empty;
+    }
+    /**
+     * @brief Gets the list of values for a list option as paths.
+     * @param option The list option to get the values for. Must be a list option.
+     * @return The list of paths for the list option, or an empty vector
+     * if not specified.
+     */
+    inline std::vector<fs::Path> getListValuesAsPaths(CLIOption option) const {
+        VEE_ASSERT(isListOption(option), "Option is not a list option");
+
+        auto it = _listOptions.find(option);
+        if (it != _listOptions.end()) {
+            std::vector<fs::Path> paths;
+            paths.reserve(it->second.size());
+            for (const CLIValue& value : it->second) {
+                paths.emplace_back(fs::Path(value.getStringValue()));
+            }
+            return paths;
+        }
+        return {};
     }
     /**
      * @brief Adds an empty list for a list option. This is used to indicate that the
