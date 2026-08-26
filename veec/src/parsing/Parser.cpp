@@ -263,6 +263,7 @@ ast::ModuleDeclNode* Parser::parseModuleDeclaration() {
         if (item) {
             items.push_back(item);
         }
+        else synchronize();
     }
 
     expect(TokenType::RCurly, diagnostics::ERROR_RCURLY_EXPECTED);
