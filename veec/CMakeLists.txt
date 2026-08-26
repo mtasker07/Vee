@@ -6,7 +6,6 @@ set(VEEC_SOURCES
     src/BuiltinRegistrar.cpp
 
     src/compilation/Compilation.cpp
-    src/compilation/CompilationConfig.cpp
 
     src/basic/APInt.cpp
     src/basic/BigInt.cpp

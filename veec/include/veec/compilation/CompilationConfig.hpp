@@ -27,14 +27,6 @@ namespace compilation {
  */
 struct CompilationConfig {
     /**
-     * @brief Creates a CompilationConfig from the given CLIOptions. The options passed
-     * must be valid as this function asserts otherwise.
-     * @param options The CLIOptions to use for generating the CompilationConfig.
-     * @return A CompilationConfig generated from the given CLIOptions.
-     */
-    static CompilationConfig fromCLIOptions(const cli::CLICommandOptions& options);
-
-    /**
      * @brief A list of input files to use for the compilation process.
      */
     std::vector<fs::Path> inputFiles;
