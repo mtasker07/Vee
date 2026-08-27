@@ -82,6 +82,7 @@ class FieldDeclNode;
 
 // -- STMT --
 class StatementNode;
+class BaseLoopStmtNode;
 class BlockStmtNode;
 class ExpressionStmtNode;
 class IfStmtNode;
