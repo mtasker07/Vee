@@ -13,7 +13,7 @@
 #include "veec/basic/Token.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
-#include "veec/ast/stmt/StatementNode.hpp"
+#include "veec/ast/stmt/BaseLoopStmtNode.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast {
@@ -21,7 +21,7 @@ namespace ast {
 /**
  * @brief This node represents a loop statement in the AST.
  */
-class LoopStmtNode : public StatementNode {
+class LoopStmtNode : public BaseLoopStmtNode {
 public:
     /**
      * @brief Creates a new LoopStmtNode with the given condition expression and body statement.
@@ -29,7 +29,7 @@ public:
      * @param body The statement to execute in the loop body.
      */
     LoopStmtNode(AstKey, StatementNode* body)
-        : StatementNode(AstKey{}, AstKind::LoopStmt), _body(body) {}
+        : BaseLoopStmtNode(AstKey{}, AstKind::LoopStmt), _body(body) {}
 
     virtual ~LoopStmtNode() = default;
 

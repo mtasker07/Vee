@@ -13,7 +13,7 @@
 #include "veec/basic/Token.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
-#include "veec/ast/stmt/StatementNode.hpp"
+#include "veec/ast/stmt/BaseLoopStmtNode.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast {
@@ -21,7 +21,7 @@ namespace ast {
 /**
  * @brief This node represents a for loop statement in the AST.
  */
-class ForStmtNode : public StatementNode {
+class ForStmtNode : public BaseLoopStmtNode {
 public:
     /**
      * @brief Creates a new ForStmtNode instance.
@@ -37,7 +37,7 @@ public:
 		ExpressionNode* increment,
 		StatementNode* body
     )
-        : StatementNode(AstKey{}, AstKind::ForStmt),
+        : BaseLoopStmtNode(AstKey{}, AstKind::ForStmt),
         _init(init),
         _condition(condition),
         _increment(increment),

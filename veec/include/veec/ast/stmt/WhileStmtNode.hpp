@@ -13,7 +13,7 @@
 #include "veec/basic/Token.hpp"
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
-#include "veec/ast/stmt/StatementNode.hpp"
+#include "veec/ast/stmt/BaseLoopStmtNode.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace ast {
@@ -21,7 +21,7 @@ namespace ast {
 /**
  * @brief This node represents a while loop statement in the AST.
  */
-class WhileStmtNode : public StatementNode {
+class WhileStmtNode : public BaseLoopStmtNode {
 public:
     /**
      * @brief Creates a new WhileStmtNode with the given condition expression and body statement.
@@ -29,7 +29,7 @@ public:
      * @param body The statement to execute in the loop body.
      */
     WhileStmtNode(AstKey, ExpressionNode* condition, StatementNode* body)
-        : StatementNode(AstKey{}, AstKind::WhileStmt), _condition(condition), _body(body) {}
+        : BaseLoopStmtNode(AstKey{}, AstKind::WhileStmt), _condition(condition), _body(body) {}
 
     virtual ~WhileStmtNode() = default;
 
