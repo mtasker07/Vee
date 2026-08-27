@@ -37,6 +37,11 @@
 #include "veec/diagnostics/DiagnosticCatalog.hpp"
 
 VEEC_NAMESPACE_BEGIN
+
+namespace diagnostics {
+    class UserDiagnostic;
+}
+
 namespace sema_passes {
 
 void SymbolCollectionPass::visitCompilationUnit(ast::CompilationUnitNode& node) {

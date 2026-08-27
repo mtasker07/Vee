@@ -43,12 +43,12 @@ set(VEEC_SOURCES
     src/ast/AstWalker.cpp
     src/ast/AstPrinter.cpp
     
-    src/ast_passes/SymbolCollectionPass.cpp
-    src/ast_passes/TopLevelUseResolutionPass.cpp
-    src/ast_passes/SymbolResolutionPass.cpp
-    src/ast_passes/TypeConstructionPass.cpp
-    src/ast_passes/TypeResolutionPass.cpp
-    src/ast_passes/TypeCheckerPass.cpp
+    src/sema_passes/SymbolCollectionPass.cpp
+    src/sema_passes/TopLevelUseResolutionPass.cpp
+    src/sema_passes/SymbolResolutionPass.cpp
+    src/sema_passes/TypeConstructionPass.cpp
+    src/sema_passes/TypeResolutionPass.cpp
+    src/sema_passes/TypeCheckerPass.cpp
     
     src/mir/MirNode.cpp
     src/mir/MirFactory.cpp
