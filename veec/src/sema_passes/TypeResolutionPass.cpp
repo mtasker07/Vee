@@ -46,7 +46,13 @@ void TypeResolutionPass::visitFunctionDecl(ast::FunctionDeclNode& node) {
     VEE_ASSERT(functionSymbol != nullptr, "FunctionDeclNode has no associated FunctionSymbol");
 
     // Set the return type and parameters
-    types::Type* returnType = _ctx.types.table.getNodeType(node.getReturnType());
+    types::Type* returnType = nullptr;
+    if (node.getReturnType() == nullptr) {
+        // Default void
+        returnType = _ctx.types.table.getBuiltin(types::BuiltinTypeKind::Void);
+    } else {
+        returnType = _ctx.types.table.getNodeType(node.getReturnType());
+    }
 
     std::vector<types::Type*> parameterTypes;
     for (ast::ParameterDeclNode* paramNode : node.getParameters()) {
@@ -86,7 +92,14 @@ void TypeResolutionPass::visitMethodDecl(ast::MethodDeclNode& node) {
     VEE_ASSERT(methodSymbol != nullptr, "MethodDeclNode has no associated FunctionSymbol");
 
     // Grab the return type and parameter types
-    types::Type* returnType = _ctx.types.table.getNodeType(node.getReturnType());
+    types::Type* returnType = nullptr;
+    if (node.getReturnType() == nullptr) {
+        // Default void
+        returnType = _ctx.types.table.getBuiltin(types::BuiltinTypeKind::Void);
+    } else {
+        returnType = _ctx.types.table.getNodeType(node.getReturnType());
+    }
+
     std::vector<types::Type*> parameterTypes;
     for (ast::ParameterDeclNode* paramNode : node.getParameters()) {
         parameterTypes.push_back(_ctx.types.table.getNodeType(paramNode->getType()));
