@@ -30,6 +30,7 @@
 #include "veec/sema_passes/TypeConstructionPass.hpp"
 #include "veec/sema_passes/TypeResolutionPass.hpp"
 #include "veec/sema_passes/TypeCheckerPass.hpp"
+#include "veec/sema_passes/ControlFlowValidationPass.hpp"
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/MirNode.hpp"
 #include "veec/mir/Module.hpp"
@@ -125,6 +126,7 @@ bool Compilation::analyze() {
     pm.addPass<sema_passes::TypeConstructionPass>();
     pm.addPass<sema_passes::TypeResolutionPass>();
     pm.addPass<sema_passes::TypeCheckerPass>();
+	pm.addPass<sema_passes::ControlFlowValidationPass>();
 
     const std::vector<TranslationUnit*>& units = _ctx.units.getAllUnits();
     return pm.runAllForUnits(units);
