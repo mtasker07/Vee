@@ -49,6 +49,7 @@ set(VEEC_SOURCES
     src/sema_passes/TypeConstructionPass.cpp
     src/sema_passes/TypeResolutionPass.cpp
     src/sema_passes/TypeCheckerPass.cpp
+    src/sema_passes/ControlFlowValidationPass.cpp
     
     src/mir/MirNode.cpp
     src/mir/MirFactory.cpp
