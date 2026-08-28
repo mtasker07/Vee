@@ -306,6 +306,9 @@ inline constexpr DiagnosticDescriptor<1> ERROR_VAR_DECL_NO_TYPE_OR_INIT {
 inline constexpr DiagnosticDescriptor<2> ERROR_VAR_ASSIGNMENT_TYPE_MISMATCH {
     UserDiagnosticKind::Error, 516, "value of type '{}' cannot be assigned to variable of type '{}'"
 };
+inline constexpr DiagnosticDescriptor<2> ERROR_NOT_ALL_CODE_PATHS_RETURN_VALUE {
+    UserDiagnosticKind::Error, 517, "not all code paths return a value"
+};
 
 // ------------------------------------------------------
 //                       WARNINGS
