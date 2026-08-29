@@ -50,6 +50,8 @@ public:
     }
 
 protected:
+    virtual void visitCallableDecl(ast::CallableDeclNode& node) override;
+
     virtual void visitExpression(ast::ExpressionNode& node) override;
     virtual void visitParenthesizedExpr(ast::ParenthesizedExprNode& node) override;
     virtual void visitIntLiteralExpr(ast::IntLiteralExprNode& node) override;
@@ -68,7 +70,11 @@ protected:
     // For variable type inference
     virtual void visitVariableDecl(ast::VariableDeclNode& node) override;
 
+	virtual void visitReturnStmt(ast::ReturnStmtNode& node) override;
+
 private:
+	ast::CallableDeclNode* _currentCallable = nullptr;
+
     //
     // Overload resolution
     //

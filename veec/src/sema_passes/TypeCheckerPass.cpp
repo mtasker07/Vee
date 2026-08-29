@@ -14,6 +14,10 @@
 #include "veec/ast/AstNode.hpp"
 #include "veec/ast/AstFwd.hpp"
 #include "veec/ast/AstWalker.hpp"
+#include "veec/ast/decl/DeclarationNode.hpp"
+#include "veec/ast/decl/CallableDeclNode.hpp"
+#include "veec/ast/decl/FunctionDeclNode.hpp"
+#include "veec/ast/decl/MethodDeclNode.hpp"
 #include "veec/ast/expr/ExpressionNode.hpp"
 #include "veec/ast/expr/ParenthesizedExprNode.hpp"
 #include "veec/ast/expr/LiteralExprNode.hpp"
@@ -30,6 +34,7 @@
 #include "veec/ast/expr/MemberAccessExprNode.hpp"
 #include "veec/ast/expr/ConstructExprNode.hpp"
 #include "veec/ast/decl/VariableDeclNode.hpp"
+#include "veec/ast/stmt/ReturnStmtNode.hpp"
 #include "veec/ast/type/TypeNode.hpp"
 #include "veec/ast/type/BuiltinTypeNode.hpp"
 #include "veec/ast/type/NamedTypeNode.hpp"
@@ -58,6 +63,15 @@
 
 VEEC_NAMESPACE_BEGIN
 namespace sema_passes {
+
+void TypeCheckerPass::visitCallableDecl(ast::CallableDeclNode& node) {
+	ast::CallableDeclNode* oldCallable = _currentCallable;
+	_currentCallable = &node;
+
+	ast::AstWalker::visitCallableDecl(node);
+
+	_currentCallable = oldCallable;
+}
 
 void TypeCheckerPass::visitExpression(ast::ExpressionNode& node) {
     ast::AstWalker::visitExpression(node);
@@ -580,6 +594,63 @@ void TypeCheckerPass::visitVariableDecl(ast::VariableDeclNode& node) {
         initType,
         varSymbol->getType()
     );
+}
+
+void TypeCheckerPass::visitReturnStmt(ast::ReturnStmtNode& node) {
+    // vv For inferring return value type vv
+    ast::AstWalker::visitReturnStmt(node);
+
+    if (_currentCallable == nullptr) return;
+    // ^^ Not our responsibility to emit a diagnostic for this
+
+    symbols::FunctionSymbol* funcSymbol = _currentCallable->symbol;
+    VEE_ASSERT(funcSymbol != nullptr, "Unresolved callable!");
+
+	types::Type* callableReturnType = funcSymbol->getReturnType();
+    VEE_ASSERT(callableReturnType != nullptr, "Callable has no return type!");
+
+    if (callableReturnType == _ctx.types.table.getVoid()) {
+        // Cant return a value
+        if (node.getValue() != nullptr) {
+            _ctx.diagnostics.report(
+                diagnostics::ERROR_RETURN_VALUE_IN_VOID_FUNCTION,
+                node.getRange(),
+                _currentCallable->getName().range.getText()
+            );
+        }
+    }
+    else {
+        // Must return a value
+        if (node.getValue() == nullptr) {
+            _ctx.diagnostics.report(
+                diagnostics::ERROR_RETURN_NO_VALUE_IN_NON_VOID_FUNCTION,
+                node.getRange(),
+                _currentCallable->getName().range.getText()
+            );
+        }
+        else {
+            types::Type* returnValueType = _ctx.types.table.getNodeType(node.getValue());
+            VEE_ASSERT(returnValueType != nullptr, "Failed to infer type for return value");
+
+            // Validate return value type can be converted to callable return type
+            if (!implicitConversionPossible(returnValueType, callableReturnType)) {
+                // Cannot convert return value type to callable return type
+                _ctx.diagnostics.report(
+                    diagnostics::ERROR_RETURN_TYPE_MISMATCH,
+                    node.getValue()->getRange(),
+                    returnValueType->toString(),
+                    callableReturnType->toString()
+                );
+            }
+
+            // Emit conversion diagnostics for return value
+            emitImplicitConversionDiagnostics(
+                node.getValue()->getRange(),
+                returnValueType,
+                callableReturnType
+            );
+        }
+    }
 }
 
 bool TypeCheckerPass::implicitConversionPossible(types::Type* from, types::Type* to) {
