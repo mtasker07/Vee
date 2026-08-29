@@ -75,7 +75,8 @@ void MirPrinter::printModule(const Module& module) {
         printFunction(*func);
         addLineIndented("");
     }
-    addLineIndented("\n}");
+    // Account for newline after last function
+    addLineIndented("}");
 }
 void MirPrinter::printFunction(const Function& function) {
     // Values are unique to functions, so reset the counter here
