@@ -59,6 +59,7 @@ protected:
     virtual void visitMemberAccessExpr(MemberAccessExprNode& node);
     virtual void visitConstructExpr(ConstructExprNode& node);
     virtual void visitDeclaration(DeclarationNode& node);
+    virtual void visitCallableDecl(CallableDeclNode& node);
     virtual void visitModuleDecl(ModuleDeclNode& node);
     virtual void visitFunctionDecl(FunctionDeclNode& node);
     virtual void visitParameterDecl(ParameterDeclNode& node);

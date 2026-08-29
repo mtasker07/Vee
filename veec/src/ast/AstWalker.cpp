@@ -30,6 +30,7 @@
 #include "veec/ast/expr/MemberAccessExprNode.hpp"
 #include "veec/ast/expr/ConstructExprNode.hpp"
 #include "veec/ast/decl/DeclarationNode.hpp"
+#include "veec/ast/decl/CallableDeclNode.hpp"
 #include "veec/ast/decl/ModuleDeclNode.hpp"
 #include "veec/ast/decl/FunctionDeclNode.hpp"
 #include "veec/ast/decl/ParameterDeclNode.hpp"
@@ -280,16 +281,13 @@ void AstWalker::visitConstructExpr(ConstructExprNode& node) {
 void AstWalker::visitDeclaration(DeclarationNode& node) {
     visitItem(node);
 }
-void AstWalker::visitModuleDecl(ModuleDeclNode& node) {
-    visitDeclaration(node);
-    for (auto& item : node.getItems()) {
-        walk(*item);
-    }
-}
-void AstWalker::visitFunctionDecl(FunctionDeclNode& node) {
+void AstWalker::visitCallableDecl(CallableDeclNode& node) {
     visitDeclaration(node);
     if (node.getReturnType())
         walk(*node.getReturnType());
+
+    if (node.getGenericParams())
+        walk(*node.getGenericParams());
 
     for (auto& param : node.getParameters()) {
         walk(*param);
@@ -297,6 +295,15 @@ void AstWalker::visitFunctionDecl(FunctionDeclNode& node) {
 
     if (node.getBody())
         walk(*node.getBody());
+}
+void AstWalker::visitModuleDecl(ModuleDeclNode& node) {
+    visitDeclaration(node);
+    for (auto& item : node.getItems()) {
+        walk(*item);
+    }
+}
+void AstWalker::visitFunctionDecl(FunctionDeclNode& node) {
+    visitCallableDecl(node);
 }
 void AstWalker::visitParameterDecl(ParameterDeclNode& node) {
     visitDeclaration(node);
@@ -310,16 +317,7 @@ void AstWalker::visitClassDecl(ClassDeclNode& node) {
     }
 }
 void AstWalker::visitMethodDecl(MethodDeclNode& node) {
-    visitDeclaration(node);
-    if (node.getReturnType())
-        walk(*node.getReturnType());
-
-    for (auto& param : node.getParameters()) {
-        walk(*param);
-    }
-
-    if (node.getBody())
-        walk(*node.getBody());
+    visitCallableDecl(node);
 }
 void AstWalker::visitFieldDecl(FieldDeclNode& node) {
     visitDeclaration(node);

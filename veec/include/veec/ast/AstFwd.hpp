@@ -72,6 +72,7 @@ class ConstructExprNode;
 
 // -- DECL --
 class DeclarationNode;
+class CallableDeclNode;
 class ModuleDeclNode;
 class FunctionDeclNode;
 class ParameterDeclNode;
