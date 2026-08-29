@@ -312,6 +312,12 @@ inline constexpr DiagnosticDescriptor<0> ERROR_NOT_ALL_CODE_PATHS_RETURN_VALUE {
 inline constexpr DiagnosticDescriptor<0> ERROR_RETURN_OUTSIDE_FUNCTION_OR_METHOD {
     UserDiagnosticKind::Error, 518, "return statement outside of function or method"
 };
+inline constexpr DiagnosticDescriptor<1> ERROR_RETURN_NO_VALUE_IN_NON_VOID_FUNCTION {
+    UserDiagnosticKind::Error, 519, "must return a value in non-void function '{}'"
+};
+inline constexpr DiagnosticDescriptor<1> ERROR_RETURN_VALUE_IN_VOID_FUNCTION {
+    UserDiagnosticKind::Error, 520, "cannot return a value in void function '{}'"
+};
 
 // ------------------------------------------------------
 //                       WARNINGS
