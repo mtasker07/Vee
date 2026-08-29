@@ -79,6 +79,50 @@ ClassType* TypeTable::getClass(symbols::ClassSymbol* classSymbol) {
     return newClassType;
 }
 
+//
+// Builtin helpers
+//
+
+BuiltinType* TypeTable::getVoid() {
+    return getBuiltin(BuiltinTypeKind::Void);
+}
+BuiltinType* TypeTable::getBool() {
+    return getBuiltin(BuiltinTypeKind::Bool);
+}
+BuiltinType* TypeTable::getString() {
+    return getBuiltin(BuiltinTypeKind::String);
+}
+BuiltinType* TypeTable::getI8() {
+    return getBuiltin(BuiltinTypeKind::I8);
+}
+BuiltinType* TypeTable::getI16() {
+    return getBuiltin(BuiltinTypeKind::I16);
+}
+BuiltinType* TypeTable::getI32() {
+    return getBuiltin(BuiltinTypeKind::I32);
+}
+BuiltinType* TypeTable::getI64() {
+    return getBuiltin(BuiltinTypeKind::I64);
+}
+BuiltinType* TypeTable::getU8() {
+    return getBuiltin(BuiltinTypeKind::U8);
+}
+BuiltinType* TypeTable::getU16() {
+    return getBuiltin(BuiltinTypeKind::U16);
+}
+BuiltinType* TypeTable::getU32() {
+    return getBuiltin(BuiltinTypeKind::U32);
+}
+BuiltinType* TypeTable::getU64() {
+    return getBuiltin(BuiltinTypeKind::U64);
+}
+BuiltinType* TypeTable::getF32() {
+    return getBuiltin(BuiltinTypeKind::F32);
+}
+BuiltinType* TypeTable::getF64() {
+    return getBuiltin(BuiltinTypeKind::F64);
+}
+
 Type* TypeTable::getNodeType(const ast::AstNode* node) {
     auto it = _astNodeTypes.find(node);
     if (it != _astNodeTypes.end()) {

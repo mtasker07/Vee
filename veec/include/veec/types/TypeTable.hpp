@@ -73,6 +73,77 @@ public:
      */
     ClassType* getClass(symbols::ClassSymbol* classSymbol);
 
+    //
+    // Builtin helpers
+    //
+
+    /**
+     * @brief Gets the void type.
+     * @return A pointer to the void type object.
+     */
+    BuiltinType* getVoid();
+    /**
+     * @brief Gets the bool type.
+     * @return A pointer to the bool type object.
+     */
+    BuiltinType* getBool();
+    /**
+     * @brief Gets the string type.
+     * @return A pointer to the string type object.
+     */
+    BuiltinType* getString();
+    /**
+     * @brief Gets the i8 type.
+     * @return A pointer to the i8 type object.
+     */
+    BuiltinType* getI8();
+    /**
+     * @brief Gets the i16 type.
+     * @return A pointer to the i16 type object.
+     */
+    BuiltinType* getI16();
+    /**
+     * @brief Gets the i32 type.
+     * @return A pointer to the i32 type object.
+     */
+    BuiltinType* getI32();
+    /**
+     * @brief Gets the i64 type.
+     * @return A pointer to the i64 type object.
+     */
+    BuiltinType* getI64();
+    /**
+     * @brief Gets the u8 type.
+     * @return A pointer to the u8 type object.
+     */
+    BuiltinType* getU8();
+    /**
+     * @brief Gets the u16 type.
+     * @return A pointer to the u16 type object.
+     */
+    BuiltinType* getU16();
+    /**
+     * @brief Gets the u32 type.
+     * @return A pointer to the u32 type object.
+     */
+    BuiltinType* getU32();
+    /**
+     * @brief Gets the u64 type.
+     * @return A pointer to the u64 type object.
+     */
+    BuiltinType* getU64();
+    /**
+     * @brief Gets the f32 type.
+     * @return A pointer to the f32 type object.
+     */
+    BuiltinType* getF32();
+    /**
+     * @brief Gets the f64 type.
+     * @return A pointer to the f64 type object.
+     */
+    BuiltinType* getF64();
+
+
     /**
      * @brief Gets the type of a given AST node.
      * @param node The AST node to get the type for.
