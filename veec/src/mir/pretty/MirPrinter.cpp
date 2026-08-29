@@ -140,11 +140,11 @@ std::string MirPrinter::printOperand(const Value& value) {
     switch (value.getNodeKind()) {
         case MirKind::Function: {
             const Function* func = static_cast<const Function*>(&value);
-            return std::format("@{}", nameOfFunction(*func));
+            return std::format("func {}", nameOfFunction(*func));
         }
         case MirKind::BasicBlock: {
             const BasicBlock* block = static_cast<const BasicBlock*>(&value);
-            return std::format("@{}", nameOfValue(*block));
+            return std::format("{}", nameOfValue(*block));
         }
         case MirKind::Instruction: {
             const Instruction* instr = static_cast<const Instruction*>(&value);
