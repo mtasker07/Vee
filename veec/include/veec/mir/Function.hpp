@@ -19,6 +19,7 @@
 #include "veec/mir/MirNode.hpp"
 #include "veec/mir/Value.hpp"
 #include "veec/symbols/SymbolFwd.hpp"
+#include "veec/symbols/ent/FunctionSymbol.hpp"
 #include "veec/types/TypeFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -85,6 +86,14 @@ public:
         VEE_ASSERT(param != nullptr, "Parameter cannot be null");
         VEE_ASSERT(param->getLocalKind() == LocalKind::Parameter, "Local is not a parameter");
         _parameters.push_back(param);
+    }
+
+    /**
+     * @brief Gets the return type of this function.
+     * @return The return type of this function.
+     */
+    inline types::Type* getReturnType() const {
+        return _sym->getReturnType();
     }
 
     /**
