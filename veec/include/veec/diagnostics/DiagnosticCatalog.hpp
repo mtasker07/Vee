@@ -318,6 +318,9 @@ inline constexpr DiagnosticDescriptor<1> ERROR_RETURN_NO_VALUE_IN_NON_VOID_FUNCT
 inline constexpr DiagnosticDescriptor<1> ERROR_RETURN_VALUE_IN_VOID_FUNCTION {
     UserDiagnosticKind::Error, 520, "cannot return a value in void function '{}'"
 };
+inline constexpr DiagnosticDescriptor<0> ERROR_RETURN_TYPE_MISMATCH {
+    UserDiagnosticKind::Error, 521, "return value type does not match (or cannot be converted to) function return type"
+};
 
 // ------------------------------------------------------
 //                       WARNINGS
