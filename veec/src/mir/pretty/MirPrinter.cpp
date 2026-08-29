@@ -66,17 +66,16 @@ void MirPrinter::printModule(const Module& module) {
     _funcCounter = 1;
     _unnamedFunctionNames.clear();
 
-    addLineIndented("[Module] {");
-    _indent++;
+    addLineIndented("[Module] {\n");
     for (const Constant* constant : module.getConstants()) {
         addLineIndented(printConstant(*constant));
     }
     append("\n");
     for (const Function* func : module.getFunctions()) {
         printFunction(*func);
+        addLineIndented("");
     }
-    _indent--;
-    addLineIndented("}");
+    addLineIndented("\n}");
 }
 void MirPrinter::printFunction(const Function& function) {
     // Values are unique to functions, so reset the counter here
