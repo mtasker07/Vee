@@ -55,6 +55,14 @@ public:
     }
 
     /**
+     * @brief Allocates memory of the specified size and alignment in the arena.
+     * @param size The size of the memory to allocate in bytes.
+     * @param alignment The alignment of the memory to allocate in bytes.
+     * @return A pointer to the newly allocated memory.
+     */
+    void* allocate(size_t size, size_t alignment);
+
+    /**
      * @brief Resets the arena, freeing all allocated memory.
      */
     inline void reset() {
@@ -79,9 +87,6 @@ private:
         void (*destroy)(void*);
         void* object;
     };
-
-    // Internal alloc
-    void* allocate(size_t size, size_t alignment);
 
     std::vector<Block> _blocks;
     std::vector<Destructor> _destructors;
