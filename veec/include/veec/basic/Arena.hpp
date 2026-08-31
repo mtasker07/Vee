@@ -61,6 +61,26 @@ public:
      * @return A pointer to the newly allocated memory.
      */
     void* allocate(size_t size, size_t alignment);
+    /**
+     * @brief Allocates memory for an object of type T in the arena.
+     * @tparam T The type of the object to allocate.
+     * @param args The constructor arguments for T.
+     * @return A pointer to the newly allocated object of type T.
+     */
+    template<typename T>
+    inline T* allocate() {
+        return static_cast<T*>(allocate(sizeof(T), alignof(T)));
+    }
+    /**
+     * @brief Allocates memory for an array of objects of type T in the arena.
+     * @tparam T The type of the objects to allocate.
+     * @param count The number of objects to allocate.
+     * @return A pointer to the newly allocated array of objects of type T.
+     */
+    template<typename T>
+    inline T* allocateArray(size_t count) {
+        return static_cast<T*>(allocate(sizeof(T) * count, alignof(T)));
+    }
 
     /**
      * @brief Resets the arena, freeing all allocated memory.
