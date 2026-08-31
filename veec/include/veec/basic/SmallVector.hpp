@@ -260,6 +260,70 @@ public:
     }
 
     //
+    // Useful operators
+    //
+
+    // Equality/inequality
+    /**
+     * @brief Checks if this vector is equal to another SmallVector.
+     * @param other The other SmallVector to compare with.
+     * @return True if the two SmallVectors are equal, false otherwise.
+     */
+    inline bool operator==(const SmallVector& other) const {
+        if (_size != other._size)
+            return false;
+        for (size_t i = 0; i < _size; ++i) {
+            if (!(_data[i] == other._data[i]))
+                return false;
+        }
+        return true;
+    }
+    /**
+     * @brief Checks if this vector is not equal to another SmallVector.
+     * @param other The other SmallVector to compare with.
+     * @return True if the two SmallVectors are not equal, false otherwise.
+     */
+    inline bool operator!=(const SmallVector& other) const {
+        return !(*this == other);
+    }
+
+    // Addition
+    /**
+     * @brief Adds the elements of two SmallVectors together, and returns them in a new SmallVector.
+     * @param other The other SmallVector to add.
+     * @return A new SmallVector containing the elements of both vectors.
+     */
+    inline SmallVector operator+(const SmallVector& other) const {
+        SmallVector result;
+        result.reserve(_size + other._size);
+        for (const auto& value : *this)
+            result.push_back(value);
+        for (const auto& value : other)
+            result.push_back(value);
+        return result;
+    }
+    /**
+     * @brief Adds all elements of another SmallVector to this SmallVector.
+     * @param other The other SmallVector to add.
+     * @return A reference to self after the addition.
+     */
+    inline SmallVector& operator+=(const SmallVector& other) {
+        reserve(_size + other._size);
+        for (const auto& value : other)
+            push_back(value);
+        return *this;
+    }
+    /**
+     * @brief Adds a single element to this SmallVector.
+     * @param value The element to add.
+     * @return A reference to self after the addition.
+     */
+    inline SmallVector& operator+=(const T& value) {
+        push_back(value);
+        return *this;
+    }
+
+    //
     // Iterators
     // 
 
