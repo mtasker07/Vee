@@ -19,7 +19,6 @@
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/Instruction.hpp"
 #include "veec/symbols/SymbolFwd.hpp"
-#include "veec/types/TypeFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
@@ -88,27 +87,37 @@ public:
     /**
      * @brief Creates a new function in the given module.
      * @param module The module to create the function in.
-     * @param sym The function symbol for the function.
+     * @param type The type of the function.
      * @param name The name of the function (optional).
      * @return A pointer to the new function.
      */
-    Function* createFunction(Module* module, symbols::FunctionSymbol* sym, std::string_view name = {});
+    Function* createFunction(
+        Module* module,
+        const MirFunctionType* type,
+        std::string_view name = {}
+    );
+    /**
+     * @brief Creates a new argument in the given function.
+     * @param function The function to create the argument in.
+     * @param type The type of the argument.
+     * @param name The name of the argument (optional).
+     * @return A pointer to the new argument.
+     */
+    Argument* createArgument(
+        Function* function,
+        const MirType* type,
+        std::string_view name = {}
+    );
     /**
      * @brief Creates a new basic block in the given function.
      * @param function The function to create the basic block in.
      * @param name The name of the basic block (optional).
      * @return A pointer to the new basic block.
      */
-    BasicBlock* createBasicBlock(Function* function, std::string_view name = {});
-    /**
-     * @brief Creates a new local in the given function.
-     * @param function The function to create the local in.
-     * @param kind The kind of the local.
-     * @param sym The symbol for the local.
-     * @param name The name of the local (optional).
-     * @return A pointer to the new local.
-     */
-    Local* createLocal(Function* function, LocalKind kind, symbols::VariableSymbol* sym, std::string_view name = {});
+    BasicBlock* createBasicBlock(
+        Function* function,
+        std::string_view name = {}
+    );
 
     /**
      * @brief Gets or creates a constant integer in the given module.
@@ -117,8 +126,13 @@ public:
      * @param value The value of the constant.
      * @param name The name of the constant (optional).
      * @return A pointer to the constant integer.
-     */
-    ConstantInt* getConstantInt(Module* module, types::Type* type, basic::APInt value, std::string_view name = {});
+    */
+    ConstantInt* getConstantInt(
+        Module* module,
+        const MirType* type,
+        basic::APInt value,
+        std::string_view name = {}
+    );
     /**
      * @brief Gets or creates a constant integer with value 1 in the given module.
      * @param module The module to get or create the constant in.
@@ -126,7 +140,11 @@ public:
      * @param name The name of the constant (optional).
      * @return A pointer to the constant integer with value 1.
      */
-    ConstantInt* getConstantIntOne(Module* module, types::Type* type, std::string_view name = {});
+    ConstantInt* getConstantIntOne(
+        Module* module,
+        const MirType* type,
+        std::string_view name = {}
+    );
     /**
      * @brief Gets or creates a constant float in the given module.
      * @param module The module to get or create the constant in.
@@ -135,7 +153,12 @@ public:
      * @param name The name of the constant (optional).
      * @return A pointer to the constant float.
      */
-    ConstantFloat* getConstantFloat(Module* module, types::Type* type, double value, std::string_view name = {});
+    ConstantFloat* getConstantFloat(
+        Module* module,
+        const MirType* type,
+        double value,
+        std::string_view name = {}
+    );
     /**
      * @brief Gets or creates a constant string in the given module.
      * @param module The module to get or create the constant in.
@@ -144,7 +167,12 @@ public:
      * @param name The name of the constant (optional).
      * @return A pointer to the constant string.
      */
-    ConstantString* getConstantString(Module* module, types::Type* type, std::string_view value, std::string_view name = {});
+    ConstantString* getConstantString(
+        Module* module,
+        const MirType* type,
+        std::string_view value,
+        std::string_view name = {}
+    );
     /**
      * @brief Gets or creates a constant boolean in the given module.
      * @param module The module to get or create the constant in.
@@ -153,7 +181,12 @@ public:
      * @param name The name of the constant (optional).
      * @return A pointer to the constant boolean.
      */
-    ConstantBool* getConstantBool(Module* module, types::Type* type, bool value, std::string_view name = {});
+    ConstantBool* getConstantBool(
+        Module* module,
+        const MirType* type,
+        bool value,
+        std::string_view name = {}
+    );
 
     //
     // Basic
@@ -171,7 +204,7 @@ public:
 
     // TODO
     Value* createPhi(
-        types::Type* type,
+        const MirType* type,
         basic::SmallVector<std::pair<Value*, mir::BasicBlock*>>&& incomingValues
     );
 
@@ -536,7 +569,7 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The constructed value.
      */
-    Value* createConstruct(types::Type* type, basic::SmallVector<Value*, 2>&& values, std::string_view resultName = {});
+    Value* createConstruct(const MirType* type, basic::SmallVector<Value*, 2>&& values, std::string_view resultName = {});
 
     //
     // Conversion / casting
@@ -549,15 +582,23 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The truncated value.
      */
-    Value* createTruncateInt(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createTruncateInt(Value* value, const MirType* toType, std::string_view resultName = {});
     /**
-     * @brief Creates an extend instruction that extends the given integer to the given type.
+     * @brief Creates a zero-extend instruction that extends the given integer to the given type.
      * @param value The value to extend.
      * @param toType The type to extend the value to.
      * @param resultName The name of the result value (optional).
      * @return The extended value.
      */
-    Value* createExtendInt(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createZExtendInt(Value* value, const MirType* toType, std::string_view resultName = {});
+    /**
+     * @brief Creates a sign-extend instruction that extends the given integer to the given type.
+     * @param value The value to extend.
+     * @param toType The type to extend the value to.
+     * @param resultName The name of the result value (optional).
+     * @return The extended value.
+     */
+    Value* createSExtendInt(Value* value, const MirType* toType, std::string_view resultName = {});
     
     /**
      * @brief Creates a truncate instruction that truncates the given float to the given type.
@@ -566,7 +607,7 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The truncated value.
      */
-    Value* createTruncateFloat(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createTruncateFloat(Value* value, const MirType* toType, std::string_view resultName = {});
     /**
      * @brief Creates an extend instruction that extends the given float to the given type.
      * @param value The value to extend.
@@ -574,7 +615,7 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The extended value.
      */
-    Value* createExtendFloat(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createExtendFloat(Value* value, const MirType* toType, std::string_view resultName = {});
 
     /**
      * @brief Creates an integer to float conversion instruction.
@@ -583,7 +624,7 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The converted float value.
      */
-    Value* createIntToFloat(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createIntToFloat(Value* value, const MirType* toType, std::string_view resultName = {});
     /**
      * @brief Creates a float to integer conversion instruction.
      * @param value The float value to convert.
@@ -591,7 +632,7 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The converted integer value.
      */
-    Value* createFloatToInt(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createFloatToInt(Value* value, const MirType* toType, std::string_view resultName = {});
 
     /**
      * @brief Creates a pointer to integer conversion instruction.
@@ -600,7 +641,7 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The converted integer value.
      */
-    Value* createPointerToInt(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createPointerToInt(Value* value, const MirType* toType, std::string_view resultName = {});
     /**
      * @brief Creates an integer to pointer conversion instruction.
      * @param value The integer value to convert.
@@ -608,7 +649,7 @@ public:
      * @param resultName The name of the result value (optional).
      * @return The converted pointer value.
      */
-    Value* createIntToPointer(Value* value, types::Type* toType, std::string_view resultName = {});
+    Value* createIntToPointer(Value* value, const MirType* toType, std::string_view resultName = {});
 
     //
     // Control flow
@@ -660,10 +701,13 @@ private:
 
     void assertBoolean(Value* value, std::string_view name);
     void assertInteger(Value* value, std::string_view name);
-    void assertSignedInteger(Value* value, std::string_view name);
-    void assertUnsignedInteger(Value* value, std::string_view name);
     void assertFloat(Value* value, std::string_view name);
     void assertPointer(Value* value, std::string_view name);
+
+    void assertBooleanType(const MirType* type, std::string_view name);
+    void assertIntegerType(const MirType* type, std::string_view name);
+    void assertFloatType(const MirType* type, std::string_view name);
+    void assertPointerType(const MirType* type, std::string_view name);
 
     //
     // Instruction creation
@@ -671,19 +715,15 @@ private:
 
     void createInstruction(InstructionOpcode opcode);
     void createInstruction(InstructionOpcode opcode, basic::SmallVector<Value*, 2>&& operands);
-    Value* createValueInstruction(InstructionOpcode opcode, types::Type* type, basic::SmallVector<Value*, 2>&& operands, std::string_view resultName);
+    Value* createValueInstruction(InstructionOpcode opcode, const MirType* type, basic::SmallVector<Value*, 2>&& operands, std::string_view resultName);
     void beginInstruction();
     void finishInstruction(Instruction* instr);
 
     // Name given value
     void nameValue(const Value* val, std::string_view name);
 
-    //
-    // Type helpers
-    //
-
-    types::Type* getValueType(const Value* value);
-    types::Type* getBoolType();
+    // Get boolean type directly (usually for logical operations)
+    const MirType* getBoolType();
 };
 
 } // namespace mir

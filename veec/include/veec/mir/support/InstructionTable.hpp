@@ -16,16 +16,14 @@
 #include "veec/basic/SmallVector.hpp"
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/Instruction.hpp"
-#include "veec/symbols/SymbolFwd.hpp"
-#include "veec/types/TypeFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
 namespace support {
 
 struct InstructionOverload {
-    basic::SmallVector<types::Type*, 2> operandTypes;
-    types::Type* resultType = nullptr;
+    basic::SmallVector<MirType*, 2> operandTypes;
+    MirType* resultType = nullptr;
 };
 
 /**
@@ -49,8 +47,8 @@ public:
      */
     void addOverload(
         InstructionOpcode opcode,
-        const std::vector<types::Type*>& operandTypes,
-        types::Type* resultType
+        const std::vector<MirType*>& operandTypes,
+        MirType* resultType
     ) {
         VEE_ASSERT(resultType != nullptr, "Result type cannot be null");
         if (_resultTypes.find(opcode) != _resultTypes.end()) {
@@ -62,7 +60,7 @@ public:
         _overloads[opcode].push_back({operandTypes, resultType});
     }
 
-    inline types::Type* getResultType(InstructionOpcode opcode) const {
+    inline MirType* getResultType(InstructionOpcode opcode) const {
         auto it = _resultTypes.find(opcode);
         if (it != _resultTypes.end()) {
             return it->second;
@@ -71,7 +69,7 @@ public:
     }
 
 private:
-    std::unordered_map<InstructionOpcode, types::Type*> _resultTypes;
+    std::unordered_map<InstructionOpcode, MirType*> _resultTypes;
     std::unordered_map<InstructionOpcode, std::vector<InstructionOverload>> _overloads;
 };
 

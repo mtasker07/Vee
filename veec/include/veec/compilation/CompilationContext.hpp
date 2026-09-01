@@ -19,6 +19,7 @@
 #include "veec/sema/SemaContext.hpp"
 #include "veec/mir/MirContext.hpp"
 #include "veec/types/TypeContext.hpp"
+#include "veec/codegen/CodegenContext.hpp"
 #include "veec/diagnostics/DiagnosticEngine.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -40,6 +41,7 @@ public:
     sema::SemaContext sema;
     types::TypeContext types;
     mir::MirContext mir;
+    codegen::CodegenContext codegen;
 
     CompilationContext() = default;
     ~CompilationContext() = default;

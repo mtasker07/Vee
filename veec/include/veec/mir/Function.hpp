@@ -17,10 +17,9 @@
 #include "veec/basic/SmallVector.hpp"
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/MirNode.hpp"
+#include "veec/mir/MirType.hpp"
 #include "veec/mir/Value.hpp"
-#include "veec/symbols/SymbolFwd.hpp"
-#include "veec/symbols/ent/FunctionSymbol.hpp"
-#include "veec/types/TypeFwd.hpp"
+#include "veec/mir/Argument.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
@@ -36,10 +35,9 @@ class Function : public Value {
 public:
     Function(
         MirKey key,
-        symbols::FunctionSymbol* sym
+        const MirFunctionType* type
     )
-        : Value(key, MirKind::Function),
-        _sym(sym) {}
+        : Value(key, MirKind::Function, type) {}
 
     ~Function() = default;
 
@@ -51,54 +49,52 @@ public:
     inline Module* getModule() const { return _module; }
 
     /**
-     * @brief Gets the function symbol associated with this function.
-     * @return A pointer to the function symbol associated with this function.
+     * @brief Gets the number of arguments in this function.
+     * @return The number of arguments in this function.
      */
-    inline symbols::FunctionSymbol* getSymbol() const { return _sym; }
-
+    inline size_t getArgCount() const { return _args.size(); }
     /**
-     * @brief Gets the number of parameters in this function.
-     * @return The number of parameters in this function.
+     * @brief Gets the arguments of this function.
+     * @return A list of arguments of this function.
      */
-    inline size_t getParameterCount() const { return _parameters.size(); }
-    /**
-     * @brief Gets the parameters of this function.
-     * @return A list of parameters of this function.
-     */
-    inline const basic::SmallVector<Local*>& getParameters() const {
-        return _parameters;
+    inline const basic::SmallVector<Argument*>& getArgs() const {
+        return _args;
     }
     /**
-     * @brief Gets the parameter at the given index.
-     * @param index The index of the parameter to get.
-     * @return A pointer to the parameter at the given index.
+     * @brief Gets the argument at the given index.
+     * @param index The index of the argument to get.
+     * @return A pointer to the argument at the given index.
      */
-    inline Local* getParameter(size_t index) const {
-        VEE_ASSERT(index < _parameters.size(), "Index out of bounds");
-        return _parameters[index];
-    }
-    /**
-     * @brief Adds a parameter to this function. The parameter must not belong to
-     * a function already.
-     * @param param The parameter to add. MUST be of kind LocalKind::Parameter.
-     */
-    inline void addParameter(Local* param) {
-        VEE_ASSERT(param != nullptr, "Parameter cannot be null");
-        VEE_ASSERT(param->getLocalKind() == LocalKind::Parameter, "Local is not a parameter");
-        _parameters.push_back(param);
+    inline Argument* getArg(size_t index) const {
+        VEE_ASSERT(index < _args.size(), "Index out of bounds");
+        return _args[index];
     }
 
     /**
-     * @brief Gets the return type of this function.
+     * @brief Gets the function type of this function (read-only).
+     * @return The function type of this function.
+     */
+    inline const MirFunctionType* getFunctionType() const {
+        return static_cast<const MirFunctionType*>(getType());
+    }
+    /**
+     * @brief Gets the return type of this function (read-only).
      * @return The return type of this function.
      */
-    inline types::Type* getReturnType() const {
-        return _sym->getReturnType();
+    inline const MirType* getReturnType() const {
+        return getFunctionType()->getReturnType();
+    }
+    /**
+     * @brief Gets the parameter types of this function (read-only).
+     * @return The parameter types of this function.
+     */
+    inline const basic::SmallVector<const MirType*>& getParameterTypes() const {
+        return getFunctionType()->getParameterTypes();
     }
 
     /**
-     * @brief Gets the locals of this function.
-     * @return A list of locals of this function.
+     * @brief Gets the basic blocks of this function (read-only).
+     * @return A list of basic blocks of this function.
      */
     inline const std::vector<BasicBlock*>& getBlocks() const { return _blocks; }
     /**
@@ -131,10 +127,8 @@ private:
     friend class Module;
 
     Module* _module = nullptr;
-    symbols::FunctionSymbol* _sym = nullptr;
-    basic::SmallVector<Local*> _parameters;
-
-    basic::SmallVector<Local*> _locals;
+    basic::SmallVector<Argument*> _args;
+    
     std::vector<BasicBlock*> _blocks;
 };
 

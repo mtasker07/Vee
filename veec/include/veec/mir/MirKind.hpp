@@ -25,9 +25,9 @@ namespace mir {
 enum class MirKind : u8 {
     Module,
     Function,
+    Argument,
     BasicBlock,
     Instruction,
-    Local,
     Constant
 };
 

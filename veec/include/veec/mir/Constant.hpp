@@ -20,7 +20,6 @@
 #include "veec/mir/MirKind.hpp"
 #include "veec/mir/MirNode.hpp"
 #include "veec/mir/Value.hpp"
-#include "veec/types/TypeFwd.hpp"
 #include "veec/util/HashUtils.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -134,9 +133,10 @@ public:
 protected:
     Constant(
         MirKey key,
-        ConstantKind kind
+        ConstantKind kind,
+        const MirType* type = nullptr
     )
-        : Value(key, MirKind::Constant),
+        : Value(key, MirKind::Constant, type),
         _kind(kind) {}
 
 private:
@@ -156,14 +156,15 @@ private:
  */
 class ConstantInt : public Constant {
 public:
-    using KeyType = util::HashUtils::CompositeKey<types::Type*, basic::APInt>;
+    using KeyType = util::HashUtils::CompositeKey<const MirType*, basic::APInt>;
     using Hasher = util::HashUtils::CompositeHasher;
 
     ConstantInt(
         MirKey key,
-        basic::APInt value
+        basic::APInt value,
+        const MirType* type = nullptr
     )
-        : Constant(key, ConstantKind::Int),
+        : Constant(key, ConstantKind::Int, type),
         _value(value) {}
 
     ~ConstantInt() = default;
@@ -190,14 +191,15 @@ private:
  */
 class ConstantFloat : public Constant {
 public:
-    using KeyType = util::HashUtils::CompositeKey<types::Type*, double>;
+    using KeyType = util::HashUtils::CompositeKey<const MirType*, double>;
     using Hasher = util::HashUtils::CompositeHasher;
 
     ConstantFloat(
         MirKey key,
-        double value
+        double value,
+        const MirType* type = nullptr
     )
-        : Constant(key, ConstantKind::Float),
+        : Constant(key, ConstantKind::Float, type),
         _value(value) {}
 
     ~ConstantFloat() = default;
@@ -224,14 +226,15 @@ private:
  */
 class ConstantString : public Constant {
 public:
-    using KeyType = util::HashUtils::CompositeKey<types::Type*, std::string_view>;
+    using KeyType = util::HashUtils::CompositeKey<const MirType*, std::string_view>;
     using Hasher = util::HashUtils::CompositeHasher;
 
     ConstantString(
         MirKey key,
-        std::string_view value
+        std::string_view value,
+        const MirType* type = nullptr
     )
-        : Constant(key, ConstantKind::String),
+        : Constant(key, ConstantKind::String, type),
         _value(value) {}
 
     ~ConstantString() = default;
@@ -262,9 +265,10 @@ public:
 
     ConstantBool(
         MirKey key,
-        bool value
+        bool value,
+        const MirType* type = nullptr
     )
-        : Constant(key, ConstantKind::Bool),
+        : Constant(key, ConstantKind::Bool, type),
         _value(value) {}
 
     ~ConstantBool() = default;

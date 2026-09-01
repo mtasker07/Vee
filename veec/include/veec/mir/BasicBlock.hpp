@@ -31,9 +31,7 @@ namespace mir {
  */
 class BasicBlock : public Value {
 public:
-    BasicBlock(
-        MirKey key
-    )
+    BasicBlock(MirKey key)
         : Value(key, MirKind::BasicBlock) {}
 
     ~BasicBlock() = default;

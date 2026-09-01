@@ -19,8 +19,6 @@
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/MirKind.hpp"
 #include "veec/mir/MirNode.hpp"
-#include "veec/types/TypeFwd.hpp"
-#include "veec/symbols/SymbolFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
@@ -38,9 +36,20 @@ class Value : public MirNode {
 public:
     ~Value() = default;
 
+    /**
+     * @brief Gets the type of this value.
+     * @return The type of this value, or nullptr if it has no type.
+     */
+    inline const MirType* getType() const { return _type; }
+
 protected:
-    Value(MirKey, MirKind kind)
-        : MirNode(MirKey{}, kind) {}
+    Value(MirKey key, MirKind kind, const MirType* type = nullptr)
+        : MirNode(key, kind), _type(type) {}
+
+private:
+    friend class MirFactory;
+
+    const MirType* _type = nullptr;
 };
 
 //
@@ -91,72 +100,13 @@ public:
     }
 
 protected:
-    User(MirKey key, MirKind kind)
-        : Value(key, kind) {}
-    User(MirKey key, MirKind kind, OperandList&& operands)
-        : Value(key, kind), _operands(std::move(operands)) {}
+    User(MirKey key, MirKind kind, const MirType* type = nullptr)
+        : Value(key, kind, type) {}
+    User(MirKey key, MirKind kind, OperandList&& operands, const MirType* type = nullptr)
+        : Value(key, kind, type), _operands(std::move(operands)) {}
 
 private:
     OperandList _operands;
-};
-
-//
-// LOCAL
-//
-
-/**
- * @enum LocalKind
- * @brief Represents the kind of a local.
- */
-enum class LocalKind : u8 {
-    Variable,
-    Parameter
-};
-
-/**
- * @class Local
- * @brief Represents a local variable or parameter in the middle intermediate representation (MIR) of the compiler.
- */
-class Local : public Value {
-public:
-    Local(
-        MirKey key,
-        Function* func,
-        LocalKind kind,
-        symbols::VariableSymbol* sym
-    )
-        : Value(key, MirKind::Local),
-        _func(func),
-        _kind(kind),
-        _symbol(sym) {}
-
-    ~Local() = default;
-
-    /**
-     * @brief Gets the function to which this local belongs.
-     * @return A pointer to the function that owns this local.
-     */
-    inline Function* getFunction() const { return _func; }
-
-    /**
-     * @brief Gets the kind of this local.
-     * @return The kind of this local.
-     */
-    inline LocalKind getLocalKind() const { return _kind; }
-
-    /**
-     * @brief Gets the variable symbol associated with this local.
-     * @return A pointer to the variable symbol associated with this local.
-     */
-    inline symbols::VariableSymbol* getSymbol() const { return _symbol; }
-
-private:
-    friend class MirFactory;
-    friend class Function;
-
-    Function* _func;
-    LocalKind _kind;
-    symbols::VariableSymbol* _symbol;
 };
 
 } // namespace mir

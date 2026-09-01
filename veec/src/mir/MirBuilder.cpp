@@ -16,12 +16,9 @@
 #include "veec/mir/Instruction.hpp"
 #include "veec/mir/Value.hpp"
 #include "veec/mir/Constant.hpp"
-#include "veec/mir/support/ValueTypeMap.hpp"
+#include "veec/mir/MirType.hpp"
+#include "veec/mir/support/TypeTable.hpp"
 #include "veec/symbols/SymbolFwd.hpp"
-#include "veec/types/Type.hpp"
-#include "veec/types/TypeFwd.hpp"
-#include "veec/types/BuiltinType.hpp"
-#include "veec/types/PointerType.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
@@ -33,29 +30,57 @@ namespace mir {
 Module* MirBuilder::createModule() {
     return _mir.factory.createModule();
 }
-Function* MirBuilder::createFunction(Module* module, symbols::FunctionSymbol* sym, std::string_view name) {
-    return _mir.factory.createFunction(module, sym, name);
+Function* MirBuilder::createFunction(
+    Module* module,
+    const MirFunctionType* type,
+    std::string_view name
+) {
+    return _mir.factory.createFunction(module, type, name);
 }
-BasicBlock* MirBuilder::createBasicBlock(Function* function, std::string_view name) {
+BasicBlock* MirBuilder::createBasicBlock(
+    Function* function,
+    std::string_view name
+) {
     return _mir.factory.createBasicBlock(function, name);
 }
-Local* MirBuilder::createLocal(Function* function, LocalKind kind, symbols::VariableSymbol* sym, std::string_view name) {
-    return _mir.factory.createLocal(function, kind, sym, name);
-}
 
-ConstantInt* MirBuilder::getConstantInt(Module* module, types::Type* type, basic::APInt value, std::string_view name) {
+ConstantInt* MirBuilder::getConstantInt(
+    Module* module,
+    const MirType* type,
+    basic::APInt value,
+    std::string_view name
+) {
     return _mir.factory.getConstantInt(module, type, std::move(value), name);
 }
-ConstantInt* MirBuilder::getConstantIntOne(Module* module, types::Type* type, std::string_view name) {
+ConstantInt* MirBuilder::getConstantIntOne(
+    Module* module,
+    const MirType* type,
+    std::string_view name
+) {
     return _mir.factory.getConstantIntOne(module, type, name);
 }
-ConstantFloat* MirBuilder::getConstantFloat(Module* module, types::Type* type, double value, std::string_view name) {
+ConstantFloat* MirBuilder::getConstantFloat(
+    Module* module,
+    const MirType* type,
+    double value,
+    std::string_view name
+) {
     return _mir.factory.getConstantFloat(module, type, value, name);
 }
-ConstantString* MirBuilder::getConstantString(Module* module, types::Type* type, std::string_view value, std::string_view name) {
+ConstantString* MirBuilder::getConstantString(
+    Module* module,
+    const MirType* type,
+    std::string_view value,
+    std::string_view name
+) {
     return _mir.factory.getConstantString(module, type, value, name);
 }
-ConstantBool* MirBuilder::getConstantBool(Module* module, types::Type* type, bool value, std::string_view name) {
+ConstantBool* MirBuilder::getConstantBool(
+    Module* module,
+    const MirType* type,
+    bool value,
+    std::string_view name
+) {
     return _mir.factory.getConstantBool(module, type, value, name);
 }
 
@@ -71,7 +96,10 @@ void MirBuilder::createNop() {
 // SSA / value
 //
 
-Value* MirBuilder::createPhi(types::Type*, basic::SmallVector<std::pair<Value*, mir::BasicBlock*>>&&) {
+Value* MirBuilder::createPhi(
+    const MirType*,
+    basic::SmallVector<std::pair<Value*, mir::BasicBlock*>>&&
+) {
     beginInstruction();
     return nullptr; // TODO
 }
@@ -83,49 +111,49 @@ Value* MirBuilder::createPhi(types::Type*, basic::SmallVector<std::pair<Value*, 
 Value* MirBuilder::createNeg(Value* value, std::string_view resultName) {
     assertInteger(value, "value");
 
-    return createValueInstruction(InstructionOpcode::Neg, getValueType(value), { value }, resultName);
+    return createValueInstruction(InstructionOpcode::Neg, value->getType(), { value }, resultName);
 }
 Value* MirBuilder::createAdd(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::Add, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::Add, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createSub(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::Sub, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::Sub, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createMul(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::Mul, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::Mul, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createSDiv(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::SDiv, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::SDiv, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createUDiv(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertUnsignedInteger(lhs, "lhs");
-    assertUnsignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::UDiv, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::UDiv, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createSMod(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertSignedInteger(lhs, "lhs");
-    assertSignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::SMod, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::SMod, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createUMod(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertUnsignedInteger(lhs, "lhs");
-    assertUnsignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::UMod, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::UMod, lhs->getType(), { lhs, rhs }, resultName);
 }
 
 //
@@ -135,45 +163,45 @@ Value* MirBuilder::createUMod(Value* lhs, Value* rhs, std::string_view resultNam
 Value* MirBuilder::createBitNot(Value* value, std::string_view resultName) {
     assertInteger(value, "value");
 
-    return createValueInstruction(InstructionOpcode::BitNot, getValueType(value), { value }, resultName);
+    return createValueInstruction(InstructionOpcode::BitNot, value->getType(), { value }, resultName);
 }
 Value* MirBuilder::createBitAnd(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::BitAnd, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::BitAnd, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createBitOr(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::BitOr, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::BitOr, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createBitXor(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::BitXor, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::BitXor, lhs->getType(), { lhs, rhs }, resultName);
 }
 
 Value* MirBuilder::createBitShl(Value* lhs, Value* rhs, std::string_view resultName) {
     assertInteger(lhs, "lhs");
     assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::BitShl, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::BitShl, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createBitLShr(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertUnsignedInteger(lhs, "lhs");
-    assertUnsignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::BitLShr, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::BitLShr, lhs->getType(), { lhs, rhs }, resultName);
 }
 
 Value* MirBuilder::createBitAShr(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertSignedInteger(lhs, "lhs");
-    assertSignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::BitAShr, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::BitAShr, lhs->getType(), { lhs, rhs }, resultName);
 }
 
 //
@@ -183,31 +211,31 @@ Value* MirBuilder::createBitAShr(Value* lhs, Value* rhs, std::string_view result
 Value* MirBuilder::createFNeg(Value* value, std::string_view resultName) {
     assertFloat(value, "value");
 
-    return createValueInstruction(InstructionOpcode::FNeg, getValueType(value), { value }, resultName);
+    return createValueInstruction(InstructionOpcode::FNeg, value->getType(), { value }, resultName);
 }
 Value* MirBuilder::createFAdd(Value* lhs, Value* rhs, std::string_view resultName) {
     assertFloat(lhs, "lhs");
     assertFloat(rhs, "rhs");
     
-    return createValueInstruction(InstructionOpcode::FAdd, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::FAdd, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createFSub(Value* lhs, Value* rhs, std::string_view resultName) {
     assertFloat(lhs, "lhs");
     assertFloat(rhs, "rhs");
     
-    return createValueInstruction(InstructionOpcode::FSub, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::FSub, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createFMul(Value* lhs, Value* rhs, std::string_view resultName) {
     assertFloat(lhs, "lhs");
     assertFloat(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::FMul, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::FMul, lhs->getType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createFDiv(Value* lhs, Value* rhs, std::string_view resultName) {
     assertFloat(lhs, "lhs");
     assertFloat(rhs, "rhs");
 
-    return createValueInstruction(InstructionOpcode::FDiv, getValueType(lhs), { lhs, rhs }, resultName);
+    return createValueInstruction(InstructionOpcode::FDiv, lhs->getType(), { lhs, rhs }, resultName);
 }
 
 //
@@ -249,50 +277,50 @@ Value* MirBuilder::createICmpNe(Value* lhs, Value* rhs, std::string_view resultN
     return createValueInstruction(InstructionOpcode::ICmpNe, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpSlt(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertSignedInteger(lhs, "lhs");
-    assertSignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpSlt, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpSle(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertSignedInteger(lhs, "lhs");
-    assertSignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpSle, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpSgt(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertSignedInteger(lhs, "lhs");
-    assertSignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpSgt, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpSge(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertSignedInteger(lhs, "lhs");
-    assertSignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpSge, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpUlt(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertUnsignedInteger(lhs, "lhs");
-    assertUnsignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpUlt, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpUle(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertUnsignedInteger(lhs, "lhs");
-    assertUnsignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpUle, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpUgt(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertUnsignedInteger(lhs, "lhs");
-    assertUnsignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpUgt, getBoolType(), { lhs, rhs }, resultName);
 }
 Value* MirBuilder::createICmpUge(Value* lhs, Value* rhs, std::string_view resultName) {
-    assertUnsignedInteger(lhs, "lhs");
-    assertUnsignedInteger(rhs, "rhs");
+    assertInteger(lhs, "lhs");
+    assertInteger(rhs, "rhs");
 
     return createValueInstruction(InstructionOpcode::ICmpUge, getBoolType(), { lhs, rhs }, resultName);
 }
@@ -351,14 +379,15 @@ void MirBuilder::createStore(Value* address, Value* value) {
 Value* MirBuilder::createLoad(Value* address, std::string_view resultName) {
     VEE_ASSERT(address != nullptr, "Address is null!");
 
-    return createValueInstruction(InstructionOpcode::Load, getValueType(address), { address }, resultName);
+    const MirType* loadedType = address->getType()->asPointer()->getPointeeType();
+    return createValueInstruction(InstructionOpcode::Load, loadedType, { address }, resultName);
 }
 
 //
 // Data
 //
 
-Value* MirBuilder::createConstruct(types::Type* type, basic::SmallVector<Value*, 2>&& values, std::string_view resultName) {
+Value* MirBuilder::createConstruct(const MirType* type, basic::SmallVector<Value*, 2>&& values, std::string_view resultName) {
     VEE_ASSERT(type != nullptr, "Type is null!");
 
     return createValueInstruction(InstructionOpcode::Construct, type, { std::move(values) }, resultName);
@@ -368,112 +397,100 @@ Value* MirBuilder::createConstruct(types::Type* type, basic::SmallVector<Value*,
 // Conversion / casting
 //
 
-Value* MirBuilder::createTruncateInt(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createTruncateInt(Value* value, const MirType* toType, std::string_view resultName) {
     assertInteger(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
+    assertIntegerType(toType, "toType");
 
-    types::BuiltinType* builtinValueType = _mir.valueTypes.getValueType(value)->as<types::BuiltinType>();
-    u32 valueBitWidth = builtinValueType->getBitWidth();
+    const MirIntegerType* integerValueType = value->getType()->asInteger();
+    u32 valueBitWidth = integerValueType->getBitWidth();
 
-    types::BuiltinType* builtinToType = toType->as<types::BuiltinType>();
-    VEE_ASSERT(builtinToType->isInteger(), "toType must be an integer type!");
-    u32 toBitWidth = builtinToType->getBitWidth();
+    const MirIntegerType* integerToType = toType->asInteger();
+    u32 toBitWidth = integerToType->getBitWidth();
 
     VEE_ASSERT(toBitWidth < valueBitWidth, "toType must have a smaller bit width than the value type!");
-    VEE_ASSERT(builtinValueType->isSignedInteger() == builtinToType->isSignedInteger(),
-        "Invalid integer truncation: from {} to {}. Both types must be of the same signedness",
-        builtinValueType->toString(), builtinToType->toString());
 
     return createValueInstruction(InstructionOpcode::TruncateInt, toType, { value }, resultName);
 }
-Value* MirBuilder::createExtendInt(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createZExtendInt(Value* value, const MirType* toType, std::string_view resultName) {
     assertInteger(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
+    assertIntegerType(toType, "toType");
 
-    types::BuiltinType* builtinValueType = _mir.valueTypes.getValueType(value)->as<types::BuiltinType>();
-    u32 valueBitWidth = builtinValueType->getBitWidth();
+    const MirIntegerType* integerValueType = value->getType()->asInteger();
+    u32 valueBitWidth = integerValueType->getBitWidth();
 
-    types::BuiltinType* builtinToType = toType->as<types::BuiltinType>();
-    VEE_ASSERT(builtinToType->isInteger(), "toType must be an integer type!");
-    u32 toBitWidth = builtinToType->getBitWidth();
+    const MirIntegerType* integerToType = toType->asInteger();
+    u32 toBitWidth = integerToType->getBitWidth();
 
     VEE_ASSERT(toBitWidth > valueBitWidth, "toType must have a larger bit width than the value type!");
 
-    if (builtinValueType->isSignedInteger() && builtinToType->isSignedInteger()) {
-        return createValueInstruction(InstructionOpcode::SignExtendInt, toType, { value }, resultName);
-    } else if (builtinValueType->isUnsignedInteger() && builtinToType->isUnsignedInteger()) {
-        return createValueInstruction(InstructionOpcode::ZeroExtendInt, toType, { value }, resultName);
-    }
+    return createValueInstruction(InstructionOpcode::ZeroExtendInt, toType, { value }, resultName);
+}
+Value* MirBuilder::createSExtendInt(Value* value, const MirType* toType, std::string_view resultName) {
+    assertInteger(value, "value");
+    assertIntegerType(toType, "toType");
 
-    VEE_FATAL("Invalid integer extension: from {} to {}. Both types must be of the same signedness",
-        builtinValueType->toString(), builtinToType->toString());
+    const MirIntegerType* integerValueType = value->getType()->asInteger();
+    u32 valueBitWidth = integerValueType->getBitWidth();
+
+    const MirIntegerType* integerToType = toType->asInteger();
+    u32 toBitWidth = integerToType->getBitWidth();
+
+    VEE_ASSERT(toBitWidth > valueBitWidth, "toType must have a larger bit width than the value type!");
+
+    return createValueInstruction(InstructionOpcode::SignExtendInt, toType, { value }, resultName);
 }
 
-Value* MirBuilder::createTruncateFloat(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createTruncateFloat(Value* value, const MirType* toType, std::string_view resultName) {
     assertFloat(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
+    assertFloatType(toType, "toType");
 
-    types::BuiltinType* builtinValueType = _mir.valueTypes.getValueType(value)->as<types::BuiltinType>();
-    u32 valueBitWidth = builtinValueType->getBitWidth();
+    const MirFloatType* floatValueType = value->getType()->asFloat();
+    u32 valueBitWidth = floatValueType->getBitWidth();
 
-    types::BuiltinType* builtinToType = toType->as<types::BuiltinType>();
-    VEE_ASSERT(builtinToType->isFloatingPoint(), "toType must be a floating-point type!");
-    u32 toBitWidth = builtinToType->getBitWidth();
+    const MirFloatType* floatToType = toType->asFloat();
+    u32 toBitWidth = floatToType->getBitWidth();
 
     VEE_ASSERT(toBitWidth < valueBitWidth, "toType must have a smaller bit width than the value type!");
 
     return createValueInstruction(InstructionOpcode::TruncateFloat, toType, { value }, resultName);
 }
-Value* MirBuilder::createExtendFloat(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createExtendFloat(Value* value, const MirType* toType, std::string_view resultName) {
     assertFloat(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
+    assertFloatType(toType, "toType");
 
-    types::BuiltinType* builtinValueType = _mir.valueTypes.getValueType(value)->as<types::BuiltinType>();
-    u32 valueBitWidth = builtinValueType->getBitWidth();
+    const MirFloatType* floatValueType = value->getType()->asFloat();
+    u32 valueBitWidth = floatValueType->getBitWidth();
 
-    types::BuiltinType* builtinToType = toType->as<types::BuiltinType>();
-    VEE_ASSERT(builtinToType->isFloatingPoint(), "toType must be a floating-point type!");
-    u32 toBitWidth = builtinToType->getBitWidth();
+    const MirFloatType* floatToType = toType->asFloat();
+    u32 toBitWidth = floatToType->getBitWidth();
 
     VEE_ASSERT(toBitWidth > valueBitWidth, "toType must have a larger bit width than the value type!");
 
     return createValueInstruction(InstructionOpcode::ExtendFloat, toType, { value }, resultName);
 }
 
-Value* MirBuilder::createIntToFloat(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createIntToFloat(Value* value, const MirType* toType, std::string_view resultName) {
     assertInteger(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
-
-    types::BuiltinType* builtinToType = toType->as<types::BuiltinType>();
-    VEE_ASSERT(builtinToType->isFloatingPoint(), "toType must be a floating-point type!");
+    assertFloatType(toType, "toType");
 
     return createValueInstruction(InstructionOpcode::IntToFloat, toType, { value }, resultName);
 }
-Value* MirBuilder::createFloatToInt(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createFloatToInt(Value* value, const MirType* toType, std::string_view resultName) {
     assertFloat(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
-
-    types::BuiltinType* builtinToType = toType->as<types::BuiltinType>();
-    VEE_ASSERT(builtinToType->isInteger(), "toType must be an integer type!");
+    assertIntegerType(toType, "toType");
 
     return createValueInstruction(InstructionOpcode::FloatToInt, toType, { value }, resultName);
 }
 
-Value* MirBuilder::createPointerToInt(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createPointerToInt(Value* value, const MirType* toType, std::string_view resultName) {
     assertPointer(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
-
-    types::BuiltinType* builtinToType = toType->as<types::BuiltinType>();
-    VEE_ASSERT(builtinToType->isInteger(), "toType must be an integer type!");
+    assertIntegerType(toType, "toType");
 
     return createValueInstruction(InstructionOpcode::PtrToInt, toType, { value }, resultName);
 }
-Value* MirBuilder::createIntToPointer(Value* value, types::Type* toType, std::string_view resultName) {
+Value* MirBuilder::createIntToPointer(Value* value, const MirType* toType, std::string_view resultName) {
     assertInteger(value, "value");
-    VEE_ASSERT(toType != nullptr, "toType is null!");
-
-    types::PointerType* pointerToType = toType->as<types::PointerType>();
-    VEE_ASSERT(pointerToType != nullptr, "toType must be a pointer type!");
+    assertPointerType(toType, "toType");
 
     return createValueInstruction(InstructionOpcode::IntToPtr, toType, { value }, resultName);
 }
@@ -493,7 +510,7 @@ Value* MirBuilder::createCall(Function* function, const basic::SmallVector<Value
         operands.push_back(arg);
     }
     
-    types::Type* returnType = _ctx.mir.valueTypes.getValueType(function);
+    const MirType* returnType = function->getType();
     return createValueInstruction(InstructionOpcode::Call, returnType, std::move(operands), resultName);
 }
 void MirBuilder::createRet(Value* returnValue) {
@@ -521,32 +538,44 @@ void MirBuilder::createUnreachable() {
 
 void MirBuilder::assertBoolean(Value* value, std::string_view name) {
     VEE_ASSERT(value != nullptr, "{} is null!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->is<types::BuiltinType>(), "{} must be of boolean type!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->as<types::BuiltinType>()->isBoolean(), "{} must be of boolean type!", name);
+    const MirType* type = value->getType();
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isBool(), "{} must be of boolean type!", name);
 }
 void MirBuilder::assertInteger(Value* value, std::string_view name) {
     VEE_ASSERT(value != nullptr, "{} is null!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->is<types::BuiltinType>(), "{} must be of integer type!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->as<types::BuiltinType>()->isInteger(), "{} must be of integer type!", name);
-}
-void MirBuilder::assertSignedInteger(Value* value, std::string_view name) {
-    VEE_ASSERT(value != nullptr, "{} is null!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->is<types::BuiltinType>(), "{} must be of signed integer type!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->as<types::BuiltinType>()->isSignedInteger(), "{} must be of signed integer type!", name);
-}
-void MirBuilder::assertUnsignedInteger(Value* value, std::string_view name) {
-    VEE_ASSERT(value != nullptr, "{} is null!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->is<types::BuiltinType>(), "{} must be of unsigned integer type!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->as<types::BuiltinType>()->isUnsignedInteger(), "{} must be of unsigned integer type!", name);
+    const MirType* type = value->getType();
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isInteger(), "{} must be of integer type!", name);
 }
 void MirBuilder::assertFloat(Value* value, std::string_view name) {
     VEE_ASSERT(value != nullptr, "{} is null!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->is<types::BuiltinType>(), "{} must be of float type!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->as<types::BuiltinType>()->isFloatingPoint(), "{} must be of float type!", name);
+    const MirType* type = value->getType();
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isFloat(), "{} must be of float type!", name);
 }
 void MirBuilder::assertPointer(Value* value, std::string_view name) {
     VEE_ASSERT(value != nullptr, "{} is null!", name);
-    VEE_ASSERT(_mir.valueTypes.getValueType(value)->is<types::PointerType>(), "{} must be of pointer type!", name);
+    const MirType* type = value->getType();
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isPointer(), "{} must be of pointer type!", name);
+}
+
+void MirBuilder::assertBooleanType(const MirType* type, std::string_view name) {
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isBool(), "{} must be of boolean type!", name);
+}
+void MirBuilder::assertIntegerType(const MirType* type, std::string_view name) {
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isInteger(), "{} must be of integer type!", name);
+}
+void MirBuilder::assertFloatType(const MirType* type, std::string_view name) {
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isFloat(), "{} must be of float type!", name);
+}
+void MirBuilder::assertPointerType(const MirType* type, std::string_view name) {
+    VEE_ASSERT(type != nullptr, "{} is null!", name);
+    VEE_ASSERT(type->isPointer(), "{} must be of pointer type!", name);
 }
 
 void MirBuilder::createInstruction(InstructionOpcode opcode) {
@@ -559,14 +588,10 @@ void MirBuilder::createInstruction(InstructionOpcode opcode, basic::SmallVector<
     Instruction* inst = _mir.factory.createInstruction(opcode, std::move(operands));
     finishInstruction(inst);
 }
-Value* MirBuilder::createValueInstruction(InstructionOpcode opcode, types::Type* type, basic::SmallVector<Value*, 2>&& operands, std::string_view resultName) {
+Value* MirBuilder::createValueInstruction(InstructionOpcode opcode, const MirType* type, basic::SmallVector<Value*, 2>&& operands, std::string_view resultName) {
     beginInstruction();
-    Instruction* inst = _mir.factory.createInstruction(opcode, std::move(operands));
-    _ctx.mir.valueTypes.setValueType(inst, type);
+    Instruction* inst = _mir.factory.createInstruction(opcode, std::move(operands), type, resultName);
     finishInstruction(inst);
-    if (!resultName.empty()) {
-        nameValue(inst, resultName);
-    }
     return inst;
 }
 void MirBuilder::beginInstruction() {
@@ -586,14 +611,8 @@ void MirBuilder::nameValue(const Value* val, std::string_view name) {
     _mir.valueNames.setName(val, name);
 }
 
-types::Type* MirBuilder::getValueType(const Value* value) {
-    VEE_ASSERT(value != nullptr, "Value is null!");
-    types::Type* type = _mir.valueTypes.getValueType(value);
-    VEE_ASSERT(type != nullptr, "Value has no type!");
-    return type;
-}
-types::Type* MirBuilder::getBoolType() {
-    return _ctx.types.table.getBuiltin(types::BuiltinTypeKind::Bool);
+const MirType* MirBuilder::getBoolType() {
+    return _mir.types.getBool();
 }
 
 } // namespace mir

@@ -14,7 +14,7 @@
 #include "veec/basic/Arena.hpp"
 #include "veec/mir/MirFactory.hpp"
 #include "veec/mir/support/InstructionTable.hpp"
-#include "veec/mir/support/ValueTypeMap.hpp"
+#include "veec/mir/support/TypeTable.hpp"
 #include "veec/mir/pretty/ValueNameMap.hpp"
 
 VEEC_NAMESPACE_BEGIN
@@ -27,7 +27,7 @@ namespace mir {
 class MirContext {
 public:
     support::InstructionTable instructionTable;
-    support::ValueTypeMap valueTypes;
+    support::TypeTable types;
     pretty::ValueNameMap valueNames;
     MirFactory factory;
 
@@ -35,7 +35,7 @@ public:
      * @brief Creates a new MIRContext instance.
      */
     MirContext()
-        : factory(_nodeArena, valueTypes, valueNames) {}
+        : factory(_nodeArena, valueNames) {}
 
     ~MirContext() = default;
 

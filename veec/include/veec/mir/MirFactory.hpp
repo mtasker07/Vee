@@ -17,9 +17,6 @@
 #include "veec/basic/SmallVector.hpp"
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/pretty/ValueNameMap.hpp"
-#include "veec/mir/support/ValueTypeMap.hpp"
-#include "veec/symbols/SymbolFwd.hpp"
-#include "veec/types/TypeFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
@@ -37,11 +34,9 @@ public:
      */
     MirFactory(
         basic::Arena<>& nodeArena,
-        support::ValueTypeMap& valueTypes,
         pretty::ValueNameMap& valueNames
     )
         : _nodeArena(nodeArena),
-        _valueTypes(valueTypes),
         _valueNames(valueNames) {}
 
     ~MirFactory() = default;
@@ -60,13 +55,25 @@ public:
     /**
      * @brief Creates a new function in the given module.
      * @param module The module to create the function in.
-     * @param sym The function symbol for the function.
+     * @param type The function type.
      * @param name The name of the function (optional).
      * @return A pointer to the new function.
      */
     Function* createFunction(
         Module* module,
-        symbols::FunctionSymbol* sym,
+        const MirFunctionType* type,
+        std::string_view name = {}
+    );
+    /**
+     * @brief Creates a new argument in the given function.
+     * @param function The function to create the argument in.
+     * @param type The type of the argument.
+     * @param name The name of the argument (optional).
+     * @return A pointer to the new argument.
+     */
+    Argument* createArgument(
+        Function* function,
+        const MirType* type,
         std::string_view name = {}
     );
     /**
@@ -90,7 +97,7 @@ public:
      */
     Instruction* createInstruction(
         InstructionOpcode opcode,
-        types::Type* resultType = nullptr,
+        const MirType* resultType = nullptr,
         std::string_view resultName = {}
     );
     /**
@@ -106,22 +113,8 @@ public:
     Instruction* createInstruction(
         InstructionOpcode opcode,
         basic::SmallVector<Value*, 2>&& operands,
-        types::Type* resultType = nullptr,
+        const MirType* resultType = nullptr,
         std::string_view resultName = {}
-    );
-    /**
-     * @brief Creates a new local in the given function.
-     * @param function The function to create the local in.
-     * @param kind The kind of the local.
-     * @param symbol The symbol for the local.
-     * @param name The name of the local (optional).
-     * @return A pointer to the new local.
-     */
-    Local* createLocal(
-        Function* function,
-        LocalKind kind,
-        symbols::VariableSymbol* symbol,
-        std::string_view name = {}
     );
 
     /**
@@ -134,7 +127,7 @@ public:
      */
     ConstantInt* getConstantInt(
         Module* module,
-        types::Type* type,
+        const MirType* type,
         basic::APInt value,
         std::string_view name = {}
     );
@@ -147,7 +140,7 @@ public:
      */
     ConstantInt* getConstantIntOne(
         Module* module,
-        types::Type* type,
+        const MirType* type,
         std::string_view name = {}
     );
     /**
@@ -160,7 +153,7 @@ public:
      */
     ConstantFloat* getConstantFloat(
         Module* module,
-        types::Type* type,
+        const MirType* type,
         double value,
         std::string_view name = {}
     );
@@ -174,7 +167,7 @@ public:
      */
     ConstantString* getConstantString(
         Module* module,
-        types::Type* type,
+        const MirType* type,
         std::string_view value,
         std::string_view name = {}
     );
@@ -188,14 +181,13 @@ public:
      */
     ConstantBool* getConstantBool(
         Module* module,
-        types::Type* type,
+        const MirType* type,
         bool value,
         std::string_view name = {}
     );
 
 private:
     basic::Arena<>& _nodeArena;
-    support::ValueTypeMap& _valueTypes;
     pretty::ValueNameMap& _valueNames;
 
     template<typename T, typename... Args>
@@ -204,15 +196,13 @@ private:
     }
 
     template<typename T, typename... Args>
-    inline T* makeValue(types::Type* type, Args&&... args) {
+    inline T* makeValue(Args&&... args) {
         T* node = _nodeArena.create<T>(typename MirNode::MirKey{}, std::forward<Args>(args)...);
-        if (type != nullptr) _valueTypes.setValueType(node, type);
         return node;
     }
     template<typename T, typename... Args>
-    inline T* makeNamedValue(types::Type* type, std::string_view name, Args&&... args) {
+    inline T* makeNamedValue(std::string_view name, Args&&... args) {
         T* node = _nodeArena.create<T>(typename MirNode::MirKey{}, std::forward<Args>(args)...);
-        if (type != nullptr) _valueTypes.setValueType(node, type);
         if (!name.empty()) _valueNames.setName(node, name);
         return node;
     }

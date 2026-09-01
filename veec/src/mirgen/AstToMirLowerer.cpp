@@ -42,13 +42,11 @@
 #include "veec/mir/BasicBlock.hpp"
 #include "veec/mir/Value.hpp"
 #include "veec/mir/Constant.hpp"
+#include "veec/mir/MirType.hpp"
 #include "veec/mirgen/support/FunctionCollector.hpp"
 #include "veec/symbols/ent/FunctionSymbol.hpp"
 #include "veec/types/TypeContext.hpp"
 #include "veec/types/TypeTable.hpp"
-#include "veec/types/Type.hpp"
-#include "veec/types/BuiltinType.hpp"
-#include "veec/types/PointerType.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mirgen {
@@ -101,62 +99,46 @@ void AstToMirLowerer::visitParenthesizedExpr(const ast::ParenthesizedExprNode& n
 }
 void AstToMirLowerer::visitIntLiteralExpr(const ast::IntLiteralExprNode& node) {
     // Create new constant for integer literal
-    types::Type* type = _ctx.types.table.getNodeType(&node);
-    VEE_ASSERT(type != nullptr, "Type for integer literal is null!");
-
-    // Ensure integer type
-    types::BuiltinType* builtinType = type->as<types::BuiltinType>();
-    VEE_ASSERT(builtinType != nullptr && builtinType->isInteger(),
+    const mir::MirType* mirType = _typeConverter.convert(_ctx.types.table.getNodeType(&node));
+    VEE_ASSERT(mirType->isInteger(),
         "Type for integer literal is not an integer type");
 
-    u32 bitWidth = builtinType->getBitWidth();
-
+    u32 bitWidth = mirType->getBitWidth();
+    
     // TODO: Use better conversion, string is slow and inefficient
     basic::APInt value = basic::APInt::fromString(bitWidth, node.getValue().toString(), 10);
-
-    _lastValue = _mir.factory.getConstantInt(_currentModule, type, value, "const_int");
+    
+    _lastValue = _mir.factory.getConstantInt(_currentModule, mirType, value, "const_int");
 }
 void AstToMirLowerer::visitFloatLiteralExpr(const ast::FloatLiteralExprNode& node) {
     // Create new constant for float literal
-    types::Type* type = _ctx.types.table.getNodeType(&node);
-    VEE_ASSERT(type != nullptr, "Type for float literal is null!");
-
-    // Ensure float type
-    types::BuiltinType* builtinType = type->as<types::BuiltinType>();
-    VEE_ASSERT(builtinType != nullptr && builtinType->isFloatingPoint(),
+    const mir::MirType* mirType = _typeConverter.convert(_ctx.types.table.getNodeType(&node));
+    VEE_ASSERT(mirType->isFloat(),
         "Type for float literal is not a float type");
 
     double value = node.getValue();
 
-    _lastValue = _mir.factory.getConstantFloat(_currentModule, type, value, "const_float");
+    _lastValue = _mir.factory.getConstantFloat(_currentModule, mirType, value, "const_float");
 }
 void AstToMirLowerer::visitStringLiteralExpr(const ast::StringLiteralExprNode& node) {
     // Create new constant for string literal
-    types::Type* type = _ctx.types.table.getNodeType(&node);
-    VEE_ASSERT(type != nullptr, "Type for string literal is null!");
-
-    // Ensure string type
-    types::BuiltinType* builtinType = type->as<types::BuiltinType>();
-    VEE_ASSERT(builtinType != nullptr && builtinType->isString(),
+    const mir::MirType* mirType = _typeConverter.convert(_ctx.types.table.getNodeType(&node));
+    VEE_ASSERT(mirType->isStruct(),
         "Type for string literal is not a string type");
 
     std::string_view value = node.getValue();
 
-    _lastValue = _mir.factory.getConstantString(_currentModule, type, value, "const_string");
+    _lastValue = _mir.factory.getConstantString(_currentModule, mirType, value, "const_string");
 }
 void AstToMirLowerer::visitBoolLiteralExpr(const ast::BoolLiteralExprNode& node) {
     // Create new constant for bool literal
-    types::Type* type = _ctx.types.table.getNodeType(&node);
-    VEE_ASSERT(type != nullptr, "Type for bool literal is null!");
-
-    // Ensure bool type
-    types::BuiltinType* builtinType = type->as<types::BuiltinType>();
-    VEE_ASSERT(builtinType != nullptr && builtinType->isBoolean(),
+    const mir::MirType* mirType = _typeConverter.convert(_ctx.types.table.getNodeType(&node));
+    VEE_ASSERT(mirType->isBool(),
         "Type for bool literal is not a bool type");
 
     bool value = node.getValue();
 
-    _lastValue = _mir.factory.getConstantBool(_currentModule, type, value, "const_bool");
+    _lastValue = _mir.factory.getConstantBool(_currentModule, mirType, value, "const_bool");
 }
 void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
     mir::Value* operandValue = lowerExpression(*node.getOperand());
@@ -165,23 +147,22 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
     symbols::OperatorSymbol* opSymbol = node.symbol;
     VEE_ASSERT(opSymbol != nullptr, "Unresolved unary expression");
 
-    types::Type* operandType = _mir.valueTypes.getValueType(operandValue);
-    VEE_ASSERT(operandType != nullptr,
+    const mir::MirType* operandMirType = operandValue->getType();
+    VEE_ASSERT(operandMirType != nullptr,
         "Unary expression operand has null type");
 
-    types::Type* desiredOperandType = opSymbol->getOperandType(0);
-    VEE_ASSERT(desiredOperandType != nullptr,
+    const mir::MirType* desiredOperandMirType = _typeConverter.convert(opSymbol->getOperandType(0));
+    VEE_ASSERT(desiredOperandMirType != nullptr,
         "Unary expression operator has null operand type");
 
-    operandValue = handleAnyConversion(operandValue, desiredOperandType);
+    operandValue = handleAnyConversion(operandValue, desiredOperandMirType);
+    VEE_ASSERT(operandValue->getType() == desiredOperandMirType,
+        "Unary expression operand conversion failed");
 
-    operandType = _mir.valueTypes.getValueType(operandValue);
+    operandMirType = desiredOperandMirType;
 
-    types::BuiltinType* builtinType = operandType->as<types::BuiltinType>();
-    types::PointerType* pointerType = operandType->as<types::PointerType>();
-
-    if (builtinType && builtinType->isInteger()) {
-        u32 bitWidth = builtinType->getBitWidth();
+    if (operandMirType->isInteger()) {
+        u32 bitWidth = operandMirType->getBitWidth();
 
         //
         // Integer operations
@@ -200,7 +181,7 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
                 basic::APInt one = basic::APInt::one(bitWidth);
                 mir::ConstantInt* oneValue = _mir.factory.getConstantInt(
                     _currentModule,
-                    operandType,
+                    operandMirType,
                     one,
                     "const_one"
                 );
@@ -211,7 +192,7 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
                 basic::APInt one = basic::APInt::one(bitWidth);
                 mir::ConstantInt* oneValue = _mir.factory.getConstantInt(
                     _currentModule,
-                    operandType,
+                    operandMirType,
                     one,
                     "const_one"
                 );
@@ -231,7 +212,7 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
     // Float operations
     //
 
-    else if (builtinType && builtinType->isFloatingPoint()) {
+    else if (operandMirType->isFloat()) {
         switch (node.getOperator()) {
             case ast::UnaryOp::Plus:
                 // vvv See integer plus, same reasoning
@@ -243,7 +224,7 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
             case ast::UnaryOp::Increment: {
                 mir::ConstantFloat* oneValue = _mir.factory.getConstantFloat(
                     _currentModule,
-                    operandType,
+                    operandMirType,
                     1.0,
                     "const_one"
                 );
@@ -253,7 +234,7 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
             case ast::UnaryOp::Decrement: {
                 mir::ConstantFloat* oneValue = _mir.factory.getConstantFloat(
                     _currentModule,
-                    operandType,
+                    operandMirType,
                     1.0,
                     "const_one"
                 );
@@ -271,7 +252,7 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
     // Bool operations
     //
 
-    else if (builtinType && builtinType->isBoolean()) {
+    else if (operandMirType->isBool()) {
         switch (node.getOperator()) {
             case ast::UnaryOp::LogicalNot:
                 setLoweredValue(_builder.createLogicalNot(operandValue));
@@ -287,7 +268,7 @@ void AstToMirLowerer::visitUnaryExpr(const ast::UnaryExprNode& node) {
     // Pointer operations
     //
 
-    else if (pointerType) {
+    else if (operandMirType->isPointer()) {
         switch (node.getOperator()) {
             case ast::UnaryOp::Dereference:
                 setLoweredValue(_builder.createLoad(operandValue));
@@ -309,28 +290,27 @@ void AstToMirLowerer::visitBinaryExpr(const ast::BinaryExprNode& node) {
     symbols::OperatorSymbol* opSymbol = node.symbol;
     VEE_ASSERT(opSymbol != nullptr, "Unresolved binary expression");
 
-	types::Type* lhsType = _mir.valueTypes.getValueType(lhsValue);
-	types::Type* rhsType = _mir.valueTypes.getValueType(rhsValue);
-	VEE_ASSERT(lhsType != nullptr && rhsType != nullptr,
+    const mir::MirType* lhsType = lhsValue->getType();
+    const mir::MirType* rhsType = rhsValue->getType();
+    VEE_ASSERT(lhsType != nullptr && rhsType != nullptr,
         "Binary expression operands have null types");
 
-    types::Type* desiredLhsType = opSymbol->getOperandType(0);
-    types::Type* desiredRhsType = opSymbol->getOperandType(1);
+    const mir::MirType* desiredLhsType = _typeConverter.convert(opSymbol->getOperandType(0));
+    const mir::MirType* desiredRhsType = _typeConverter.convert(opSymbol->getOperandType(1));
     VEE_ASSERT(desiredLhsType != nullptr && desiredRhsType != nullptr,
         "Binary expression operator has null operand types");
 
     lhsValue = handleAnyConversion(lhsValue, desiredLhsType);
     rhsValue = handleAnyConversion(rhsValue, desiredRhsType);
 
-    lhsType = _mir.valueTypes.getValueType(lhsValue);
-    rhsType = _mir.valueTypes.getValueType(rhsValue);
+    lhsType = lhsValue->getType();
+    rhsType = rhsValue->getType();
 
     VEE_ASSERT(lhsType == rhsType,
         "Binary expression operands have mismatched types after conversion");
 
-    types::BuiltinType* builtinType = lhsType->as<types::BuiltinType>();
-    if (builtinType && builtinType->isInteger()) {
-        bool isSigned = builtinType->isSignedInteger();
+    if (lhsType->isInteger()) {
+        bool isSigned = lhsType->isSigned();
 
         //
         // Integer operations
@@ -409,7 +389,7 @@ void AstToMirLowerer::visitBinaryExpr(const ast::BinaryExprNode& node) {
     // Float operations
     //
 
-    else if (builtinType && builtinType->isFloatingPoint()) {
+    else if (lhsType->isFloat()) {
         switch (node.getOperator()) {
             case ast::BinaryOp::Add:
                 setLoweredValue(_builder.createFAdd(lhsValue, rhsValue));
@@ -452,7 +432,7 @@ void AstToMirLowerer::visitBinaryExpr(const ast::BinaryExprNode& node) {
     // Bool operations
     //
 
-    else if (builtinType && builtinType->isBoolean()) {
+    else if (lhsType->isBool()) {
         switch (node.getOperator()) {
             case ast::BinaryOp::Equal:
                 setLoweredValue(_builder.createICmpEq(lhsValue, rhsValue));
@@ -510,12 +490,14 @@ void AstToMirLowerer::visitCallExpr(const ast::CallExprNode& node) {
 
     // Lower args
     const std::vector<ast::ExpressionNode*>& argNodes = node.getArgs();
-    const std::vector<types::Type*>& paramTypes = funcSymbol->getParameterTypes();
+    VEE_ASSERT(argNodes.size() == funcSymbol->getParameterCount(),
+        "Argument count does not match parameter count");
     
     basic::SmallVector<mir::Value*, 2> argValues;
     for (size_t i = 0; i < argNodes.size(); ++i) {
         mir::Value* argValue = lowerExpression(*argNodes[i]);
-        argValues.push_back(handleAnyConversion(argValue, paramTypes[i]));
+        const mir::MirType* paramMirType = _typeConverter.convert(funcSymbol->getParameter(i)->getType());
+        argValues.push_back(handleAnyConversion(argValue, paramMirType));
     }
 
     mir::Function* func = _functionMap[funcSymbol];
@@ -531,14 +513,14 @@ void AstToMirLowerer::visitMemberAccessExpr(const ast::MemberAccessExprNode&) {
     // TODO
 }
 void AstToMirLowerer::visitConstructExpr(const ast::ConstructExprNode& node) {
-    types::Type* constructType = _ctx.types.table.getNodeType(node.getType());
+    const mir::MirType* mirConstructType = _typeConverter.convert(_ctx.types.table.getNodeType(node.getType()));
 
     basic::SmallVector<mir::Value*, 2> argValues;
     for (const auto& arg : node.getArgs()) {
         argValues.push_back(lowerExpression(*arg));
     }
 
-    setLoweredValue(_builder.createConstruct(constructType, std::move(argValues)));
+    setLoweredValue(_builder.createConstruct(mirConstructType, std::move(argValues)));
 }
 
 //
@@ -555,19 +537,14 @@ void AstToMirLowerer::visitParameterDecl(const ast::ParameterDeclNode&) {
 }
 void AstToMirLowerer::visitVariableDecl(const ast::VariableDeclNode& node) {
     VEE_ASSERT(_currentFunction != nullptr, "Current function is null!");
-
     symbols::VariableSymbol* varSymbol = node.symbol;
-    VEE_ASSERT(varSymbol != nullptr, "Variable symbol is null for variable declaration");
+    VEE_ASSERT(varSymbol != nullptr, "Variable symbol is null!");
 
-    _mir.factory.createLocal(_currentFunction, mir::LocalKind::Variable, varSymbol);
-
-    mir::Value* value = nullptr;
     if (node.getInitializer()) {
-        value = lowerExpression(*node.getInitializer());
-        value = handleAnyConversion(value, varSymbol->getType());
+        mir::Value* value = lowerExpression(*node.getInitializer());
+        value = handleAnyConversion(value, _typeConverter.convert(varSymbol->getType()));
+        _variableMap[varSymbol] = value;
     }
-
-    _variableMap[varSymbol] = value;
 }
 
 //
@@ -715,17 +692,37 @@ void AstToMirLowerer::lowerFunctionDecl(const ast::FunctionDeclNode& node) {
     
     // Create new function & add to map
     std::string_view funcName = _ctx.strings.get(funcSymbol->getNameValue());
-    mir::Function* func = _mir.factory.createFunction(_currentModule, funcSymbol, funcName);
+
+    // Convert param types
+    basic::SmallVector<const mir::MirType*> paramTypes;
+    for (size_t i = 0; i < funcSymbol->getParameterCount(); ++i) {
+        const mir::MirType* mirParamType = _typeConverter.convert(
+            funcSymbol->getParameter(i)->getType()
+        );
+        paramTypes.push_back(mirParamType);
+    }
+    // Convert return type
+    const mir::MirType* returnType = _typeConverter.convert(funcSymbol->getReturnType());
+
+    // Get function type
+    const mir::MirFunctionType* funcType = _mir.types.getFunction(
+        returnType,
+        paramTypes
+    );
+
+    mir::Function* func = _mir.factory.createFunction(_currentModule, funcType, funcName);
     _functionMap[funcSymbol] = func;
     _currentFunction = func;
 
     // Create parameters
     for (size_t i = 0; i < funcSymbol->getParameterCount(); ++i) {
         symbols::VariableSymbol* paramSymbol = funcSymbol->getParameter(i);
+        // Name
         std::string_view paramName = _ctx.strings.get(paramSymbol->getNameValue());
-        mir::Local* param = _mir.factory.createLocal(func, mir::LocalKind::Parameter, paramSymbol, paramName);
-        func->addParameter(param);
-        // DONT add to map yet
+        // Type
+        const mir::MirType* paramMirType = func->getParameterTypes()[i];
+        _mir.factory.createArgument(func, paramMirType, paramName);
+        // DONT add to variable map yet (just declaring)
     }
 
     // Create entry block
@@ -742,12 +739,13 @@ void AstToMirLowerer::lowerFunctionBody(const ast::FunctionDeclNode& node) {
     _currentFunction = func;
 
     // Map params -> values
-    VEE_ASSERT(funcSymbol->getParameterCount() == func->getParameterCount(),
+    VEE_ASSERT(funcSymbol->getParameterCount() == func->getArgCount(),
         "Function parameter count mismatch between symbol and mir function");
+        
     _variableMap.clear();
     for (size_t i = 0; i < funcSymbol->getParameterCount(); ++i) {
 		symbols::VariableSymbol* paramSymbol = funcSymbol->getParameter(i);
-		mir::Value* paramValue = func->getParameter(i);
+        mir::Value* paramValue = func->getArg(i);
 		_variableMap[paramSymbol] = paramValue;
     }
 
@@ -795,7 +793,7 @@ std::vector<mir::Value*> AstToMirLowerer::lowerExpressionList(const std::vector<
 
 std::vector<mir::Value*> AstToMirLowerer::lowerExpressionListWithConversions(
     const std::vector<mir::Value*>& values,
-    const std::vector<types::Type*>& toTypes
+    const std::vector<const mir::MirType*>& toTypes
 ) {
     VEE_ASSERT(values.size() == toTypes.size(),
         "Mismatched sizes for values and types");
@@ -807,19 +805,7 @@ std::vector<mir::Value*> AstToMirLowerer::lowerExpressionListWithConversions(
     }
     return convertedValues;
 }
-mir::Value* AstToMirLowerer::handleAnyConversion(mir::Value* value, types::Type* to) {
-    types::Type* from = _mir.valueTypes.getValueType(value);
-    validateConversion(from, to);
-
-    // No conversion needed
-    if (from == to) {
-        return value;
-    }
-
-    // Lower the conversion
-    return lowerConversion(value, to);
-}
-void AstToMirLowerer::validateConversion(types::Type* from, types::Type* to) {
+void AstToMirLowerer::validateConversion(const mir::MirType* from, const mir::MirType* to) {
     // Internal validation
     // Since this is where we actually perform the conversion, we dont trust the conversion
     // table here, we validate the conversion ourselves to ensure that it is valid.
@@ -831,34 +817,41 @@ void AstToMirLowerer::validateConversion(types::Type* from, types::Type* to) {
         return;
     }
 
-    // Builtin type conversions
-    types::BuiltinType* fromBuiltin = from->as<types::BuiltinType>();
-    types::BuiltinType* toBuiltin = to->as<types::BuiltinType>();
-    if (fromBuiltin != nullptr && toBuiltin != nullptr) {
-        // Check if the conversion is valid
-        if (fromBuiltin->isInteger() && toBuiltin->isInteger()) {
-            // Integer to integer conversion is always valid
-            return;
-        }
-        if (fromBuiltin->isFloatingPoint() && toBuiltin->isFloatingPoint()) {
-            // Float to float conversion is always valid
-            return;
-        }
-        if (fromBuiltin->isInteger() && toBuiltin->isFloatingPoint()) {
-            // Integer to float conversion is always valid
-            return;
-        }
-        if (fromBuiltin->isFloatingPoint() && toBuiltin->isInteger()) {
-            // Float to integer conversion is always valid
-            return;
-        }
+    // Check if the conversion is valid
+    if (from->isInteger() && to->isInteger()) {
+        // Integer to integer conversion is always valid
+        return;
+    }
+    if (from->isFloat() && to->isFloat()) {
+        // Float to float conversion is always valid
+        return;
+    }
+    if (from->isInteger() && to->isFloat()) {
+        // Integer to float conversion is always valid
+        return;
+    }
+    if (from->isFloat() && to->isInteger()) {
+        // Float to integer conversion is always valid
+        return;
     }
 
     // TODO: Add more conversion rules here
-    VEE_UNREACHABLE("Conversion from '{}' to '{}' is not supported", from->toString(), to->toString());
+    VEE_FATAL("Unsupported MIR type conversion");
 }
-mir::Value* AstToMirLowerer::lowerConversion(mir::Value* value, types::Type* to) {
-    types::Type* from = _mir.valueTypes.getValueType(value);
+mir::Value* AstToMirLowerer::handleAnyConversion(mir::Value* value, const mir::MirType* to) {
+    const mir::MirType* from = value->getType();
+    validateConversion(from, to);
+
+    // No conversion needed
+    if (from == to) {
+        return value;
+    }
+
+    // Lower the conversion
+    return lowerConversion(value, to);
+}
+mir::Value* AstToMirLowerer::lowerConversion(mir::Value* value, const mir::MirType* to) {
+    const mir::MirType* from = value->getType();
     validateConversion(from, to);
 
     if (from == to) {
@@ -866,25 +859,29 @@ mir::Value* AstToMirLowerer::lowerConversion(mir::Value* value, types::Type* to)
     }
 
     // Builtin type conversions
-    types::BuiltinType* fromBuiltin = from->as<types::BuiltinType>();
-    types::BuiltinType* toBuiltin = to->as<types::BuiltinType>();
-    if (fromBuiltin != nullptr && toBuiltin != nullptr) {
+    if (from != nullptr && to != nullptr) {
         // Get bit widths
-        u32 fromBitWidth =
-            fromBuiltin->isInteger() ||
-            fromBuiltin->isFloatingPoint() ?
-            fromBuiltin->getBitWidth() : 0;
+        u32 fromBitWidth = from->getBitWidth();
+        u32 toBitWidth = to->getBitWidth();
 
-        u32 toBitWidth =
-            toBuiltin->isInteger() ||
-            toBuiltin->isFloatingPoint() ?
-            toBuiltin->getBitWidth() : 0;
+        // Signedness?
+        bool fromSigned = from->isSigned();
+        bool toSigned = to->isSigned();
+
+        auto assertSameSignedness = [&]() {
+            VEE_ASSERT(fromSigned == toSigned, "Signedness mismatch in conversion");
+        };
 
         // Int -> int
-        if (fromBuiltin->isInteger() && toBuiltin->isInteger()) {
+        if (from->isInteger() && to->isInteger()) {
             if (fromBitWidth < toBitWidth) {
                 // Widening conversion
-                return _builder.createExtendInt(value, to);
+                assertSameSignedness();
+                if (toSigned) {
+                    return _builder.createSExtendInt(value, to);
+                } else {
+                    return _builder.createZExtendInt(value, to);
+                }
             } else if (fromBitWidth > toBitWidth) {
                 // Narrowing conversion
                 return _builder.createTruncateInt(value, to);
@@ -894,7 +891,7 @@ mir::Value* AstToMirLowerer::lowerConversion(mir::Value* value, types::Type* to)
             }
         }
         // Float -> float
-        if (fromBuiltin->isFloatingPoint() && toBuiltin->isFloatingPoint()) {
+        if (from->isFloat() && to->isFloat()) {
             if (fromBitWidth < toBitWidth) {
                 // Widening conversion
                 return _builder.createExtendFloat(value, to);
@@ -907,18 +904,18 @@ mir::Value* AstToMirLowerer::lowerConversion(mir::Value* value, types::Type* to)
             }
         }
         // Int -> float
-        if (fromBuiltin->isInteger() && toBuiltin->isFloatingPoint()) {
+        if (from->isInteger() && to->isFloat()) {
             // Integer to float conversion is always valid
             return _builder.createIntToFloat(value, to);
         }
         // Float -> int
-        if (fromBuiltin->isFloatingPoint() && toBuiltin->isInteger()) {
+        if (from->isFloat() && to->isInteger()) {
             // Float to integer conversion is always valid
             return _builder.createFloatToInt(value, to);
         }
     }
 
-    VEE_UNREACHABLE("Conversion from '{}' to '{}' is not implemented", from->toString(), to->toString());
+    VEE_UNREACHABLE("MIR type conversion is not implemented");
 }
 
 } // namespace mirgen

@@ -17,6 +17,7 @@
 #include "veec/ast/AstWalker.hpp"
 #include "veec/mir/MirFwd.hpp"
 #include "veec/mir/MirBuilder.hpp"
+#include "veec/mirgen/MirTypeConverter.hpp"
 #include "veec/sema/SemaContext.hpp"
 #include "veec/symbols/SymbolFwd.hpp"
 
@@ -26,7 +27,7 @@ namespace mirgen {
 class AstToMirLowerer : private ast::ConstAstWalker {
 public:
     AstToMirLowerer(compilation::CompilationContext& ctx)
-        : _ctx(ctx), _mir(ctx.mir), _builder(ctx) {}
+        : _ctx(ctx), _mir(ctx.mir), _builder(ctx), _typeConverter(ctx) {}
 
     ~AstToMirLowerer() = default;
 
@@ -50,6 +51,8 @@ private:
 
     std::unordered_map<const symbols::FunctionSymbol*, mir::Function*> _functionMap;
     std::unordered_map<const symbols::VariableSymbol*, mir::Value*> _variableMap;
+
+    MirTypeConverter _typeConverter;
 
     // Entry point
     void lowerAllFunctions(const ast::AstNode& node);
@@ -136,11 +139,11 @@ private:
 
     std::vector<mir::Value*> lowerExpressionListWithConversions(
         const std::vector<mir::Value*>& values,
-        const std::vector<types::Type*>& toTypes
+        const std::vector<const mir::MirType*>& toTypes
     );
-    mir::Value* handleAnyConversion(mir::Value* value, types::Type* to);
-    void validateConversion(types::Type* from, types::Type* to);
-    mir::Value* lowerConversion(mir::Value* value, types::Type* to);
+    void validateConversion(const mir::MirType* from, const mir::MirType* to);
+    mir::Value* handleAnyConversion(mir::Value* value, const mir::MirType* to);
+    mir::Value* lowerConversion(mir::Value* value, const mir::MirType* to);
 };
 
 } // namespace mirgen

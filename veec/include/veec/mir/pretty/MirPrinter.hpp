@@ -75,7 +75,6 @@ private:
     void addLineIndented(const std::string& str);
     std::string_view poolText(basic::StringId id) const;
 
-    types::Type* typeOfValue(const Value& value) const;
     std::string_view nameOfValue(const Value& value) const;
     std::string_view nameOfFunction(const Function& function) const;
 };

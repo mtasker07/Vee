@@ -52,7 +52,7 @@ void MirPrinter::printNode(const MirNode& node, io::IWriter& writer) {
         case MirKind::Instruction:
             printInstruction(static_cast<const Instruction&>(node));
             break;
-        case MirKind::Local:
+        case MirKind::Argument:
         case MirKind::Constant:
             printOperand(static_cast<const Value&>(node));
             break;
@@ -86,14 +86,14 @@ void MirPrinter::printFunction(const Function& function) {
     // Print signature
     std::string_view funcName = nameOfFunction(function);
     std::string args;
-    for (size_t i = 0; i < function.getParameterCount(); ++i) {
-        const Local& param = *function.getParameter(i);
+    for (size_t i = 0; i < function.getArgCount(); ++i) {
+        const Argument& param = *function.getArg(i);
         if (i > 0) args += ", ";
-        std::string paramTypeName = typeOfValue(param)->toString();
         std::string_view paramName = nameOfValue(param);
-        args += std::format("{} {}", paramTypeName, paramName);
+        std::string paramTypeName = param.getType()->toString();
+        args += std::format("{}: {}", paramName, paramTypeName);
     }
-    std::string returnTypeName = typeOfValue(function)->toString();
+    std::string returnTypeName = function.getFunctionType()->getReturnType()->toString();
 
     // Print body
     addLineIndented(std::format("func {}({}) -> {} {{", funcName, args, returnTypeName));
@@ -142,6 +142,11 @@ std::string MirPrinter::printOperand(const Value& value) {
             const Function* func = static_cast<const Function*>(&value);
             return std::format("func {}", nameOfFunction(*func));
         }
+        case MirKind::Argument: {
+            const Argument* arg = static_cast<const Argument*>(&value);
+            std::string typeName = arg->getType()->toString();
+            return std::format("{} %{}", typeName, nameOfValue(*arg));
+        }
         case MirKind::BasicBlock: {
             const BasicBlock* block = static_cast<const BasicBlock*>(&value);
             return std::format("{}", nameOfValue(*block));
@@ -150,14 +155,9 @@ std::string MirPrinter::printOperand(const Value& value) {
             const Instruction* instr = static_cast<const Instruction*>(&value);
             return std::format("%{}", nameOfValue(*instr));
         }
-        case MirKind::Local: {
-            const Local* local = static_cast<const Local*>(&value);
-            std::string typeName = typeOfValue(*local)->toString();
-            return std::format("{} %{}", typeName, nameOfValue(*local));
-        }
         case MirKind::Constant: {
             const Constant* constant = static_cast<const Constant*>(&value);
-            std::string typeName = typeOfValue(*constant)->toString();
+            std::string typeName = constant->getType()->toString();
             return std::format("{} ${}", typeName, nameOfValue(*constant));
         }
 
@@ -211,9 +211,6 @@ std::string_view MirPrinter::poolText(basic::StringId id) const {
     return _sp.get(id);
 }
 
-types::Type* MirPrinter::typeOfValue(const Value& value) const {
-    return _ctx.mir.valueTypes.getValueType(&value);
-}
 std::string_view MirPrinter::nameOfValue(const Value& value) const {
     std::string_view name = _ctx.mir.valueNames.getName(&value);
     if (name.empty()) {

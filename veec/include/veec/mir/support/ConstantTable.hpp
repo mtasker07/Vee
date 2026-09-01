@@ -43,21 +43,21 @@ public:
      * @param value The value of the constant.
      * @return A pointer to the constant if found, nullptr otherwise.
      */
-    ConstantInt* getInt(types::Type* type, basic::APInt value);
+    ConstantInt* getInt(const MirType* type, basic::APInt value);
     /**
      * @brief Gets the float constant with the specified type and value.
      * @param type The type of the constant.
      * @param value The value of the constant.
      * @return A pointer to the constant if found, nullptr otherwise.
      */
-    ConstantFloat* getFloat(types::Type* type, double value);
+    ConstantFloat* getFloat(const MirType* type, double value);
     /**
      * @brief Gets the string constant with the specified type and value.
      * @param type The type of the constant.
      * @param value The value of the constant.
      * @return A pointer to the constant if found, nullptr otherwise.
      */
-    ConstantString* getString(types::Type* type, std::string_view value);
+    ConstantString* getString(const MirType* type, std::string_view value);
     /**
      * @brief Gets the boolean constant with the specified value.
      * @param value The value of the constant.
@@ -70,19 +70,19 @@ public:
      * @param type The type of the constant.
      * @param constant The constant to intern.
      */
-    void intern(types::Type* type, ConstantInt* constant);
+    void intern(const MirType* type, ConstantInt* constant);
     /**
      * @brief Interns the given float constant into the table.
      * @param type The type of the constant.
      * @param constant The constant to intern.
      */
-    void intern(types::Type* type, ConstantFloat* constant);
+    void intern(const MirType* type, ConstantFloat* constant);
     /**
      * @brief Interns the given string constant into the table.
      * @param type The type of the constant.
      * @param constant The constant to intern.
      */
-    void intern(types::Type* type, ConstantString* constant);
+    void intern(const MirType* type, ConstantString* constant);
     /**
      * @brief Interns the given boolean constant into the table.
      * @param constant The constant to intern.

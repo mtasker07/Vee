@@ -60,10 +60,13 @@ set(VEEC_SOURCES
     src/mir/Instruction.cpp
     src/mir/Value.cpp
     src/mir/Constant.cpp
+    src/mir/MirType.cpp
     src/mir/pretty/MirPrinter.cpp
     src/mir/support/ConstantTable.cpp
+    src/mir/support/TypeTable.cpp
     
     src/mirgen/AstToMirLowerer.cpp
+    src/mirgen/MirTypeConverter.cpp
     src/mirgen/support/FunctionCollector.cpp
     
     src/sema/ScopeManager.cpp

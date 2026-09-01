@@ -15,7 +15,6 @@
 #include "veec/mir/MirKind.hpp"
 #include "veec/mir/MirNode.hpp"
 #include "veec/mir/Value.hpp"
-#include "veec/types/TypeFwd.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace mir {
@@ -164,17 +163,19 @@ class Instruction : public User {
 public:
     Instruction(
         MirKey key,
-        InstructionOpcode opcode
+        InstructionOpcode opcode,
+        const MirType* type = nullptr
     )
-        : User(key, MirKind::Instruction),
+        : User(key, MirKind::Instruction, type),
         _opcode(opcode) {}
         
     Instruction(
         MirKey key,
         InstructionOpcode opcode,
-        basic::SmallVector<Value*, 2>&& operands
+        basic::SmallVector<Value*, 2>&& operands,
+        const MirType* type = nullptr
     )
-        : User(key, MirKind::Instruction, std::move(operands)),
+        : User(key, MirKind::Instruction, std::move(operands), type),
         _opcode(opcode) {}
 
     ~Instruction() = default;
