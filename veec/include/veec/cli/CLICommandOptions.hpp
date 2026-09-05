@@ -139,6 +139,51 @@ public:
         return defaultValue;
     }
     /**
+     * @brief Sets the value of a value option. Asserts if set more than once for
+     * a given option, so that should be checked beforehand.
+     * @param option The value option to set the value for. Must be a value option.
+     * @param value The value to set for the option.
+     */
+    inline void setValue(CLIOption option, CLIValue value) {
+        VEE_ASSERT(isValueOption(option), "Option is not a value option");
+        VEE_ASSERT(!isOptionSpecified(option), "Value option already specified");
+        _specifiedOptions.insert(option);
+        _valueOptions[option] = value;
+    }
+
+    //
+    // getValueAs helpers
+    //
+
+    /**
+     * @brief Gets the value of a value option as a string.
+     * @param option The value option to get the value for. Must be a value option.
+     * @return The string of the value option, or an empty string view if not specified.
+     */
+    inline std::string_view getValueAsString(CLIOption option) const {
+        VEE_ASSERT(isValueOption(option), "Option is not a value option");
+
+        auto it = _valueOptions.find(option);
+        if (it != _valueOptions.end()) {
+            return it->second.getStringValue();
+        }
+        return {};
+    }
+    /**
+     * @brief Gets the value of a value option as a string.
+     * @param option The value option to get the value for. Must be a value option.
+     * @return The string of the value option, or defaultValue if not specified.
+     */
+    inline std::string_view getValueAsStringOr(CLIOption option, std::string_view defaultValue) const {
+        VEE_ASSERT(isValueOption(option), "Option is not a value option");
+
+        auto it = _valueOptions.find(option);
+        if (it != _valueOptions.end()) {
+            return it->second.getStringValue();
+        }
+        return defaultValue;
+    }
+    /**
      * @brief Gets the value of a value option as a path.
      * @param option The value option to get the value for. Must be a value option.
      * @return The path of the value option, or an empty path if not specified.
@@ -165,18 +210,6 @@ public:
             return fs::Path(it->second.getStringValue());
         }
         return defaultValue;
-    }
-    /**
-     * @brief Sets the value of a value option. Asserts if set more than once for
-     * a given option, so that should be checked beforehand.
-     * @param option The value option to set the value for. Must be a value option.
-     * @param value The value to set for the option.
-     */
-    inline void setValue(CLIOption option, CLIValue value) {
-        VEE_ASSERT(isValueOption(option), "Option is not a value option");
-        VEE_ASSERT(!isOptionSpecified(option), "Value option already specified");
-        _specifiedOptions.insert(option);
-        _valueOptions[option] = value;
     }
     
     //
