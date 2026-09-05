@@ -36,6 +36,10 @@
 #include "veec/mir/Module.hpp"
 #include "veec/mir/pretty/MirPrinter.hpp"
 #include "veec/mirgen/AstToMirLowerer.hpp"
+#include "veec/codegen/CodegenBackend.hpp"
+#include "veec/codegen/CodegenBackendInfo.hpp"
+#include "veec/codegen/CodegenBackendRegistry.hpp"
+#include "veec/codegen/CodegenResult.hpp"
 
 VEEC_NAMESPACE_BEGIN
 namespace compilation {
@@ -77,6 +81,9 @@ CompilationResult Compilation::compile() {
         return result;
     }
     if (!runPhase([this]() { return generateMir(); })) {
+        return result;
+    }
+    if (!runPhase([this]() { return generateCode(); })) {
         return result;
     }
 
@@ -164,6 +171,48 @@ bool Compilation::generateMir() {
 
             return true;
         });
+    }
+
+    return true;
+}
+bool Compilation::generateCode() {
+    std::vector<const mir::Module*> modules;
+    for (const TranslationUnit* unit : _ctx.units.getAllUnits()) {
+        if (unit->mir != nullptr) {
+            modules.push_back(unit->mir);
+        }
+    }
+
+    if (modules.empty()) {
+        return false;
+    }
+
+    // Pass to backend
+    codegen::CodegenBackendRegistry registry(_ctx);
+    registry.registerAllDefaults();
+
+    codegen::CodegenBackend* backend;
+    if (_config.backendIdentifier == "default") {
+        backend = registry.getDefaultBackend();
+    } else {
+        backend = registry.getBackend(_config.backendIdentifier);
+    }
+    // TODO: Identify this and report an error (probably some validateConfig kinda thing)
+    VEE_ASSERT(backend != nullptr,
+        "Failed to retrieve backend with identifier: {}", _config.backendIdentifier);
+
+    // TODO: Use this for some stuff maybe?
+    //const codegen::CodegenBackendInfo& backendInfo = backend->queryBackendInfo();
+
+    codegen::CodegenResult result = backend->generate(modules);
+    if (!result.didSucceed()) {
+        return false; // TODO: Better handle this case
+    }
+
+    // TEMPORARY: Emit to output file
+    if (!_config.outputFile.isEmpty()) {
+        io::FileWriter writer(_config.outputFile, std::ios_base::out | std::ios_base::trunc, true);
+        writer.write(result.getData());
     }
 
     return true;

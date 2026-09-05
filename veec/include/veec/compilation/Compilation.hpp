@@ -109,6 +109,7 @@ private:
     bool parse();
     bool analyze();
     bool generateMir();
+    bool generateCode();
 };
 
 template<typename Fn>
