@@ -77,8 +77,15 @@ set(VEEC_SOURCES
     src/types/TypeTable.cpp
     src/types/TypeSystem.cpp
     
+    src/codegen/CodegenBackendRegistry.cpp
+    src/codegen/support/NameMangler.cpp
+    src/codegen/c/CCodegenBackend.cpp
+    src/codegen/c/CConstructGenerator.cpp
+    src/codegen/c/CConstructPrinter.cpp
+
     src/diagnostics/DiagnosticRange.cpp
     src/diagnostics/rendering/TerminalDiagnosticRenderer.cpp
+
     src/util/CharUtils.cpp
 )
     
