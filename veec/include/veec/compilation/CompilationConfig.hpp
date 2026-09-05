@@ -39,6 +39,12 @@ struct CompilationConfig {
      * @brief The directory specified to output mir. Empty indicates no mir output is desired.
      */
     fs::Path outputMirDirectory;
+
+    /**
+     * @brief The identifier of the backend to use for code generation.
+     * To use the default backend, set to "default".
+     */
+    std::string backendIdentifier;
 };
 
 } // namespace compilation

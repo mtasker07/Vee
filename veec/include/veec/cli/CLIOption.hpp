@@ -29,6 +29,7 @@ enum class CLIOption : u8 {
     OutputFile,
     OptimizationLevel,
     OutputMir,
+    Backend,
 };
 
 /**

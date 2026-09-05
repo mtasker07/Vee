@@ -34,6 +34,7 @@ compilation::CompilationConfig generateCompilationConfigFromOptions(const CLICom
     config.outputFile = options.getValueAsPathOr(CLIOption::OutputFile, fs::Path("a.out"));
     config.outputMirDirectory = options.getValueAsPathOr(CLIOption::OutputMir, fs::Path());
     // TODO: Optimization level etc.
+    config.backendIdentifier = options.getValueAsStringOr(CLIOption::Backend, "default");
 
     return config;
 }
@@ -108,6 +109,23 @@ const std::vector<descriptor::CLIOptionDescriptor>& getCompileCommandOptionDescr
             /* maxValues            */ 1,
             /* required             */ false,
             /* validateValue        */ delegate::mirOutputDirectoryValidationDelegate,
+        },
+
+        // BACKEND
+
+        {
+            /* option               */ CLIOption::Backend,
+            /* nameShort            */ '\0',
+            /* nameLong             */ "backend",
+            /* description          */ "Backend to use for code generation",
+            /* type                 */ CLIOptionType::Value,
+            /* valueType            */ CLIValueType::String,
+            /* defaultValue         */ CLIValue("default"),
+            /* flagDefaultValue     */ false,
+            /* minValues            */ 1,
+            /* maxValues            */ 1,
+            /* required             */ false,
+            /* validateValue        */ nullptr, // Not sure how to approach this yet
         },
     };
 
